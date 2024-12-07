@@ -11,6 +11,7 @@ import fun.android.federal_square.view.View_Hot;
 import fun.android.federal_square.view.View_Main;
 import fun.android.federal_square.view.View_Square;
 import okhttp3.CookieJar;
+import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
 public class able {
@@ -20,12 +21,8 @@ public class able {
     public static int square_time_index = 5000; //广场五秒钟刷新一次
     public static String URL_Name="";
     public static Gson gson = new Gson();
-    public static OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-            .cookieJar(CookieJar.NO_COOKIES)
-            .connectTimeout(5, TimeUnit.MINUTES)
-            .writeTimeout(5, TimeUnit.MINUTES)
-            .readTimeout(5, TimeUnit.MINUTES)
-            .build();
+
+    public static OkHttpClient okHttpClient;
 
     public static View_Square view_square;
     public static View_Hot view_hot;
