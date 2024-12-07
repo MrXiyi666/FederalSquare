@@ -3,12 +3,15 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
@@ -16,6 +19,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.view.View_Create;
 import fun.android.federal_square.view.View_Home;
+import fun.android.federal_square.view.View_Home_Page;
 import fun.android.federal_square.view.View_Hot;
 import fun.android.federal_square.view.View_Square;
 
@@ -113,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 pager.setCurrentItem(0);
 
             }else{
-                //able.view_Square.初始化广场();
+                able.view_square.初始化本地数据();
             }
             return true;
         });
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             if(pager.getCurrentItem() != 1){
                 pager.setCurrentItem(1);
             }else{
-                //able.view_Hot.初始化热门();
+                able.view_hot.初始化数据();
             }
 
             return true;
@@ -129,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
         menu_home.setOnLongClickListener(V->{
             if(pager.getCurrentItem() != 2){
                 pager.setCurrentItem(2);
+            }else{
+                able.view_home.linear_main.removeAllViews();
+                able.view_home.linear_main.addView(new View_Home_Page(this).getView());
             }
             return true;
         });
@@ -154,4 +161,14 @@ public class MainActivity extends AppCompatActivity {
         able.view_home.释放();
     }
 
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(pager.getCurrentItem() > 0){
+                pager.setCurrentItem(0);
+                return false;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }
