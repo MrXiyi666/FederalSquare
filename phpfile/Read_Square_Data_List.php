@@ -7,6 +7,9 @@ $_array = scandir('./Square_Data', 1);
 $_return = array();
 $index = 0;
 foreach ($_array as $value){
+    if($index >= 100){
+        break;
+    }
     if($value=='.' || $value=='..'){
         continue;
     }else{

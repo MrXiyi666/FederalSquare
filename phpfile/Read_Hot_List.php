@@ -46,14 +46,17 @@ rsort($list_size);
 $list = array();
 $list_index = 0;
 while($list_index < count($list_size)){
+    if($list_index > 10){
+        break;
+    }
     foreach($list_name as $value){
         if(explode("\n", $value)[0] == $list_size[$list_index]){
             $list[] = explode("\n", $value)[1];
             $list_name = remove_array($list_name, $value);
+            $list_index++;
             break;
         }
     }
-    $list_index++;
 }
 
 echo implode("\n", $list);

@@ -10,23 +10,17 @@
     }
     $_array = scandir($path, 1);
     $_return = array();
-    $index = 0;
     foreach ($_array as $value){
-        if($index < 30){
-            if($value=='.' || $value=='..'){
-                continue;
-            }else{
-                if(file_exists($path)){
-                    $str = file_get_contents($path . "/$value");
-                    if(strlen($str) > 0){
-                        $_return[] = $str;
-                        $index++;
-                    }
-                }
-
-            }
+        if($value=='.' || $value=='..'){
+            continue;
         }else{
-            break;
+            if(file_exists($path)){
+                $str = file_get_contents($path . "/$value");
+                if(strlen($str) > 0){
+                    $_return[] = $str;
+                }
+            }
+
         }
     }
     if(count($_return) == 0){
