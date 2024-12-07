@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/round_white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="图片选择"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/return_icon"
+            android:id="@+id/return_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+    </RelativeLayout>
+    <TextView
+        android:background="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <GridView
+        android:scrollbars="none"
+        android:fadeScrollbars="false"
+        android:id="@+id/gridview"
+        android:stretchMode="columnWidth"
+        android:numColumns="3"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

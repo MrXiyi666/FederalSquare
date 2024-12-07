@@ -1,0 +1,371 @@
+package fun.android.federal_square.fun;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import fun.android.federal_square.R;
+import fun.android.federal_square.View_Post_Activity;
+import fun.android.federal_square.data.Post_Data;
+import fun.android.federal_square.data.able;
+import fun.android.federal_square.network.NetWork_添加收藏;
+import fun.android.federal_square.view.View_Home_Article;
+import fun.android.federal_square.view.View_Home_Collection;
+
+public class Fun_贴子 {
+    public static View 创建新贴子(Activity activity, List<Post_Data> post_data){
+        String time_name="";
+
+        View view = View.inflate(activity, R.layout.create_post_layout, null);
+        LinearLayout button_message = view.findViewById(R.id.button_message);
+        LinearLayout button_collection = view.findViewById(R.id.button_collection);
+
+        View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
+        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
+        TextView name_view = view.findViewById(R.id.name);
+        TextView sign_view = view.findViewById(R.id.sign);
+        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        List<ImageView> img_list = new ArrayList<>();
+
+        img_list.add(img_view.findViewById(R.id.img0));
+        img_list.add(img_view.findViewById(R.id.img1));
+        img_list.add(img_view.findViewById(R.id.img2));
+        LinearLayout linear = view.findViewById(R.id.linear);
+        int img_id=0;
+        String 网址="";
+        for(Post_Data pd : post_data){
+            switch (pd.getName()){
+                case "name":
+                    name_view.setText(pd.getText());
+                    break;
+                case "sign":
+                    sign_view.setText(pd.getText());
+                    break;
+                case "avatar":
+                    if(pd.getText().isEmpty()){
+                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
+                    }else{
+                        Glide.with(activity)
+                                .load(pd.getText())
+                                .apply(new RequestOptions()
+                                        .circleCropTransform()
+                                        .error(R.drawable.glide_shibai)
+                                        .fallback(R.drawable.glide_duqushibai))
+                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                                .into(avatar_img);
+                    }
+
+                    break;
+                case "text":
+                    TextView text1 = new TextView(activity);
+                    text1.setTextColor(Color.BLACK);
+                    text1.setTextSize(15);
+                    text1.setText(pd.getText());
+                    text1.setTextIsSelectable(true);
+                    linear.addView(text1);
+                    break;
+                case "img":
+                    if(img_id < 3){
+                        img_linear1.setVisibility(View.VISIBLE);
+                        img_list.get(img_id).setImageBitmap(null);
+                        Glide.with(activity)
+                                .load(pd.getText())
+                                .apply(new RequestOptions()
+                                        .error(R.drawable.glide_shibai)
+                                        .fallback(R.drawable.glide_duqushibai))
+                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                                .into(img_list.get(img_id));
+                        img_list.get(img_id).setOnClickListener(V->{
+                            Fun_查看图片.启动(activity, pd.getText());
+                        });
+                        img_id++;
+                    }
+                    break;
+                case "time":
+                    time_name = pd.getText();
+                    break;
+                case "url":
+                    网址 = pd.getText();
+                    break;
+            }
+        }
+        linear.addView(img_view);
+        String finalTime_name = time_name;
+        String final网址 = 网址;
+        button_message.setOnClickListener(V->{
+            Fun_评论.查看评论窗口(activity, finalTime_name, final网址);
+        });
+
+        String finalTime_name1 = time_name;
+        button_collection.setOnClickListener(V->{
+            NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
+            netWork_添加_收藏.传递参数(finalTime_name1, post_data);
+            netWork_添加_收藏.start();
+        });
+
+        view.setOnClickListener(V->{
+            able.传递数据 = post_data;
+            Intent intent = new Intent();
+            intent.setClass(activity, View_Post_Activity.class);
+            activity.startActivity(intent);
+        });
+        return view;
+    }
+
+    public static View 创建文章贴子(Activity activity, List<Post_Data> post_data, View_Home_Article view_home_article){
+        String time_name="";
+
+        View view = View.inflate(activity, R.layout.create_post_layout, null);
+        LinearLayout button_message = view.findViewById(R.id.button_message);
+        LinearLayout button_collection = view.findViewById(R.id.button_collection);
+
+        View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
+        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
+        TextView name_view = view.findViewById(R.id.name);
+        TextView sign_view = view.findViewById(R.id.sign);
+        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        List<ImageView> img_list = new ArrayList<>();
+
+        img_list.add(img_view.findViewById(R.id.img0));
+        img_list.add(img_view.findViewById(R.id.img1));
+        img_list.add(img_view.findViewById(R.id.img2));
+        LinearLayout linear = view.findViewById(R.id.linear);
+        int img_id=0;
+        String 网址="";
+        for(Post_Data pd : post_data){
+            switch (pd.getName()){
+                case "name":
+                    name_view.setText(pd.getText());
+                    break;
+                case "sign":
+                    sign_view.setText(pd.getText());
+                    break;
+                case "avatar":
+                    if(pd.getText().isEmpty()){
+                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
+                    }else{
+                        Glide.with(activity)
+                                .load(pd.getText())
+                                .apply(new RequestOptions()
+                                        .circleCropTransform()
+                                        .error(R.drawable.glide_shibai)
+                                        .fallback(R.drawable.glide_duqushibai))
+                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                                .into(avatar_img);
+                    }
+
+                    break;
+                case "text":
+                    TextView text1 = new TextView(activity);
+                    text1.setTextColor(Color.BLACK);
+                    text1.setTextSize(15);
+                    text1.setText(pd.getText());
+                    text1.setTextIsSelectable(true);
+                    linear.addView(text1);
+                    break;
+                case "img":
+                    if(img_id < 3){
+                        img_linear1.setVisibility(View.VISIBLE);
+                        img_list.get(img_id).setImageBitmap(null);
+                        Glide.with(activity)
+                                .load(pd.getText())
+                                .apply(new RequestOptions()
+                                        .error(R.drawable.glide_shibai)
+                                        .fallback(R.drawable.glide_duqushibai))
+                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                                .into(img_list.get(img_id));
+                        img_list.get(img_id).setOnClickListener(V->{
+                            Fun_查看图片.启动(activity, pd.getText());
+                        });
+                        img_id++;
+                    }
+                    break;
+                case "time":
+                    time_name = pd.getText();
+                    break;
+                case "url":
+                    网址 = pd.getText();
+                    break;
+            }
+        }
+        linear.addView(img_view);
+        String finalTime_name = time_name;
+        String final网址 = 网址;
+        button_message.setOnClickListener(V->{
+            Fun_评论.查看评论窗口(activity, finalTime_name, final网址);
+        });
+
+        String finalTime_name1 = time_name;
+        button_collection.setOnClickListener(V->{
+            NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
+            netWork_添加_收藏.传递参数(finalTime_name1, post_data);
+            netWork_添加_收藏.start();
+        });
+        String finalTime_name2 = time_name;
+        view.setOnLongClickListener(V->{
+            Fun_删除文章.启动(activity, finalTime_name2, view_home_article);
+            return true;
+        });
+        view.setOnClickListener(V->{
+            able.传递数据 = post_data;
+            Intent intent = new Intent();
+            intent.setClass(activity, View_Post_Activity.class);
+            activity.startActivity(intent);
+        });
+        return view;
+    }
+
+    public static View 创建收藏贴子(Activity activity, List<Post_Data> post_data, View_Home_Collection view_HomeCollection){
+        String time_name="";
+
+        View view = View.inflate(activity, R.layout.create_post_layout, null);
+        LinearLayout button_message = view.findViewById(R.id.button_message);
+        LinearLayout button_collection = view.findViewById(R.id.button_collection);
+
+        View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
+        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
+        TextView name_view = view.findViewById(R.id.name);
+        TextView sign_view = view.findViewById(R.id.sign);
+        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        List<ImageView> img_list = new ArrayList<>();
+
+        img_list.add(img_view.findViewById(R.id.img0));
+        img_list.add(img_view.findViewById(R.id.img1));
+        img_list.add(img_view.findViewById(R.id.img2));
+        LinearLayout linear = view.findViewById(R.id.linear);
+        int img_id=0;
+        String 网址="";
+        for(Post_Data pd : post_data){
+            switch (pd.getName()){
+                case "name":
+                    name_view.setText(pd.getText());
+                    break;
+                case "sign":
+                    sign_view.setText(pd.getText());
+                    break;
+                case "avatar":
+                    if(pd.getText().isEmpty()){
+                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
+                    }else{
+                        Glide.with(activity)
+                                .load(pd.getText())
+                                .apply(new RequestOptions()
+                                        .circleCropTransform()
+                                        .error(R.drawable.glide_shibai)
+                                        .fallback(R.drawable.glide_duqushibai))
+                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                                .into(avatar_img);
+                    }
+                    break;
+                case "text":
+                    TextView text1 = new TextView(activity);
+                    text1.setTextColor(Color.BLACK);
+                    text1.setTextSize(15);
+                    text1.setText(pd.getText());
+                    text1.setTextIsSelectable(true);
+                    linear.addView(text1);
+                    break;
+                case "img":
+                    if(img_id < 3){
+                        img_linear1.setVisibility(View.VISIBLE);
+                        img_list.get(img_id).setImageBitmap(null);
+                        Glide.with(activity)
+                                .load(pd.getText())
+                                .apply(new RequestOptions()
+                                        .error(R.drawable.glide_shibai)
+                                        .fallback(R.drawable.glide_duqushibai))
+                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                                .into(img_list.get(img_id));
+                        img_list.get(img_id).setOnClickListener(V->{
+                            Fun_查看图片.启动(activity, pd.getText());
+                        });
+                        img_id++;
+                    }
+                    break;
+                case "time":
+                    time_name = pd.getText();
+                    break;
+                case "url":
+                    网址 = pd.getText();
+                    break;
+            }
+        }
+        linear.addView(img_view);
+        String finalTime_name = time_name;
+        String final网址 = 网址;
+        button_message.setOnClickListener(V->{
+            Fun_评论.查看评论窗口(activity, finalTime_name, final网址);
+        });
+
+        button_collection.setVisibility(View.GONE);
+        String finalTime_name2 = time_name;
+        view.setOnLongClickListener(V->{
+            Fun_删除收藏.启动(activity, finalTime_name2, view_HomeCollection);
+            return true;
+        });
+        view.setOnClickListener(V->{
+            able.传递数据 = post_data;
+            Intent intent = new Intent();
+            intent.setClass(activity, View_Post_Activity.class);
+            activity.startActivity(intent);
+        });
+        return view;
+    }
+
+    public static List<String> 获取广场集合(){
+        try {
+            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
+            Comparator<String> comparator = Comparator.reverseOrder();
+            list.sort(comparator);
+            return list;
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<String> 获取文章集合(){
+        try {
+            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
+            Comparator<String> comparator = Comparator.reverseOrder();
+            list.sort(comparator);
+            return list;
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+    public static List<String> 获取收藏集合(){
+        try {
+            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
+            Comparator<String> comparator = Comparator.reverseOrder();
+            list.sort(comparator);
+            return list;
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<String> 获取热门集合(){
+        try {
+            String txt = Fun_文件.读取文件(able.app_path + "Hot_Data/list.json");
+            if(txt.isEmpty()){
+                return new ArrayList<>();
+            }
+            return able.gson.fromJson(txt, new TypeToken<List<String>>(){}.getType());
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+}

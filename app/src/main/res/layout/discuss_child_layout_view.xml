@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#00000000"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="28dp">
+        <TextView
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:id="@+id/name"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/sign"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text=""
+            android:layout_alignParentEnd="true"
+            android:textSize="11sp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+    </RelativeLayout>
+    <TextView
+        android:textIsSelectable="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="#ffffff"
+        android:gravity="start"
+        android:id="@+id/text"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:background="#f2f3f7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+</LinearLayout>

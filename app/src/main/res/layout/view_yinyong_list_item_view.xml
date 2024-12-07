@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+    <EditText
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_back"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/button_color_selected_selector"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/button_system"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:text="修改"
+        android:layout_width="150dp"
+        android:layout_height="50dp"/>
+</LinearLayout>

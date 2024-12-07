@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/round_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="讨论"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/return_icon"
+            android:id="@+id/return_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+    </RelativeLayout>
+    <TextView
+        android:alpha="0.2"
+        android:background="#808080"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_toLeftOf="@id/button_ok"
+            android:id="@+id/edit_text"
+            android:textColor="@color/black"
+            android:gravity="start"
+            android:maxLength="50"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_back"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlHardcoded" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_alignParentEnd="true"
+            android:id="@+id/button_ok"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="发布"
+            android:background="@drawable/button_color_selected_selector"
+            android:layout_width="80dp"
+            android:layout_height="44dp"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:background="#f2f3f7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefee"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ScrollView
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

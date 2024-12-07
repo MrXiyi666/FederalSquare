@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="10dp"
+        android:stateListAnimator="@null"
+        android:id="@+id/button_network_disk"
+        android:textColor="@color/black"
+        android:background="@drawable/button_color_selected_selector"
+        android:text="图片资源"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="10dp"
+        android:stateListAnimator="@null"
+        android:id="@+id/button_personal_information"
+        android:textColor="@color/black"
+        android:background="@drawable/button_color_selected_selector"
+        android:text="个人信息"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="10dp"
+        android:stateListAnimator="@null"
+        android:id="@+id/button_yinyong_list"
+        android:textColor="@color/black"
+        android:background="@drawable/button_color_selected_selector"
+        android:text="引用列表"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

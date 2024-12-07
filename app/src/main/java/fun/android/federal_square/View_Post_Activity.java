@@ -1,0 +1,112 @@
+package fun.android.federal_square;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
+import fun.android.federal_square.data.Post_Data;
+import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun_查看图片;
+import fun.android.federal_square.network.NetWork_评论_读取;
+
+public class View_Post_Activity extends AppCompatActivity {
+    private LinearLayout linear, linear_check;
+    private String 网址;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Window window = this.getWindow();
+        window.setStatusBarColor(Color.WHITE);
+        window.setNavigationBarColor(Color.WHITE);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        setContentView(R.layout.activity_view_post);
+        ImageView return_icon = findViewById(R.id.return_icon);
+        linear = findViewById(R.id.linear);
+        linear_check = findViewById(R.id.linear_check);
+        TextView name_view = findViewById(R.id.name);
+        TextView sign_view = findViewById(R.id.sign);
+        ImageView avatar_img = findViewById(R.id.avatar_img);
+        TextView text_time = findViewById(R.id.text_time);
+        
+        return_icon.setOnClickListener(V->{
+            finish();
+        });
+        if(able.传递数据 == null){
+            finish();
+        }
+        if(able.传递数据.isEmpty()){
+            finish();
+        }
+        String time = "";
+        for(Post_Data post_data : able.传递数据){
+            switch(post_data.getName()){
+                case "name":
+                    name_view.setText(post_data.getText());
+                    break;
+                case "sign":
+                    sign_view.setText(post_data.getText());
+                    break;
+                case "avatar":
+                    Glide.with(this)
+                            .load(post_data.getText())
+                            .apply(new RequestOptions()
+                                    .circleCropTransform()
+                                    .error(R.drawable.glide_shibai)
+                                    .fallback(R.drawable.glide_duqushibai))
+                            .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                            .into(avatar_img);
+                    break;
+                case "text":
+                    TextView text1_view = new TextView(this);
+                    text1_view.setTextColor(Color.BLACK);
+                    text1_view.setTextSize(15);
+                    text1_view.setText(post_data.getText());
+                    text1_view.setTextIsSelectable(true);
+                    text1_view.setPadding(0,0,0,10);
+                    linear.addView(text1_view);
+                    break;
+                case "img":
+                    ImageView img = new ImageView(this);
+                    Glide.with(this)
+                            .load(post_data.getText())
+                            .apply(new RequestOptions()
+                                    .error(R.drawable.glide_shibai)
+                                    .fallback(R.drawable.glide_duqushibai))
+                            .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                            .into(img);
+                    img.setOnClickListener(V->{
+                        Fun_查看图片.启动(this, post_data.getText());
+                    });
+                    img.setPadding(0,0,0,10);
+                    linear.addView(img);
+                    break;
+                case "time":
+                    time = post_data.getText();
+                    String[] time_shuzu = post_data.getText().split("_");
+                    text_time.setText(time_shuzu[0] + ":" + time_shuzu[1] + ":" + time_shuzu[2] + ":" + time_shuzu[3] + ":" + time_shuzu[4] + ":" + time_shuzu[5]);
+                    break;
+                case "url":
+                    网址 = post_data.getText();
+                    break;
+            }
+        }
+        if(!time.isEmpty() && !网址.isEmpty()){
+            NetWork_评论_读取 netWork_讨论_读取 = new NetWork_评论_读取(this);
+            netWork_讨论_读取.传递参数(time, linear_check, 网址);
+            netWork_讨论_读取.start();
+        }
+
+
+
+    }
+
+}
