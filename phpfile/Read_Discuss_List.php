@@ -13,14 +13,12 @@
     foreach ($_array as $value){
         if($value=='.' || $value=='..'){
             continue;
-        }else{
-            if(file_exists($path)){
-                $str = file_get_contents($path . "/$value");
-                if(strlen($str) > 0){
-                    $_return[] = $str;
-                }
+        }
+        if(file_exists($path)){
+            $str = file_get_contents($path . "/$value");
+            if(strlen($str) > 0){
+                $_return[] = $str;
             }
-
         }
     }
     if(count($_return) == 0){

@@ -44,6 +44,7 @@ if(count($list_size) == 0){
 rsort($list_size);
 
 $list = array();
+$list_index = 0;
 while($list_index < count($list_size)){
     foreach($list_name as $value){
         if(explode("\n", $value)[0] == $list_size[$list_index]){
@@ -52,6 +53,7 @@ while($list_index < count($list_size)){
             break;
         }
     }
+    $list_index++;
 }
 
 echo implode("\n", $list);
