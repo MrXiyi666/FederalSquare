@@ -33,17 +33,7 @@ public class NetWork_读取热门 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("no")){
-            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
-            able.view_hot.linear.post(()-> able.view_hot.linear.removeAllViews());
-            return;
-        }
-        if(string.equals("no_list")){
-            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
-            able.view_hot.linear.post(()-> able.view_hot.linear.removeAllViews());
-            return;
-        }
-        if(string.equals("no_size")){
+        if(string.equals("no") | string.equals("no_list") | string.equals("no_size")){
             Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
             able.view_hot.linear.post(()-> able.view_hot.linear.removeAllViews());
             return;
@@ -57,6 +47,5 @@ public class NetWork_读取热门 extends NetWork_Main {
             down_list_data.add(name + ".json");
         }
         b_update = true;
-
     }
 }

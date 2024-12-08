@@ -71,9 +71,6 @@ public class View_Hot extends View_Main{
             if(i>=10){
                 return;
             }
-            if(!Fun_文件.是否存在(able.app_path + "Square_Data/" + name + ".json")){
-                break;
-            }
             try {
                 String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + name + ".json");
                 able.handler.post(()->{

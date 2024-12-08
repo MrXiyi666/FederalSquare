@@ -52,7 +52,6 @@ public class NetWork_评论_读取 extends NetWork_Main {
             try {
                 linear.addView(Fun_评论.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
             }catch (Exception e){
-
             }
         }
     }

@@ -173,7 +173,7 @@ public class NetWork_Main {
                 }
             }catch (Exception e){
                 Log.w(class_name, e);
-                Fun.mess(activity, e.toString());
+                Fun.mess(activity, class_name + " " + e);
                 if(b_dialog){
                     able.handler.post(()->{
                         dialog.dismiss();
