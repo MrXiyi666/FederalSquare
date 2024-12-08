@@ -20,7 +20,7 @@ import fun.android.federal_square.network.NetWork_评论_读取;
 
 public class View_Post_Activity extends AppCompatActivity {
     private LinearLayout linear, linear_check;
-    private String 网址;
+    private String url_txt;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class View_Post_Activity extends AppCompatActivity {
         TextView sign_view = findViewById(R.id.sign);
         ImageView avatar_img = findViewById(R.id.avatar_img);
         TextView text_time = findViewById(R.id.text_time);
-        
+        TextView url_txt_id = findViewById(R.id.url_txt_id);
         return_icon.setOnClickListener(V->{
             finish();
         });
@@ -95,13 +95,17 @@ public class View_Post_Activity extends AppCompatActivity {
                     text_time.setText(time_shuzu[0] + ":" + time_shuzu[1] + ":" + time_shuzu[2] + ":" + time_shuzu[3] + ":" + time_shuzu[4] + ":" + time_shuzu[5]);
                     break;
                 case "url":
-                    网址 = post_data.getText();
+                    url_txt = post_data.getText();
                     break;
             }
         }
-        if(!time.isEmpty() && !网址.isEmpty()){
+        if(!able.URL_Name.equals(url_txt)){
+            url_txt_id.setText(url_txt);
+        }
+
+        if(!time.isEmpty() && !url_txt.isEmpty()){
             NetWork_评论_读取 netWork_讨论_读取 = new NetWork_评论_读取(this);
-            netWork_讨论_读取.传递参数(time, linear_check, 网址);
+            netWork_讨论_读取.传递参数(time, linear_check, url_txt);
             netWork_讨论_读取.start();
         }
 

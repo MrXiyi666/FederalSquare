@@ -13,7 +13,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import fun.android.federal_square.R;
@@ -37,6 +36,8 @@ public class Fun_贴子 {
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
         ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        TextView url_txt_id = view.findViewById(R.id.url_txt_id);
+
         List<ImageView> img_list = new ArrayList<>();
 
         img_list.add(img_view.findViewById(R.id.img0));
@@ -44,7 +45,7 @@ public class Fun_贴子 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        String 网址="";
+        String url_txt="";
         for(Post_Data pd : post_data){
             switch (pd.getName()){
                 case "name":
@@ -97,21 +98,26 @@ public class Fun_贴子 {
                     time_name = pd.getText();
                     break;
                 case "url":
-                    网址 = pd.getText();
+                    url_txt = pd.getText();
                     break;
             }
         }
+
+
+        if(!able.URL_Name.equals(url_txt)){
+            url_txt_id.setText(url_txt);
+        }
+
         linear.addView(img_view);
         String finalTime_name = time_name;
-        String final网址 = 网址;
-        button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, final网址);
-        });
 
-        String finalTime_name1 = time_name;
+        String finalUrl_txt = url_txt;
+        button_message.setOnClickListener(V->{
+            Fun_评论.查看评论窗口(activity, finalTime_name, finalUrl_txt);
+        });
         button_collection.setOnClickListener(V->{
             NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
-            netWork_添加_收藏.传递参数(finalTime_name1, post_data);
+            netWork_添加_收藏.传递参数(finalTime_name, post_data);
             netWork_添加_收藏.start();
         });
 
@@ -123,6 +129,7 @@ public class Fun_贴子 {
         });
         return view;
     }
+
 
     public static View 创建文章贴子(Activity activity, List<Post_Data> post_data, View_Home_Article view_home_article){
         String time_name="";
