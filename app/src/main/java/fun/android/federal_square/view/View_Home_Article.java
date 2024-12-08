@@ -72,9 +72,6 @@ public class View_Home_Article extends View_Main{
             if(i>=100){
                 return;
             }
-            if(!Fun_文件.是否存在(able.app_path + "Square_Data/" + name)){
-                continue;
-            }
             try {
                 String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + name);
                 List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());

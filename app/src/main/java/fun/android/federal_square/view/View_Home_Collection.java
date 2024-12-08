@@ -52,7 +52,6 @@ public class View_Home_Collection extends View_Main{
             if(i >= 100){
                 return;
             }
-
             try {
                 String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + name);
                 List<Post_Data>  post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
