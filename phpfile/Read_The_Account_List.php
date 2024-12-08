@@ -13,9 +13,8 @@
    foreach ($_array as $value){
        if($value=='.' || $value=='..'){
           continue;
-       }else{
-          $_return[] = $value;
        }
+       $_return[] = $value;
    }
    if(count($_return) == 0){
     die("no");
