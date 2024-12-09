@@ -3,6 +3,7 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -11,12 +12,17 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.reflect.TypeToken;
+
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
+import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.fun.Fun_贴子;
 import fun.android.federal_square.view.View_Create;
 import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Home_Page;
@@ -42,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         初始化();
         事件();
+
     }
 
     public void 初始化(){

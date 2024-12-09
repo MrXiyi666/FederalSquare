@@ -172,8 +172,9 @@ public class NetWork_Main {
                     }
                 }
             }catch (Exception e){
-                Log.w(class_name, e);
-                Fun.mess(activity, class_name + " " + e);
+                String error_txt = class_name + "：\n" + e;
+                Log.w(class_name, error_txt);
+                Fun.mess(activity, error_txt);
                 if(b_dialog){
                     able.handler.post(()->{
                         dialog.dismiss();

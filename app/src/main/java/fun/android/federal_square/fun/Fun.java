@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +35,21 @@ public class Fun {
             TextView text_id = view.findViewById(R.id.text_id);
             AppCompatButton button_ok = view.findViewById(R.id.button_ok);
             ImageView return_icon = view.findViewById(R.id.return_icon);
+            ScrollView scrollView = view.findViewById(R.id.scrollView);
+            view.post(()->{
+                if(text_id.getHeight() > able.高度){
+                    scrollView.getLayoutParams().height = able.高度 / 2;
+                    scrollView.requestLayout();
+                }
+
+            });
             text_id.setText(name);
             button_ok.setOnClickListener(V->{
                 dialog.dismiss();
             });
-
             return_icon.setOnClickListener(V->{
                 dialog.dismiss();
             });
-
             dialog.setView(view);
             dialog.setCancelable(true);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);

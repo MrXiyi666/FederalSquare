@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/round_white"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_alignParentTop="true"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -25,33 +25,31 @@
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView
-        android:layout_below="@id/title"
         android:id="@+id/xian1"
         android:alpha="0.2"
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <ScrollView
+        android:id="@+id/scrollView"
         android:scrollbars="none"
         android:layout_margin="10dp"
-        android:layout_below="@id/xian1"
-        android:layout_above="@id/button_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/text_id"
                 android:textSize="18sp"
                 android:textColor="@color/black"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_above="@id/di_title"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:id="@+id/button_ok"
@@ -64,5 +62,5 @@
         android:id="@+id/di_title"
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
-</RelativeLayout>
+</LinearLayout>
 
