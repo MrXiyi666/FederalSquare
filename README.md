@@ -1,5 +1,11 @@
 # FederalSquare
- 联邦广场 官网 http://federal-square.top/
+此项目开发进度较短 会有BUG  只能用于体验
+
+
+
+
+
+联邦广场 官网 http://federal-square.top/
 
 这是一个开源的社区APP 是可以使用虚拟主机服务器 搭建社区的开源项目
 
