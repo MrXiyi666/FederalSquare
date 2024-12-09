@@ -58,6 +58,9 @@ public class NetWork_Main_MultipartBody {
 
     }
 
+    public void 失败(){
+
+    }
     public void 刷新(){
 
     }
@@ -88,6 +91,9 @@ public class NetWork_Main_MultipartBody {
                 dialog.dismiss();
                 Log.w(class_name, e);
                 Fun.mess(activity, class_name + e);
+                able.handler.post(()->{
+                    失败();
+                });
             }
 
             @Override
@@ -107,7 +113,6 @@ public class NetWork_Main_MultipartBody {
                     able.handler.post(()->{
                         刷新();
                     });
-
                 }
             }
         });

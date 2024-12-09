@@ -75,12 +75,15 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 加载图片初始化(String account_id){
+        button_network_disk.setEnabled(false);
         上传图片 = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if(uri == null){
+                button_network_disk.setEnabled(true);
                 return;
             }
             if(Fun.获取Uri文件大小(DiskActivity.this, uri) >= 10485760){
                 Fun.mess(DiskActivity.this, "图片大于10mb");
+                button_network_disk.setEnabled(true);
                 return;
             }
             String 后缀 = Fun.获取文件扩展名(Fun.获取Uri文件名(this, uri));
@@ -91,17 +94,18 @@ public class DiskActivity extends AppCompatActivity {
                 后缀 = "";
             }
             if(后缀.isEmpty()){
+                button_network_disk.setEnabled(true);
                 return;
             }
             try {
                 bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri));
                 Fun_图片.保存缓存图片(bitmap, 后缀);
-                button_network_disk.setEnabled(false);
                 netWork_网盘_上传.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
                 netWork_网盘_上传.start();
             } catch (FileNotFoundException e) {
                 Log.w("加载图片初始化", e);
                 Fun.mess(DiskActivity.this, "加载失败");
+                button_network_disk.setEnabled(true);
             }
 
         });
@@ -109,6 +113,7 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 初始化数据(){
+        this.button_network_disk.setEnabled(true);
         List<String> file_list = 遍历所有图片();
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
         gridView.setOnItemClickListener((parent, view, position, id) -> {

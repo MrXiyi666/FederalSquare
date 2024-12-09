@@ -67,10 +67,15 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
     }
 
     @Override
+    public void 失败() {
+        super.失败();
+        button_network_disk.setEnabled(true);
+    }
+
+    @Override
     public void 刷新() {
         super.刷新();
         diskActivity.初始化数据();
-        this.button_network_disk.setEnabled(true);
     }
 
 }

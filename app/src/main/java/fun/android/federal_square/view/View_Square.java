@@ -22,12 +22,13 @@ import fun.android.federal_square.fun.Fun_贴子;
 import fun.android.federal_square.network.NetWork_多少秒获取广场数据;
 import fun.android.federal_square.network.NetWork_广场刷新;
 import fun.android.federal_square.window.引用列表窗口;
+import fun.android.federal_square.window.重新设置域名窗口;
 
 public class View_Square extends View_Main{
     private TextView top_title;
     public ImageView new_icon;
     private SwipeRefreshLayout swiperefee;
-    private RelativeLayout button_add;
+    private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
     public Fun_发贴 fun_发贴;
     private boolean b_time_update = true;
@@ -44,6 +45,7 @@ public class View_Square extends View_Main{
         new_icon = view.findViewById(R.id.new_icon);
         swiperefee = view.findViewById(R.id.swiperefee);
         button_add = view.findViewById(R.id.button_add);
+        button_url_setting = view.findViewById(R.id.button_url_setting);
         linear = view.findViewById(R.id.linear);
         初始化本地数据();
         new_icon.setVisibility(View.GONE);
@@ -76,6 +78,13 @@ public class View_Square extends View_Main{
                 Fun.mess(activity_main, "请先登录");
             }
 
+        });
+        if(Fun_文件.是否存在(able.app_path + "url_setting_boolean.txt")){
+            button_url_setting.setVisibility(View.GONE);
+        }
+        button_url_setting.setOnClickListener(V->{
+
+            new 重新设置域名窗口().启动(activity_main);
         });
     }
 
