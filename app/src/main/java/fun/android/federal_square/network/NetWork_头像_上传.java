@@ -35,6 +35,7 @@ public class NetWork_头像_上传 extends NetWork_Main {
                 .add("data", able.gson.toJson(this.post_dataList))
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Write_Txt.php";
         b_mess = false;
     }

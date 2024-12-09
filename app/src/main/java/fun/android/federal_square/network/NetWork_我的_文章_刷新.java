@@ -23,6 +23,7 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
                 .add("Account", Fun_账号.GetID())
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Read_The_Account_List.php";
         b_mess = false;
     }

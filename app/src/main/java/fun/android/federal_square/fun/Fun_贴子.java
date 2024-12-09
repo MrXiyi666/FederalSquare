@@ -46,6 +46,7 @@ public class Fun_贴子 {
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
         String url_txt="";
+        String PassWord_txt="";
         for(Post_Data pd : post_data){
             switch (pd.getName()){
                 case "name":
@@ -100,6 +101,9 @@ public class Fun_贴子 {
                 case "url":
                     url_txt = pd.getText();
                     break;
+                case "password":
+                    PassWord_txt = pd.getText();
+                    break;
             }
         }
 
@@ -112,8 +116,9 @@ public class Fun_贴子 {
         String finalTime_name = time_name;
 
         String finalUrl_txt = url_txt;
+        String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, finalUrl_txt);
+            Fun_评论.查看评论窗口(activity, finalTime_name, finalUrl_txt, finalPassWord_txt);
         });
         button_collection.setOnClickListener(V->{
             NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
@@ -151,6 +156,7 @@ public class Fun_贴子 {
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
         String 网址="";
+        String PassWord_txt="";
         for(Post_Data pd : post_data){
             switch (pd.getName()){
                 case "name":
@@ -205,13 +211,17 @@ public class Fun_贴子 {
                 case "url":
                     网址 = pd.getText();
                     break;
+                case "password":
+                    PassWord_txt = pd.getText();
+                    break;
             }
         }
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;
+        String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, final网址);
+            Fun_评论.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
         });
 
         String finalTime_name1 = time_name;
@@ -254,6 +264,7 @@ public class Fun_贴子 {
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
         String 网址="";
+        String PassWord_txt="";
         for(Post_Data pd : post_data){
             switch (pd.getName()){
                 case "name":
@@ -307,13 +318,17 @@ public class Fun_贴子 {
                 case "url":
                     网址 = pd.getText();
                     break;
+                case "password":
+                    PassWord_txt = pd.getText();
+                    break;
             }
         }
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;
+        String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, final网址);
+            Fun_评论.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
         });
 
         button_collection.setVisibility(View.GONE);

@@ -17,6 +17,7 @@ public class NetWork_读取热门 extends NetWork_Main {
         super(activity);
 
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Read_Hot_List.php";
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)

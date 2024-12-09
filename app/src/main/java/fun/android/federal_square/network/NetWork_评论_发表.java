@@ -15,16 +15,17 @@ public class NetWork_评论_发表 extends NetWork_Main {
         super(activity);
     }
 
-    public void 传递参数(String 网址, String square_time, String discuss_time, String discuss_data, View view, LinearLayout linear){
+    public void 传递参数(String 网址, String PassWord, String square_time, String discuss_time, String discuss_data, View view, LinearLayout linear){
         this.view = view;
         this.linear = linear;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("Read_PassWord", PassWord)
                 .add("square_time", square_time)
                 .add("discuss_time", discuss_time)
                 .add("discuss_data", discuss_data)
                 .build();
         url = 网址;
+        password = PassWord;
         url_path = "federal-square/Create_Discuss.php";
         b_mess = false;
     }

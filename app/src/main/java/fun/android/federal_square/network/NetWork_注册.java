@@ -26,6 +26,7 @@ public class NetWork_注册 extends NetWork_Main {
                 .add("data", able.gson.toJson(post_dataList))
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Create_Account.php";
         b_mess = false;
         b_account = false;

@@ -12,6 +12,7 @@ import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
+import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_发贴;
@@ -55,11 +56,12 @@ public class View_Square extends View_Main{
 
         swiperefee.setOnRefreshListener(()->{
             NetWork_广场刷新 netWork_广场刷新 = new NetWork_广场刷新(activity_main);
-            netWork_广场刷新.传递参数(able.URL_Name);
+            netWork_广场刷新.传递参数(able.URL_Name, able.Read_PassWord);
             netWork_广场刷新.start();
-            for(String url : 引用列表窗口.获取引用列表()){
+            for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
                 NetWork_广场刷新 zi_network = new NetWork_广场刷新(activity_main);
-                zi_network.传递参数(url);
+                Log.w("刷新", "URL " + url_passWord_data.getURL() + "\nPassWord " + url_passWord_data.getPassWord());
+                zi_network.传递参数(url_passWord_data.getURL(), url_passWord_data.getPassWord());
                 zi_network.start();
             }
 

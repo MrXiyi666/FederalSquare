@@ -15,18 +15,19 @@ import fun.android.federal_square.view.View_Home_Page;
 import okhttp3.FormBody;
 
 public class NetWork_登录 extends NetWork_Main {
-    private String PassWord="";
+    private String n_PassWord="";
     public NetWork_登录(Activity activity) {
         super(activity);
     }
 
-    public void 传递参数(String id, String password){
-        this.PassWord=password;
+    public void 传递参数(String id, String password1){
+        this.n_PassWord=password1;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + id + "/" + id + ".txt")
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Read_Txt.php";
         b_mess = false;
     }
@@ -47,7 +48,7 @@ public class NetWork_登录 extends NetWork_Main {
             }
             for(Post_Data pd : post_dataList){
                 if(pd.getName().equals("PassWord")){
-                    if(pd.getText().equals(PassWord)){
+                    if(pd.getText().equals(n_PassWord)){
                         Fun.mess(activity, "登陆成功");
                         this.b_update = true;
                         Fun_账号.保存账号(post_dataList);

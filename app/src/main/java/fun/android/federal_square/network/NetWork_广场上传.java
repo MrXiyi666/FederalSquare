@@ -29,6 +29,7 @@ public class NetWork_广场上传 extends NetWork_Main {
                 .add("data", able.gson.toJson(post_dataList))
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Publish_Article.php";
         b_mess = false;
     }

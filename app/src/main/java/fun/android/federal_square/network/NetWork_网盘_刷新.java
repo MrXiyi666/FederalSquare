@@ -17,6 +17,7 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
                 .add("Account", Fun_账号.GetID())
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Read_The_Disk_List.php";
         b_mess = true;
     }

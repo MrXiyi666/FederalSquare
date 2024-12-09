@@ -24,7 +24,7 @@ import fun.android.federal_square.network.NetWork_评论_发表;
 import fun.android.federal_square.network.NetWork_评论_读取;
 
 public class Fun_评论 {
-    public static void 查看评论窗口(Activity activity, String time_name, String 网址){
+    public static void 查看评论窗口(Activity activity, String time_name, String 网址, String PassWord){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_check_reviews, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
@@ -53,13 +53,13 @@ public class Fun_评论 {
                     post_dataList.add(post_data_name);
                     post_dataList.add(post_data_sign);
                     post_dataList.add(post_data_text);
-                    Fun_评论.发布新的讨论(activity, linear, post_dataList, time_name, 网址);
+                    Fun_评论.发布新的讨论(activity, linear, post_dataList, time_name, 网址, PassWord);
                 }
                 edit_text.setText("");
             });
         }
         NetWork_评论_读取 netWork_讨论_读取 = new NetWork_评论_读取(activity);
-        netWork_讨论_读取.传递参数(time_name, linear, 网址);
+        netWork_讨论_读取.传递参数(time_name, linear, 网址, PassWord);
         netWork_讨论_读取.start();
         swiperefee.setOnRefreshListener(()->{
             netWork_讨论_读取.start();
@@ -75,10 +75,10 @@ public class Fun_评论 {
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
-    public static void 发布新的讨论(Activity activity, LinearLayout linear, List<Post_Data> post_dataList, String time_name, String 网址){
+    public static void 发布新的讨论(Activity activity, LinearLayout linear, List<Post_Data> post_dataList, String time_name, String 网址, String PassWord){
         View view = 添加评论布局(activity, post_dataList);
         NetWork_评论_发表 netWork_讨论_发表 = new NetWork_评论_发表(activity);
-        netWork_讨论_发表.传递参数(网址, time_name, Fun.获取时间(), able.gson.toJson(post_dataList), view, linear);
+        netWork_讨论_发表.传递参数(网址, PassWord, time_name, Fun.获取时间(), able.gson.toJson(post_dataList), view, linear);
         netWork_讨论_发表.start();
 
     }

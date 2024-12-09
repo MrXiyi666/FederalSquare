@@ -26,6 +26,7 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
                 .add("path", "./Account/" + account_id + "/Collection/" + time + ".json")
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Delete_File.php";
         b_mess = false;
     }

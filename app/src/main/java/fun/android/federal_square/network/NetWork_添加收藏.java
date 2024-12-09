@@ -28,6 +28,7 @@ public class NetWork_添加收藏 extends NetWork_Main {
                 .add("account_id", Fun_账号.GetID())
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Add_Collection.php";
         b_mess = false;
     }

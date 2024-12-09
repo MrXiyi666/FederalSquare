@@ -20,6 +20,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.Post_Data;
+import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 
@@ -31,22 +33,30 @@ public class 引用列表窗口 {
         LinearLayout linear = view.findViewById(R.id.linear);
         AppCompatButton button_add = view.findViewById(R.id.button_add);
         EditText edit_text = view.findViewById(R.id.edit_text);
+        EditText edit_text_password = view.findViewById(R.id.edit_text_password);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-        List<String>list = 获取引用列表();
+        List<URL_PassWord_Data>list = 获取引用列表();
         linear.removeAllViews();
-        for(String name : list){
-            linear.addView(创建子布局(activity, name, linear));
+        for(URL_PassWord_Data url_passWord_data : list){
+            linear.addView(创建子布局(activity, url_passWord_data, linear, list));
         }
         button_add.setOnClickListener(V->{
             String txt = edit_text.getText().toString();
+            String txt_password = edit_text_password.getText().toString()+"";
+
+
             txt = txt.replaceAll("\r\n|\r|\n", "");
             if(!txt.isEmpty()){
+                URL_PassWord_Data urlPassWordData = new URL_PassWord_Data();
+                urlPassWordData.setURL(txt);
+                urlPassWordData.setPassWord(txt_password);
                 edit_text.setText("");
-                list.add(txt);
+                edit_text_password.setText("");
+                list.add(urlPassWordData);
                 Fun_文件.写入文件(able.app_path + "YinYong_Data/List.json", able.gson.toJson(list));
-                linear.addView(创建子布局(activity, txt, linear), 0);
+                linear.addView(创建子布局(activity, urlPassWordData, linear, list), 0);
             }
         });
 
@@ -59,35 +69,27 @@ public class 引用列表窗口 {
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
-    public static List<String> 获取引用列表(){
-        List<String> list = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "YinYong_Data/List.json"), new TypeToken<List<String>>(){});
+    public static List<URL_PassWord_Data> 获取引用列表(){
+        List<URL_PassWord_Data> list = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "YinYong_Data/List.json"), new TypeToken<>() {
+        });
         if(list == null){
             return new ArrayList<>();
         }
         return list;
     }
-    public View 创建子布局(Activity activity, String txt, LinearLayout linear){
+    public View 创建子布局(Activity activity, URL_PassWord_Data url_passWord_data, LinearLayout linear, List<URL_PassWord_Data> list){
         View view = View.inflate(activity, R.layout.view_yinyong_list_item_view, null);
         EditText edit_text = view.findViewById(R.id.edit_text);
-        edit_text.setText(txt);
+        edit_text.setText(url_passWord_data.getURL());
         edit_text.setEnabled(false);
         AppCompatButton button_system = view.findViewById(R.id.button_system);
         button_system.setOnClickListener(V->{
-           if(button_system.getText().equals("修改")){
-               edit_text.setEnabled(true);
-               button_system.setText("确认");
-           }else{
-               edit_text.setEnabled(false);
-               button_system.setText("修改");
-               if(edit_text.getText().toString().isEmpty()){
-                   Fun_文件.删除文件(able.app_path + "YinYong_Data/" + txt);
-                   linear.removeAllViews();
-                   for(String name : 获取引用列表()){
-                       linear.addView(创建子布局(activity, name, linear));
-                   }
-               }
-
-           }
+            list.remove(url_passWord_data);
+            Fun_文件.写入文件(able.app_path + "YinYong_Data/List.json", able.gson.toJson(list));
+            linear.removeAllViews();
+            for(URL_PassWord_Data urlPassWordData : 获取引用列表()){
+                linear.addView(创建子布局(activity, urlPassWordData, linear, list));
+            }
         });
         return view;
     }

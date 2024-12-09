@@ -29,6 +29,7 @@ public class NetWork_我的_个人信息 extends NetWork_Main {
                     .add("data", able.gson.toJson(post_dataList))
                     .build();
             url = able.URL_Name;
+            password = able.Read_PassWord;
             url_path = "federal-square/Write_Txt.php";
         }
         b_mess = false;

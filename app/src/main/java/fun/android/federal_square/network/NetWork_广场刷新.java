@@ -17,13 +17,19 @@ public class NetWork_广场刷新 extends NetWork_Main {
                 .add("Read_PassWord", able.Read_PassWord)
                 .build();
         url = able.URL_Name;
+        password = able.Read_PassWord;
         url_path = "federal-square/Read_Square_Data_List.php";
         b_mess = false;
     }
 
-    public void 传递参数(String 网址){
+    public void 传递参数(String 网址, String PassWord){
         this.url = 网址;
+        formBody = null;
         url_path = "federal-square/Read_Square_Data_List.php";
+        password = PassWord;
+        formBody = new FormBody.Builder()
+                .add("Read_PassWord", PassWord)
+                .build();
     }
     @Override
     public void 事件(String string) {
@@ -31,7 +37,6 @@ public class NetWork_广场刷新 extends NetWork_Main {
         if(string.equals("no")){
             return;
         }
-
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
         for(String name : filename){

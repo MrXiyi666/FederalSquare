@@ -33,19 +33,34 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
-        <EditText
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_weight="1"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:layout_margin="10dp"
-            android:background="@drawable/edit_back"
-            android:padding="10dp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/edit_text"
-            android:hint="添加新的网址"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/edit_back"
+                android:padding="10dp"
+                android:id="@+id/edit_text"
+                android:hint="添加新的网址"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/edit_back"
+                android:padding="10dp"
+                android:id="@+id/edit_text_password"
+                android:hint="有密码的话请输入"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_gravity="center_vertical"
             android:layout_weight="1"

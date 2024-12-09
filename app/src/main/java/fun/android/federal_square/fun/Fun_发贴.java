@@ -100,11 +100,15 @@ public class Fun_发贴 {
                 Post_Data url = new Post_Data();
                 url.setName("url");
                 url.setText(able.URL_Name);
+                Post_Data password = new Post_Data();
+                password.setName("password");
+                password.setText(able.Read_PassWord);
                 post_dataList.add(name);
                 post_dataList.add(sign);
                 post_dataList.add(avatar);
                 post_dataList.add(time);
                 post_dataList.add(url);
+                post_dataList.add(password);
                 netWork_广场上传.传递数据(post_dataList, time.getText());
                 netWork_广场上传.start();
             }else{

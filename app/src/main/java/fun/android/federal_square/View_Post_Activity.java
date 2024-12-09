@@ -20,7 +20,7 @@ import fun.android.federal_square.network.NetWork_评论_读取;
 
 public class View_Post_Activity extends AppCompatActivity {
     private LinearLayout linear, linear_check;
-    private String url_txt;
+    private String url_txt, PassWord_txt="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +97,9 @@ public class View_Post_Activity extends AppCompatActivity {
                 case "url":
                     url_txt = post_data.getText();
                     break;
+                case "password":
+                    PassWord_txt = post_data.getText();
+                    break;
             }
         }
         if(!able.URL_Name.equals(url_txt)){
@@ -105,7 +108,7 @@ public class View_Post_Activity extends AppCompatActivity {
 
         if(!time.isEmpty() && !url_txt.isEmpty()){
             NetWork_评论_读取 netWork_讨论_读取 = new NetWork_评论_读取(this);
-            netWork_讨论_读取.传递参数(time, linear_check, url_txt);
+            netWork_讨论_读取.传递参数(time, linear_check, url_txt, PassWord_txt);
             netWork_讨论_读取.start();
         }
 
