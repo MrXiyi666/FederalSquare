@@ -14,6 +14,7 @@ public class NetWork_广场刷新 extends NetWork_Main {
     public NetWork_广场刷新(Activity activity) {
         super(activity);
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .build();
         url = able.URL_Name;
         url_path = "federal-square/Read_Square_Data_List.php";
@@ -30,6 +31,7 @@ public class NetWork_广场刷新 extends NetWork_Main {
         if(string.equals("no")){
             return;
         }
+
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
         for(String name : filename){
@@ -37,6 +39,7 @@ public class NetWork_广场刷新 extends NetWork_Main {
                continue;
             }
             down_list_data.add(name);
+            Log.w(class_name, string);
             b_update = true;
             b_mess = true;
         }

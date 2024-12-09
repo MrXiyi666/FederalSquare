@@ -1,4 +1,6 @@
 <?php
+    include 'PassWord_Data.php';
+
     $path = $_POST['path'];
     if(!file_exists($path)) {
         die("no_file");

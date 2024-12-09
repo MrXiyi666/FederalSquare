@@ -75,6 +75,9 @@ public class View_Home_Article extends View_Main{
             try {
                 String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + name);
                 List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
                 able.handler.post(()->{
                     linear.addView(Fun_贴子.创建文章贴子(activity_main, post_data, View_Home_Article.this));
                 });
@@ -82,6 +85,7 @@ public class View_Home_Article extends View_Main{
             }catch (Exception e){
 
             }
+
 
         }
     }

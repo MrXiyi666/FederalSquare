@@ -3,6 +3,8 @@ package fun.android.federal_square.network;
 import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import okhttp3.FormBody;
 
@@ -17,6 +19,7 @@ public class NetWork_评论_发表 extends NetWork_Main {
         this.view = view;
         this.linear = linear;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("square_time", square_time)
                 .add("discuss_time", discuss_time)
                 .add("discuss_data", discuss_data)

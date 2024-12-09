@@ -1,5 +1,7 @@
 <?php
-    $square_time = $_POST['square_time'];
+     include 'PassWord_Data.php';
+     $square_time = $_POST['square_time'];
+
     if(!isset($square_time) and strlen($square_time) == 0){
         die("no_square_time");
     }

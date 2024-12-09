@@ -24,6 +24,7 @@ public class NetWork_我的_个人信息 extends NetWork_Main {
         post_dataList = Fun_账号.重新生成(Fun_账号.GetID(), PassWord, Name, Sign, Fun_账号.GetAvatar_Url(), Fun_账号.GetBack_Url(), Fun_账号.Get发贴开关(), Fun_账号.Get评论开关());
         if(!post_dataList.isEmpty()){
             formBody = new FormBody.Builder()
+                    .add("Read_PassWord", able.Read_PassWord)
                     .add("path", "./Account/" + Fun_账号.GetID() + "/" + Fun_账号.GetID() + ".txt")
                     .add("data", able.gson.toJson(post_dataList))
                     .build();

@@ -1,4 +1,5 @@
 <?php
+    include 'PassWord_Data.php';
     $Account_name = $_POST['Account'];
     if(!isset($Account_name) and strlen($Account_name) == 0){
         die("no");

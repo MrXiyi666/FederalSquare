@@ -47,7 +47,7 @@ public class Fun_文件 {
         } catch (Exception e) {
             Log.w("读取文件", e);
         }
-        return  sb.toString();
+        return  sb.toString()+"";
     }
 
 

@@ -73,13 +73,19 @@ public class View_Hot extends View_Main{
             }
             try {
                 String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + name + ".json");
-                able.handler.post(()->{
-                    linear.addView(Fun_贴子.创建新贴子(activity_main,able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType())));
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
+                linear.post(()->{
+                    linear.addView(Fun_贴子.创建新贴子(activity_main,post_data));
                 });
                 i++;
             }catch (Exception e){
 
             }
+
+
 
         }
 

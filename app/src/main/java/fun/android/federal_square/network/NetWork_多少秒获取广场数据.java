@@ -12,6 +12,7 @@ public class NetWork_多少秒获取广场数据 extends NetWork_Main{
     public NetWork_多少秒获取广场数据(Activity activity) {
         super(activity);
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .build();
         url = able.URL_Name;
         url_path = "federal-square/Time_Update_Square_New_Post.php";

@@ -6,6 +6,8 @@
 
 第三步 配置好你的域名可以正常访问 index.html
 
+注意 如果你想设置密码的话 打开 PassWord_Data.php 修改变量 $Square_PassWord = "federal-square"; 改成你想要的密码 特殊符号 , 除外
+
 第四步 在联邦广场APP内 输入您的域名 注意 后面要有/符号
 
 例如
@@ -18,3 +20,4 @@ http://federal-square.top/ 后面要带斜杠符号 以保证正常访问你的�
 
 
 如果您搭建好了 社区 并且成功运行 你可以发送到MrXiyi@outlook.com 邮箱 我可以把你的域名公开
+

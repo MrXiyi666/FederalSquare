@@ -19,6 +19,7 @@ public class NetWork_读取热门 extends NetWork_Main {
         url = able.URL_Name;
         url_path = "federal-square/Read_Hot_List.php";
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .build();
         b_mess = false;
     }
@@ -33,11 +34,6 @@ public class NetWork_读取热门 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("no") | string.equals("no_list") | string.equals("no_size")){
-            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
-            able.view_hot.linear.post(()-> able.view_hot.linear.removeAllViews());
-            return;
-        }
         List<String> filename = new ArrayList<>(Arrays.asList(string.split("\n")));
         Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(filename));
         for(String name : filename){

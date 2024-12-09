@@ -15,8 +15,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //able.app_path = Objects.requireNonNull(this.getExternalFilesDir("")).getPath() + "/";
-        able.app_path = Objects.requireNonNull(this.getFilesDir()).getPath() + "/";
+        able.app_path = Objects.requireNonNull(this.getExternalFilesDir("")).getPath() + "/";
+        //able.app_path = Objects.requireNonNull(this.getFilesDir()).getPath() + "/";
         Fun_文件.创建文件夹(able.app_path + "Disk_Data");
         Fun_文件.创建文件夹(able.app_path + "Account");
         Fun_文件.创建文件夹(able.app_path + "Account/Data");

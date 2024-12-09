@@ -1,5 +1,5 @@
 <?php
-
+    include 'PassWord_Data.php';
     $post_time = $_POST['post_time'];
     $data = $_POST['data'];
     $account_id = $_POST['account_id'];

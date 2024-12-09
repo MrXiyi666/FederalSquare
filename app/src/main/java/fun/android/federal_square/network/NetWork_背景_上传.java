@@ -25,6 +25,7 @@ public class NetWork_背景_上传 extends NetWork_Main{
         this.post_dataList = post_dataList;
         this.fun_dialog = fun_dialog;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/" + Fun_账号.GetID() + ".txt")
                 .add("data", able.gson.toJson(this.post_dataList))
                 .build();

@@ -13,6 +13,7 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
     public NetWork_网盘_刷新(Activity activity) {
         super(activity);
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("Account", Fun_账号.GetID())
                 .build();
         url = able.URL_Name;

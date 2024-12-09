@@ -23,6 +23,7 @@ public class NetWork_广场上传 extends NetWork_Main {
         this.time = time;
         this.post_dataList = post_dataList;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("account", Fun_账号.GetID())
                 .add("name", time)
                 .add("data", able.gson.toJson(post_dataList))

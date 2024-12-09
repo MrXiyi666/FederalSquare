@@ -41,7 +41,6 @@ public class Fun {
                     scrollView.getLayoutParams().height = able.高度 / 2;
                     scrollView.requestLayout();
                 }
-
             });
             text_id.setText(name);
             button_ok.setOnClickListener(V->{

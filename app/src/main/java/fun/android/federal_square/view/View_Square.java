@@ -89,12 +89,10 @@ public class View_Square extends View_Main{
                 NetWork_多少秒获取广场数据 fun_多少秒获取广场数据 = new NetWork_多少秒获取广场数据(activity_main);
                 while (b_time_update){
                     fun_多少秒获取广场数据.start();
-                    Log.w("刷新", "true");
                     try {
                         Thread.sleep(able.square_time_index);
                     }catch (Exception e){
                         //Log.w("刷新", e);
-                        Log.w("刷新", "false");
                     }
                 }
 
@@ -134,12 +132,18 @@ public class View_Square extends View_Main{
             }
             try {
                 String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + name);
+                if(txt.isEmpty()){
+                    continue;
+                }
                 List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
                 able.handler.post(()->{
                     linear.addView(Fun_贴子.创建新贴子(activity_main, post_data));
                 });
                 i++;
-            }catch (Exception ignored){
+            }catch (Exception e){
 
             }
 

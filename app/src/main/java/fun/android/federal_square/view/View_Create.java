@@ -12,7 +12,7 @@ import fun.android.federal_square.fun.Fun_文件;
 
 public class View_Create extends View_Main{
     private AppCompatButton button_ok;
-    private EditText edit_txt;
+    private EditText edit_url, edit_password;
     public View_Create(MainActivity activity) {
         super(activity);
     }
@@ -26,7 +26,9 @@ public class View_Create extends View_Main{
             pager.setVisibility(View.VISIBLE);
             linear_create.setVisibility(View.GONE);
             linear_di.setVisibility(View.VISIBLE);
-            able.URL_Name = Fun_文件.读取文件(able.app_path + "URL_Name.txt");
+            able.URL_Name = Fun_文件.读取文件(able.app_path + "URL_Name.txt").split(",")[0]+"";
+            able.Read_PassWord = Fun_文件.读取文件(able.app_path + "URL_Name.txt").split(",")[1] + "";
+
         }
     }
     @Override
@@ -34,22 +36,31 @@ public class View_Create extends View_Main{
         super.初始化();
         view = View.inflate(activity_main, R.layout.view_create, null);
         button_ok = view.findViewById(R.id.button_ok);
-        edit_txt = view.findViewById(R.id.edit_txt);
+        edit_url = view.findViewById(R.id.edit_url);
+        edit_password = view.findViewById(R.id.edit_password);
     }
 
     @Override
     public void 事件() {
         super.事件();
         button_ok.setOnClickListener(V->{
-            String txt = edit_txt.getText().toString();
-            if(txt.isEmpty()){
+            String txt_url = edit_url.getText().toString();
+            String txt_password = edit_password.getText().toString();
+            if(txt_url.isEmpty()){
                 return;
             }
-            Fun_文件.写入文件(able.app_path + "URL_Name.txt", txt);
+            String txt_data = txt_url;
+            able.URL_Name = txt_url;
+
+            if(!txt_password.isEmpty()){
+                txt_data = txt_data + "," + txt_password;
+                able.Read_PassWord = txt_password;
+            }
+            Fun_文件.写入文件(able.app_path + "URL_Name.txt", txt_data);
             pager.setVisibility(View.VISIBLE);
             linear_create.setVisibility(View.GONE);
             linear_di.setVisibility(View.VISIBLE);
-            able.URL_Name = txt;
+
         });
     }
 

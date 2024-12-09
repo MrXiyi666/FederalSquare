@@ -20,6 +20,7 @@ public class NetWork_注册 extends NetWork_Main {
     public void 传递参数(List<Post_Data> account_data){
         this.post_dataList = account_data;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("account", post_dataList.get(0).getText())
                 .add("path", "./Account/" + post_dataList.get(0).getText())
                 .add("data", able.gson.toJson(post_dataList))

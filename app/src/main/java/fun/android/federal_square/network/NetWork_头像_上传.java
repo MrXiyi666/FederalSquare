@@ -30,6 +30,7 @@ public class NetWork_头像_上传 extends NetWork_Main {
         this.avatar_img = avatar_img;
         this.fun_dialog = dialog;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/" + Fun_账号.GetID() + ".txt")
                 .add("data", able.gson.toJson(this.post_dataList))
                 .build();

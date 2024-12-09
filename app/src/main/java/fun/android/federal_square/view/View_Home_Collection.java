@@ -55,15 +55,16 @@ public class View_Home_Collection extends View_Main{
             try {
                 String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + name);
                 List<Post_Data>  post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
                 able.handler.post(()->{
                     linear.addView(Fun_贴子.创建收藏贴子(activity_main, post_data, View_Home_Collection.this));
                 });
-
                 i++;
             }catch (Exception e){
 
             }
-
 
         }
 

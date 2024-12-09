@@ -1,5 +1,8 @@
 <?php
 
+include 'PassWord_Data.php';
+
+
 if(!is_dir('./Square_Data')){
     die("no");
 }

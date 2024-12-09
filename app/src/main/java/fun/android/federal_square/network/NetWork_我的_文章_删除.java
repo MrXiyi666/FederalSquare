@@ -22,6 +22,7 @@ public class NetWork_我的_文章_删除 extends NetWork_Main{
         this.time = time;
         this.view_HomeArticle = view_home_article;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + account_id + "/Data/" + time + ".json")
                 .build();
         url = able.URL_Name;

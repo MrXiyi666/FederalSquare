@@ -21,6 +21,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
     public void 传递参数(String square_time, LinearLayout linear, String 网址){
         this.linear = linear;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("square_time", square_time)
                 .build();
         url = 网址;

@@ -21,6 +21,7 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
         this.b_account = true;
 
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("account_id", Fun_账号.GetID())
                 .build();
         url = able.URL_Name;

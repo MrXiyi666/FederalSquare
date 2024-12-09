@@ -22,6 +22,7 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
         this.view_HomeCollection = view_HomeCollection;
         this.time = time;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + account_id + "/Collection/" + time + ".json")
                 .build();
         url = able.URL_Name;

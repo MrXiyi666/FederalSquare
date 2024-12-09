@@ -22,6 +22,7 @@ public class NetWork_添加收藏 extends NetWork_Main {
         this.post_time = post_time;
         this.post_data = post_data;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("post_time", post_time)
                 .add("data", able.gson.toJson(this.post_data))
                 .add("account_id", Fun_账号.GetID())

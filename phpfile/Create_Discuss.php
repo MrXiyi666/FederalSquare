@@ -1,4 +1,5 @@
 <?php
+    include 'PassWord_Data.php';
     //创建评论功能
     $square_time = $_POST['square_time'];
     $discuss_time = $_POST['discuss_time'];

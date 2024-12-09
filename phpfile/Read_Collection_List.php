@@ -1,5 +1,5 @@
 <?php
-
+    include 'PassWord_Data.php';
     $account_id = $_POST['account_id'];
 
     $path = "./Account/$account_id/Collection";

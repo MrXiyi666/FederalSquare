@@ -1,7 +1,7 @@
 <?php
 
 include 'Fun.php';
-
+include 'PassWord_Data.php';
 
 $path = "./Discuss_Data/";
 $name = scandir($path);

@@ -1,4 +1,7 @@
 <?php
+
+    include 'PassWord_Data.php';
+
     $account = $_POST['account'];
     $name = $_POST['name'];
     $data = $_POST['data'];

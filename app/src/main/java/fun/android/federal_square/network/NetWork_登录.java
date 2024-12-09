@@ -23,6 +23,7 @@ public class NetWork_登录 extends NetWork_Main {
     public void 传递参数(String id, String password){
         this.PassWord=password;
         formBody = new FormBody.Builder()
+                .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + id + "/" + id + ".txt")
                 .build();
         url = able.URL_Name;

@@ -1,4 +1,6 @@
 <?php
+
+    include 'PassWord_Data.php';
     //创建账号功能
 	$account = $_POST['account'];
 	$path = $_POST['path'];

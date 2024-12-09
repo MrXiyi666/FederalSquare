@@ -16,7 +16,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
-        android:id="@+id/edit_txt"
+        android:id="@+id/edit_url"
+        android:textColor="@color/black"
+        android:gravity="start"
+        android:maxLength="50"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_back"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="如果有密码的话请您输入密码\n密码错误将无法获取任何数据\n没有密码可以留空\n初始密码一般为federal-square"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edit_password"
         android:textColor="@color/black"
         android:gravity="start"
         android:maxLength="50"
