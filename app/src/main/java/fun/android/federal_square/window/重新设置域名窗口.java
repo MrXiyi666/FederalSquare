@@ -7,6 +7,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import java.io.File;
@@ -16,11 +19,17 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 
 public class 重新设置域名窗口 {
-    public void 启动(Activity activity){
+    public void 启动(Activity activity, RelativeLayout button_url_setting){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_url_setting_view, null);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         AppCompatButton button_exit = view.findViewById(R.id.button_exit);
+        ImageView return_icon = view.findViewById(R.id.return_icon);
+
+        return_icon.setOnClickListener(V->{
+            dialog.dismiss();
+        });
+
         button_ok.setOnClickListener(V->{
             Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Hot_Data"));
@@ -32,6 +41,8 @@ public class 重新设置域名窗口 {
         });
         button_exit.setOnClickListener(V->{
             Fun_文件.写入文件(able.app_path + "url_setting_boolean.txt", "");
+            button_url_setting.setVisibility(View.GONE);
+            dialog.dismiss();
         });
 
 

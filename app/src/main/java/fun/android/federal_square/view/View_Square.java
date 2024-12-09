@@ -84,7 +84,7 @@ public class View_Square extends View_Main{
         }
         button_url_setting.setOnClickListener(V->{
 
-            new 重新设置域名窗口().启动(activity_main);
+            new 重新设置域名窗口().启动(activity_main, button_url_setting);
         });
     }
 
