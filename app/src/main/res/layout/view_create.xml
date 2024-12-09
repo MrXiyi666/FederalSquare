@@ -12,7 +12,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:gravity="center"
-        android:text="您必须填写您的域名地址\n并且虚拟空间正确的适配\n才可以正常使用\n例如 http://federal-square.top/\n后面的斜杠要加上\n请使用http而不是https"
+        android:text="您必须填写您的域名地址\n并且虚拟空间正确的适配\n才可以正常使用\n例如 http://federal-square.top/\n后面的斜杠要加上\n请使用http而不是https\n如果你输入错误\n必须进入系统设置清除数据重新进入软件"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText

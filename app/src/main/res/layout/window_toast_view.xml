@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:background="@drawable/round_white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
         <TextView
             android:layout_centerInParent="true"
             android:text="系统提示"
@@ -24,25 +25,44 @@
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView
+        android:layout_below="@id/title"
+        android:id="@+id/xian1"
         android:alpha="0.2"
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
-    <TextView
-        android:layout_margin="30dp"
-        android:id="@+id/text_id"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:gravity="center"
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_margin="10dp"
+        android:layout_below="@id/xian1"
+        android:layout_above="@id/button_ok"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/text_id"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </ScrollView>
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_ok"
+        android:layout_above="@id/di_title"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:id="@+id/button_ok"
         android:text="关闭"
         android:background="@drawable/button_color_selected_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-</LinearLayout>
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/di_title"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+</RelativeLayout>
+
