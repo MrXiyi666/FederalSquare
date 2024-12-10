@@ -1,14 +1,12 @@
 <?php
      include 'PassWord_Data.php';
-     $square_time = $_POST['square_time'];
+     $path = $_POST['path'];
 
-    if(!isset($square_time) and strlen($square_time) == 0){
-        die("no_square_time");
+    if(!isset($path) and strlen($path) == 0){
+        die("no_folder");
     }
-
-    $path = "./Discuss_Data/$square_time";
     if(!is_dir($path)){
-        die("no_list");
+        die("no");
     }
     $_array = scandir($path, 1);
     $_return = array();
@@ -16,7 +14,7 @@
         if($value=='.' || $value=='..'){
             continue;
         }
-        if(file_exists($path)){
+        if(is_file($path . "/$value")){
             $str = file_get_contents($path . "/$value");
             if(strlen($str) > 0){
                 $_return[] = $str;
@@ -24,6 +22,6 @@
         }
     }
     if(count($_return) == 0){
-        die("no_list");
+        die("no");
     }
     echo implode("\n", $_return);

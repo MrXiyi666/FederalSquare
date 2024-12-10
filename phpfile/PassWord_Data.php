@@ -7,9 +7,7 @@
             die("Null_PassWord");
         }
 
-        if($Read_PassWord === $Square_PassWord){
-
-        }else{
+        if($Read_PassWord != $Square_PassWord){
             die("Error_PassWord");
         }
     }

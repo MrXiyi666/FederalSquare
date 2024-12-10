@@ -40,12 +40,6 @@ public class NetWork_登录 extends NetWork_Main {
         }
         try {
             List<Post_Data> post_dataList = able.gson.fromJson(string, new TypeToken<List<Post_Data>>(){}.getType());
-            if(post_dataList == null){
-                return;
-            }
-            if(post_dataList.isEmpty()){
-                return;
-            }
             for(Post_Data pd : post_dataList){
                 if(pd.getName().equals("PassWord")){
                     if(pd.getText().equals(n_PassWord)){

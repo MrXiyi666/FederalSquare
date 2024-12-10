@@ -7,13 +7,13 @@
     if(!isset($path) and strlen($path) == 0){
         die("no_file");
     }
-if(file_exists($path)){
-    $str = file_get_contents($path);
-    if(strlen($str) > 0){
-        echo $str;
+    if(is_file($path)){
+        $str = file_get_contents($path);
+        if(strlen($str) > 0){
+            echo $str;
+        }else{
+            echo "no_file";
+        }
     }else{
-        echo "no_file";
+        echo 'no_file';
     }
-}else{
-    echo 'no_file';
-}

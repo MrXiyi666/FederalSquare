@@ -20,11 +20,11 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
         this.b_account = true;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
-                .add("Account", Fun_账号.GetID())
+                .add("path", "./Account/" + Fun_账号.GetID() + "/Data")
                 .build();
         url = able.URL_Name;
         password = able.Read_PassWord;
-        url_path = "federal-square/Read_The_Account_List.php";
+        url_path = "federal-square/Read_Folder_List.php";
         b_mess = false;
     }
 
@@ -39,6 +39,11 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Data"));
             Fun_文件.创建文件夹(able.app_path + "Account/Data");
             return;
+        }
+        if(string.equals("no_folder")){
+            view_home_article.linear.post(()-> view_home_article.linear.removeAllViews());
+            Fun_文件.删除文件夹(new File(able.app_path + "Account/Data"));
+            Fun_文件.创建文件夹(able.app_path + "Account/Data");
         }
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));

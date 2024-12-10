@@ -23,28 +23,23 @@ public class NetWork_添加收藏 extends NetWork_Main {
         this.post_data = post_data;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
-                .add("post_time", post_time)
+                .add("path", "./Account/" + Fun_账号.GetID() + "/Collection/" + post_time + ".json")
                 .add("data", able.gson.toJson(this.post_data))
-                .add("account_id", Fun_账号.GetID())
                 .build();
         url = able.URL_Name;
         password = able.Read_PassWord;
-        url_path = "federal-square/Add_Collection.php";
+        url_path = "federal-square/Write_Txt.php";
         b_mess = false;
     }
 
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("cunzai")){
-            Fun.mess(activity, "已收藏");
-            return;
-        }
-        if(string.equals("no_file")){
+        if(string.equals("no")){
             Fun.mess(activity, "收藏失败");
             return;
         }
-        if(string.equals("yes_file")){
+        if(string.equals("ok")){
             Fun.mess(activity, "收藏成功");
             Fun_文件.写入文件(able.app_path + "Account/Collection/" + post_time + ".json", able.gson.toJson(this.post_data));
         }

@@ -2,7 +2,7 @@
     include 'PassWord_Data.php';
 
     $path = $_POST['path'];
-    if(!file_exists($path)) {
+    if(!is_file($path)) {
         die("no_file");
     }
     if(!unlink($path)){

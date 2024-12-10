@@ -37,16 +37,8 @@ public class NetWork_广场上传 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("no_network")){
+        if(!string.equals("ok")){
             Fun.mess(activity,  "发表失败");
-            return;
-        }
-        if(string.equals("no_data")){
-            Fun.mess(activity, "数据传输失败");
-            return;
-        }
-        if(string.equals("no_account")){
-            Fun.mess(activity, "未找到账号");
             return;
         }
         Fun_文件.写入文件(able.app_path + "Square_Data/" + time + ".json", able.gson.toJson(this.post_dataList));

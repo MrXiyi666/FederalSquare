@@ -20,13 +20,12 @@ public class NetWork_评论_发表 extends NetWork_Main {
         this.linear = linear;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", PassWord)
-                .add("square_time", square_time)
-                .add("discuss_time", discuss_time)
-                .add("discuss_data", discuss_data)
+                .add("path", "./Discuss_Data/" + square_time + "/" + discuss_time + ".json")
+                .add("data", discuss_data)
                 .build();
         url = 网址;
         password = PassWord;
-        url_path = "federal-square/Create_Discuss.php";
+        url_path = "federal-square/Write_Txt.php";
         b_mess = false;
     }
 
@@ -39,20 +38,10 @@ public class NetWork_评论_发表 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("no_discuss")){
-            Fun.mess(activity, "传输失败");
-            return;
+        if(string.equals("ok")){
+            this.b_update = true;
+            Fun.mess(activity, "评价成功");
         }
-        if(string.equals("no_square")){
-            Fun.mess(activity, "评论失败");
-            return;
-        }
-        if(string.equals("create_file_error")){
-            Fun.mess(activity, "评论失败");
-            return;
-        }
-        this.b_update = true;
-        Fun.mess(activity, "评价成功");
     }
 
 }

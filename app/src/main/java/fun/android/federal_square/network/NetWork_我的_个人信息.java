@@ -38,7 +38,7 @@ public class NetWork_我的_个人信息 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("no")){
+        if(!string.equals("ok")){
             Fun.mess(activity, "修改失败");
             return;
         }

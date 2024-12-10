@@ -14,12 +14,11 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
         super(activity);
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
-                .add("Account", Fun_账号.GetID())
+                .add("path", "./Account/" + Fun_账号.GetID() + "/Image_Resources/")
                 .build();
         url = able.URL_Name;
         password = able.Read_PassWord;
-        url_path = "federal-square/Read_The_Disk_List.php";
-        b_mess = true;
+        url_path = "federal-square/Read_Folder_List.php";
     }
 
     @Override
@@ -27,7 +26,12 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
         super.事件(string);
         Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
         Fun_文件.创建文件夹(able.app_path + "Disk_Data");
-        if(string.equals("no")){
+        if(string.equals("no_folder")){
+            this.b_update = true;
+            Fun.mess(activity, "没有数据");
+            return;
+        }
+        if(string.equals("no_folder")){
             this.b_update = true;
             Fun.mess(activity, "没有数据");
             return;

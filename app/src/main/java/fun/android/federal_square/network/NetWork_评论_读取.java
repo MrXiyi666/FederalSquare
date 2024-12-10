@@ -1,8 +1,11 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.LinearLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +25,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
         this.linear = linear;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", PassWord)
-                .add("square_time", square_time)
+                .add("path", "./Discuss_Data/" + square_time)
                 .build();
         url = 网址;
         password = PassWord;
@@ -33,11 +36,11 @@ public class NetWork_评论_读取 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("no_square_time")){
-            Fun.mess(activity, "无法读取");
+
+        if(string.equals("no")){
             return;
         }
-        if(string.equals("no_list")){
+        if(string.equals("no_folder")){
             return;
         }
         this.string = string;
@@ -54,6 +57,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
             try {
                 linear.addView(Fun_评论.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
             }catch (Exception e){
+
             }
         }
     }

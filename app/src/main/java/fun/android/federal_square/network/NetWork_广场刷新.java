@@ -2,7 +2,6 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,26 +14,31 @@ public class NetWork_广场刷新 extends NetWork_Main {
         super(activity);
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
+                .add("path", "./Square_Data")
                 .build();
         url = able.URL_Name;
         password = able.Read_PassWord;
-        url_path = "federal-square/Read_Square_Data_List.php";
+        url_path = "federal-square/Read_Folder_List.php";
         b_mess = false;
     }
 
     public void 传递参数(String 网址, String PassWord){
         this.url = 网址;
         formBody = null;
-        url_path = "federal-square/Read_Square_Data_List.php";
+        url_path = "federal-square/Read_Folder_List.php";
         password = PassWord;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", PassWord)
+                .add("path", "./Square_Data")
                 .build();
     }
     @Override
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no")){
+            return;
+        }
+        if(string.equals("no_folder")){
             return;
         }
         String[] dd = string.split("\n");
