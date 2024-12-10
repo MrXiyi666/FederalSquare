@@ -61,7 +61,7 @@ public class Fun {
             dialog.show();
             new Thread(()->{
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     dialog.dismiss();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
