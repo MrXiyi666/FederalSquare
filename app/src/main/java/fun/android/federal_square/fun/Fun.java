@@ -10,6 +10,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -24,16 +26,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 
 public class Fun {
+
     public static void mess(Activity activity, String name){
+
         able.handler.post(()->{
-            AlertDialog dialog = new AlertDialog.Builder(activity).create();
+            AlertDialog dialog = new AlertDialog.Builder(activity,  R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
-            AppCompatButton button_ok = view.findViewById(R.id.button_ok);
             ImageView return_icon = view.findViewById(R.id.return_icon);
             ScrollView scrollView = view.findViewById(R.id.scrollView);
             view.post(()->{
@@ -43,22 +47,30 @@ public class Fun {
                 }
             });
             text_id.setText(name);
-            button_ok.setOnClickListener(V->{
-                dialog.dismiss();
-            });
+
             return_icon.setOnClickListener(V->{
                 dialog.dismiss();
             });
             dialog.setView(view);
-            dialog.setCancelable(true);
+            dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().setGravity(Gravity.CENTER);
             dialog.show();
+            new Thread(()->{
+                try {
+                    Thread.sleep(1000);
+                    dialog.dismiss();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+
         });
     }
+
 
     public static String 获取时间() {
         @SuppressLint("SimpleDateFormat")

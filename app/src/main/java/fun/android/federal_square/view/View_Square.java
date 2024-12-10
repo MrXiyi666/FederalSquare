@@ -87,13 +87,14 @@ public class View_Square extends View_Main{
             new 重新设置域名窗口().启动(activity_main, button_url_setting);
         });
     }
-
+    int i=0;
     @Override
     public void onStart() {
         super.onStart();
         if(able.URL_Name.isEmpty()){
             return;
         }
+
         b_time_update = true;
         if(time_thread == null){
             time_thread = new Thread(()->{
@@ -103,7 +104,6 @@ public class View_Square extends View_Main{
                     try {
                         Thread.sleep(able.square_time_index);
                     }catch (Exception e){
-                        //Log.w("刷新", e);
                     }
                 }
 
@@ -121,7 +121,6 @@ public class View_Square extends View_Main{
             time_thread.interrupt();
             time_thread = null;
         }
-
     }
 
     @Override

@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import java.io.IOException;
 import java.util.Objects;
-
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -39,11 +38,10 @@ public class NetWork_Main_MultipartBody {
         this.class_name = this.getClass().getSimpleName();
         this.activity = activity;
         able.handler.post(()->{
-            dialog = new AlertDialog.Builder(activity).create();
-            View view = View.inflate(activity, R.layout.view_loading, null);
-            TextView text = view.findViewById(R.id.text);
-            text.setTextColor(Color.WHITE);
-
+            dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
+            View view = View.inflate(activity, R.layout.window_toast_view, null);
+            TextView text_id = view.findViewById(R.id.text_id);
+            text_id.setText("→→→  加载中  ←←←");
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);

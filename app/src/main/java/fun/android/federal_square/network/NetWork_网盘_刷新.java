@@ -25,10 +25,10 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
+        Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
+        Fun_文件.创建文件夹(able.app_path + "Disk_Data");
         if(string.equals("no")){
             this.b_update = true;
-            Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
-            Fun_文件.创建文件夹(able.app_path + "Disk_Data");
             Fun.mess(activity, "没有数据");
             return;
         }

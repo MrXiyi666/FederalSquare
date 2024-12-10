@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -24,12 +24,14 @@
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView
+        android:layout_below="@id/relati"
         android:alpha="0.2"
         android:id="@+id/xian1"
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <ScrollView
+        android:layout_below="@id/xian1"
         android:scrollbars="none"
         android:overScrollMode="never"
         android:layout_width="match_parent"
@@ -118,4 +120,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

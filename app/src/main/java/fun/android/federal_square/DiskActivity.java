@@ -65,6 +65,7 @@ public class DiskActivity extends AppCompatActivity {
             swiperefre.setRefreshing(false);
         });
         button_network_disk.setOnClickListener(V->{
+            button_network_disk.setEnabled(false);
             上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
         });
         List<String> file_list = 遍历所有图片();
@@ -75,7 +76,7 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 加载图片初始化(String account_id){
-        button_network_disk.setEnabled(false);
+
         上传图片 = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if(uri == null){
                 button_network_disk.setEnabled(true);

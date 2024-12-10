@@ -8,6 +8,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,9 @@ public class NetWork_Main {
         this.class_name = this.getClass().getSimpleName();
         able.handler.post(()->{
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
-            View view = View.inflate(activity, R.layout.view_loading, null);
+            View view = View.inflate(activity, R.layout.window_toast_view, null);
+            TextView text_id = view.findViewById(R.id.text_id);
+            text_id.setText("→→→  加载中  ←←←");
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -88,9 +92,14 @@ public class NetWork_Main {
                         .build();
                 Response response = able.okHttpClient.newCall(request).execute();
                 if(b_dialog){
-                    able.handler.post(()->{
-                        dialog.dismiss();
-                    });
+                    new Thread(()->{
+                        try {
+                            Thread.sleep(1000);
+                            dialog.dismiss();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }).start();
                 }
 
                 if(!response.isSuccessful()){
@@ -183,9 +192,14 @@ public class NetWork_Main {
                 Log.w(class_name, error_txt);
                 //Fun.mess(activity, error_txt);
                 if(b_dialog){
-                    able.handler.post(()->{
-                        dialog.dismiss();
-                    });
+                    new Thread(()->{
+                        try {
+                            Thread.sleep(1000);
+                            dialog.dismiss();
+                        } catch (InterruptedException ee) {
+
+                        }
+                    }).start();
                 }
             }
 
