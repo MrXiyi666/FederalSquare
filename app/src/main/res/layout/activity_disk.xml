@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DiskActivity">
     <RelativeLayout
+        android:id="@+id/top_title"
         android:background="@drawable/round_white"
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -29,11 +30,14 @@
             android:layout_height="40dp"/>
     </RelativeLayout>
     <TextView
+        android:layout_below="@id/top_title"
+        android:id="@id/xian1"
         android:alpha="0.5"
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_below="@id/xian1"
         android:id="@+id/swiperefee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,4 +54,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</LinearLayout>
+    <com.github.chrisbanes.photoview.PhotoView
+        android:visibility="gone"
+        android:id="@+id/photoView"
+        android:background="@drawable/round_white_stroke_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

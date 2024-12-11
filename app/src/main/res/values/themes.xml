@@ -13,6 +13,7 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
     <style name="AlertDialog_Loading" parent="android:Theme.Dialog">

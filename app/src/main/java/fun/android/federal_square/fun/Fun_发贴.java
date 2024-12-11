@@ -162,7 +162,7 @@ public class Fun_发贴 {
                 return true;
             });
             imageView.setOnClickListener(V->{
-                Fun_查看图片.启动(activity, list.get(position));
+                Fun_查看图片.启动_Dialog(activity, list.get(position));
             });
             post_dataList.add(post_data);
             linear.addView(imageView);
