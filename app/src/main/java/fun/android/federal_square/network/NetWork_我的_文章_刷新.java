@@ -1,8 +1,6 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +8,11 @@ import java.util.List;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.view.View_Home_Article;
+import fun.android.federal_square.view.View_Home_Essay;
 import okhttp3.FormBody;
 
 public class NetWork_我的_文章_刷新 extends NetWork_Main {
-    private View_Home_Article view_home_article;
+    private View_Home_Essay view_home_essay;
     public NetWork_我的_文章_刷新(Activity activity) {
         super(activity);
         this.b_account = true;
@@ -28,20 +26,20 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
         b_mess = false;
     }
 
-    public void 传递参数(View_Home_Article view_home_article){
-        this.view_home_article = view_home_article;
+    public void 传递参数(View_Home_Essay view_home_essay){
+        this.view_home_essay = view_home_essay;
     }
     @Override
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no")){
-            view_home_article.linear.post(()-> view_home_article.linear.removeAllViews());
+            view_home_essay.linear.post(()-> view_home_essay.linear.removeAllViews());
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Data"));
             Fun_文件.创建文件夹(able.app_path + "Account/Data");
             return;
         }
         if(string.equals("no_folder")){
-            view_home_article.linear.post(()-> view_home_article.linear.removeAllViews());
+            view_home_essay.linear.post(()-> view_home_essay.linear.removeAllViews());
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Data"));
             Fun_文件.创建文件夹(able.app_path + "Account/Data");
         }
@@ -62,7 +60,7 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        view_home_article.初始化数据();
+        view_home_essay.初始化数据();
     }
 
 }

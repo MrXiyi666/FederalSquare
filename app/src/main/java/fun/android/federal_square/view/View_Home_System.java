@@ -12,9 +12,10 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_个人信息;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.window.引用列表窗口;
+import fun.android.federal_square.window.文章设置窗口;
 
 public class View_Home_System extends View_Main{
-    private AppCompatButton 网盘按钮, 个人信息, 引用列表;
+    private AppCompatButton 网盘按钮, 个人信息, 引用列表, 文章设置;
     public View_Home_System(MainActivity activity) {
         super(activity);
     }
@@ -26,6 +27,7 @@ public class View_Home_System extends View_Main{
         网盘按钮 = view.findViewById(R.id.button_network_disk);
         个人信息 = view.findViewById(R.id.button_personal_information);
         引用列表 = view.findViewById(R.id.button_yinyong_list);
+        文章设置 = view.findViewById(R.id.button_essay_system);
     }
 
     @Override
@@ -43,6 +45,9 @@ public class View_Home_System extends View_Main{
         });
         引用列表.setOnClickListener(V->{
             new 引用列表窗口().启动(activity_main);
+        });
+        文章设置.setOnClickListener(V->{
+            文章设置窗口.显示(activity_main);
         });
     }
 

@@ -58,15 +58,19 @@ public class View_Hot extends View_Main{
     }
     public void 初始化数据(){
         List<String> filename = Fun_贴子.获取热门集合();
-        able.handler.post(()->{
+        linear.post(()->{
             linear.removeAllViews();
         });
 
         if(filename == null){
             return;
         }
-
-        for(int i=0;i<10;i++){
+        int index=50;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }
+        for(int i=0;i<index;i++){
             if(i >= filename.size()){
                 return;
             }
@@ -81,8 +85,8 @@ public class View_Hot extends View_Main{
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
                     continue;
                 }
-                able.handler.post(()->{
-                    linear.addView(Fun_贴子.创建新贴子(activity_main,post_data));
+                linear.post(()->{
+                    linear.addView(Fun_贴子.创建贴子(activity_main,post_data));
                 });
             }catch (Exception e){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");

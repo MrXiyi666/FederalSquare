@@ -9,7 +9,7 @@
         android:layout_height="50dp">
         <TextView
             android:layout_centerInParent="true"
-            android:text="讨论"
+            android:text="发表文章"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"

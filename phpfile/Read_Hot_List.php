@@ -4,7 +4,7 @@ include 'Fun.php';
 include 'PassWord_Data.php';
 
 $path = "./Discuss_Data/";
-$name = scandir($path);
+$name = scandir($path, 1);
 $list = array();
 foreach ($name as $value){
     if($value=='.' || $value=='..'){
@@ -19,7 +19,7 @@ $list_size = array();
 $list_name = array();
 $name = array();
 foreach ($list as $value){
-    if(strlen($value) == 0){
+    if($value=='.' || $value=='..'){
         continue;
     }
     $name = scandir($path . $value);
@@ -32,7 +32,7 @@ if(count($list_name) == 0){
     die("no_list");
 }
 foreach($list_name as $value){
-    if(strlen($value) == 0){
+    if($value=='.' || $value=='..'){
         continue;
     }
     $list_size[] = explode("\n", $value)[0];

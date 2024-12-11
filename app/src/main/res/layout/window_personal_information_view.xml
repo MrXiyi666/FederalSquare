@@ -68,7 +68,7 @@
         <TextView
             android:layout_marginBottom="10dp"
             android:textColor="@color/black"
-            android:textSize="11sp"
+            android:textSize="13sp"
             android:id="@+id/text_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -17,6 +17,7 @@ public class App extends Application {
         super.onCreate();
         able.app_path = Objects.requireNonNull(this.getExternalFilesDir("")).getPath() + "/";
         //able.app_path = Objects.requireNonNull(this.getFilesDir()).getPath() + "/";
+        Fun_文件.创建文件夹(able.app_path + "System_Data");
         Fun_文件.创建文件夹(able.app_path + "Disk_Data");
         Fun_文件.创建文件夹(able.app_path + "Account");
         Fun_文件.创建文件夹(able.app_path + "Account/Data");
@@ -35,6 +36,19 @@ public class App extends Application {
                 .retryOnConnectionFailure(false)
                 .dispatcher(dispatcher)
                 .build();
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/Essay_index.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/Essay_index.txt", "50");
+        }
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/Home_Essay_index.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/Home_Essay_index.txt", "10");
+        }
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/Home_Collection_Essay_index.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt", "10");
+        }
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/Hot_Essay_index.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/Hot_Essay_index.txt", "10");
+        }
+
     }
 
 }

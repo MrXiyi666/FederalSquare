@@ -80,13 +80,13 @@ public class View_Home_Page extends View_Main{
         back_img.setOnClickListener(V->{
             Fun_选择背景.启动(activity_main, this);
         });
-        linear.addView(new View_Home_Article(activity_main).getView());
+        linear.addView(new View_Home_Essay(activity_main).getView());
         button_article.setTextColor(Color.rgb(0,0,0));
         button_collection.setTextColor(Color.rgb(128,128,128));
         button_system.setTextColor(Color.rgb(128,128,128));
         button_article.setOnClickListener(V->{
             linear.removeAllViews();
-            linear.addView(new View_Home_Article(activity_main).getView());
+            linear.addView(new View_Home_Essay(activity_main).getView());
             button_article.setTextColor(Color.rgb(0,0,0));
             button_collection.setTextColor(Color.rgb(128,128,128));
             button_system.setTextColor(Color.rgb(128,128,128));

@@ -50,7 +50,7 @@ public class NetWork_广场上传 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_square.linear.addView(Fun_贴子.创建新贴子(activity, this.post_dataList), 0);
+        able.view_square.linear.addView(Fun_贴子.创建贴子(activity, this.post_dataList), 0);
         if(able.view_square.linear.getChildCount() >= 100){
             able.view_square.linear.removeViewAt(able.view_square.linear.getChildCount()-1);
         }

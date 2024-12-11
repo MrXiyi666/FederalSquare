@@ -2,30 +2,26 @@ package fun.android.federal_square.fun;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 
-import java.util.List;
 import java.util.Objects;
 import fun.android.federal_square.R;
-import fun.android.federal_square.View_Article;
-import fun.android.federal_square.data.Post_Data;
+import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.network.NetWork_我的_文章_删除;
 import fun.android.federal_square.network.NetWork_我的所有文章_删除;
-import fun.android.federal_square.view.View_Home_Article;
+import fun.android.federal_square.view.View_Home_Essay;
 
 public class Fun_删除文章 {
 
-    public static void 启动(Activity activity, String time, View_Home_Article view_HomeArticle){
+    public static void 启动(Activity activity, String time, View_Home_Essay view_HomeArticle){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_delete_file, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
@@ -57,7 +53,7 @@ public class Fun_删除文章 {
         dialog.show();
     }
 
-    public static void 所有启动(View_Article activity, String time){
+    public static void 所有启动(View_Essay activity, String time){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_delete_file, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);

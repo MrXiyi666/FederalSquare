@@ -15,16 +15,22 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
+import fun.android.federal_square.View_Collectin;
+import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.View_Post_Activity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
-import fun.android.federal_square.view.View_Home_Article;
+import fun.android.federal_square.view.View_Home_Essay;
 import fun.android.federal_square.view.View_Home_Collection;
 
 public class Fun_贴子 {
-    public static View 创建新贴子(Activity activity, List<Post_Data> post_data){
+
+
+    public static View 创建贴子(Activity activity, List<Post_Data> post_data){
         String time_name="";
 
         View view = View.inflate(activity, R.layout.create_post_layout, null);
@@ -134,7 +140,7 @@ public class Fun_贴子 {
     }
 
 
-    public static View 创建文章贴子(Activity activity, List<Post_Data> post_data, View_Home_Article view_home_article){
+    public static View 创建文章贴子(Activity activity, List<Post_Data> post_data, View_Home_Essay view_home_essay){
         String time_name="";
 
         View view = View.inflate(activity, R.layout.create_post_layout, null);
@@ -230,7 +236,7 @@ public class Fun_贴子 {
         });
         String finalTime_name2 = time_name;
         view.setOnLongClickListener(V->{
-            Fun_删除文章.启动(activity, finalTime_name2, view_home_article);
+            Fun_删除文章.启动(activity, finalTime_name2, view_home_essay);
             return true;
         });
         view.setOnClickListener(V->{

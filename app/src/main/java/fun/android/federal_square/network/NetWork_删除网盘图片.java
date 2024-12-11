@@ -1,25 +1,25 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-
+import fun.android.federal_square.DiskActivity;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.view.View_Home_Essay;
+import fun.android.federal_square.fun.Fun_账号;
 import okhttp3.FormBody;
 
-public class NetWork_我的_文章_删除 extends NetWork_Main{
-    private View_Home_Essay view_HomeArticle;
-    private String time="";
-    public NetWork_我的_文章_删除(Activity activity) {
+public class NetWork_删除网盘图片 extends NetWork_Main {
+    private DiskActivity diskActivity;
+    private String name;
+    public NetWork_删除网盘图片(Activity activity) {
         super(activity);
     }
-    public void 传递参数(String account_id, String time, View_Home_Essay view_home_essay){
-        this.time = time;
-        this.view_HomeArticle = view_home_essay;
+    public void 传递参数(String name, DiskActivity diskActivity){
+        this.name = name;
+        this.diskActivity = diskActivity;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
-                .add("path", "./Account/" + account_id + "/Data/" + time + ".json")
+                .add("path",  "./Account/" + Fun_账号.GetID() + "/Image_Resources/" + name)
                 .build();
         url = able.URL_Name;
         password = able.Read_PassWord;
@@ -32,7 +32,6 @@ public class NetWork_我的_文章_删除 extends NetWork_Main{
         super.事件(string);
         if(string.equals("no_file")){
             Fun.mess(activity, "文件不存在");
-            Fun_文件.删除文件(able.app_path + "Account/Data/" + time + ".json");
             return;
         }
         if(string.equals("no_delete")){
@@ -41,15 +40,13 @@ public class NetWork_我的_文章_删除 extends NetWork_Main{
         }
         Fun.mess(activity, "删除成功");
         this.b_update = true;
-        Fun_文件.删除文件(able.app_path + "Account/Data/" + time + ".json");
-        b_mess = true;
+        Fun_文件.删除文件(able.app_path + "Disk_Data/" + name);
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-        view_HomeArticle.初始化数据();
+        diskActivity.初始化数据();
     }
-
 
 }

@@ -37,7 +37,7 @@
             android:name=".View_Post_Activity"
             android:exported="true"
             />
-        <activity android:name=".View_Article"
+        <activity android:name=".View_Essay"
             android:exported="true"/>
         <activity android:name=".View_Collectin"
             android:exported="true">

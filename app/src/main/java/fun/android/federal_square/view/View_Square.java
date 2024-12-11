@@ -128,10 +128,15 @@ public class View_Square extends View_Main{
 
     public void 初始化本地数据(){
         List<String> list = Fun_贴子.获取广场集合();
-        able.handler.post(()->{
+        linear.post(()->{
             linear.removeAllViews();
         });
-        for(int i=0;i<100;i++){
+        int index=50;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }
+        for(int i=0;i<index;i++){
             if(i >= list.size()){
                 return;
             }
@@ -146,8 +151,8 @@ public class View_Square extends View_Main{
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                able.handler.post(()->{
-                    linear.addView(Fun_贴子.创建新贴子(activity_main, post_data));
+                linear.post(()->{
+                    linear.addView(Fun_贴子.创建贴子(activity_main, post_data));
                 });
             }catch (Exception e){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));

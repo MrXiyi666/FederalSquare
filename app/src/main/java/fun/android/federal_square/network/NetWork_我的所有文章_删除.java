@@ -1,10 +1,8 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.view.View;
-import android.widget.LinearLayout;
 
-import fun.android.federal_square.View_Article;
+import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
@@ -12,13 +10,13 @@ import okhttp3.FormBody;
 
 public class NetWork_我的所有文章_删除 extends NetWork_Main{
     private String time;
-    private View_Article view_article;
+    private View_Essay view_essay;
     public NetWork_我的所有文章_删除(Activity activity) {
         super(activity);
     }
-    public void 传递参数(String account_id, String time, View_Article view_article){
+    public void 传递参数(String account_id, String time, View_Essay view_essay){
         this.time = time;
-        this.view_article = view_article;
+        this.view_essay = view_essay;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
                 .add("path", "./Account/" + account_id + "/Data/" + time + ".json")
@@ -49,7 +47,7 @@ public class NetWork_我的所有文章_删除 extends NetWork_Main{
     @Override
     public void 刷新() {
         super.刷新();
-        view_article.初始化数据();
+        view_essay.初始化数据();
     }
 
 }

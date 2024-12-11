@@ -134,7 +134,7 @@ public class Fun_发贴 {
         return_icon.setOnClickListener(V->{
             选择图片窗口句柄.dismiss();
         });
-        List<String> list = 遍历所有图片();
+        List<String> list = Fun_图片.遍历所有图片不带域名();
         if(list.isEmpty()){
             Fun.mess(activity, "网盘数据为空");
             return;
@@ -143,12 +143,12 @@ public class Fun_发贴 {
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             Post_Data post_data = new Post_Data();
             post_data.setName("img");
-            post_data.setText(list.get(position));
+            post_data.setText(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             ImageView imageView = new ImageView(activity);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(able.宽度 / 2, able.宽度 / 2);
             imageView.setLayoutParams(layoutParams);
             Glide.with(activity)
-                    .load(list.get(position))
+                    .load(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -162,7 +162,7 @@ public class Fun_发贴 {
                 return true;
             });
             imageView.setOnClickListener(V->{
-                Fun_查看图片.启动_Dialog(activity, list.get(position));
+                Fun_查看图片.启动_Dialog(activity, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             });
             post_dataList.add(post_data);
             linear.addView(imageView);
@@ -178,16 +178,5 @@ public class Fun_发贴 {
         选择图片窗口句柄.getWindow().setGravity(Gravity.CENTER);
         选择图片窗口句柄.show();
 
-    }
-
-    public List<String> 遍历所有图片(){
-        List<String> list = Fun_文件.遍历文件夹(able.app_path + "Disk_Data");
-        Comparator<String> comparator = Comparator.reverseOrder();
-        list.sort(comparator);
-        List<String> return_list = new ArrayList<>();
-        for(String name : list){
-            return_list.add(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + name);
-        }
-        return return_list;
     }
 }

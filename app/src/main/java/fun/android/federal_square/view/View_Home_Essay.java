@@ -2,7 +2,6 @@ package fun.android.federal_square.view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -15,25 +14,25 @@ import java.util.List;
 
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
-import fun.android.federal_square.View_Article;
+import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_贴子;
 import fun.android.federal_square.network.NetWork_我的_文章_刷新;
 
-public class View_Home_Article extends View_Main{
+public class View_Home_Essay extends View_Main{
     public LinearLayout linear;
     private SwipeRefreshLayout swiperefee;
     private AppCompatButton button_loading;
-    public View_Home_Article(Activity activity){
+    public View_Home_Essay(Activity activity){
         super((MainActivity) activity);
     }
 
     @Override
     public void 初始化() {
         super.初始化();
-        view = View.inflate(activity_main, R.layout.view_home_article, null);
+        view = View.inflate(activity_main, R.layout.view_home_essay, null);
         linear = view.findViewById(R.id.linear);
         swiperefee = view.findViewById(R.id.swiperefee);
         button_loading = view.findViewById(R.id.button_loading);
@@ -46,12 +45,12 @@ public class View_Home_Article extends View_Main{
 
         swiperefee.setOnRefreshListener(()->{
             NetWork_我的_文章_刷新 netWork_我的_文章刷新 = new NetWork_我的_文章_刷新(activity_main);
-            netWork_我的_文章刷新.传递参数(View_Home_Article.this);
+            netWork_我的_文章刷新.传递参数(View_Home_Essay.this);
             netWork_我的_文章刷新.start();
             swiperefee.setRefreshing(false);
         });
         button_loading.setOnClickListener(V->{
-            Intent intent = new Intent(activity_main, View_Article.class);
+            Intent intent = new Intent(activity_main, View_Essay.class);
             activity_main.startActivity(intent);
         });
     }
@@ -76,7 +75,12 @@ public class View_Home_Article extends View_Main{
         linear.post(()->{
             linear.removeAllViews();button_loading.setVisibility(View.VISIBLE);
         });
-        for(int i=0;i<10;i++){
+        int index=50;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }
+        for(int i=0;i<index;i++){
             if(i >= list.size()){
                 return;
             }
@@ -92,7 +96,7 @@ public class View_Home_Article extends View_Main{
                     continue;
                 }
                 linear.post(()->{
-                    linear.addView(Fun_贴子.创建文章贴子(activity_main, post_data, View_Home_Article.this));
+                    linear.addView(Fun_贴子.创建文章贴子(activity_main, post_data, View_Home_Essay.this));
                 });
             }catch (Exception e){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));

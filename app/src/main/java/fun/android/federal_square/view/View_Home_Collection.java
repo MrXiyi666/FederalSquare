@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
-import fun.android.federal_square.View_Article;
 import fun.android.federal_square.View_Collectin;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -59,7 +58,12 @@ public class View_Home_Collection extends View_Main{
             linear.removeAllViews();
             button_loading.setVisibility(View.VISIBLE);
         });
-        for(int i=0;i<10;i++){
+        int index=50;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }
+        for(int i=0;i<index;i++){
             if(i>=list.size()){
                 return;
             }

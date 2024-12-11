@@ -14,6 +14,8 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import java.util.List;
 
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun_账号;
 
 public class Disk_Grid_Adapter extends BaseAdapter {
     private final Activity activity;
@@ -57,7 +59,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         DrawableCrossFadeFactory factory =
                 new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
         Glide.with(activity)
-                .load(url.get(position))
+                .load(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions.with(factory))
                 .into(gui.img);

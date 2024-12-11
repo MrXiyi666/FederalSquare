@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -32,6 +33,7 @@ import fun.android.federal_square.fun.Fun_查看图片;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_网盘_上传;
 import fun.android.federal_square.network.NetWork_网盘_刷新;
+import fun.android.federal_square.window.Delete_File_Window;
 
 public class DiskActivity extends AppCompatActivity {
     ActivityResultLauncher<PickVisualMediaRequest> 上传图片;
@@ -58,6 +60,7 @@ public class DiskActivity extends AppCompatActivity {
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         netWork_网盘_上传 = new NetWork_网盘_上传(this);
         加载图片初始化(Fun_账号.GetID());
+        初始化数据();
     }
 
     public void 事件(){
@@ -70,11 +73,7 @@ public class DiskActivity extends AppCompatActivity {
             button_network_disk.setEnabled(false);
             上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
         });
-        List<String> file_list = 遍历所有图片();
-        gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
-        gridView.setOnItemClickListener((parent, view, position, id) -> {
-            Fun_查看图片.启动(DiskActivity.this, file_list.get(position));
-        });
+
     }
 
     public void 加载图片初始化(String account_id){
@@ -117,21 +116,15 @@ public class DiskActivity extends AppCompatActivity {
 
     public void 初始化数据(){
         this.button_network_disk.setEnabled(true);
-        List<String> file_list = 遍历所有图片();
+        List<String> file_list = Fun_图片.遍历所有图片不带域名();
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
-            Fun_查看图片.启动(DiskActivity.this, file_list.get(position));
+            Fun_查看图片.启动(DiskActivity.this, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
         });
-    }
-    public List<String> 遍历所有图片(){
-        List<String> list = Fun_文件.遍历文件夹(able.app_path + "Disk_Data");
-        Comparator<String> comparator = Comparator.reverseOrder();
-        list.sort(comparator);
-        List<String> return_list = new ArrayList<>();
-        for(String name : list){
-            return_list.add(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + name);
-        }
-        return return_list;
+        gridView.setOnItemLongClickListener((parent, view, position, id) -> {
+            Delete_File_Window.删除网盘图片(DiskActivity.this, file_list.get(position));
+            return true;
+        });
     }
 
     @Override

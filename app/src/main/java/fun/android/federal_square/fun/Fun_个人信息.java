@@ -36,7 +36,7 @@ public class Fun_个人信息 {
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-        text_url.setText("网址: "+able.URL_Name);
+        text_url.setText("我的网址: "+able.URL_Name + "\n我的密码: " + able.Read_PassWord);
         button_ok.setOnClickListener(V->{
             String name_txt="";
             String sign_txt="";

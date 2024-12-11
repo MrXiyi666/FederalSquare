@@ -25,6 +25,15 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_margin="10dp"
         android:stateListAnimator="@null"
+        android:id="@+id/button_essay_system"
+        android:textColor="@color/black"
+        android:background="@drawable/button_color_selected_selector"
+        android:text="文章设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="10dp"
+        android:stateListAnimator="@null"
         android:id="@+id/button_yinyong_list"
         android:textColor="@color/black"
         android:background="@drawable/button_color_selected_selector"
