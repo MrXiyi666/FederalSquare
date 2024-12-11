@@ -16,6 +16,7 @@ import java.util.List;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_查看图片;
 import fun.android.federal_square.view.View_Create;
 import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Home_Page;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
     private LinearLayout linear_create, button_menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,10 +168,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(pager.getCurrentItem() > 0){
+            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
+                Fun_查看图片.photoView.setVisibility(View.GONE);
+                return false;
+            }else if(pager.getCurrentItem() > 0){
                 pager.setCurrentItem(0);
                 return false;
             }
+
         }
         return super.onKeyUp(keyCode, event);
     }

@@ -94,10 +94,10 @@ public class NetWork_Main {
                 if(b_dialog){
                     new Thread(()->{
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(100);
                             dialog.dismiss();
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
                         }
                     }).start();
                 }
@@ -194,10 +194,10 @@ public class NetWork_Main {
                 if(b_dialog){
                     new Thread(()->{
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(100);
                             dialog.dismiss();
-                        } catch (InterruptedException ee) {
-
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
                         }
                     }).start();
                 }

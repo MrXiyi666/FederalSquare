@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 
@@ -130,5 +132,17 @@ public class DiskActivity extends AppCompatActivity {
             return_list.add(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + name);
         }
         return return_list;
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
+                Fun_查看图片.photoView.setVisibility(View.GONE);
+                return false;
+            }
+
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

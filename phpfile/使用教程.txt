@@ -6,7 +6,9 @@
 
 第三步 配置好你的域名可以正常访问 index.html
 
-注意 如果你想设置密码的话 打开 PassWord_Data.php 修改变量 $Square_PassWord = "federal-square"; 改成你想要的密码 特殊符号 , 除外
+如何设置访问密码 在federal-square 目录下面创建 Access_PassWord.txt 文件 填写里面的内容 即可设置密码 注意： 空格的话也算有效密码 对方忘记填写空格的话 访问也会失败
+
+若没有 Access_PassWord.txt 或者 内容为空 都算没有密码
 
 第四步 在联邦广场APP内 输入您的域名 注意 后面要有/符号
 

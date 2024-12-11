@@ -23,7 +23,7 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 
 public class Fun_查看图片 {
-
+    public static PhotoView photoView;
     public static void 启动_Dialog(Activity activity, String url){
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
         View view = View.inflate(activity, R.layout.window_view_img, null);
@@ -56,7 +56,8 @@ public class Fun_查看图片 {
 
 
     public static void 启动(Activity activity, String url){
-        PhotoView photoView = activity.findViewById(R.id.photoView);
+        photoView = null;
+        photoView = activity.findViewById(R.id.photoView);
         photoView.setVisibility(View.VISIBLE);
         Glide.with(activity)
                 .asBitmap()

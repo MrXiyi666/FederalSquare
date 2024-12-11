@@ -2,6 +2,7 @@ package fun.android.federal_square;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -116,4 +117,15 @@ public class View_Post_Activity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
+                Fun_查看图片.photoView.setVisibility(View.GONE);
+                return false;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }
