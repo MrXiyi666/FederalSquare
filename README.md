@@ -19,9 +19,8 @@
 
 注意：需要的php文件在 phpfile文件夹里面 全部上传到federal-square即可
 
-注意 PassWord_Data.php 文件里面有一个$Square_PassWord 变量 可以修改访问密码 密码正确才可以正常访问 否则会失败
-
-比如 $Square_PassWord = "federal-square"; 修改为 $Square_PassWord = "12345678"; 不要忘记末尾的符号 密码要包含在"" 里面才可以
+如何设置访问密码 在federal-square 目录下面创建 Access_PassWord.txt 文件 填写里面的内容 即可设置密码
+注意： 空格的话也算有效密码 对方忘记填写空格的话 访问也会失败
 
 
 
