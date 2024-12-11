@@ -1,23 +1,20 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.util.Log;
-
+import fun.android.federal_square.View_Collectin;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.view.View_Home_Collection;
 import okhttp3.FormBody;
 
-public class NetWork_我的_收藏_删除 extends NetWork_Main{
+public class NetWork_我的所有收藏_删除 extends NetWork_Main{
     private String time;
-    private View_Home_Collection view_HomeCollection;
-    public NetWork_我的_收藏_删除(Activity activity ) {
+    private View_Collectin view_collectin;
+    public NetWork_我的所有收藏_删除(Activity activity) {
         super(activity);
     }
-
-    public void 传递参数(String account_id, String time, View_Home_Collection view_HomeCollection){
-        this.view_HomeCollection = view_HomeCollection;
+    public void 传递参数(String account_id, String time, View_Collectin view_collectin){
+        this.view_collectin = view_collectin;
         this.time = time;
         formBody = new FormBody.Builder()
                 .add("Read_PassWord", able.Read_PassWord)
@@ -47,8 +44,6 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
     @Override
     public void 刷新() {
         super.刷新();
-        view_HomeCollection.初始化收藏();
+        view_collectin.初始化数据();
     }
-
-
 }

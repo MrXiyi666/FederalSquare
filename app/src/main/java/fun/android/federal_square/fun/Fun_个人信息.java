@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import java.io.File;
@@ -30,10 +32,11 @@ public class Fun_个人信息 {
         EditText edit_password = view.findViewById(R.id.edit_password);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         AppCompatButton button_delete = view.findViewById(R.id.button_delete);
+        TextView text_url = view.findViewById(R.id.text_url);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-
+        text_url.setText("网址: "+able.URL_Name);
         button_ok.setOnClickListener(V->{
             String name_txt="";
             String sign_txt="";

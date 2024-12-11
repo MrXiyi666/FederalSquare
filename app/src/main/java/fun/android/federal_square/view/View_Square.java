@@ -1,10 +1,12 @@
 package fun.android.federal_square.view;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
@@ -55,21 +57,18 @@ public class View_Square extends View_Main{
     public void 事件() {
         super.事件();
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
-
         swiperefee.setOnRefreshListener(()->{
             NetWork_广场刷新 netWork_广场刷新 = new NetWork_广场刷新(activity_main);
             netWork_广场刷新.传递参数(able.URL_Name, able.Read_PassWord);
             netWork_广场刷新.start();
             for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
                 NetWork_广场刷新 zi_network = new NetWork_广场刷新(activity_main);
-                Log.w("刷新", "URL " + url_passWord_data.getURL() + "\nPassWord " + url_passWord_data.getPassWord());
                 zi_network.传递参数(url_passWord_data.getURL(), url_passWord_data.getPassWord());
                 zi_network.start();
             }
 
             swiperefee.setRefreshing(false);
         });
-
         button_add.setOnClickListener(V->{
             if(!Fun_账号.GetID().isEmpty()){
                 fun_发贴 = new Fun_发贴();
@@ -83,18 +82,16 @@ public class View_Square extends View_Main{
             button_url_setting.setVisibility(View.GONE);
         }
         button_url_setting.setOnClickListener(V->{
-
             new 重新设置域名窗口().启动(activity_main, button_url_setting);
         });
+
     }
-    int i=0;
     @Override
     public void onStart() {
         super.onStart();
         if(able.URL_Name.isEmpty()){
             return;
         }
-
         b_time_update = true;
         if(time_thread == null){
             time_thread = new Thread(()->{
@@ -131,32 +128,30 @@ public class View_Square extends View_Main{
 
     public void 初始化本地数据(){
         List<String> list = Fun_贴子.获取广场集合();
-        int i=0;
         able.handler.post(()->{
             linear.removeAllViews();
         });
-
-        for(String name : list){
-            if(i >= 100){
+        for(int i=0;i<100;i++){
+            if(i >= list.size()){
                 return;
             }
             try {
-                String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + name);
+                String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
                 if(txt.isEmpty()){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
                 List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
                 if(post_data == null){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
                 able.handler.post(()->{
                     linear.addView(Fun_贴子.创建新贴子(activity_main, post_data));
                 });
-                i++;
             }catch (Exception e){
-
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
             }
-
         }
     }
 }

@@ -1,9 +1,12 @@
 package fun.android.federal_square.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.reflect.TypeToken;
@@ -12,6 +15,7 @@ import java.util.List;
 
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
+import fun.android.federal_square.View_Article;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
@@ -21,6 +25,7 @@ import fun.android.federal_square.network.NetWork_我的_文章_刷新;
 public class View_Home_Article extends View_Main{
     public LinearLayout linear;
     private SwipeRefreshLayout swiperefee;
+    private AppCompatButton button_loading;
     public View_Home_Article(Activity activity){
         super((MainActivity) activity);
     }
@@ -31,6 +36,7 @@ public class View_Home_Article extends View_Main{
         view = View.inflate(activity_main, R.layout.view_home_article, null);
         linear = view.findViewById(R.id.linear);
         swiperefee = view.findViewById(R.id.swiperefee);
+        button_loading = view.findViewById(R.id.button_loading);
         初始化数据();
     }
 
@@ -43,6 +49,10 @@ public class View_Home_Article extends View_Main{
             netWork_我的_文章刷新.传递参数(View_Home_Article.this);
             netWork_我的_文章刷新.start();
             swiperefee.setRefreshing(false);
+        });
+        button_loading.setOnClickListener(V->{
+            Intent intent = new Intent(activity_main, View_Article.class);
+            activity_main.startActivity(intent);
         });
     }
 
@@ -63,30 +73,36 @@ public class View_Home_Article extends View_Main{
 
     public void 初始化数据(){
         List<String> list = Fun_贴子.获取文章集合();
-        able.handler.post(()->{
-            linear.removeAllViews();
+        linear.post(()->{
+            linear.removeAllViews();button_loading.setVisibility(View.VISIBLE);
         });
-
-        int i=0;
-        for(String name : list){
-            if(i>=100){
+        for(int i=0;i<10;i++){
+            if(i >= list.size()){
                 return;
             }
             try {
-                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + name);
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
+                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+                if(str.isEmpty()){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                able.handler.post(()->{
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                    continue;
+                }
+                linear.post(()->{
                     linear.addView(Fun_贴子.创建文章贴子(activity_main, post_data, View_Home_Article.this));
                 });
-                i++;
             }catch (Exception e){
-
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
             }
-
-
         }
+        linear.post(()->{
+            if(list.size() > linear.getChildCount()){
+                button_loading.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 }

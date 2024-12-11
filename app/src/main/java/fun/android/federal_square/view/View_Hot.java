@@ -1,6 +1,5 @@
 package fun.android.federal_square.view;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,28 +65,31 @@ public class View_Hot extends View_Main{
         if(filename == null){
             return;
         }
-        int i=0;
-        for(String name : filename){
-            if(i>=10){
+
+        for(int i=0;i<10;i++){
+            if(i >= filename.size()){
                 return;
             }
             try {
-                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + name + ".json");
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
+                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+                if(str.isEmpty()){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
                     continue;
                 }
-                linear.post(()->{
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+                    continue;
+                }
+                able.handler.post(()->{
                     linear.addView(Fun_贴子.创建新贴子(activity_main,post_data));
                 });
-                i++;
             }catch (Exception e){
-
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
             }
-
-
-
         }
+
+
 
     }
 }

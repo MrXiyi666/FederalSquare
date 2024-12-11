@@ -188,9 +188,6 @@ public class NetWork_Main {
                     }
                 }
             }catch (Exception e){
-                String error_txt = class_name + "：\n" + e;
-                Log.w(class_name, error_txt);
-                //Fun.mess(activity, error_txt);
                 if(b_dialog){
                     new Thread(()->{
                         try {

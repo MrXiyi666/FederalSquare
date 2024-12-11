@@ -1,17 +1,12 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.fun.Fun_账号;
 import okhttp3.FormBody;
 
 public class NetWork_多少秒获取广场数据 extends NetWork_Main{
