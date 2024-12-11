@@ -33,7 +33,10 @@ public class Fun_文件 {
     }
 
     public static String 读取文件(String path){
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("");
+        if(!是否存在(path)){
+            return sb.toString();
+        }
         try {
             File urlFile = new File(path);
             InputStreamReader isr = new InputStreamReader(new FileInputStream(urlFile), StandardCharsets.UTF_8);

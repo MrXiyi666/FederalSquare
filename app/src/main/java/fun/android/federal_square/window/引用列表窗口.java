@@ -73,6 +73,7 @@ public class 引用列表窗口 {
         List<URL_PassWord_Data> list = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "YinYong_Data/List.json"), new TypeToken<>() {
         });
         if(list == null){
+            Fun_文件.写入文件(able.app_path + "YinYong_Data/List.json", able.gson.toJson(new ArrayList<>()));
             return new ArrayList<>();
         }
         return list;
