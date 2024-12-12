@@ -31,16 +31,16 @@ public class 重新设置域名窗口 {
         });
 
         button_ok.setOnClickListener(V->{
+            Fun_文件.删除文件夹(new File(able.app_path + "System_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Hot_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Square_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "YinYong_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Account"));
-            Fun_文件.删除文件(able.app_path + "URL_Name.txt");
             System.exit(0);
         });
         button_exit.setOnClickListener(V->{
-            Fun_文件.写入文件(able.app_path + "url_setting_boolean.txt", "");
+            Fun_文件.写入文件(able.app_path + "System_Data/url_setting_boolean.txt", "");
             button_url_setting.setVisibility(View.GONE);
             dialog.dismiss();
         });

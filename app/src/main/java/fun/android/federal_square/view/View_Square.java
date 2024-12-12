@@ -78,7 +78,7 @@ public class View_Square extends View_Main{
             }
 
         });
-        if(Fun_文件.是否存在(able.app_path + "url_setting_boolean.txt")){
+        if(Fun_文件.是否存在(able.app_path + "System_Data/url_setting_boolean.txt")){
             button_url_setting.setVisibility(View.GONE);
         }
         button_url_setting.setOnClickListener(V->{

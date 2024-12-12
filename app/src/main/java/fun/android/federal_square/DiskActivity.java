@@ -9,26 +9,19 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.GridView;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
-import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_查看图片;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_网盘_上传;
@@ -83,11 +76,12 @@ public class DiskActivity extends AppCompatActivity {
                 button_network_disk.setEnabled(true);
                 return;
             }
-            if(Fun.获取Uri文件大小(DiskActivity.this, uri) >= 10485760){
+            if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 10485760){
                 Fun.mess(DiskActivity.this, "图片大于10mb");
                 button_network_disk.setEnabled(true);
                 return;
             }
+
             String 后缀 = Fun.获取文件扩展名(Fun.获取Uri文件名(this, uri));
             Bitmap bitmap;
             if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){

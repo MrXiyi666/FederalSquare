@@ -12,15 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fun_文件 {
-    List<File> files = new ArrayList<>();
     public static boolean 写入文件(String path, String data){
-        File file = new File( path);
+        File file = new File(path);
         try {
-            if (file.exists()) {
-                if(!file.delete()){
-                    return false;
-                }
-            }
+            file.delete();
             OutputStreamWriter oStreamWriter = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
             oStreamWriter.append(data);
             oStreamWriter.flush();
@@ -33,12 +28,12 @@ public class Fun_文件 {
     }
 
     public static String 读取文件(String path){
-        StringBuilder sb = new StringBuilder("");
-        if(!是否存在(path)){
-            return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        File urlFile = new File(path);
+        if(!urlFile.exists()){
+            return sb +"";
         }
         try {
-            File urlFile = new File(path);
             InputStreamReader isr = new InputStreamReader(new FileInputStream(urlFile), StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
             String line;
@@ -50,7 +45,7 @@ public class Fun_文件 {
         } catch (Exception e) {
             Log.w("读取文件", e);
         }
-        return  sb.toString()+"";
+        return  sb+"";
     }
 
 
@@ -99,7 +94,6 @@ public class Fun_文件 {
         for(File f : fs){
             list.add(f.getName());
         }
-
         return list;
     }
 

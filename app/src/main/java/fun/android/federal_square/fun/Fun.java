@@ -10,23 +10,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.documentfile.provider.DocumentFile;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
-
-import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 

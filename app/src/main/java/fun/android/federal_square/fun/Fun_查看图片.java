@@ -58,6 +58,7 @@ public class Fun_查看图片 {
     public static void 启动(Activity activity, String url){
         photoView = null;
         photoView = activity.findViewById(R.id.photoView);
+        photoView.setImageBitmap(null);
         photoView.setVisibility(View.VISIBLE);
         Glide.with(activity)
                 .asBitmap()
