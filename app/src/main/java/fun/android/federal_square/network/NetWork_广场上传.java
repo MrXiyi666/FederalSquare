@@ -50,10 +50,15 @@ public class NetWork_广场上传 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_square.linear.addView(Fun_贴子.创建贴子(activity, this.post_dataList), 0);
-        if(able.view_square.linear.getChildCount() >= 100){
-            able.view_square.linear.removeViewAt(able.view_square.linear.getChildCount()-1);
-        }
         able.view_square.fun_发贴.dialog.dismiss();
+        able.view_square.linear.addView(Fun_贴子.创建贴子(activity, this.post_dataList), 0);
+        try {
+            if(able.view_square.linear.getChildCount() >= Integer.parseInt(Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt"))){
+                able.view_square.linear.removeViewAt(able.view_square.linear.getChildCount()-1);
+            }
+        }catch (Exception e){
+
+        }
+
     }
 }

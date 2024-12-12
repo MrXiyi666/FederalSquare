@@ -49,7 +49,7 @@ public class NetWork_Main {
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setGravity(Gravity.CENTER);
+            dialog.getWindow().setGravity(Gravity.TOP);
         });
     }
 
@@ -94,7 +94,7 @@ public class NetWork_Main {
                 if(b_dialog){
                     new Thread(()->{
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(300);
                             dialog.dismiss();
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
@@ -191,7 +191,7 @@ public class NetWork_Main {
                 if(b_dialog){
                     new Thread(()->{
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(300);
                             dialog.dismiss();
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
