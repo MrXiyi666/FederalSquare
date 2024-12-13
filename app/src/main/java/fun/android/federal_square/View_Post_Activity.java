@@ -128,4 +128,10 @@ public class View_Post_Activity extends AppCompatActivity {
         }
         return super.onKeyUp(keyCode, event);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(this).clearMemory();
+    }
 }

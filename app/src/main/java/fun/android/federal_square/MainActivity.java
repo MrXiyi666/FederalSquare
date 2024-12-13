@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
@@ -163,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
         able.view_square.释放();
         able.view_hot.释放();
         able.view_home.释放();
+        Glide.get(this).clearMemory();
     }
 
     @Override

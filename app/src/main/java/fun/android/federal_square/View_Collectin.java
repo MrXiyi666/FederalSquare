@@ -205,5 +205,9 @@ public class View_Collectin extends AppCompatActivity {
         return super.onKeyUp(keyCode, event);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(this).clearMemory();
+    }
 }

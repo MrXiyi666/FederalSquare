@@ -16,6 +16,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.bumptech.glide.Glide;
+
 import java.io.FileNotFoundException;
 import java.util.List;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
@@ -131,5 +134,11 @@ public class DiskActivity extends AppCompatActivity {
 
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(this).clearMemory();
     }
 }

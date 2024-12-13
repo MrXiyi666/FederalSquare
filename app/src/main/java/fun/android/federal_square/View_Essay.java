@@ -205,4 +205,8 @@ public class View_Essay extends AppCompatActivity {
         return super.onKeyUp(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
