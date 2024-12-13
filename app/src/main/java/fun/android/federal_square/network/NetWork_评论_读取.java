@@ -1,18 +1,15 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.LinearLayout;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun;
-import fun.android.federal_square.fun.Fun_评论;
+import fun.android.federal_square.window.查看评论窗口;
 import okhttp3.FormBody;
 
 public class NetWork_评论_读取 extends NetWork_Main {
@@ -55,7 +52,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
         linear.removeAllViews();
         for(String data : filename){
             try {
-                linear.addView(Fun_评论.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
+                linear.addView(查看评论窗口.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
             }catch (Exception e){
 
             }

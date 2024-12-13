@@ -1,4 +1,4 @@
-package fun.android.federal_square.fun;
+package fun.android.federal_square.window;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -20,10 +20,12 @@ import java.util.Objects;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_评论_发表;
 import fun.android.federal_square.network.NetWork_评论_读取;
 
-public class Fun_评论 {
+public class 查看评论窗口 {
     public static void 查看评论窗口(Activity activity, String time_name, String 网址, String PassWord){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_check_reviews, null);
@@ -53,7 +55,7 @@ public class Fun_评论 {
                     post_dataList.add(post_data_name);
                     post_dataList.add(post_data_sign);
                     post_dataList.add(post_data_text);
-                    Fun_评论.发布新的讨论(activity, linear, post_dataList, time_name, 网址, PassWord);
+                    查看评论窗口.发布新的讨论(activity, linear, post_dataList, time_name, 网址, PassWord);
                 }
                 edit_text.setText("");
             });

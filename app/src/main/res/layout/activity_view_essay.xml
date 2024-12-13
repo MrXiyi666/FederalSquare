@@ -9,21 +9,22 @@
     <RelativeLayout
         android:layout_below="@id/top_title"
         android:id="@+id/relati"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:text="所有文章"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
         <ImageView
-            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView

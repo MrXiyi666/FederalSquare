@@ -14,7 +14,7 @@ import fun.android.federal_square.View_Collectin;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.fun.Fun_贴子;
+import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.network.NetWork_我的_收藏_刷新;
 
 public class View_Home_Collection extends View_Main{
@@ -53,7 +53,7 @@ public class View_Home_Collection extends View_Main{
 
 
     public void 初始化收藏(){
-        List<String> list = Fun_贴子.获取收藏集合();
+        List<String> list = Fun_文章.获取收藏集合();
         linear.post(()->{
             linear.removeAllViews();
             button_loading.setVisibility(View.VISIBLE);
@@ -79,7 +79,7 @@ public class View_Home_Collection extends View_Main{
                     continue;
                 }
                 linear.post(()->{
-                    linear.addView(Fun_贴子.创建收藏贴子(activity_main, post_data, View_Home_Collection.this));
+                    linear.addView(Fun_文章.创建收藏文章(activity_main, post_data, View_Home_Collection.this));
                 });
 
             }catch (Exception e){

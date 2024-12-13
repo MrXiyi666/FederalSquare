@@ -7,7 +7,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.fun.Fun_贴子;
+import fun.android.federal_square.fun.Fun_文章;
 import okhttp3.FormBody;
 
 public class NetWork_广场上传 extends NetWork_Main {
@@ -50,8 +50,8 @@ public class NetWork_广场上传 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_square.fun_发贴.dialog.dismiss();
-        able.view_square.linear.addView(Fun_贴子.创建贴子(activity, this.post_dataList), 0);
+        able.view_square._发表文章窗口.dialog.dismiss();
+        able.view_square.linear.addView(Fun_文章.创建文章(activity, this.post_dataList), 0);
         try {
             if(able.view_square.linear.getChildCount() >= Integer.parseInt(Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt"))){
                 able.view_square.linear.removeViewAt(able.view_square.linear.getChildCount()-1);

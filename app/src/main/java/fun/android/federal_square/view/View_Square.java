@@ -1,12 +1,9 @@
 package fun.android.federal_square.view;
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
@@ -17,10 +14,10 @@ import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
-import fun.android.federal_square.fun.Fun_发贴;
+import fun.android.federal_square.window.发表文章窗口;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.fun.Fun_贴子;
+import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.network.NetWork_多少秒获取广场数据;
 import fun.android.federal_square.network.NetWork_广场刷新;
 import fun.android.federal_square.window.引用列表窗口;
@@ -32,7 +29,7 @@ public class View_Square extends View_Main{
     private SwipeRefreshLayout swiperefee;
     private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
-    public Fun_发贴 fun_发贴;
+    public 发表文章窗口 _发表文章窗口;
     private boolean b_time_update = true;
     private Thread time_thread=null;
     public View_Square(MainActivity activity) {
@@ -71,8 +68,8 @@ public class View_Square extends View_Main{
         });
         button_add.setOnClickListener(V->{
             if(!Fun_账号.GetID().isEmpty()){
-                fun_发贴 = new Fun_发贴();
-                fun_发贴.创建发贴窗口(activity_main);
+                _发表文章窗口 = new 发表文章窗口();
+                _发表文章窗口.创建发表文章窗口(activity_main);
             }else{
                 Fun.mess(activity_main, "请先登录");
             }
@@ -127,7 +124,7 @@ public class View_Square extends View_Main{
     }
 
     public void 初始化本地数据(){
-        List<String> list = Fun_贴子.获取广场集合();
+        List<String> list = Fun_文章.获取广场集合();
         linear.post(()->{
             linear.removeAllViews();
         });
@@ -152,7 +149,7 @@ public class View_Square extends View_Main{
                     continue;
                 }
                 linear.post(()->{
-                    linear.addView(Fun_贴子.创建贴子(activity_main, post_data));
+                    linear.addView(Fun_文章.创建文章(activity_main, post_data));
                 });
             }catch (Exception e){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));

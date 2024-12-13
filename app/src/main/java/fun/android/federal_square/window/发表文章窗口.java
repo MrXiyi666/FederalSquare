@@ -1,4 +1,4 @@
-package fun.android.federal_square.fun;
+package fun.android.federal_square.window;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,10 +17,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
-import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,13 +26,16 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_图片;
+import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_广场上传;
 
-public class Fun_发贴 {
+public class 发表文章窗口 {
     private LinearLayout linear;
     public AlertDialog dialog;
     private List<Post_Data> post_dataList;
-    public void 创建发贴窗口(Activity activity ){
+    public void 创建发表文章窗口(Activity activity ){
 
         dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_post_view, null);
@@ -162,7 +163,7 @@ public class Fun_发贴 {
                 return true;
             });
             imageView.setOnClickListener(V->{
-                Fun_查看图片.启动_Dialog(activity, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
+                查看图片窗口.启动_Dialog(activity, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             });
             post_dataList.add(post_data);
             linear.addView(imageView);

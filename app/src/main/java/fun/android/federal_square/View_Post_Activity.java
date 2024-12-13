@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun_查看图片;
+import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.network.NetWork_评论_读取;
 
 public class View_Post_Activity extends AppCompatActivity {
@@ -85,7 +85,7 @@ public class View_Post_Activity extends AppCompatActivity {
                             .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                             .into(img);
                     img.setOnClickListener(V->{
-                        Fun_查看图片.启动(this, post_data.getText());
+                        查看图片窗口.启动(this, post_data.getText());
                     });
                     img.setPadding(0,0,0,10);
                     linear.addView(img);
@@ -121,8 +121,8 @@ public class View_Post_Activity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
-                Fun_查看图片.photoView.setVisibility(View.GONE);
+            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
+                查看图片窗口.photoView.setVisibility(View.GONE);
                 return false;
             }
         }

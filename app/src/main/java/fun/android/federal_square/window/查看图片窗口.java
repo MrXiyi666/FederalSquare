@@ -1,4 +1,4 @@
-package fun.android.federal_square.fun;
+package fun.android.federal_square.window;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -22,7 +22,7 @@ import java.util.Objects;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 
-public class Fun_查看图片 {
+public class 查看图片窗口 {
     public static PhotoView photoView;
     public static void 启动_Dialog(Activity activity, String url){
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();

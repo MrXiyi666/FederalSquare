@@ -18,7 +18,7 @@ import java.util.List;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
-import fun.android.federal_square.fun.Fun_查看图片;
+import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.view.View_Create;
 import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Home_Page;
@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
-                Fun_查看图片.photoView.setVisibility(View.GONE);
+            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
+                查看图片窗口.photoView.setVisibility(View.GONE);
                 return false;
             }else if(pager.getCurrentItem() > 0){
                 pager.setCurrentItem(0);

@@ -9,7 +9,7 @@ import fun.android.federal_square.DiskActivity;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun_个人信息;
+import fun.android.federal_square.window.个人信息窗口;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.window.引用列表窗口;
 import fun.android.federal_square.window.文章设置窗口;
@@ -41,7 +41,7 @@ public class View_Home_System extends View_Main{
             }
         });
         个人信息.setOnClickListener(V->{
-            Fun_个人信息.修改个人信息(activity_main);
+            个人信息窗口.修改个人信息(activity_main);
         });
         引用列表.setOnClickListener(V->{
             new 引用列表窗口().启动(activity_main);

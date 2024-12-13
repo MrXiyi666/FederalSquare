@@ -25,11 +25,11 @@ import fun.android.federal_square.adatper.Disk_Grid_Adapter;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
-import fun.android.federal_square.fun.Fun_查看图片;
+import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_网盘_上传;
 import fun.android.federal_square.network.NetWork_网盘_刷新;
-import fun.android.federal_square.window.Delete_File_Window;
+import fun.android.federal_square.window.删除窗口;
 
 public class DiskActivity extends AppCompatActivity {
     ActivityResultLauncher<PickVisualMediaRequest> 上传图片;
@@ -116,10 +116,10 @@ public class DiskActivity extends AppCompatActivity {
         List<String> file_list = Fun_图片.遍历所有图片不带域名();
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
-            Fun_查看图片.启动(DiskActivity.this, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
+            查看图片窗口.启动(DiskActivity.this, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
         });
         gridView.setOnItemLongClickListener((parent, view, position, id) -> {
-            Delete_File_Window.删除网盘图片(DiskActivity.this, file_list.get(position));
+            删除窗口.删除网盘图片窗口(DiskActivity.this, file_list.get(position));
             return true;
         });
     }
@@ -127,8 +127,8 @@ public class DiskActivity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
-                Fun_查看图片.photoView.setVisibility(View.GONE);
+            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
+                查看图片窗口.photoView.setVisibility(View.GONE);
                 return false;
             }
 

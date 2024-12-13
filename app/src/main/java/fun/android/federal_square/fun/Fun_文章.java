@@ -15,22 +15,21 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
-import fun.android.federal_square.View_Collectin;
-import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.View_Post_Activity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.view.View_Home_Essay;
 import fun.android.federal_square.view.View_Home_Collection;
+import fun.android.federal_square.window.删除窗口;
+import fun.android.federal_square.window.查看图片窗口;
+import fun.android.federal_square.window.查看评论窗口;
 
-public class Fun_贴子 {
+public class Fun_文章 {
 
 
-    public static View 创建贴子(Activity activity, List<Post_Data> post_data){
+    public static View 创建文章(Activity activity, List<Post_Data> post_data){
         String time_name="";
 
         View view = View.inflate(activity, R.layout.create_post_layout, null);
@@ -94,7 +93,7 @@ public class Fun_贴子 {
                                 .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(img_list.get(img_id));
                         img_list.get(img_id).setOnClickListener(V->{
-                            Fun_查看图片.启动(activity, pd.getText());
+                            查看图片窗口.启动(activity, pd.getText());
                         });
                         img_id++;
                     }
@@ -122,7 +121,7 @@ public class Fun_贴子 {
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, finalUrl_txt, finalPassWord_txt);
+            查看评论窗口.查看评论窗口(activity, finalTime_name, finalUrl_txt, finalPassWord_txt);
         });
         button_collection.setOnClickListener(V->{
             NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
@@ -140,7 +139,7 @@ public class Fun_贴子 {
     }
 
 
-    public static View 创建文章贴子(Activity activity, List<Post_Data> post_data, View_Home_Essay view_home_essay){
+    public static View 创建我的文章(Activity activity, List<Post_Data> post_data, View_Home_Essay view_home_essay){
         String time_name="";
 
         View view = View.inflate(activity, R.layout.create_post_layout, null);
@@ -204,7 +203,7 @@ public class Fun_贴子 {
                                 .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(img_list.get(img_id));
                         img_list.get(img_id).setOnClickListener(V->{
-                            Fun_查看图片.启动(activity, pd.getText());
+                            查看图片窗口.启动(activity, pd.getText());
                         });
                         img_id++;
                     }
@@ -225,7 +224,7 @@ public class Fun_贴子 {
         String final网址 = 网址;
         String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
+            查看评论窗口.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
         });
 
         String finalTime_name1 = time_name;
@@ -236,7 +235,7 @@ public class Fun_贴子 {
         });
         String finalTime_name2 = time_name;
         view.setOnLongClickListener(V->{
-            Fun_删除文章.启动(activity, finalTime_name2, view_home_essay);
+            删除窗口.删除我的文章窗口(activity, finalTime_name2, view_home_essay);
             return true;
         });
         view.setOnClickListener(V->{
@@ -248,7 +247,7 @@ public class Fun_贴子 {
         return view;
     }
 
-    public static View 创建收藏贴子(Activity activity, List<Post_Data> post_data, View_Home_Collection view_HomeCollection){
+    public static View 创建收藏文章(Activity activity, List<Post_Data> post_data, View_Home_Collection view_HomeCollection){
         String time_name="";
 
         View view = View.inflate(activity, R.layout.create_post_layout, null);
@@ -311,7 +310,7 @@ public class Fun_贴子 {
                                 .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(img_list.get(img_id));
                         img_list.get(img_id).setOnClickListener(V->{
-                            Fun_查看图片.启动(activity, pd.getText());
+                            查看图片窗口.启动(activity, pd.getText());
                         });
                         img_id++;
                     }
@@ -332,13 +331,13 @@ public class Fun_贴子 {
         String final网址 = 网址;
         String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
+            查看评论窗口.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
         });
 
         button_collection.setVisibility(View.GONE);
         String finalTime_name2 = time_name;
         view.setOnLongClickListener(V->{
-            Fun_删除收藏.启动(activity, finalTime_name2, view_HomeCollection);
+            删除窗口.删除收藏窗口(activity, finalTime_name2, view_HomeCollection);
             return true;
         });
         view.setOnClickListener(V->{
@@ -361,7 +360,7 @@ public class Fun_贴子 {
         }
     }
 
-    public static List<String> 获取文章集合(){
+    public static List<String> 获取我的文章集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
             Comparator<String> comparator = Comparator.reverseOrder();

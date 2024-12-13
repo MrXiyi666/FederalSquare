@@ -1,6 +1,5 @@
 package fun.android.federal_square;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,12 +24,11 @@ import java.util.List;
 
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun_删除收藏;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.fun.Fun_查看图片;
-import fun.android.federal_square.fun.Fun_评论;
-import fun.android.federal_square.fun.Fun_贴子;
-import fun.android.federal_square.view.View_Home_Collection;
+import fun.android.federal_square.window.删除窗口;
+import fun.android.federal_square.window.查看图片窗口;
+import fun.android.federal_square.window.查看评论窗口;
+import fun.android.federal_square.fun.Fun_文章;
 
 public class View_Collectin extends AppCompatActivity {
     private ImageView return_icon;
@@ -58,14 +56,14 @@ public class View_Collectin extends AppCompatActivity {
     }
 
     public void 事件(){
-        //top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+        top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         return_icon.setOnClickListener(V->{
             finish();
         });
     }
 
     public void 初始化数据(){
-        List<String> list = Fun_贴子.获取收藏集合();
+        List<String> list = Fun_文章.获取收藏集合();
         linear.post(()->{
             linear.removeAllViews();
         });
@@ -154,7 +152,7 @@ public class View_Collectin extends AppCompatActivity {
                                 .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(img_list.get(img_id));
                         img_list.get(img_id).setOnClickListener(V->{
-                            Fun_查看图片.启动(this, pd.getText());
+                            查看图片窗口.启动(this, pd.getText());
                         });
                         img_id++;
                     }
@@ -175,13 +173,13 @@ public class View_Collectin extends AppCompatActivity {
         String final网址 = 网址;
         String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            Fun_评论.查看评论窗口(this, finalTime_name, final网址, finalPassWord_txt);
+            查看评论窗口.查看评论窗口(this, finalTime_name, final网址, finalPassWord_txt);
         });
 
         button_collection.setVisibility(View.GONE);
         String finalTime_name2 = time_name;
         view.setOnLongClickListener(V->{
-            Fun_删除收藏.所有启动(this, finalTime_name2);
+            删除窗口.删除所有收藏窗口(this, finalTime_name2);
             return true;
         });
         view.setOnClickListener(V->{
@@ -196,8 +194,8 @@ public class View_Collectin extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(Fun_查看图片.photoView != null && Fun_查看图片.photoView.getVisibility() == View.VISIBLE){
-                Fun_查看图片.photoView.setVisibility(View.GONE);
+            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
+                查看图片窗口.photoView.setVisibility(View.GONE);
                 return false;
             }
 

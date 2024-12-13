@@ -1,4 +1,4 @@
-package fun.android.federal_square.fun;
+package fun.android.federal_square.window;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -19,10 +19,13 @@ import java.util.Objects;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_我的_个人信息;
 import fun.android.federal_square.view.View_Login;
 
-public class Fun_个人信息 {
+public class 个人信息窗口 {
     public static void 修改个人信息(Activity activity){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_personal_information_view, null);

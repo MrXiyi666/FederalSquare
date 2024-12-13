@@ -15,8 +15,8 @@ import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.fun.Fun_选择头像;
-import fun.android.federal_square.fun.Fun_选择背景;
+import fun.android.federal_square.window.选择头像窗口;
+import fun.android.federal_square.window.选择背景窗口;
 
 public class View_Home_Page extends View_Main{
     public ImageView avatar_img, back_img;
@@ -75,10 +75,10 @@ public class View_Home_Page extends View_Main{
             Glide.with(activity_main).load(Fun_账号.GetBack_Url()).centerCrop().into(back_img);
         }
         avatar_img.setOnClickListener(V->{
-            Fun_选择头像.选择头像(activity_main, avatar_img);
+            选择头像窗口.选择头像(activity_main, avatar_img);
         });
         back_img.setOnClickListener(V->{
-            Fun_选择背景.启动(activity_main, this);
+            选择背景窗口.启动(activity_main, this);
         });
         linear.addView(new View_Home_Essay(activity_main).getView());
         button_article.setTextColor(Color.rgb(0,0,0));

@@ -11,7 +11,7 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.fun.Fun_贴子;
+import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.network.NetWork_读取热门;
 
 public class View_Hot extends View_Main{
@@ -57,7 +57,7 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        List<String> filename = Fun_贴子.获取热门集合();
+        List<String> filename = Fun_文章.获取热门集合();
         linear.post(()->{
             linear.removeAllViews();
         });
@@ -86,7 +86,7 @@ public class View_Hot extends View_Main{
                     continue;
                 }
                 linear.post(()->{
-                    linear.addView(Fun_贴子.创建贴子(activity_main,post_data));
+                    linear.addView(Fun_文章.创建文章(activity_main,post_data));
                 });
             }catch (Exception e){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
