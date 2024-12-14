@@ -10,7 +10,6 @@ import fun.android.federal_square.fun.Fun_文件;
 import okhttp3.FormBody;
 
 public class NetWork_多少秒获取广场数据 extends NetWork_Main{
-    private boolean 是否新内容 = false;
     public NetWork_多少秒获取广场数据(Activity activity) {
         super(activity);
         formBody = new FormBody.Builder()
@@ -35,23 +34,19 @@ public class NetWork_多少秒获取广场数据 extends NetWork_Main{
         }
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
-        if(Fun_文件.是否存在(able.app_path + "Square_Data/" + filename.get(filename.size()-1))){
-            是否新内容 = false;
-        }else{
-            是否新内容 = true;
+        if(filename.isEmpty()){
+            return;
         }
-        b_update = true;
+        if(!Fun_文件.是否存在(able.app_path + "Square_Data/" + filename.get(filename.size()-1))){
+            b_update = true;
+        }
+
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-        if(是否新内容){
-            able.view_square.new_icon.setVisibility(View.VISIBLE);
-        }else{
-            able.view_square.new_icon.setVisibility(View.GONE);
-        }
-
+        able.view_square.new_icon.setVisibility(View.VISIBLE);
     }
 
 }

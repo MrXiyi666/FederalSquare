@@ -20,7 +20,7 @@ import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.network.NetWork_评论_读取;
 
 public class View_Post_Activity extends AppCompatActivity {
-    private LinearLayout linear, linear_check;
+    private TextView top_title;
     private String url_txt, PassWord_txt="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,16 +28,20 @@ public class View_Post_Activity extends AppCompatActivity {
         Window window = this.getWindow();
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_view_post);
         ImageView return_icon = findViewById(R.id.return_icon);
-        linear = findViewById(R.id.linear);
-        linear_check = findViewById(R.id.linear_check);
+        top_title = findViewById(R.id.top_title);
+        LinearLayout linear = findViewById(R.id.linear);
+        LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);
         TextView sign_view = findViewById(R.id.sign);
         ImageView avatar_img = findViewById(R.id.avatar_img);
         TextView text_time = findViewById(R.id.text_time);
         TextView url_txt_id = findViewById(R.id.url_txt_id);
+        top_title.post(()->{
+            top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+        });
         return_icon.setOnClickListener(V->{
             finish();
         });

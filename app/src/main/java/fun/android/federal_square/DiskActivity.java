@@ -10,6 +10,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -37,6 +41,8 @@ public class DiskActivity extends AppCompatActivity {
     public GridView gridView;
     private AppCompatButton button_network_disk;
     private NetWork_网盘_上传 netWork_网盘_上传;
+    ImageView return_icon;
+    private TextView top_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +50,7 @@ public class DiskActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
         setContentView(R.layout.activity_disk);
-
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         初始化();
         事件();
     }
@@ -53,6 +59,8 @@ public class DiskActivity extends AppCompatActivity {
         button_network_disk = findViewById(R.id.button_network_disk);
         gridView = findViewById(R.id.gridview);
         swiperefre = findViewById(R.id.swiperefee);
+        return_icon = findViewById(R.id.return_icon);
+        top_title = findViewById(R.id.top_title);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         netWork_网盘_上传 = new NetWork_网盘_上传(this);
         加载图片初始化(Fun_账号.GetID());
@@ -69,7 +77,12 @@ public class DiskActivity extends AppCompatActivity {
             button_network_disk.setEnabled(false);
             上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
         });
-
+        return_icon.setOnClickListener(V->{
+            finish();
+        });
+        top_title.post(()->{
+            top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+        });
     }
 
     public void 加载图片初始化(String account_id){

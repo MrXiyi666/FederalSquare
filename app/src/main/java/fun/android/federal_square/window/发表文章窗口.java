@@ -60,11 +60,12 @@ public class 发表文章窗口 {
                 post_data.setName("text");
                 post_data.setText(text_data);
                 TextView textView = new TextView(activity);
+                textView.setBackgroundColor(Color.rgb(250,250,250));
                 textView.setTextSize(18);
                 textView.setText(text_data);
                 textView.setTextColor(Color.BLACK);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 10);
                 textView.setLayoutParams(params);
                 textView.setOnLongClickListener(tV->{
@@ -152,8 +153,9 @@ public class 发表文章窗口 {
                     .load(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, 0, 0, 10);
+            imageView.setBackgroundColor(Color.rgb(250,250,250));
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V->{
                 Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);

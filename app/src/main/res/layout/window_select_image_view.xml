@@ -11,11 +11,13 @@
         <TextView
             android:layout_centerInParent="true"
             android:text="图片选择"
+            android:gravity="center"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"

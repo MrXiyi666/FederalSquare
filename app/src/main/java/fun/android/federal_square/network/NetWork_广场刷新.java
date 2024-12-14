@@ -2,6 +2,8 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,12 +45,14 @@ public class NetWork_广场刷新 extends NetWork_Main {
         }
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
+        if(filename.isEmpty()){
+            return;
+        }
         for(String name : filename){
             if(Fun_文件.是否存在(able.app_path + "Square_Data/" + name)){
                continue;
             }
             down_list_data.add(name);
-            Log.w(class_name, string);
             b_update = true;
             b_mess = true;
         }
@@ -57,6 +61,9 @@ public class NetWork_广场刷新 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
+        if(able.view_square.new_icon.getVisibility() == View.VISIBLE){
+            able.view_square.new_icon.setVisibility(View.GONE);
+        }
         able.view_square.初始化本地数据();
     }
 }

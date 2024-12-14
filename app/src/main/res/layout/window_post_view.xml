@@ -11,11 +11,13 @@
             android:layout_centerInParent="true"
             android:text="发表文章"
             android:textSize="18sp"
+            android:gravity="center"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"
@@ -23,7 +25,7 @@
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView
-        android:alpha="0.2"
+        android:alpha="0.5"
         android:layout_below="@id/relati"
         android:id="@+id/xian"
         android:background="#808080"
@@ -32,14 +34,14 @@
     <EditText
         android:layout_below="@id/xian"
         android:textColor="@color/black"
-        android:maxLength="50"
+        android:maxLength="100"
         android:textSize="18sp"
         android:layout_margin="10dp"
         android:background="@drawable/edit_back"
         android:padding="10dp"
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_below="@id/edit_text"
         android:id="@+id/linear_bu"
