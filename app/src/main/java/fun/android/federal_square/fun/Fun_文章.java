@@ -48,6 +48,8 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
+        int txt_id=0;
+        boolean txt_dian = false;
         String url_txt="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -74,29 +76,49 @@ public class Fun_文章 {
 
                     break;
                 case "text":
-                    TextView text1 = new TextView(activity);
-                    text1.setTextColor(Color.BLACK);
-                    text1.setTextSize(15);
-                    text1.setText(pd.getText());
-                    text1.setTextIsSelectable(true);
-                    linear.addView(text1);
+                    if(txt_id > 1){
+                        txt_dian = true;
+                        continue;
+                    }
+                    TextView textView = new TextView(activity);
+                    textView.setTextColor(Color.BLACK);
+                    textView.setTextSize(15);
+                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String txt ="";
+                    for(int i=0;i<str.length;i++){
+                        if(i>=20){
+                            txt_dian=true;
+                            break;
+                        }
+                        txt = txt+str[i];
+                    }
+                    if(txt_dian && txt_id==1){
+                        textView.setText(txt + "...");
+                    }else{
+                        textView.setText(txt);
+                    }
+
+                    textView.setTextIsSelectable(true);
+                    linear.addView(textView);
+                    txt_id++;
                     break;
                 case "img":
-                    if(img_id < 3){
-                        img_linear1.setVisibility(View.VISIBLE);
-                        img_list.get(img_id).setImageBitmap(null);
-                        Glide.with(activity)
-                                .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
-                                .into(img_list.get(img_id));
-                        img_list.get(img_id).setOnClickListener(V->{
-                            查看图片窗口.启动(activity, pd.getText());
-                        });
-                        img_id++;
+                    if(img_id >= 3){
+                        continue;
                     }
+                    img_linear1.setVisibility(View.VISIBLE);
+                    img_list.get(img_id).setImageBitmap(null);
+                    Glide.with(activity)
+                            .load(pd.getText())
+                            .apply(new RequestOptions()
+                                    .error(R.drawable.glide_shibai)
+                                    .fallback(R.drawable.glide_duqushibai))
+                            .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
+                            .into(img_list.get(img_id));
+                    img_list.get(img_id).setOnClickListener(V->{
+                        查看图片窗口.启动(activity, pd.getText());
+                    });
+                    img_id++;
                     break;
                 case "time":
                     time_name = pd.getText();
@@ -158,6 +180,8 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
+        int txt_id=0;
+        boolean txt_dian = false;
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -184,12 +208,31 @@ public class Fun_文章 {
 
                     break;
                 case "text":
-                    TextView text1 = new TextView(activity);
-                    text1.setTextColor(Color.BLACK);
-                    text1.setTextSize(15);
-                    text1.setText(pd.getText());
-                    text1.setTextIsSelectable(true);
-                    linear.addView(text1);
+                    if(txt_id > 1){
+                        txt_dian = true;
+                        continue;
+                    }
+                    TextView textView = new TextView(activity);
+                    textView.setTextColor(Color.BLACK);
+                    textView.setTextSize(15);
+                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String txt ="";
+                    for(int i=0;i<str.length;i++){
+                        if(i>=20){
+                            txt_dian=true;
+                            break;
+                        }
+                        txt = txt+str[i];
+                    }
+                    if(txt_dian && txt_id==1){
+                        textView.setText(txt + "...");
+                    }else{
+                        textView.setText(txt);
+                    }
+
+                    textView.setTextIsSelectable(true);
+                    linear.addView(textView);
+                    txt_id++;
                     break;
                 case "img":
                     if(img_id < 3){
@@ -266,6 +309,8 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
+        int txt_id=0;
+        boolean txt_dian = false;
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -291,12 +336,31 @@ public class Fun_文章 {
                     }
                     break;
                 case "text":
-                    TextView text1 = new TextView(activity);
-                    text1.setTextColor(Color.BLACK);
-                    text1.setTextSize(15);
-                    text1.setText(pd.getText());
-                    text1.setTextIsSelectable(true);
-                    linear.addView(text1);
+                    if(txt_id > 1){
+                        txt_dian = true;
+                        continue;
+                    }
+                    TextView textView = new TextView(activity);
+                    textView.setTextColor(Color.BLACK);
+                    textView.setTextSize(15);
+                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String txt ="";
+                    for(int i=0;i<str.length;i++){
+                        if(i>=20){
+                            txt_dian=true;
+                            break;
+                        }
+                        txt = txt+str[i];
+                    }
+                    if(txt_dian && txt_id==1){
+                        textView.setText(txt + "...");
+                    }else{
+                        textView.setText(txt);
+                    }
+
+                    textView.setTextIsSelectable(true);
+                    linear.addView(textView);
+                    txt_id++;
                     break;
                 case "img":
                     if(img_id < 3){
