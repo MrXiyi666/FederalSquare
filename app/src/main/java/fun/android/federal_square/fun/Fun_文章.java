@@ -35,7 +35,6 @@ public class Fun_文章 {
         View view = View.inflate(activity, R.layout.create_post_layout, null);
         LinearLayout button_message = view.findViewById(R.id.button_message);
         LinearLayout button_collection = view.findViewById(R.id.button_collection);
-
         View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
         LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
         TextView name_view = view.findViewById(R.id.name);
@@ -48,8 +47,7 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        int txt_id=0;
-        boolean txt_dian = false;
+        StringBuffer sb = new StringBuffer();
         String url_txt="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -76,31 +74,14 @@ public class Fun_文章 {
 
                     break;
                 case "text":
-                    if(txt_id > 1){
-                        txt_dian = true;
-                        continue;
-                    }
-                    TextView textView = new TextView(activity);
-                    textView.setTextColor(Color.BLACK);
-                    textView.setTextSize(15);
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
-                    String txt ="";
-                    for(int i=0;i<str.length;i++){
-                        if(i>=20){
-                            txt_dian=true;
+                    for(String s : str){
+                        if(sb.length() >= 50){
+                            sb.append("...");
                             break;
                         }
-                        txt = txt+str[i];
+                        sb.append(s);
                     }
-                    if(txt_dian && txt_id==1){
-                        textView.setText(txt + "...");
-                    }else{
-                        textView.setText(txt);
-                    }
-
-                    textView.setTextIsSelectable(true);
-                    linear.addView(textView);
-                    txt_id++;
                     break;
                 case "img":
                     if(img_id >= 3){
@@ -136,7 +117,12 @@ public class Fun_文章 {
         if(!able.URL_Name.equals(url_txt)){
             url_txt_id.setText(url_txt);
         }
-
+        TextView textView = new TextView(activity);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(15);
+        textView.setText(sb.toString());
+        textView.setTextIsSelectable(true);
+        linear.addView(textView);
         linear.addView(img_view);
         String finalTime_name = time_name;
 
@@ -180,8 +166,7 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        int txt_id=0;
-        boolean txt_dian = false;
+        StringBuffer sb = new StringBuffer();
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -208,31 +193,14 @@ public class Fun_文章 {
 
                     break;
                 case "text":
-                    if(txt_id > 1){
-                        txt_dian = true;
-                        continue;
-                    }
-                    TextView textView = new TextView(activity);
-                    textView.setTextColor(Color.BLACK);
-                    textView.setTextSize(15);
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
-                    String txt ="";
-                    for(int i=0;i<str.length;i++){
-                        if(i>=20){
-                            txt_dian=true;
+                    for(String s : str){
+                        if(sb.length() >= 50){
+                            sb.append("...");
                             break;
                         }
-                        txt = txt+str[i];
+                        sb.append(s);
                     }
-                    if(txt_dian && txt_id==1){
-                        textView.setText(txt + "...");
-                    }else{
-                        textView.setText(txt);
-                    }
-
-                    textView.setTextIsSelectable(true);
-                    linear.addView(textView);
-                    txt_id++;
                     break;
                 case "img":
                     if(img_id < 3){
@@ -262,6 +230,12 @@ public class Fun_文章 {
                     break;
             }
         }
+        TextView textView = new TextView(activity);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(15);
+        textView.setText(sb.toString());
+        textView.setTextIsSelectable(true);
+        linear.addView(textView);
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;
@@ -309,8 +283,7 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        int txt_id=0;
-        boolean txt_dian = false;
+        StringBuffer sb = new StringBuffer();
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -336,31 +309,14 @@ public class Fun_文章 {
                     }
                     break;
                 case "text":
-                    if(txt_id > 1){
-                        txt_dian = true;
-                        continue;
-                    }
-                    TextView textView = new TextView(activity);
-                    textView.setTextColor(Color.BLACK);
-                    textView.setTextSize(15);
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
-                    String txt ="";
-                    for(int i=0;i<str.length;i++){
-                        if(i>=20){
-                            txt_dian=true;
+                    for(String s : str){
+                        if(sb.length() >= 50){
+                            sb.append("...");
                             break;
                         }
-                        txt = txt+str[i];
+                        sb.append(s);
                     }
-                    if(txt_dian && txt_id==1){
-                        textView.setText(txt + "...");
-                    }else{
-                        textView.setText(txt);
-                    }
-
-                    textView.setTextIsSelectable(true);
-                    linear.addView(textView);
-                    txt_id++;
                     break;
                 case "img":
                     if(img_id < 3){
@@ -390,6 +346,12 @@ public class Fun_文章 {
                     break;
             }
         }
+        TextView textView = new TextView(activity);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(15);
+        textView.setText(sb.toString());
+        textView.setTextIsSelectable(true);
+        linear.addView(textView);
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;
