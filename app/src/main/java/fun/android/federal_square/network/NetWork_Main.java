@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.view.View_Main;
 import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -42,7 +40,7 @@ public class NetWork_Main {
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
-            text_id.setText("→→→  加载中  ←←←");
+            text_id.setText("  ✍  ");
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
