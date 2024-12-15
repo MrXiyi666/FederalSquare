@@ -104,6 +104,7 @@ public class View_Essay extends AppCompatActivity {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
+        StringBuffer sb = new StringBuffer();
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -130,12 +131,17 @@ public class View_Essay extends AppCompatActivity {
 
                     break;
                 case "text":
-                    TextView text1 = new TextView(this);
-                    text1.setTextColor(Color.BLACK);
-                    text1.setTextSize(15);
-                    text1.setText(pd.getText());
-                    text1.setTextIsSelectable(true);
-                    linear.addView(text1);
+                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() > 0){
+                        sb.append("\n");
+                    }
+                    for(String s : str){
+                        if(sb.length() >= 50){
+                            sb.append("...");
+                            break;
+                        }
+                        sb.append(s);
+                    }
                     break;
                 case "img":
                     if(img_id < 3){
@@ -165,6 +171,12 @@ public class View_Essay extends AppCompatActivity {
                     break;
             }
         }
+        TextView textView = new TextView(this);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(15);
+        textView.setText(sb.toString());
+        textView.setTextIsSelectable(true);
+        linear.addView(textView);
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;

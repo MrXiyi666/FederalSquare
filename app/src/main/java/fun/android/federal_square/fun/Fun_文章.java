@@ -75,6 +75,9 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() > 0){
+                        sb.append("\n");
+                    }
                     for(String s : str){
                         if(sb.length() >= 50){
                             sb.append("...");
@@ -194,6 +197,9 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() > 0){
+                        sb.append("\n");
+                    }
                     for(String s : str){
                         if(sb.length() >= 50){
                             sb.append("...");
@@ -310,6 +316,9 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() > 0){
+                        sb.append("\n");
+                    }
                     for(String s : str){
                         if(sb.length() >= 50){
                             sb.append("...");
