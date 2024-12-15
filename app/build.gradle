@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'fun.android.federal_square'
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
         applicationId "fun.android.federal_square"
         minSdk 24
@@ -23,6 +23,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
+    buildToolsVersion '35.0.0'
 }
 
 dependencies {
