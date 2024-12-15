@@ -3,6 +3,7 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         初始化();
         事件();
-
     }
 
     public void 初始化(){
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
+        able.pager_id = 0;
         img_square.setImageResource(R.drawable.square_checked_true_icon);
         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
         img_home.setImageResource(R.drawable.hot_checked_false_icon);
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onPageSelected(int position) {
+                able.pager_id = position;
                 switch (position){
                     case 0:
                         img_square.setImageResource(R.drawable.square_checked_true_icon);
@@ -114,7 +116,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        menu_square.setOnClickListener(menu_square_v-> pager.setCurrentItem(0));
+        menu_square.setOnClickListener(menu_square_v-> {
+            pager.setCurrentItem(0);
+            if(pager.getCurrentItem() == 0){
+               able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+            }
+        });
         menu_hot.setOnClickListener(menu_square_v-> pager.setCurrentItem(1));
         menu_home.setOnClickListener(menu_square_v-> pager.setCurrentItem(2));
         menu_square.setOnLongClickListener(v -> {

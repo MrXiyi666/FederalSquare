@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,5 +113,19 @@ public class Fun {
             result = activity.getResources().getDimensionPixelSize(resourceld);
         }
         return result;
+    }
+
+    public static int PXToDP(Activity activity, int px){
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float density = metrics.density;
+        return (int)(px / density);
+    }
+
+    public static int DPToPX(Activity activity, int dp){
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float density = metrics.density;
+        return (int)(dp * density);
     }
 }

@@ -3,7 +3,10 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -134,8 +137,19 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
-        String finalTime_name = time_name;
 
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
+                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                    params.height = Fun.DPToPX(activity, 150);
+                    img_view.setLayoutParams(params);
+                }
+            }
+        });
+
+        String finalTime_name = time_name;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
@@ -155,7 +169,6 @@ public class Fun_文章 {
         });
         return view;
     }
-
 
     public static View 创建我的文章(Activity activity, List<Post_Data> post_data, View_Home_Essay view_home_essay){
         String time_name="";
@@ -221,6 +234,7 @@ public class Fun_文章 {
                     if(img_id < 3){
                         img_linear1.setVisibility(View.VISIBLE);
                         img_list.get(img_id).setImageBitmap(null);
+
                         Glide.with(activity)
                                 .load(pd.getText())
                                 .apply(new RequestOptions()
@@ -228,6 +242,11 @@ public class Fun_文章 {
                                         .fallback(R.drawable.glide_duqushibai))
                                 .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(img_list.get(img_id));
+                        img_list.get(img_id).setOnClickListener(V->{
+                            查看图片窗口.启动(activity, pd.getText());
+                        });
+
+
                         img_list.get(img_id).setOnClickListener(V->{
                             查看图片窗口.启动(activity, pd.getText());
                         });
@@ -257,6 +276,17 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
+                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                    params.height = Fun.DPToPX(activity, 150);
+                    img_view.setLayoutParams(params);
+                }
+            }
+        });
+
         String finalTime_name = time_name;
         String final网址 = 网址;
         String finalPassWord_txt = PassWord_txt;
@@ -384,6 +414,16 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
+                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                    params.height = Fun.DPToPX(activity, 150);
+                    img_view.setLayoutParams(params);
+                }
+            }
+        });
         String finalTime_name = time_name;
         String final网址 = 网址;
         String finalPassWord_txt = PassWord_txt;

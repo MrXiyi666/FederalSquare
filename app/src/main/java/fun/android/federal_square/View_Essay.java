@@ -3,8 +3,11 @@ package fun.android.federal_square;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看图片窗口;
@@ -186,6 +190,16 @@ public class View_Essay extends AppCompatActivity {
             linear.addView(textView);
         }
         linear.addView(img_view);
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(img_view.getHeight() > Fun.DPToPX(View_Essay.this, 150)){
+                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                    params.height = Fun.DPToPX(View_Essay.this, 150);
+                    img_view.setLayoutParams(params);
+                }
+            }
+        });
         String finalTime_name = time_name;
         String final网址 = 网址;
         String finalPassWord_txt = PassWord_txt;

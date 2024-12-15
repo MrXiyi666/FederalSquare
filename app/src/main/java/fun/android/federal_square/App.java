@@ -1,10 +1,13 @@
 package fun.android.federal_square;
 
 import android.app.Application;
+import android.util.Log;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import okhttp3.CookieJar;
 import okhttp3.Dispatcher;
@@ -48,7 +51,6 @@ public class App extends Application {
         if(!Fun_文件.是否存在(able.app_path + "System_Data/Home_Collection_Essay_index.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt", "10");
         }
-
 
     }
 

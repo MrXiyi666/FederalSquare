@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +28,7 @@ public class View_Square extends View_Main{
     private TextView top_title;
     public ImageView new_icon;
     private SwipeRefreshLayout swiperefee;
+    public ScrollView scrollView;
     private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
     public 发表文章窗口 _发表文章窗口;
@@ -46,6 +48,7 @@ public class View_Square extends View_Main{
         button_add = view.findViewById(R.id.button_add);
         button_url_setting = view.findViewById(R.id.button_url_setting);
         linear = view.findViewById(R.id.linear);
+        scrollView = view.findViewById(R.id.scrollView);
         初始化本地数据();
         new_icon.setVisibility(View.GONE);
     }
