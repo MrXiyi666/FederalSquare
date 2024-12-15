@@ -125,12 +125,14 @@ public class Fun_文章 {
         if(sb.length() >=50){
             sb.append("...");
         }
-        TextView textView = new TextView(activity);
-        textView.setTextColor(Color.BLACK);
-        textView.setTextSize(15);
-        textView.setText(sb.toString());
-        textView.setTextIsSelectable(true);
-        linear.addView(textView);
+        if(sb.length() > 0){
+            TextView textView = new TextView(activity);
+            textView.setTextColor(Color.BLACK);
+            textView.setTextSize(15);
+            textView.setText(sb.toString());
+            textView.setTextIsSelectable(true);
+            linear.addView(textView);
+        }
         linear.addView(img_view);
         String finalTime_name = time_name;
 
@@ -246,12 +248,14 @@ public class Fun_文章 {
         if(sb.length() >=50){
             sb.append("...");
         }
-        TextView textView = new TextView(activity);
-        textView.setTextColor(Color.BLACK);
-        textView.setTextSize(15);
-        textView.setText(sb.toString());
-        textView.setTextIsSelectable(true);
-        linear.addView(textView);
+        if(sb.length() > 0){
+            TextView textView = new TextView(activity);
+            textView.setTextColor(Color.BLACK);
+            textView.setTextSize(15);
+            textView.setText(sb.toString());
+            textView.setTextIsSelectable(true);
+            linear.addView(textView);
+        }
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;
@@ -371,12 +375,14 @@ public class Fun_文章 {
         if(sb.length() >=50){
             sb.append("...");
         }
-        TextView textView = new TextView(activity);
-        textView.setTextColor(Color.BLACK);
-        textView.setTextSize(15);
-        textView.setText(sb.toString());
-        textView.setTextIsSelectable(true);
-        linear.addView(textView);
+        if(sb.length() > 0){
+            TextView textView = new TextView(activity);
+            textView.setTextColor(Color.BLACK);
+            textView.setTextSize(15);
+            textView.setText(sb.toString());
+            textView.setTextIsSelectable(true);
+            linear.addView(textView);
+        }
         linear.addView(img_view);
         String finalTime_name = time_name;
         String final网址 = 网址;
