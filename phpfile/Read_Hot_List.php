@@ -48,9 +48,11 @@ $list_index = 0;
 while($list_index < count($list_size)){
     foreach($list_name as $value){
         if(explode("\n", $value)[0] == $list_size[$list_index]){
-            $list[] = explode("\n", $value)[1];
-            $list_name = remove_array($list_name, $value);
-            break;
+            if(count($list) < 9999){
+                $list[] = explode("\n", $value)[1];
+                $list_name = remove_array($list_name, $value);
+                break;
+            } 
         }
     }
     $list_index++;

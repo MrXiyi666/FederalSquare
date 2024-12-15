@@ -15,7 +15,9 @@
       if(!is_file($path . "/$value")){
           continue;
       }
-      $_return[] = $value;
+      if(count($_return) < 9999){
+          $_return[] = $value;
+      }
   }
   if(count($_return) == 0){
       die("no");

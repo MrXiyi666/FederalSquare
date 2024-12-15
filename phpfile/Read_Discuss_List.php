@@ -16,7 +16,7 @@
         }
         if(is_file($path . "/$value")){
             $str = file_get_contents($path . "/$value");
-            if(strlen($str) > 0){
+            if(strlen($str) > 0 || count($_return) < 9999){
                 $_return[] = $str;
             }
         }
