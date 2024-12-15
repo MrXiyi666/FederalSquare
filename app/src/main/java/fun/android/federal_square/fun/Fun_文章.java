@@ -75,12 +75,14 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() >=50){
+                        break;
+                    }
                     if(sb.length() > 0){
                         sb.append("\n");
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
-                            sb.append("...");
                             break;
                         }
                         sb.append(s);
@@ -119,6 +121,9 @@ public class Fun_文章 {
 
         if(!able.URL_Name.equals(url_txt)){
             url_txt_id.setText(url_txt);
+        }
+        if(sb.length() >=50){
+            sb.append("...");
         }
         TextView textView = new TextView(activity);
         textView.setTextColor(Color.BLACK);
@@ -197,12 +202,14 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() >=50){
+                        break;
+                    }
                     if(sb.length() > 0){
                         sb.append("\n");
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
-                            sb.append("...");
                             break;
                         }
                         sb.append(s);
@@ -235,6 +242,9 @@ public class Fun_文章 {
                     PassWord_txt = pd.getText();
                     break;
             }
+        }
+        if(sb.length() >=50){
+            sb.append("...");
         }
         TextView textView = new TextView(activity);
         textView.setTextColor(Color.BLACK);
@@ -316,6 +326,9 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() >=50){
+                        break;
+                    }
                     if(sb.length() > 0){
                         sb.append("\n");
                     }
@@ -354,6 +367,9 @@ public class Fun_文章 {
                     PassWord_txt = pd.getText();
                     break;
             }
+        }
+        if(sb.length() >=50){
+            sb.append("...");
         }
         TextView textView = new TextView(activity);
         textView.setTextColor(Color.BLACK);

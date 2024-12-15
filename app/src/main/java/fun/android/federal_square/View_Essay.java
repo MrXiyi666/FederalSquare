@@ -132,6 +132,9 @@ public class View_Essay extends AppCompatActivity {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    if(sb.length() >=50){
+                        break;
+                    }
                     if(sb.length() > 0){
                         sb.append("\n");
                     }
@@ -170,6 +173,9 @@ public class View_Essay extends AppCompatActivity {
                     PassWord_txt = pd.getText();
                     break;
             }
+        }
+        if(sb.length() >=50){
+            sb.append("...");
         }
         TextView textView = new TextView(this);
         textView.setTextColor(Color.BLACK);
