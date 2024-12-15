@@ -38,7 +38,7 @@
 
 此项目 完全开源免费
 
-如果你愿意分享你的服务器域名 请发送到1561645385@qq.com 或者 MrXiyi@outlook.com 邮箱
+如果你愿意分享你的服务器域名 请发送到mrxiyi666@qq.com 或者 MrXiyi@outlook.com 邮箱
 
 我可以帮你添加到下面 供大家使用
 
