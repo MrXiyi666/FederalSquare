@@ -89,25 +89,38 @@ public class NetWork_Main {
                         .post(formBody)
                         .build();
                 Response response = able.okHttpClient.newCall(request).execute();
-                if(b_dialog){
-                    new Thread(()->{
-                        try {
-                            Thread.sleep(300);
-                            dialog.dismiss();
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }).start();
-                }
-
                 if(!response.isSuccessful()){
                     Log.w(class_name, url + " isSuccessfulnull");
                     Fun.mess(activity, url + "isSuccessfulnull");
+                    if(b_dialog){
+                        new Thread(()->{
+                            try {
+                                Thread.sleep(300);
+                                if(dialog!=null){
+                                    dialog.dismiss();
+                                }
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }).start();
+                    }
                     return;
                 }
                 if(response.body() == null){
                     Log.w(class_name, url + "response.body() null");
                     Fun.mess(activity, url + "response.body() null");
+                    if(b_dialog){
+                        new Thread(()->{
+                            try {
+                                Thread.sleep(300);
+                                if(dialog!=null){
+                                    dialog.dismiss();
+                                }
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }).start();
+                    }
                     return;
                 }
                 String string=response.body().string();
@@ -115,10 +128,34 @@ public class NetWork_Main {
                 if(string.isEmpty()){
                     Fun.mess(activity, url + "string null");
                     Log.w(class_name, url + "string null");
+                    if(b_dialog){
+                        new Thread(()->{
+                            try {
+                                Thread.sleep(300);
+                                if(dialog!=null){
+                                    dialog.dismiss();
+                                }
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }).start();
+                    }
                     return;
                 }
                 if(string.equals("Null_PassWord") | string.equals("Error_PassWord")){
                     Fun.mess(activity, url + "\n" + string);
+                    if(b_dialog){
+                        new Thread(()->{
+                            try {
+                                Thread.sleep(300);
+                                if(dialog!=null){
+                                    dialog.dismiss();
+                                }
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }).start();
+                    }
                     return;
                 }
 
@@ -177,6 +214,18 @@ public class NetWork_Main {
                     }
                     Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
                 }
+                if(b_dialog){
+                    new Thread(()->{
+                        try {
+                            Thread.sleep(300);
+                            if(dialog!=null){
+                                dialog.dismiss();
+                            }
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }).start();
+                }
                 if(b_update){
                     able.handler.post(()->{
                         刷新();
@@ -190,7 +239,9 @@ public class NetWork_Main {
                     new Thread(()->{
                         try {
                             Thread.sleep(300);
-                            dialog.dismiss();
+                            if(dialog!=null){
+                                dialog.dismiss();
+                            }
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }

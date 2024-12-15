@@ -140,23 +140,15 @@ public class View_Square extends View_Main{
             if(i >= list.size()){
                 return;
             }
-            try {
-                String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-                if(txt.isEmpty()){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                linear.post(()->{
-                    linear.addView(Fun_文章.创建文章(activity_main, post_data));
-                });
-            }catch (Exception e){
+            String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+            if(!Fun.StrBoolJSON(txt)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                continue;
             }
+            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+            linear.post(()->{
+                linear.addView(Fun_文章.创建文章(activity_main, post_data));
+            });
         }
     }
 }

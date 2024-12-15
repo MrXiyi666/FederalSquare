@@ -17,6 +17,7 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.network.NetWork_我的_文章_刷新;
@@ -84,23 +85,14 @@ public class View_Home_Essay extends View_Main{
             if(i >= list.size()){
                 return;
             }
-            try {
-                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-                if(str.isEmpty()){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                linear.post(()->{
-                    linear.addView(Fun_文章.创建我的文章(activity_main, post_data, View_Home_Essay.this));
-                });
-            }catch (Exception e){
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+            if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                continue;
             }
+            linear.post(()->{
+                linear.addView(Fun_文章.创建我的文章(activity_main, able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType()), View_Home_Essay.this));
+            });
         }
         linear.post(()->{
             if(list.size() > linear.getChildCount()){

@@ -116,9 +116,6 @@ public class View_Post_Activity extends AppCompatActivity {
             netWork_讨论_读取.传递参数(time, linear_check, url_txt, PassWord_txt);
             netWork_讨论_读取.start();
         }
-
-
-
     }
 
 

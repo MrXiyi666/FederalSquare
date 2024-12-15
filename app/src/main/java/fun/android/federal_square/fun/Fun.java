@@ -16,6 +16,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.documentfile.provider.DocumentFile;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 import fun.android.federal_square.R;
@@ -127,5 +134,15 @@ public class Fun {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float density = metrics.density;
         return (int)(dp * density);
+    }
+
+    public static boolean StrBoolJSON(String json){
+        TypeAdapter<JsonElement> strictAdapter=new Gson().getAdapter(JsonElement.class);
+        try {
+            strictAdapter.fromJson(json);
+        }catch (JsonSyntaxException | IOException e){
+            return false;
+        }
+        return true;
     }
 }

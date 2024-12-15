@@ -9,15 +9,16 @@
   $_array = scandir($path);
   $_return = array();
   foreach ($_array as $value){
+      if(count($_return) >= 9999){
+          break;
+      }
       if($value=='.' || $value=='..'){
           continue;
       }
       if(!is_file($path . "/$value")){
           continue;
       }
-      if(count($_return) < 9999){
-          $_return[] = $value;
-      }
+      $_return[] = $value;
   }
   if(count($_return) == 0){
       die("no");

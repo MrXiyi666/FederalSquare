@@ -11,12 +11,15 @@
     $_array = scandir($path, 1);
     $_return = array();
     foreach ($_array as $value){
+        if(count($_return) >= 9999){
+            break;
+        }
         if($value=='.' || $value=='..'){
             continue;
         }
         if(is_file($path . "/$value")){
             $str = file_get_contents($path . "/$value");
-            if(strlen($str) > 0 || count($_return) < 9999){
+            if(strlen($str) > 0){
                 $_return[] = $str;
             }
         }

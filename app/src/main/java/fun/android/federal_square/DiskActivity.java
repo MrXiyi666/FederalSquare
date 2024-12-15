@@ -11,18 +11,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.bumptech.glide.Glide;
-
 import java.io.FileNotFoundException;
 import java.util.List;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;

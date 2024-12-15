@@ -10,6 +10,7 @@ import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.network.NetWork_读取热门;
@@ -61,7 +62,6 @@ public class View_Hot extends View_Main{
         linear.post(()->{
             linear.removeAllViews();
         });
-
         if(filename == null){
             return;
         }
@@ -74,23 +74,14 @@ public class View_Hot extends View_Main{
             if(i >= filename.size()){
                 return;
             }
-            try {
-                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-                if(str.isEmpty()){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-                    continue;
-                }
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-                    continue;
-                }
-                linear.post(()->{
-                    linear.addView(Fun_文章.创建文章(activity_main,post_data));
-                });
-            }catch (Exception e){
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+            if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+                continue;
             }
+            linear.post(()->{
+                linear.addView(Fun_文章.创建文章(activity_main,able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType())));
+            });
         }
 
 

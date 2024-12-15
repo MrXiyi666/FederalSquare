@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.window.查看评论窗口;
 import okhttp3.FormBody;
 
@@ -51,11 +52,10 @@ public class NetWork_评论_读取 extends NetWork_Main {
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
         linear.removeAllViews();
         for(String data : filename){
-            try {
-                linear.addView(查看评论窗口.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
-            }catch (Exception e){
-
+            if(!Fun.StrBoolJSON(data)){
+                continue;
             }
+            linear.addView(查看评论窗口.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
         }
     }
 

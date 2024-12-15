@@ -41,7 +41,7 @@ public class NetWork_Main_MultipartBody {
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
-            text_id.setText("→→→  加载中  ←←←");
+            text_id.setText("  ✍  ");
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -96,17 +96,19 @@ public class NetWork_Main_MultipartBody {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                dialog.dismiss();
                 if(response.body() == null){
                     Log.w(class_name, "null");
+                    dialog.dismiss();
                     return;
                 }
                 String string=response.body().string();
                 response.close();
                 if(string.isEmpty()){
+                    dialog.dismiss();
                     return;
                 }
                 事件(string);
+                dialog.dismiss();
                 if(b_update){
                     able.handler.post(()->{
                         刷新();
