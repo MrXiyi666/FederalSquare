@@ -10,7 +10,7 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 4
-        versionName "4.5"
+        versionName "4.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
