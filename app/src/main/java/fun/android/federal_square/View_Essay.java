@@ -108,7 +108,7 @@ public class View_Essay extends AppCompatActivity {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        StringBuffer sb = new StringBuffer();
+        String sb = "";
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -135,19 +135,18 @@ public class View_Essay extends AppCompatActivity {
 
                     break;
                 case "text":
-                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
                     if(sb.length() >=50){
                         break;
                     }
-                    if(sb.length() > 0){
-                        sb.append("\n");
+                    if(!sb.isEmpty()){
+                        sb = sb+"\n";
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
-                            sb.append("...");
                             break;
                         }
-                        sb.append(s);
+                        sb = sb+s;
                     }
                     break;
                 case "img":
@@ -179,9 +178,9 @@ public class View_Essay extends AppCompatActivity {
             }
         }
         if(sb.length() >=50){
-            sb.append("...");
+            sb = sb+"...";
         }
-        if(sb.length() > 0){
+        if(!sb.isEmpty()){
             TextView textView = new TextView(this);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);

@@ -3,7 +3,6 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -50,7 +49,7 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        StringBuffer sb = new StringBuffer();
+        String sb = "";
         String url_txt="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -77,18 +76,18 @@ public class Fun_文章 {
 
                     break;
                 case "text":
-                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
                     if(sb.length() >=50){
                         break;
                     }
-                    if(sb.length() > 0){
-                        sb.append("\n");
+                    if(!sb.isEmpty()){
+                        sb = sb+"\n";
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
                             break;
                         }
-                        sb.append(s);
+                        sb = sb + s;
                     }
                     break;
                 case "img":
@@ -126,13 +125,13 @@ public class Fun_文章 {
             url_txt_id.setText(url_txt);
         }
         if(sb.length() >=50){
-            sb.append("...");
+            sb = sb+"...";
         }
-        if(sb.length() > 0){
+        if(!sb.isEmpty()){
             TextView textView = new TextView(activity);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
-            textView.setText(sb.toString());
+            textView.setText(sb);
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
@@ -189,7 +188,7 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        StringBuffer sb = new StringBuffer();
+        String sb = "";
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -216,18 +215,18 @@ public class Fun_文章 {
 
                     break;
                 case "text":
-                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
                     if(sb.length() >=50){
                         break;
                     }
-                    if(sb.length() > 0){
-                        sb.append("\n");
+                    if(!sb.isEmpty()){
+                        sb = sb+"\n";
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
                             break;
                         }
-                        sb.append(s);
+                        sb = sb+s;
                     }
                     break;
                 case "img":
@@ -265,9 +264,9 @@ public class Fun_文章 {
             }
         }
         if(sb.length() >=50){
-            sb.append("...");
+            sb = sb+"...";
         }
-        if(sb.length() > 0){
+        if(!sb.isEmpty()){
             TextView textView = new TextView(activity);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
@@ -333,7 +332,7 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
         int img_id=0;
-        StringBuffer sb = new StringBuffer();
+        String sb = "";
         String 网址="";
         String PassWord_txt="";
         for(Post_Data pd : post_data){
@@ -359,19 +358,18 @@ public class Fun_文章 {
                     }
                     break;
                 case "text":
-                    String [] str = pd.getText().replace("\n", "").replace("\r", "").split("");
+                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
                     if(sb.length() >=50){
                         break;
                     }
-                    if(sb.length() > 0){
-                        sb.append("\n");
+                    if(!sb.isEmpty()){
+                        sb = sb+"\n";
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
-                            sb.append("...");
                             break;
                         }
-                        sb.append(s);
+                        sb = sb+s;
                     }
                     break;
                 case "img":
@@ -403,9 +401,9 @@ public class Fun_文章 {
             }
         }
         if(sb.length() >=50){
-            sb.append("...");
+            sb = sb+"...";
         }
-        if(sb.length() > 0){
+        if(!sb.isEmpty()){
             TextView textView = new TextView(activity);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
