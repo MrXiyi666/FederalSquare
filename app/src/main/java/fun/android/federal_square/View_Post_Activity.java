@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
+import net.csdn.roundview.RoundImageView;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.window.查看图片窗口;
@@ -36,7 +37,7 @@ public class View_Post_Activity extends AppCompatActivity {
         LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);
         TextView sign_view = findViewById(R.id.sign);
-        ImageView avatar_img = findViewById(R.id.avatar_img);
+        RoundImageView avatar_img = findViewById(R.id.avatar_img);
         TextView text_time = findViewById(R.id.text_time);
         TextView url_txt_id = findViewById(R.id.url_txt_id);
         top_title.post(()->{
@@ -63,11 +64,6 @@ public class View_Post_Activity extends AppCompatActivity {
                 case "avatar":
                     Glide.with(this)
                             .load(post_data.getText())
-                            .apply(new RequestOptions()
-                                    .circleCropTransform()
-                                    .error(R.drawable.glide_shibai)
-                                    .fallback(R.drawable.glide_duqushibai))
-                            .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                             .into(avatar_img);
                     break;
                 case "text":

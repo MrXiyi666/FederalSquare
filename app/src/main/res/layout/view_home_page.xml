@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -26,12 +27,14 @@
             android:id="@+id/relati_page"
             android:layout_width="match_parent"
             android:layout_height="160dp">
-            <ImageView
+            <net.csdn.roundview.CircleImageView
                 android:scaleType="centerCrop"
                 android:id="@+id/avatar_img"
                 android:src="@mipmap/ic_launcher_round"
                 android:layout_width="80dp"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp"
+                app:rStrokeWidth="1dp"
+                app:rStrokeColor="#f2f3f7" />
             <TextView
                 android:id="@+id/name"
                 android:textSize="18sp"

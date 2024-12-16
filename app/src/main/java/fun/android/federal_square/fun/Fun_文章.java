@@ -14,6 +14,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.google.gson.reflect.TypeToken;
+
+import net.csdn.roundview.RoundImageView;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -41,7 +44,7 @@ public class Fun_文章 {
         LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
-        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         TextView url_txt_id = view.findViewById(R.id.url_txt_id);
         List<ImageView> img_list = new ArrayList<>();
         img_list.add(img_view.findViewById(R.id.img0));
@@ -66,11 +69,6 @@ public class Fun_文章 {
                     }else{
                         Glide.with(activity)
                                 .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .circleCropTransform()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(avatar_img);
                     }
 
@@ -180,7 +178,7 @@ public class Fun_文章 {
         LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
-        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         List<ImageView> img_list = new ArrayList<>();
 
         img_list.add(img_view.findViewById(R.id.img0));
@@ -205,11 +203,6 @@ public class Fun_文章 {
                     }else{
                         Glide.with(activity)
                                 .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .circleCropTransform()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(avatar_img);
                     }
 
@@ -324,7 +317,7 @@ public class Fun_文章 {
         LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
-        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         List<ImageView> img_list = new ArrayList<>();
 
         img_list.add(img_view.findViewById(R.id.img0));
@@ -349,11 +342,6 @@ public class Fun_文章 {
                     }else{
                         Glide.with(activity)
                                 .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .circleCropTransform()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(avatar_img);
                     }
                     break;

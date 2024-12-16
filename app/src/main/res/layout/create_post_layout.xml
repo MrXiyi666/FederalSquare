@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#ffffff"
     android:layout_width="match_parent"
@@ -18,13 +18,16 @@
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="40dp">
-            <ImageView
+            <net.csdn.roundview.RoundImageView
                 android:layout_centerVertical="true"
-                android:id="@+id/avatar_img"
-                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher_round"
+                android:id="@+id/avatar_img"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                app:rStrokeWidth="1dp"
+                app:rStrokeColor="#f2f3f7"
+                app:rRadius="10dp"/>
             <TextView
                 android:layout_toEndOf="@id/avatar_img"
                 android:id="@+id/name"

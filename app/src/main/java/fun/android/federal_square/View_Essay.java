@@ -19,6 +19,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.google.gson.reflect.TypeToken;
+
+import net.csdn.roundview.RoundImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
@@ -101,7 +104,7 @@ public class View_Essay extends AppCompatActivity {
         LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
-        ImageView avatar_img = view.findViewById(R.id.avatar_img);
+        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         List<ImageView> img_list = new ArrayList<>();
         img_list.add(img_view.findViewById(R.id.img0));
         img_list.add(img_view.findViewById(R.id.img1));
@@ -125,11 +128,6 @@ public class View_Essay extends AppCompatActivity {
                     }else{
                         Glide.with(this)
                                 .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .circleCropTransform()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                                 .into(avatar_img);
                     }
 

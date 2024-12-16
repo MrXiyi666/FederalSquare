@@ -10,7 +10,7 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 4
-        versionName "4.8"
+        versionName "4.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,7 +23,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-    buildToolsVersion '35.0.0'
+
 }
 
 dependencies {
@@ -40,4 +40,6 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation 'io.github.csdn-mobile:RoundView:1.8.0'
 }
