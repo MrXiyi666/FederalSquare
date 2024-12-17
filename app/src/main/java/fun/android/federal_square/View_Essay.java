@@ -182,7 +182,7 @@ public class View_Essay extends AppCompatActivity {
             TextView textView = new TextView(this);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
-            textView.setText(sb.toString());
+            textView.setText(sb);
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }

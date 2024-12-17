@@ -9,8 +9,8 @@ android {
         applicationId "fun.android.federal_square"
         minSdk 24
         targetSdk 34
-        versionCode 4
-        versionName "4.9"
+        versionCode 5
+        versionName "5.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

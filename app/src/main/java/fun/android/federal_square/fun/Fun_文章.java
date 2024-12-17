@@ -71,7 +71,6 @@ public class Fun_文章 {
                                 .load(pd.getText())
                                 .into(avatar_img);
                     }
-
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
@@ -134,7 +133,6 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
-
         img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -263,7 +261,7 @@ public class Fun_文章 {
             TextView textView = new TextView(activity);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
-            textView.setText(sb.toString());
+            textView.setText(sb);
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
@@ -395,7 +393,7 @@ public class Fun_文章 {
             TextView textView = new TextView(activity);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
-            textView.setText(sb.toString());
+            textView.setText(sb);
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
