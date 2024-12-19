@@ -26,12 +26,7 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
         super.事件(string);
         Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
         Fun_文件.创建文件夹(able.app_path + "Disk_Data");
-        if(string.equals("no_folder")){
-            this.b_update = true;
-            Fun.mess(activity, "没有数据");
-            return;
-        }
-        if(string.equals("no_folder")){
+        if(string.equals("no_folder") || string.equals("no")){
             this.b_update = true;
             Fun.mess(activity, "没有数据");
             return;
