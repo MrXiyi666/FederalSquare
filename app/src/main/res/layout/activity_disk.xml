@@ -6,15 +6,10 @@
     android:background="#ffffff"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DiskActivity">
-    <TextView
-        android:id="@+id/top_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <RelativeLayout
-        android:layout_below="@id/top_title"
         android:id="@+id/relati"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
         <androidx.appcompat.widget.AppCompatButton
             android:layout_marginStart="10dp"
             android:stateListAnimator="@null"
@@ -23,19 +18,20 @@
             android:background="@drawable/button_color_selected_selector"
             android:layout_centerVertical="true"
             android:text="上传图片"
-            android:layout_marginEnd="5dp"
             android:layout_width="wrap_content"
             android:layout_height="40dp"/>
         <TextView
             android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
             android:text="图片资源"
             android:textSize="18sp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
         <ImageView
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"

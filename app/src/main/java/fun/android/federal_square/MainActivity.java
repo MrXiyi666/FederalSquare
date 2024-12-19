@@ -3,7 +3,6 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -11,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
@@ -117,38 +114,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         menu_square.setOnClickListener(menu_square_v-> {
-            pager.setCurrentItem(0);
             if(pager.getCurrentItem() == 0){
-               able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                return;
             }
+            pager.setCurrentItem(0);
         });
         menu_hot.setOnClickListener(menu_square_v-> pager.setCurrentItem(1));
         menu_home.setOnClickListener(menu_square_v-> pager.setCurrentItem(2));
         menu_square.setOnLongClickListener(v -> {
-            if(pager.getCurrentItem() != 0){
-                pager.setCurrentItem(0);
-
-            }else{
+            if(pager.getCurrentItem() == 0){
                 able.view_square.初始化本地数据();
+                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                return true;
             }
+            pager.setCurrentItem(0);
             return true;
         });
         menu_hot.setOnLongClickListener(v -> {
-            if(pager.getCurrentItem() != 1){
-                pager.setCurrentItem(1);
-            }else{
+            if(pager.getCurrentItem() == 1) {
                 able.view_hot.初始化数据();
+                return true;
             }
-
+            pager.setCurrentItem(1);
             return true;
         });
         menu_home.setOnLongClickListener(V->{
-            if(pager.getCurrentItem() != 2){
-                pager.setCurrentItem(2);
-            }else{
+            if(pager.getCurrentItem() == 2){
                 able.view_home.linear_main.removeAllViews();
                 able.view_home.linear_main.addView(new View_Home_Page(this).getView());
+                return true;
             }
+            pager.setCurrentItem(2);
             return true;
         });
     }

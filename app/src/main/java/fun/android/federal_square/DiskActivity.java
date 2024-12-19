@@ -38,7 +38,6 @@ public class DiskActivity extends AppCompatActivity {
     private AppCompatButton button_network_disk;
     private NetWork_网盘_上传 netWork_网盘_上传;
     ImageView return_icon;
-    private TextView top_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +45,7 @@ public class DiskActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
         setContentView(R.layout.activity_disk);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         初始化();
         事件();
     }
@@ -56,7 +55,6 @@ public class DiskActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridview);
         swiperefre = findViewById(R.id.swiperefee);
         return_icon = findViewById(R.id.return_icon);
-        top_title = findViewById(R.id.top_title);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         netWork_网盘_上传 = new NetWork_网盘_上传(this);
         加载图片初始化(Fun_账号.GetID());
@@ -75,9 +73,6 @@ public class DiskActivity extends AppCompatActivity {
         });
         return_icon.setOnClickListener(V->{
             finish();
-        });
-        top_title.post(()->{
-            top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         });
     }
 
