@@ -110,7 +110,8 @@ public class Fun {
         }
         return (int)documentFile.length();
     }
-    
+
+
     public static int 获取状态栏高度(Activity activity){
         int result=0;
         @SuppressLint("InternalInsetResource") 
