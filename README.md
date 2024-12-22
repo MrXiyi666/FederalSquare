@@ -1,7 +1,5 @@
 # FederalSquare
-此项目开发进度较短 会有BUG  只能用于体验
-
-
+此项目目前没什么好更新的 代码简单 配置简单 使用也简单 bug也简单
 
 联邦广场 官网 http://federal-square.top/
 
