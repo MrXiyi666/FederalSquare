@@ -1,5 +1,5 @@
 # FederalSquare
-此项目目前没什么好更新的 代码简单 配置简单 使用也简单 bug也简单
+注意： 5.4版本以后php后台代码修改了变量名 Read_PassWord 修改为 PassWord
 
 联邦广场 官网 http://federal-square.top/
 
