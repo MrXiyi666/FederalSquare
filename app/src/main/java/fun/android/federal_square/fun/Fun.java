@@ -77,7 +77,11 @@ public class Fun {
         String formattedDate = simpleDateFormat.format(date);
         long nanoTime = System.nanoTime();
         long microTime = nanoTime / 1000;
-        return formattedDate + "_" + microTime;
+        String str = formattedDate + "_" + microTime;
+        if(str.length() > 50){
+            return str.substring(0, 50);
+        }
+        return str;
     }
     /*
      * Java文件操作 获取文件扩展名

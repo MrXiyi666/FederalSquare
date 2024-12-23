@@ -39,7 +39,7 @@
             android:id="@+id/edit_text"
             android:textColor="@color/black"
             android:gravity="start"
-            android:maxLength="50"
+            android:maxLength="100"
             android:textSize="18sp"
             android:layout_margin="10dp"
             android:background="@drawable/edit_back"
