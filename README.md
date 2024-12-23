@@ -61,7 +61,13 @@
 #
 把php文件上传到federal-square文件夹 并且配置好 域名和虚拟主机可以正常访问
 #
-在创建 Account Discuss_Data Square_Data 三个文件夹注意大小写
+创建
+#
+Account       保存账号个人信息
+#
+Discuss_Data  保存文章评论信息
+#
+Square_Data   保存广场文章信息
 #
 例如 http://federal-square.top/federal-square/Read_Folder_List.php
 #
@@ -101,10 +107,6 @@
 #
 #
 #
-#================================================
-=======
 #=================================软件介绍=================================
 #
 #
-该项目可以通过 虚拟主机 搭建私人社区
->>>>>>> 12e790ee3d436481a81aafbcb3871742b161d4ef
