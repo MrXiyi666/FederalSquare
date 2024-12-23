@@ -16,10 +16,14 @@
 #===================================================
 
 
-在虚拟主机根目录 创建federal-square 文件夹\n
+在虚拟主机根目录 创建federal-square 文件夹
+
 把php文件上传到federal-square文件夹 并且配置好 域名和虚拟主机可以正常访问
+
 在创建 Account Discuss_Data Square_Data 三个文件夹注意大小写
+
 例如 http://federal-square.top/federal-square/Read_Folder_List.php
+
 上面的是读取文章列表 php功能 以此举例正常访问即可
 
 
