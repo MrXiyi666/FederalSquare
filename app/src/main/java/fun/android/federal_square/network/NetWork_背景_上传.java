@@ -25,12 +25,12 @@ public class NetWork_背景_上传 extends NetWork_Main{
         this.post_dataList = post_dataList;
         this.fun_dialog = fun_dialog;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/" + Fun_账号.GetID() + ".txt")
                 .add("data", able.gson.toJson(this.post_dataList))
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Write_Txt.php";
         b_mess = false;
     }

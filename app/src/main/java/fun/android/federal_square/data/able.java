@@ -24,7 +24,10 @@ public class able {
     public static int 宽度, 高度, 状态栏高度;
     public static String app_path;
     public static int square_time_index = 5000; //广场五秒钟刷新一次
-    public static String URL_Name="", Read_PassWord="";
+
+    public static String URL ="";
+
+    public static String PassWord ="";
     public static Gson gson = new Gson();
 
     public static OkHttpClient okHttpClient;

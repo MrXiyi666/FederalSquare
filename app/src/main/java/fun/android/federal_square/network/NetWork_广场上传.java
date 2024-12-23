@@ -23,13 +23,13 @@ public class NetWork_广场上传 extends NetWork_Main {
         this.time = time;
         this.post_dataList = post_dataList;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("account", Fun_账号.GetID())
                 .add("name", time)
                 .add("data", able.gson.toJson(post_dataList))
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Publish_Article.php";
         b_mess = false;
     }

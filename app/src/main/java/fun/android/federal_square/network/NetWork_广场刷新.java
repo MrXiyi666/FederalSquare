@@ -1,9 +1,7 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,11 +13,11 @@ public class NetWork_广场刷新 extends NetWork_Main {
     public NetWork_广场刷新(Activity activity) {
         super(activity);
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Square_Data")
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
         b_mess = false;
     }
@@ -30,7 +28,7 @@ public class NetWork_广场刷新 extends NetWork_Main {
         url_path = "federal-square/Read_Folder_List.php";
         password = PassWord;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", PassWord)
+                .add("PassWord", PassWord)
                 .add("path", "./Square_Data")
                 .build();
     }

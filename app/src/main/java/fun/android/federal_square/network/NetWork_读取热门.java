@@ -1,11 +1,9 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 import okhttp3.FormBody;
@@ -13,13 +11,10 @@ import okhttp3.FormBody;
 public class NetWork_读取热门 extends NetWork_Main {
     public NetWork_读取热门(Activity activity ) {
         super(activity);
-
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Read_Hot_List.php";
-        formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
-                .build();
+        formBody = new FormBody.Builder().add("PassWord", able.PassWord).build();
         b_mess = false;
     }
 

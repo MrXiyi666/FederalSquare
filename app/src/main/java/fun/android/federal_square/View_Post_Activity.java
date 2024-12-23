@@ -103,7 +103,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
             }
         }
-        if(!able.URL_Name.equals(url_txt)){
+        if(!able.URL.equals(url_txt)){
             url_txt_id.setText(url_txt);
         }
 

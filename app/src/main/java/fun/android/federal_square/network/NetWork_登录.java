@@ -23,11 +23,11 @@ public class NetWork_登录 extends NetWork_Main {
     public void 传递参数(String id, String password1){
         this.n_PassWord=password1;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + id + "/" + id + ".txt")
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Read_Txt.php";
         b_mess = false;
     }

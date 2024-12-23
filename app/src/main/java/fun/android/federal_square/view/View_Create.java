@@ -26,8 +26,8 @@ public class View_Create extends View_Main{
             pager.setVisibility(View.VISIBLE);
             linear_create.setVisibility(View.GONE);
             linear_di.setVisibility(View.VISIBLE);
-            able.URL_Name = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
-            able.Read_PassWord = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1] + "";
+            able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
+            able.PassWord = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1] + "";
 
         }
     }
@@ -49,10 +49,10 @@ public class View_Create extends View_Main{
             if(txt_data.isEmpty()){
                 return;
             }
-            able.URL_Name = txt_data;
+            able.URL = txt_data;
             if(!txt_password.isEmpty()){
                 txt_data = txt_data + "," + txt_password;
-                able.Read_PassWord = txt_password;
+                able.PassWord = txt_password;
             }
             Fun_文件.写入文件(able.app_path + "System_Data/URL_Name.txt", txt_data);
             pager.setVisibility(View.VISIBLE);

@@ -34,7 +34,7 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
         this.后缀 = 后缀;
         this.diskActivity = diskActivity;
         this.button_network_disk = button_network_disk;
-        url = able.URL_Name + "federal-square/Upload_Image.php";
+        url = able.URL + "federal-square/Upload_Image.php";
         this.body = RequestBody.Companion.create(new File(able.app_path + "/cache/cache." + 后缀), MediaType.Companion.parse("image/" + 后缀));
         file_name = Fun.获取时间() + "." + 后缀;
         multipartBody = new MultipartBody.Builder()

@@ -162,7 +162,7 @@ public class NetWork_Main {
                 事件(string);
                 for(String name : down_list_data){
                     FormBody d_formBody = new FormBody.Builder()
-                            .add("Read_PassWord", password)
+                            .add("PassWord", password)
                             .add("path", "./Square_Data/" + name)
                             .build();
                     Request d_request = new Request.Builder()
@@ -189,7 +189,7 @@ public class NetWork_Main {
 
                 for(String name : down_list_collection_data){
                     FormBody d_formBody = new FormBody.Builder()
-                            .add("Read_PassWord", password)
+                            .add("PassWord", password)
                             .add("path", "./Account/" + Fun_账号.GetID() + "/Collection/" + name)
                             .build();
                     Request d_request = new Request.Builder()

@@ -101,10 +101,10 @@ public class 发表文章窗口 {
                 time.setText(Fun.获取时间());
                 Post_Data url = new Post_Data();
                 url.setName("url");
-                url.setText(able.URL_Name);
+                url.setText(able.URL);
                 Post_Data password = new Post_Data();
                 password.setName("password");
-                password.setText(able.Read_PassWord);
+                password.setText(able.PassWord);
                 post_dataList.add(name);
                 post_dataList.add(sign);
                 post_dataList.add(avatar);
@@ -145,12 +145,12 @@ public class 发表文章窗口 {
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             Post_Data post_data = new Post_Data();
             post_data.setName("img");
-            post_data.setText(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
+            post_data.setText(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             ImageView imageView = new ImageView(activity);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(able.宽度 / 2, able.宽度 / 2);
             imageView.setLayoutParams(layoutParams);
             Glide.with(activity)
-                    .load(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
+                    .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -165,7 +165,7 @@ public class 发表文章窗口 {
                 return true;
             });
             imageView.setOnClickListener(V->{
-                查看图片窗口.启动_Dialog(activity, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
+                查看图片窗口.启动_Dialog(activity, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             });
             post_dataList.add(post_data);
             linear.addView(imageView);

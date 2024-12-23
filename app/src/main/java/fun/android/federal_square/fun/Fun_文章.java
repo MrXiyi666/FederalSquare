@@ -118,7 +118,7 @@ public class Fun_文章 {
         }
 
 
-        if(!able.URL_Name.equals(url_txt)){
+        if(!able.URL.equals(url_txt)){
             url_txt_id.setText(url_txt);
         }
         if(sb.length() >=50){
@@ -133,14 +133,11 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
-                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                    params.height = Fun.DPToPX(activity, 150);
-                    img_view.setLayoutParams(params);
-                }
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
+                ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                params.height = Fun.DPToPX(activity, 150);
+                img_view.setLayoutParams(params);
             }
         });
 
@@ -266,14 +263,11 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
-                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                    params.height = Fun.DPToPX(activity, 150);
-                    img_view.setLayoutParams(params);
-                }
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
+                ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                params.height = Fun.DPToPX(activity, 150);
+                img_view.setLayoutParams(params);
             }
         });
 
@@ -398,14 +392,11 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         linear.addView(img_view);
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
-                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                    params.height = Fun.DPToPX(activity, 150);
-                    img_view.setLayoutParams(params);
-                }
+        img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
+                ViewGroup.LayoutParams params = img_view.getLayoutParams();
+                params.height = Fun.DPToPX(activity, 150);
+                img_view.setLayoutParams(params);
             }
         });
         String finalTime_name = time_name;

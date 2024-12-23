@@ -72,7 +72,7 @@ public class Fun_图片 {
         list.sort(comparator);
         List<String> return_url = new ArrayList<>();
         for(String name : list){
-            return_url.add(able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + name);
+            return_url.add(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + name);
         }
         return return_url;
     }

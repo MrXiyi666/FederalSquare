@@ -38,10 +38,10 @@ public class 选择头像窗口 {
 
         gridview.setAdapter(new Disk_Grid_Adapter(activity, file_list));
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
-            List<Post_Data> post_dataList = Fun_账号.重新生成(Fun_账号.GetID(), Fun_账号.GetPassWord(), Fun_账号.GetName(), Fun_账号.GetSign(), able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position), Fun_账号.GetBack_Url(), Fun_账号.Get发贴开关(), Fun_账号.Get评论开关());
+            List<Post_Data> post_dataList = Fun_账号.重新生成(Fun_账号.GetID(), Fun_账号.GetPassWord(), Fun_账号.GetName(), Fun_账号.GetSign(), able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position), Fun_账号.GetBack_Url(), Fun_账号.Get发贴开关(), Fun_账号.Get评论开关());
             if(!post_dataList.isEmpty()){
                 NetWork_头像_上传 netWork_头像_上传 = new NetWork_头像_上传(activity);
-                netWork_头像_上传.传递参数(post_dataList, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position), avatar_img, dialog);
+                netWork_头像_上传.传递参数(post_dataList, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position), avatar_img, dialog);
                 netWork_头像_上传.start();
             }
         });

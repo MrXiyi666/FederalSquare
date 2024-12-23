@@ -39,7 +39,7 @@ public class 个人信息窗口 {
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-        text_url.setText("我的网址: "+able.URL_Name + "\n我的密码: " + able.Read_PassWord);
+        text_url.setText("我的网址: "+able.URL + "\n我的密码: " + able.PassWord);
         button_ok.setOnClickListener(V->{
             String name_txt="";
             String sign_txt="";

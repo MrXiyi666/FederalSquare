@@ -3,7 +3,6 @@ package fun.android.federal_square.network;
 import android.app.Activity;
 import android.widget.LinearLayout;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
     public void 传递参数(String square_time, LinearLayout linear, String 网址 , String PassWord){
         this.linear = linear;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", PassWord)
+                .add("PassWord", PassWord)
                 .add("path", "./Discuss_Data/" + square_time)
                 .build();
         url = 网址;

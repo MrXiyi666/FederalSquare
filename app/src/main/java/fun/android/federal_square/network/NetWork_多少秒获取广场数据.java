@@ -13,11 +13,11 @@ public class NetWork_多少秒获取广场数据 extends NetWork_Main{
     public NetWork_多少秒获取广场数据(Activity activity) {
         super(activity);
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Square_Data")
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
         b_dialog = false;
         b_mess = false;

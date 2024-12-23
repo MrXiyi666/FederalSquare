@@ -59,7 +59,7 @@ public class View_Square extends View_Main{
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         swiperefee.setOnRefreshListener(()->{
             NetWork_广场刷新 netWork_广场刷新 = new NetWork_广场刷新(activity_main);
-            netWork_广场刷新.传递参数(able.URL_Name, able.Read_PassWord);
+            netWork_广场刷新.传递参数(able.URL, able.PassWord);
             netWork_广场刷新.start();
             for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
                 NetWork_广场刷新 zi_network = new NetWork_广场刷新(activity_main);
@@ -89,7 +89,7 @@ public class View_Square extends View_Main{
     @Override
     public void onStart() {
         super.onStart();
-        if(able.URL_Name.isEmpty()){
+        if(able.URL.isEmpty()){
             return;
         }
         b_time_update = true;

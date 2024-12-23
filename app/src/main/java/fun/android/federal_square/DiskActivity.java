@@ -120,7 +120,7 @@ public class DiskActivity extends AppCompatActivity {
         List<String> file_list = Fun_图片.遍历所有图片不带域名();
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
-            查看图片窗口.启动(DiskActivity.this, able.URL_Name + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
+            查看图片窗口.启动(DiskActivity.this, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
         });
         gridView.setOnItemLongClickListener((parent, view, position, id) -> {
             删除窗口.删除网盘图片窗口(DiskActivity.this, file_list.get(position));

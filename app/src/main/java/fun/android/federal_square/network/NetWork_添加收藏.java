@@ -22,12 +22,12 @@ public class NetWork_添加收藏 extends NetWork_Main {
         this.post_time = post_time;
         this.post_data = post_data;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/Collection/" + post_time + ".json")
                 .add("data", able.gson.toJson(this.post_data))
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Write_Txt.php";
         b_mess = false;
     }

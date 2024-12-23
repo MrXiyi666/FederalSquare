@@ -18,11 +18,11 @@ public class NetWork_删除网盘图片 extends NetWork_Main {
         this.name = name;
         this.diskActivity = diskActivity;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path",  "./Account/" + Fun_账号.GetID() + "/Image_Resources/" + name)
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Delete_File.php";
         b_mess = false;
     }

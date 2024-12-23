@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
-
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -17,8 +16,6 @@ import okhttp3.FormBody;
 public class NetWork_头像_上传 extends NetWork_Main {
     public NetWork_头像_上传(Activity activity ) {
         super(activity);
-
-
     }
     private List<Post_Data> post_dataList;
     private String tou_url;
@@ -30,12 +27,12 @@ public class NetWork_头像_上传 extends NetWork_Main {
         this.avatar_img = avatar_img;
         this.fun_dialog = dialog;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/" + Fun_账号.GetID() + ".txt")
                 .add("data", able.gson.toJson(this.post_dataList))
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Write_Txt.php";
         b_mess = false;
     }

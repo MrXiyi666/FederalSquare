@@ -17,11 +17,11 @@ public class NetWork_我的所有收藏_删除 extends NetWork_Main{
         this.view_collectin = view_collectin;
         this.time = time;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + account_id + "/Collection/" + time + ".json")
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Delete_File.php";
         b_mess = false;
     }

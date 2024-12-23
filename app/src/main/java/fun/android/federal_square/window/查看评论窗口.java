@@ -41,22 +41,23 @@ public class 查看评论窗口 {
         if(!Fun_账号.GetID().isEmpty()){
             button_ok.setOnClickListener(V->{
                 String text = edit_text.getText().toString();
-                if(!text.isEmpty()){
-                    Post_Data post_data_name = new Post_Data();
-                    post_data_name.setName("Name");
-                    post_data_name.setText(Fun_账号.GetName());
-                    Post_Data post_data_sign = new Post_Data();
-                    post_data_sign.setName("Sign");
-                    post_data_sign.setText(Fun_账号.GetSign());
-                    Post_Data post_data_text = new Post_Data();
-                    post_data_text.setName("Text");
-                    post_data_text.setText(text);
-                    List<Post_Data> post_dataList = new ArrayList<>();
-                    post_dataList.add(post_data_name);
-                    post_dataList.add(post_data_sign);
-                    post_dataList.add(post_data_text);
-                    查看评论窗口.发布新的讨论(activity, linear, post_dataList, time_name, 网址, PassWord);
+                if(text.isEmpty()){
+                    return;
                 }
+                Post_Data post_data_name = new Post_Data();
+                post_data_name.setName("Name");
+                post_data_name.setText(Fun_账号.GetName());
+                Post_Data post_data_sign = new Post_Data();
+                post_data_sign.setName("Sign");
+                post_data_sign.setText(Fun_账号.GetSign());
+                Post_Data post_data_text = new Post_Data();
+                post_data_text.setName("Text");
+                post_data_text.setText(text);
+                List<Post_Data> post_dataList = new ArrayList<>();
+                post_dataList.add(post_data_name);
+                post_dataList.add(post_data_sign);
+                post_dataList.add(post_data_text);
+                查看评论窗口.发布新的讨论(activity, linear, post_dataList, time_name, 网址, PassWord);
                 edit_text.setText("");
             });
         }

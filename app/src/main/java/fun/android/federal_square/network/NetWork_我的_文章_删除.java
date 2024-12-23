@@ -1,7 +1,6 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
@@ -18,11 +17,11 @@ public class NetWork_我的_文章_删除 extends NetWork_Main{
         this.time = time;
         this.view_HomeArticle = view_home_essay;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + account_id + "/Data/" + time + ".json")
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Delete_File.php";
         b_mess = false;
     }

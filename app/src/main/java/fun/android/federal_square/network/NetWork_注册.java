@@ -2,9 +2,7 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import android.util.Log;
-
 import java.util.List;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -20,13 +18,13 @@ public class NetWork_注册 extends NetWork_Main {
     public void 传递参数(List<Post_Data> account_data){
         this.post_dataList = account_data;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("account", post_dataList.get(0).getText())
                 .add("path", "./Account/" + post_dataList.get(0).getText())
                 .add("data", able.gson.toJson(post_dataList))
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Create_Account.php";
         b_mess = false;
         b_account = false;

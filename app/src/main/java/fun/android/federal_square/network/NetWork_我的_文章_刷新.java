@@ -17,11 +17,11 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
         super(activity);
         this.b_account = true;
         formBody = new FormBody.Builder()
-                .add("Read_PassWord", able.Read_PassWord)
+                .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/Data")
                 .build();
-        url = able.URL_Name;
-        password = able.Read_PassWord;
+        url = able.URL;
+        password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
         b_mess = false;
     }
