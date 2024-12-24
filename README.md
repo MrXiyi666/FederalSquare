@@ -79,6 +79,10 @@
 #
 **Write_Txt.php** 写入文件功能 每个文件都需要经常写入
 #
+必须保证路径的正确 比如 http://federal-square.top/Create_Account.php
+#
+#以上格式才正确
+#
 #
 #
 #**======================================================**
@@ -108,10 +112,6 @@
 **Discuss_Data**  保存文章评论信息
 #
 **Square_Data**   保存广场文章信息
-#
-必须保证路径的正确 比如 http://federal-square.top/Square_Data/文章1.json
-#
-#以上才可以正确读取
 #
 上面的是读取文章列表 php功能 以此举例正常访问即可
 #
