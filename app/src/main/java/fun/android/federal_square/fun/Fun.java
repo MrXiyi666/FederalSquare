@@ -25,6 +25,8 @@ import com.google.gson.TypeAdapter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
+
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 
@@ -70,14 +72,21 @@ public class Fun {
     }
 
 
+    private static int Random_Data = 0;
     public static String 获取时间() {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS");
         Date date = new Date(System.currentTimeMillis());
         String formattedDate = simpleDateFormat.format(date);
-        long nanoTime = System.nanoTime();
-        long microTime = nanoTime / 1000;
-        String str = formattedDate + "_" + microTime;
+        Random random = new Random();
+        while(true) {
+            int index = random.nextInt(999999999);
+            if(Random_Data != index) {
+                Random_Data = index;
+                break;
+            }
+        }
+        String str = formattedDate + "_" + Random_Data;
         if(str.length() > 50){
             return str.substring(0, 50);
         }
