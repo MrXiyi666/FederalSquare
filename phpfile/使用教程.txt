@@ -1,5 +1,5 @@
 联邦广场使用教程
-第一步在虚拟空间根目录 创建federal-square文件夹 小写
+第一步在虚拟空间根目录 创建federal-square文件夹
 
 第二步在 federal-square 文件夹内部 创建 Account Discuss_Data Square_Data 文件夹 大小写要一致
 之后把php文件 上传到federal-square 文件夹下
@@ -19,7 +19,4 @@ http://federal-square.top/ 后面要带斜杠符号 以保证正常访问你的�
 同样的引用别人的域名 也需要后面加 / 符号
 
 注意 最好是http 不要使用https 测试会post失败
-
-
-如果您搭建好了 社区 并且成功运行 你可以发送到MrXiyi@outlook.com 邮箱 我可以把你的域名公开
 
