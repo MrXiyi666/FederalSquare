@@ -105,7 +105,6 @@
 #
 **http://federal-square.top/Square_Data/xxx.json**
 #
-#
 #以上格式才正确
 #
 #
