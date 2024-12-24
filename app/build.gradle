@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'fun.android.federal_square'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "fun.android.federal_square"
         minSdk 26
-        targetSdk 34
+        targetSdk 35
         versionCode 5
         versionName "5.4"
 
