@@ -79,7 +79,32 @@
 #
 **Write_Txt.php** 写入文件功能 每个文件都需要经常写入
 #
-必须保证路径的正确 比如 http://federal-square.top/Create_Account.php
+**http://federal-square.top/Create_Account.php**
+#
+**http://federal-square.top/Delete_File.php**
+#
+**http://federal-square.top/PassWord_Data.php**
+#
+**http://federal-square.top/Publish_Article.php**
+#
+**http://federal-square.top/Read_Discuss_List.php**
+#
+**http://federal-square.top/Read_Folder_List.php**
+#
+**http://federal-square.top/Read_Hot_List.php**
+#
+**http://federal-square.top/Read_Txt.php**
+#
+**http://federal-square.top/Upload_Image.php**
+#
+**http://federal-square.top/Write_Txt.php**
+#
+**http://federal-square.top/Account/xxx.json**
+#
+**http://federal-square.top/Discuss_Data/xxx.json**
+#
+**http://federal-square.top/Square_Data/xxx.json**
+#
 #
 #以上格式才正确
 #
