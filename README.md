@@ -109,7 +109,9 @@
 #
 **Square_Data**   保存广场文章信息
 #
-例如 http://federal-square.top/federal-square/Read_Folder_List.php
+必须保证路径的正确 比如 http://federal-square.top/Square_Data/文章1.json
+#
+#以上才可以正确读取
 #
 上面的是读取文章列表 php功能 以此举例正常访问即可
 #
