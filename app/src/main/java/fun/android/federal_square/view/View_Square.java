@@ -123,12 +123,11 @@ public class View_Square extends View_Main{
     @Override
     public void 释放() {
         super.释放();
-
     }
 
     public void 初始化本地数据(){
         List<String> list = Fun_文章.获取广场集合();
-        linear.post(()->{
+        able.handler.post(()->{
             linear.removeAllViews();
         });
         int index=50;
@@ -146,9 +145,12 @@ public class View_Square extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            linear.post(()->{
+            able.handler.post(()->{
                 linear.addView(Fun_文章.创建文章(activity_main, post_data));
             });
         }
+        able.handler.post(()->{
+            scrollView.scrollTo(0, 0);
+        });
     }
 }
