@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class NetWork_Main {
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
+            ImageView return_icon = view.findViewById(R.id.return_icon);
+            return_icon.setVisibility(View.GONE);
             text_id.setText("  ✍  ");
             dialog.setView(view);
             dialog.setCancelable(false);

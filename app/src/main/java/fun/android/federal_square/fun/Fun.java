@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -40,6 +42,7 @@ public class Fun {
             TextView text_id = view.findViewById(R.id.text_id);
             ImageView return_icon = view.findViewById(R.id.return_icon);
             ScrollView scrollView = view.findViewById(R.id.scrollView);
+            return_icon.setVisibility(View.GONE);
             view.post(()->{
                 if(text_id.getHeight() > able.高度){
                     scrollView.getLayoutParams().height = able.高度 / 2;
@@ -158,4 +161,5 @@ public class Fun {
         }
         return true;
     }
+
 }

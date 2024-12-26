@@ -11,9 +11,9 @@
         android:id="@+id/relati"
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
         <TextView
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:text="所有收藏"
             android:textSize="18sp"
             android:textColor="@color/black"
@@ -25,7 +25,7 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView

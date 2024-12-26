@@ -14,9 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.google.gson.reflect.TypeToken;
-
 import net.csdn.roundview.RoundImageView;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

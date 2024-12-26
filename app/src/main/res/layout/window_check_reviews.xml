@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"/>
         <ImageView
-            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
