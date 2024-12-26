@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
             android:text="选择图片"
             android:id="@+id/add_img"
             android:layout_marginStart="10dp"
@@ -49,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
             android:text="提交文本"
             android:id="@+id/add_text"
             android:layout_marginStart="5dp"
@@ -88,6 +90,7 @@
         </LinearLayout>
     </ScrollView>
     <androidx.appcompat.widget.AppCompatButton
+        android:stateListAnimator="@null"
         android:id="@+id/button_ok"
         android:layout_above="@id/di"
         android:background="@drawable/button_color_selected_selector"

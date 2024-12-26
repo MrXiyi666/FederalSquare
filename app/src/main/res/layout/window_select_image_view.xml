@@ -25,7 +25,7 @@
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView
-        android:background="#000000"
+        android:background="#80808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <GridView

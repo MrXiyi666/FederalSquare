@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             tools:ignore="RtlHardcoded" />
         <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
             android:layout_alignParentEnd="true"
             android:id="@+id/button_ok"
             android:layout_marginTop="10dp"

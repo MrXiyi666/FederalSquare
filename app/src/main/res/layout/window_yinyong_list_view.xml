@@ -64,6 +64,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@drawable/button_color_selected_selector"
