@@ -17,12 +17,14 @@
         if($value=='.' || $value=='..'){
             continue;
         }
-        if(is_file($path . "/$value")){
-            $str = file_get_contents($path . "/$value");
-            if(strlen($str) > 0){
-                $_return[] = $str;
-            }
+        if(!is_file($path . "/$value")){
+            continue;
         }
+		$str = file_get_contents($path . "/$value");
+        if(strlen($str) == 0){
+           continue;
+        }
+		 $_return[] = $str;
     }
     if(count($_return) == 0){
         die("no");

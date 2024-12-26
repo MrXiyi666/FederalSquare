@@ -11,21 +11,23 @@
     ){
         die("no_account");
     }
+	if(file_exists($path)){
+	   die("exists");
+	}
+		
     if(is_dir($path)){
         die("exists");
     }
-if(!mkdir($path, 0777, true)){
-    die("no_account");
-}
-$file = fopen($path . '/' . $account . '.txt', "w");
-if(!$file){
-    die("no_data");
-}
-echo "ok";
-fwrite($file, $data);
-fclose($file);
-mkdir($path . '/Data', 0777, true);
-mkdir($path . "/Collection", 0777, true);
-mkdir($path . "/Image_Resources", 0777, true);
-
-	
+    if(!mkdir($path, 0777, true)){
+        die("no_account");
+    }
+    $file = fopen($path . '/' . $account . '.txt', "w");
+    if(!$file){
+        die("no_data");
+    }
+    echo "ok";
+    fwrite($file, $data);
+    fclose($file);
+    mkdir($path . '/Data', 0777, true);
+    mkdir($path . "/Collection", 0777, true);
+    mkdir($path . "/Image_Resources", 0777, true);

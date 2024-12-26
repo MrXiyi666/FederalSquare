@@ -5,11 +5,10 @@
 
 
     $file = fopen($path, "w");
-    if($file){
-        echo "ok";
-        fwrite($file, $data);
-        fclose($file);
-    }else{
-        echo "no";
+    if(!$file){
+        echo "np";
     }
+	echo "ok";
+    fwrite($file, $data);
+    fclose($file);
     

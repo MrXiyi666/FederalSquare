@@ -12,5 +12,3 @@
 	}else{
 		echo "no_file";
 	}
-
-?>
