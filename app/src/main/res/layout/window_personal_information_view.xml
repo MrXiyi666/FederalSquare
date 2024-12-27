@@ -38,8 +38,9 @@
         <EditText
             android:layout_marginBottom="10dp"
             android:hint="修改名字"
-            android:padding="10dp"
-            android:gravity="center"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:gravity="start"
             android:background="@drawable/edit_back"
             android:id="@+id/edit_name"
             android:textColor="@color/black"
@@ -47,20 +48,22 @@
             android:layout_height="wrap_content"/>
         <EditText
             android:layout_marginBottom="10dp"
+            android:textSize="15sp"
             android:hint="修改签名"
-            android:padding="10dp"
-            android:gravity="center"
+            android:padding="15dp"
+            android:gravity="start"
             android:background="@drawable/edit_back"
             android:id="@+id/edit_sign"
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
+            android:textSize="15sp"
             android:layout_marginBottom="10dp"
             android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
             android:hint="修改密码"
-            android:padding="10dp"
-            android:gravity="center"
+            android:padding="15dp"
+            android:gravity="start"
             android:background="@drawable/edit_back"
             android:id="@+id/edit_password"
             android:textColor="@color/black"

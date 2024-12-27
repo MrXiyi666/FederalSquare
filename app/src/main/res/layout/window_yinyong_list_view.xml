@@ -31,6 +31,15 @@
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
+    <TextView
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:gravity="start"
+        android:text="说明：引用可以让你和更多的人进行互动\n            你必须输入正确的域名和密码"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -45,7 +54,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:background="@drawable/edit_back"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:id="@+id/edit_text"
                 android:hint="添加新的网址"
                 android:layout_width="match_parent"
@@ -55,7 +64,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:background="@drawable/edit_back"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:id="@+id/edit_text_password"
                 android:hint="有密码的话请输入"
                 android:layout_width="match_parent"

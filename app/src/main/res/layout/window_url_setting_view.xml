@@ -27,7 +27,6 @@
     </RelativeLayout>
     <TextView
         android:id="@+id/xian1"
-        android:alpha="0.2"
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
@@ -37,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
             android:layout_weight="1"
             android:id="@+id/button_ok"
             android:text="重新启动并删除数据"
@@ -44,6 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:id="@+id/button_exit"

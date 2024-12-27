@@ -34,7 +34,7 @@
         android:layout_height="1dp"/>
     <TextView
         android:layout_margin="10dp"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
         android:text="删除 文件"
         android:gravity="center"

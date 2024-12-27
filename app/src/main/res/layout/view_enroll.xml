@@ -24,6 +24,7 @@
         android:background="@drawable/edit_back"
         android:textColor="@color/black"
         android:maxLength="11"
+        android:textSize="15sp"
         android:textAlignment="center"
         android:padding="10dp"
         android:id="@+id/enroll_edit_account"
@@ -31,6 +32,7 @@
         android:layout_height="48dp"/>
     <EditText
         android:hint="密码"
+        android:textSize="15sp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_back"
         android:textColor="@color/black"
@@ -43,6 +45,7 @@
         android:layout_height="48dp"/>
     <EditText
         android:hint="确认密码"
+        android:textSize="15sp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_back"
         android:textColor="@color/black"
