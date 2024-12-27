@@ -61,11 +61,9 @@ public class 发表文章窗口 {
                 post_data.setName("text");
                 post_data.setText(text_data);
                 TextView textView = new TextView(activity);
-                textView.setBackgroundColor(Color.rgb(250,250,250));
                 textView.setTextSize(15);
                 textView.setText(text_data);
                 textView.setTextColor(Color.BLACK);
-                textView.setPadding(5,5,5,5);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 10);
@@ -150,14 +148,13 @@ public class 发表文章窗口 {
             post_data.setName("img");
             post_data.setText(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             ImageView imageView = new ImageView(activity);
-            imageView.setPadding(5,5,5,5);
             Glide.with(activity)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    able.宽度 / 2, able.宽度 / 2);
+                    ViewGroup.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
-            imageView.setBackgroundColor(Color.rgb(250,250,250));
+            params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V->{
                 Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
