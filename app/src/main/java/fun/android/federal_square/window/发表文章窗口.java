@@ -1,5 +1,6 @@
 package fun.android.federal_square.window;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -64,6 +65,7 @@ public class 发表文章窗口 {
                 textView.setTextSize(15);
                 textView.setText(text_data);
                 textView.setTextColor(Color.BLACK);
+                textView.setPadding(5,5,5,5);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 10);
@@ -128,6 +130,7 @@ public class 发表文章窗口 {
         dialog.show();
     }
 
+    @SuppressLint("RtlHardcoded")
     public void 选择图片(Activity activity){
         AlertDialog 选择图片窗口句柄 = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_select_image_view, null);
@@ -147,13 +150,12 @@ public class 发表文章窗口 {
             post_data.setName("img");
             post_data.setText(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             ImageView imageView = new ImageView(activity);
-            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(able.宽度 / 2, able.宽度 / 2);
-            imageView.setLayoutParams(layoutParams);
+            imageView.setPadding(5,5,5,5);
             Glide.with(activity)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    able.宽度 / 2, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             imageView.setBackgroundColor(Color.rgb(250,250,250));
             imageView.setLayoutParams(params);
