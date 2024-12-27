@@ -44,7 +44,7 @@ public class View_Create extends View_Main{
     public void 事件() {
         super.事件();
         button_ok.setOnClickListener(V->{
-            String txt_data = edit_url.getText().toString();
+            String txt_data = edit_url.getText().toString().replaceAll("\\s+", "");
             String txt_password = edit_password.getText().toString();
             if(txt_data.isEmpty()){
                 return;

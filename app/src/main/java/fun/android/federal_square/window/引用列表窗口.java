@@ -47,7 +47,7 @@ public class 引用列表窗口 {
             String txt_password = edit_text_password.getText().toString()+"";
 
 
-            txt = txt.replaceAll("\r\n|\r|\n", "");
+            txt = txt.replaceAll("\\s+", "");
             if(!txt.isEmpty()){
                 URL_PassWord_Data urlPassWordData = new URL_PassWord_Data();
                 urlPassWordData.setURL(txt);
@@ -87,10 +87,7 @@ public class 引用列表窗口 {
         button_system.setOnClickListener(V->{
             list.remove(url_passWord_data);
             Fun_文件.写入文件(able.app_path + "YinYong_Data/List.json", able.gson.toJson(list));
-            linear.removeAllViews();
-            for(URL_PassWord_Data urlPassWordData : 获取引用列表()){
-                linear.addView(创建子布局(activity, urlPassWordData, linear, list));
-            }
+            linear.removeView(view);
         });
         return view;
     }
