@@ -52,7 +52,7 @@
             android:layout_height="wrap_content">
             <EditText
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:background="@drawable/edit_back"
                 android:padding="15dp"
                 android:id="@+id/edit_text"
@@ -62,7 +62,7 @@
             <EditText
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:background="@drawable/edit_back"
                 android:padding="15dp"
                 android:id="@+id/edit_text_password"
