@@ -61,7 +61,7 @@ public class 发表文章窗口 {
                 post_data.setText(text_data);
                 TextView textView = new TextView(activity);
                 textView.setBackgroundColor(Color.rgb(250,250,250));
-                textView.setTextSize(18);
+                textView.setTextSize(15);
                 textView.setText(text_data);
                 textView.setTextColor(Color.BLACK);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
