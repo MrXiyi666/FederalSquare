@@ -44,6 +44,14 @@ public class NetWork_Main {
             ImageView return_icon = view.findViewById(R.id.return_icon);
             return_icon.setVisibility(View.GONE);
             text_id.setText("  ✍  ");
+
+            view.setOnClickListener(V->{
+                dialog.dismiss();
+                dialog = null;
+            });
+            if(dialog == null){
+                return;
+            }
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -83,8 +91,6 @@ public class NetWork_Main {
         if(b_dialog){
             able.handler.post(()-> dialog.show());
         }
-
-
         new Thread(()->{
             try {
                 Request request = new Request.Builder()
@@ -95,35 +101,11 @@ public class NetWork_Main {
                 if(!response.isSuccessful()){
                     Log.w(class_name, url + " isSuccessfulnull");
                     Fun.mess(activity, url + "isSuccessfulnull");
-                    if(b_dialog){
-                        new Thread(()->{
-                            try {
-                                Thread.sleep(300);
-                                if(dialog!=null){
-                                    dialog.dismiss();
-                                }
-                            } catch (InterruptedException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        }).start();
-                    }
                     return;
                 }
                 if(response.body() == null){
                     Log.w(class_name, url + "response.body() null");
                     Fun.mess(activity, url + "response.body() null");
-                    if(b_dialog){
-                        new Thread(()->{
-                            try {
-                                Thread.sleep(300);
-                                if(dialog!=null){
-                                    dialog.dismiss();
-                                }
-                            } catch (InterruptedException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        }).start();
-                    }
                     return;
                 }
                 String string=response.body().string();
@@ -131,34 +113,11 @@ public class NetWork_Main {
                 if(string.isEmpty()){
                     Fun.mess(activity, url + "string null");
                     Log.w(class_name, url + "string null");
-                    if(b_dialog){
-                        new Thread(()->{
-                            try {
-                                Thread.sleep(300);
-                                if(dialog!=null){
-                                    dialog.dismiss();
-                                }
-                            } catch (InterruptedException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        }).start();
-                    }
                     return;
                 }
                 if(string.equals("Null_PassWord") | string.equals("Error_PassWord")){
                     Fun.mess(activity, url + "\n" + string);
-                    if(b_dialog){
-                        new Thread(()->{
-                            try {
-                                Thread.sleep(300);
-                                if(dialog!=null){
-                                    dialog.dismiss();
-                                }
-                            } catch (InterruptedException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        }).start();
-                    }
+
                     return;
                 }
 
@@ -217,18 +176,6 @@ public class NetWork_Main {
                     }
                     Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
                 }
-                if(b_dialog){
-                    new Thread(()->{
-                        try {
-                            Thread.sleep(300);
-                            if(dialog!=null){
-                                dialog.dismiss();
-                            }
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }).start();
-                }
                 if(b_update){
                     able.handler.post(()->{
                         刷新();
@@ -238,18 +185,23 @@ public class NetWork_Main {
                     }
                 }
             }catch (Exception e){
-                if(b_dialog){
+               Log.w(class_name, e);
+            }
+            if(b_dialog){
+                able.handler.post(()-> {
                     new Thread(()->{
                         try {
                             Thread.sleep(300);
-                            if(dialog!=null){
-                                dialog.dismiss();
-                            }
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
+                        } catch (Exception ignored) {
+
                         }
+                        if(dialog == null){
+                            return;
+                        }
+                        dialog.dismiss();
+                        dialog = null;
                     }).start();
-                }
+                });
             }
 
         }).start();

@@ -75,12 +75,13 @@ public class NetWork_Main_MultipartBody {
                 return;
             }
         }
-        able.handler.post(()->{
-            dialog.show();
-        });
+
         if(multipartBody == null){
             return;
         }
+        able.handler.post(()->{
+            dialog.show();
+        });
         request = new Request.Builder()
                 .url(url)
                 .post(multipartBody)
@@ -89,29 +90,30 @@ public class NetWork_Main_MultipartBody {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                dialog.dismiss();
+
                 Log.w(class_name, e);
                 Fun.mess(activity, class_name + e);
                 able.handler.post(()->{
+                    dialog.dismiss();
                     失败();
                 });
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                able.handler.post(()->{
+                    dialog.dismiss();
+                });
                 if(response.body() == null){
                     Log.w(class_name, "null");
-                    dialog.dismiss();
                     return;
                 }
                 String string=response.body().string();
                 response.close();
                 if(string.isEmpty()){
-                    dialog.dismiss();
                     return;
                 }
                 事件(string);
-                dialog.dismiss();
                 if(b_update){
                     able.handler.post(()->{
                         刷新();
