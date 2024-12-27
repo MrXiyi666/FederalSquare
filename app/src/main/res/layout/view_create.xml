@@ -46,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <androidx.appcompat.widget.AppCompatButton
+        android:stateListAnimator="@null"
         android:id="@+id/button_ok"
         android:background="@drawable/button_color_selected_selector"
         android:text="确认"

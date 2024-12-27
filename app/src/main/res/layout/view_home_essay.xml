@@ -27,6 +27,7 @@
 
                 </LinearLayout>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:stateListAnimator="@null"
                     android:visibility="gone"
                     android:id="@+id/button_loading"
                     android:text="查看全部"

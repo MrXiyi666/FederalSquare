@@ -25,7 +25,6 @@
             android:layout_height="30dp"/>
     </RelativeLayout>
     <TextView
-        android:alpha="0.5"
         android:layout_below="@id/relati"
         android:id="@+id/xian"
         android:background="#808080"

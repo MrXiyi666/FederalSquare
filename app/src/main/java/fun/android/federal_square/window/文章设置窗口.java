@@ -31,6 +31,8 @@ public class 文章设置窗口 {
         AppCompatButton button_home_essay = view.findViewById(R.id.button_home_essay);
         EditText home_collection_edit = view.findViewById(R.id.home_collection_edit);
         AppCompatButton button_home_collection = view.findViewById(R.id.button_home_collection);
+        EditText time_edit = view.findViewById(R.id.time_edit);
+        AppCompatButton button_time = view.findViewById(R.id.button_time);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
@@ -59,6 +61,13 @@ public class 文章设置窗口 {
             String txt = home_collection_edit.getText().toString();
             if(!txt.isEmpty()){
                 Fun_文件.写入文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt", txt);
+                Fun.mess(activity, "修改为" + txt);
+            }
+        });
+        button_time.setOnClickListener(V->{
+            String txt = time_edit.getText().toString();
+            if(!txt.isEmpty()){
+                Fun_文件.写入文件(able.app_path + "System_Data/Time_index.txt", txt);
                 Fun.mess(activity, "修改为" + txt);
             }
         });

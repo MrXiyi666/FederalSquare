@@ -58,6 +58,7 @@ public class View_Create extends View_Main{
             pager.setVisibility(View.VISIBLE);
             linear_create.setVisibility(View.GONE);
             linear_di.setVisibility(View.VISIBLE);
+            able.view_square.启动刷新();
         });
     }
 

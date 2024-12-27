@@ -1,5 +1,6 @@
 package fun.android.federal_square.view;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,6 +59,10 @@ public class View_Square extends View_Main{
         super.事件();
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         swiperefee.setOnRefreshListener(()->{
+            if(able.view_square.new_icon.getVisibility() == View.VISIBLE){
+                able.view_square.new_icon.setVisibility(View.GONE);
+            }
+
             NetWork_广场刷新 netWork_广场刷新 = new NetWork_广场刷新(activity_main);
             netWork_广场刷新.传递参数(able.URL, able.PassWord);
             netWork_广场刷新.start();
@@ -92,14 +97,25 @@ public class View_Square extends View_Main{
         if(able.URL.isEmpty()){
             return;
         }
+        启动刷新();
+    }
+
+    public void 启动刷新(){
         b_time_update = true;
         if(time_thread == null){
+            int index;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Time_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
+            } else {
+                index = 5000;
+            }
             time_thread = new Thread(()->{
                 NetWork_多少秒获取广场数据 fun_多少秒获取广场数据 = new NetWork_多少秒获取广场数据(activity_main);
                 while (b_time_update){
                     fun_多少秒获取广场数据.start();
                     try {
-                        Thread.sleep(able.square_time_index);
+                        Thread.sleep(index);
                     }catch (Exception e){
                     }
                 }
@@ -109,7 +125,6 @@ public class View_Square extends View_Main{
         }
         time_thread.start();
     }
-
     @Override
     public void onStop() {
         super.onStop();

@@ -40,7 +40,6 @@
     <TextView
         android:layout_below="@id/relati"
         android:id="@id/xian1"
-        android:alpha="0.5"
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>

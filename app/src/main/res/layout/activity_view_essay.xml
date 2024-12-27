@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/top_title"
@@ -30,7 +31,6 @@
     </RelativeLayout>
     <TextView
         android:layout_below="@id/relati"
-        android:alpha="0.2"
         android:id="@+id/xian1"
         android:background="#808080"
         android:layout_width="match_parent"

@@ -51,6 +51,9 @@ public class App extends Application {
         if(!Fun_文件.是否存在(able.app_path + "System_Data/Home_Collection_Essay_index.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt", "10");
         }
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/Time_index.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/Time_index.txt", "5000");
+        }
 
     }
 

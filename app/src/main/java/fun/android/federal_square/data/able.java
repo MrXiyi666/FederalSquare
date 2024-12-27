@@ -19,11 +19,11 @@ import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
 public class able {
+
     public static int pager_id=0;
     public static Handler handler = new Handler();
     public static int 宽度, 高度, 状态栏高度;
     public static String app_path;
-    public static int square_time_index = 5000; //广场五秒钟刷新一次
 
     public static String URL ="";
 
