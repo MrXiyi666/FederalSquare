@@ -7,11 +7,14 @@
         die("no_file");
     }
     if(!is_file($path)){
-       echo 'no_file';  
+        die ("no_file");  
     }
 	
 	$str = file_get_contents($path);
+	if(!$str){
+		die("no_file");
+	}
     if(strlen($str) == 0){
-        echo "no_file";
+        die "no_file";
     }
     echo $str;
