@@ -118,6 +118,7 @@ public class Fun_文章 {
 
         if(!able.URL.equals(url_txt)){
             url_txt_id.setText(url_txt);
+            url_txt_id.setVisibility(View.VISIBLE);
         }
         if(sb.length() >=50){
             sb = sb+"...";
@@ -309,7 +310,7 @@ public class Fun_文章 {
         TextView sign_view = view.findViewById(R.id.sign);
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         List<ImageView> img_list = new ArrayList<>();
-
+        TextView url_txt_id = view.findViewById(R.id.url_txt_id);
         img_list.add(img_view.findViewById(R.id.img0));
         img_list.add(img_view.findViewById(R.id.img1));
         img_list.add(img_view.findViewById(R.id.img2));
@@ -377,6 +378,11 @@ public class Fun_文章 {
                     PassWord_txt = pd.getText();
                     break;
             }
+        }
+
+        if(!able.URL.equals(网址)){
+            url_txt_id.setText(网址);
+            url_txt_id.setVisibility(View.VISIBLE);
         }
         if(sb.length() >=50){
             sb = sb+"...";

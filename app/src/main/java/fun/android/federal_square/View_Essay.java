@@ -105,6 +105,8 @@ public class View_Essay extends AppCompatActivity {
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
+        TextView url_txt_id = view.findViewById(R.id.url_txt_id);
+
         List<ImageView> img_list = new ArrayList<>();
         img_list.add(img_view.findViewById(R.id.img0));
         img_list.add(img_view.findViewById(R.id.img1));
@@ -175,6 +177,7 @@ public class View_Essay extends AppCompatActivity {
                     break;
             }
         }
+
         if(sb.length() >=50){
             sb = sb+"...";
         }

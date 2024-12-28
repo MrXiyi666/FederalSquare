@@ -105,6 +105,7 @@ public class View_Post_Activity extends AppCompatActivity {
         }
         if(!able.URL.equals(url_txt)){
             url_txt_id.setText(url_txt);
+            url_txt_id.setVisibility(View.VISIBLE);
         }
 
         if(!time.isEmpty() && !url_txt.isEmpty()){
