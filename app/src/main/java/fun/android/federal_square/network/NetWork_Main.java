@@ -37,6 +37,10 @@ public class NetWork_Main {
     public NetWork_Main(Activity activity){
         this.activity = activity;
         this.class_name = this.getClass().getSimpleName();
+        初始化等待窗口();
+    }
+
+    private void 初始化等待窗口(){
         able.handler.post(()->{
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
@@ -61,7 +65,6 @@ public class NetWork_Main {
             dialog.getWindow().setGravity(Gravity.TOP);
         });
     }
-
     public void 事件(String string){
 
     }
@@ -89,6 +92,9 @@ public class NetWork_Main {
             return;
         }
         if(b_dialog){
+            if(dialog == null){
+                初始化等待窗口();
+            }
             able.handler.post(()-> dialog.show());
         }
         new Thread(()->{
