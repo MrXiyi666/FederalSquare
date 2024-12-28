@@ -44,7 +44,7 @@
                     android:id="@+id/url_txt_id"
                     android:visibility="gone"
                     android:textSize="15sp"
-                    android:textColor="#80808080"
+                    android:textColor="#f2f3f7"
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
