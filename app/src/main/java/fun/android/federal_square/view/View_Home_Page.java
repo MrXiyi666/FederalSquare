@@ -19,11 +19,11 @@ import fun.android.federal_square.window.选择头像窗口;
 import fun.android.federal_square.window.选择背景窗口;
 
 public class View_Home_Page extends View_Main{
-    public ImageView avatar_img, back_img;
+    public ImageView avatar_img, back_img, jianbian_img;
     private TextView top_title;
     public TextView name_view, sign_view, account_id;
     public LinearLayout linear;
-    private RelativeLayout relati_page;
+    private RelativeLayout top_relati, relati_page;
     private AppCompatButton button_article, button_collection, button_system;
     public View_Home_Page(MainActivity activity) {
         super(activity);
@@ -34,10 +34,12 @@ public class View_Home_Page extends View_Main{
         super.初始化();
         view = View.inflate(activity_main, R.layout.view_home_page, null);
         top_title = view.findViewById(R.id.top_title);
+        top_relati = view.findViewById(R.id.top_relati);
         relati_page = view.findViewById(R.id.relati_page);
         linear = view.findViewById(R.id.linear);
         avatar_img = view.findViewById(R.id.avatar_img);
         back_img = view.findViewById(R.id.back_img);
+        jianbian_img = view.findViewById(R.id.jianbian_img);
         name_view = view.findViewById(R.id.name);
         sign_view = view.findViewById(R.id.sign);
         account_id = view.findViewById(R.id.account_id);
@@ -51,9 +53,6 @@ public class View_Home_Page extends View_Main{
         super.事件();
         top_title.post(()->{
             top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
-            back_img.getLayoutParams().height = relati_page.getHeight();
-            back_img.requestLayout();
-            relati_page.setPadding(20, 0, 20, 0);
         });
         name_view.setText(Fun_账号.GetName() + "");
         sign_view.setText(Fun_账号.GetSign() + "");
@@ -72,8 +71,13 @@ public class View_Home_Page extends View_Main{
                     .into(avatar_img);
         }
         if(!Fun_账号.GetBack_Url().isEmpty()){
-            Glide.with(activity_main).load(Fun_账号.GetBack_Url()).centerCrop().into(back_img);
+            Glide.with(activity_main).load(Fun_账号.GetBack_Url()).into(back_img);
         }
+        top_relati.post(()->{
+            top_relati.getLayoutParams().height = top_relati.getHeight() + able.状态栏高度;
+            top_relati.requestLayout();
+        });
+
         avatar_img.setOnClickListener(V->{
             选择头像窗口.选择头像(activity_main, avatar_img);
         });

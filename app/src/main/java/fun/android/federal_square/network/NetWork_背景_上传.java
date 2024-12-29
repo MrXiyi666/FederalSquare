@@ -51,7 +51,6 @@ public class NetWork_背景_上传 extends NetWork_Main{
         super.刷新();
         Glide.with(activity)
                 .load(back_url)
-                .centerCrop()
                 .into(back_img);
         if(fun_dialog != null){
            fun_dialog.dismiss();
