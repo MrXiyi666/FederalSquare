@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import fun.android.federal_square.R;
+import fun.android.federal_square.View_Collectin;
+import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.View_Post_Activity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -30,10 +32,7 @@ import fun.android.federal_square.window.查看评论窗口;
 
 public class Fun_文章 {
 
-
-    public static View 创建文章(Activity activity, List<Post_Data> post_data){
-        String time_name="";
-
+    public static View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
         View view = View.inflate(activity, R.layout.create_post_layout, null);
         LinearLayout button_message = view.findViewById(R.id.button_message);
         LinearLayout button_collection = view.findViewById(R.id.button_collection);
@@ -48,12 +47,14 @@ public class Fun_文章 {
         img_list.add(img_view.findViewById(R.id.img1));
         img_list.add(img_view.findViewById(R.id.img2));
         LinearLayout linear = view.findViewById(R.id.linear);
+
+        StringBuffer sb = new StringBuffer();
         int img_id=0;
-        String sb = "";
         String url_txt="";
         String PassWord_txt="";
+        String time_txt = "";
         for(Post_Data pd : post_data){
-            switch (pd.getName()){
+            switch(pd.getName()){
                 case "name":
                     name_view.setText(pd.getText());
                     break;
@@ -74,14 +75,14 @@ public class Fun_文章 {
                     if(sb.length() >=50){
                         break;
                     }
-                    if(!sb.isEmpty()){
-                        sb = sb+"\n";
+                    if(!sb.toString().isEmpty()){
+                        sb.append("\n");
                     }
                     for(String s : str){
                         if(sb.length() >= 50){
                             break;
                         }
-                        sb = sb + s;
+                        sb.append(s);
                     }
                     break;
                 case "img":
@@ -102,35 +103,35 @@ public class Fun_文章 {
                     });
                     img_id++;
                     break;
-                case "time":
-                    time_name = pd.getText();
-                    break;
                 case "url":
                     url_txt = pd.getText();
                     break;
                 case "password":
                     PassWord_txt = pd.getText();
                     break;
+                case "time":
+                    time_txt = pd.getText();
+                    break;
             }
         }
-
-
         if(!able.URL.equals(url_txt)){
             url_txt_id.setText(url_txt);
             url_txt_id.setVisibility(View.VISIBLE);
         }
         if(sb.length() >=50){
-            sb = sb+"...";
+            sb.append("...");
         }
-        if(!sb.isEmpty()){
+        if(!sb.toString().isEmpty()){
             TextView textView = new TextView(activity);
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(15);
-            textView.setText(sb);
+            textView.setText(sb.toString());
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
-        linear.addView(img_view);
+        if(img_id > 0){
+            linear.addView(img_view);
+        }
         img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
                 ViewGroup.LayoutParams params = img_view.getLayoutParams();
@@ -138,289 +139,42 @@ public class Fun_文章 {
                 img_view.setLayoutParams(params);
             }
         });
-
-        String finalTime_name = time_name;
+        String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
         button_message.setOnClickListener(V->{
-            查看评论窗口.查看评论窗口(activity, finalTime_name, finalUrl_txt, finalPassWord_txt);
+            查看评论窗口.查看评论窗口(activity, finalTime_txt, finalUrl_txt, finalPassWord_txt);
         });
         button_collection.setOnClickListener(V->{
             NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
-            netWork_添加_收藏.传递参数(finalTime_name, post_data);
+            netWork_添加_收藏.传递参数(finalTime_txt, post_data);
             netWork_添加_收藏.start();
         });
-
         view.setOnClickListener(V->{
             able.传递数据 = post_data;
             Intent intent = new Intent();
             intent.setClass(activity, View_Post_Activity.class);
             activity.startActivity(intent);
         });
-        return view;
-    }
-
-    public static View 创建我的文章(Activity activity, List<Post_Data> post_data, View_Home_Essay view_home_essay){
-        String time_name="";
-
-        View view = View.inflate(activity, R.layout.create_post_layout, null);
-        LinearLayout button_message = view.findViewById(R.id.button_message);
-        LinearLayout button_collection = view.findViewById(R.id.button_collection);
-
-        View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
-        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
-        TextView name_view = view.findViewById(R.id.name);
-        TextView sign_view = view.findViewById(R.id.sign);
-        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
-        List<ImageView> img_list = new ArrayList<>();
-
-        img_list.add(img_view.findViewById(R.id.img0));
-        img_list.add(img_view.findViewById(R.id.img1));
-        img_list.add(img_view.findViewById(R.id.img2));
-        LinearLayout linear = view.findViewById(R.id.linear);
-        int img_id=0;
-        String sb = "";
-        String 网址="";
-        String PassWord_txt="";
-        for(Post_Data pd : post_data){
-            switch (pd.getName()){
-                case "name":
-                    name_view.setText(pd.getText());
-                    break;
-                case "sign":
-                    sign_view.setText(pd.getText());
-                    break;
-                case "avatar":
-                    if(pd.getText().isEmpty()){
-                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
-                    }else{
-                        Glide.with(activity)
-                                .load(pd.getText())
-                                .into(avatar_img);
-                    }
-
-                    break;
-                case "text":
-                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
-                    if(sb.length() >=50){
-                        break;
-                    }
-                    if(!sb.isEmpty()){
-                        sb = sb+"\n";
-                    }
-                    for(String s : str){
-                        if(sb.length() >= 50){
-                            break;
-                        }
-                        sb = sb+s;
-                    }
-                    break;
-                case "img":
-                    if(img_id < 3){
-                        img_linear1.setVisibility(View.VISIBLE);
-                        img_list.get(img_id).setImageBitmap(null);
-
-                        Glide.with(activity)
-                                .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
-                                .into(img_list.get(img_id));
-                        img_list.get(img_id).setOnClickListener(V->{
-                            查看图片窗口.启动(activity, pd.getText());
-                        });
-
-
-                        img_list.get(img_id).setOnClickListener(V->{
-                            查看图片窗口.启动(activity, pd.getText());
-                        });
-                        img_id++;
-                    }
-                    break;
-                case "time":
-                    time_name = pd.getText();
-                    break;
-                case "url":
-                    网址 = pd.getText();
-                    break;
-                case "password":
-                    PassWord_txt = pd.getText();
-                    break;
-            }
-        }
-        if(sb.length() >=50){
-            sb = sb+"...";
-        }
-        if(!sb.isEmpty()){
-            TextView textView = new TextView(activity);
-            textView.setTextColor(Color.BLACK);
-            textView.setTextSize(15);
-            textView.setText(sb);
-            textView.setTextIsSelectable(true);
-            linear.addView(textView);
-        }
-        linear.addView(img_view);
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
-                ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                params.height = Fun.DPToPX(activity, 150);
-                img_view.setLayoutParams(params);
-            }
-        });
-
-        String finalTime_name = time_name;
-        String final网址 = 网址;
-        String finalPassWord_txt = PassWord_txt;
-        button_message.setOnClickListener(V->{
-            查看评论窗口.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
-        });
-
-        String finalTime_name1 = time_name;
-        button_collection.setOnClickListener(V->{
-            NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
-            netWork_添加_收藏.传递参数(finalTime_name1, post_data);
-            netWork_添加_收藏.start();
-        });
-        String finalTime_name2 = time_name;
         view.setOnLongClickListener(V->{
-            删除窗口.删除我的文章窗口(activity, finalTime_name2, view_home_essay);
+            if(index == 1){
+                删除窗口.删除我的文章窗口(activity, finalTime_txt);
+            }
+            if(index == 2){
+                删除窗口.删除收藏窗口(activity, finalTime_txt);
+            }
+            if(index == 3){
+                删除窗口.删除所有文章窗口((View_Essay) activity, finalTime_txt);
+            }
+            if(index == 4){
+                删除窗口.删除所有收藏窗口((View_Collectin) activity, finalTime_txt);
+            }
             return true;
         });
-        view.setOnClickListener(V->{
-            able.传递数据 = post_data;
-            Intent intent = new Intent();
-            intent.setClass(activity, View_Post_Activity.class);
-            activity.startActivity(intent);
-        });
-        return view;
-    }
-
-    public static View 创建收藏文章(Activity activity, List<Post_Data> post_data, View_Home_Collection view_HomeCollection){
-        String time_name="";
-
-        View view = View.inflate(activity, R.layout.create_post_layout, null);
-        LinearLayout button_message = view.findViewById(R.id.button_message);
-        LinearLayout button_collection = view.findViewById(R.id.button_collection);
-
-        View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
-        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
-        TextView name_view = view.findViewById(R.id.name);
-        TextView sign_view = view.findViewById(R.id.sign);
-        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
-        List<ImageView> img_list = new ArrayList<>();
-        TextView url_txt_id = view.findViewById(R.id.url_txt_id);
-        img_list.add(img_view.findViewById(R.id.img0));
-        img_list.add(img_view.findViewById(R.id.img1));
-        img_list.add(img_view.findViewById(R.id.img2));
-        LinearLayout linear = view.findViewById(R.id.linear);
-        int img_id=0;
-        String sb = "";
-        String 网址="";
-        String PassWord_txt="";
-        for(Post_Data pd : post_data){
-            switch (pd.getName()){
-                case "name":
-                    name_view.setText(pd.getText());
-                    break;
-                case "sign":
-                    sign_view.setText(pd.getText());
-                    break;
-                case "avatar":
-                    if(pd.getText().isEmpty()){
-                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
-                    }else{
-                        Glide.with(activity)
-                                .load(pd.getText())
-                                .into(avatar_img);
-                    }
-                    break;
-                case "text":
-                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
-                    if(sb.length() >=50){
-                        break;
-                    }
-                    if(!sb.isEmpty()){
-                        sb = sb+"\n";
-                    }
-                    for(String s : str){
-                        if(sb.length() >= 50){
-                            break;
-                        }
-                        sb = sb+s;
-                    }
-                    break;
-                case "img":
-                    if(img_id < 3){
-                        img_linear1.setVisibility(View.VISIBLE);
-                        img_list.get(img_id).setImageBitmap(null);
-                        Glide.with(activity)
-                                .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
-                                .into(img_list.get(img_id));
-                        img_list.get(img_id).setOnClickListener(V->{
-                            查看图片窗口.启动(activity, pd.getText());
-                        });
-                        img_id++;
-                    }
-                    break;
-                case "time":
-                    time_name = pd.getText();
-                    break;
-                case "url":
-                    网址 = pd.getText();
-                    break;
-                case "password":
-                    PassWord_txt = pd.getText();
-                    break;
-            }
+        if(index==2){
+            button_collection.setVisibility(View.GONE);
         }
 
-        if(!able.URL.equals(网址)){
-            url_txt_id.setText(网址);
-            url_txt_id.setVisibility(View.VISIBLE);
-        }
-        if(sb.length() >=50){
-            sb = sb+"...";
-        }
-        if(!sb.isEmpty()){
-            TextView textView = new TextView(activity);
-            textView.setTextColor(Color.BLACK);
-            textView.setTextSize(15);
-            textView.setText(sb);
-            textView.setTextIsSelectable(true);
-            linear.addView(textView);
-        }
-        linear.addView(img_view);
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
-                ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                params.height = Fun.DPToPX(activity, 150);
-                img_view.setLayoutParams(params);
-            }
-        });
-        String finalTime_name = time_name;
-        String final网址 = 网址;
-        String finalPassWord_txt = PassWord_txt;
-        button_message.setOnClickListener(V->{
-            查看评论窗口.查看评论窗口(activity, finalTime_name, final网址, finalPassWord_txt);
-        });
-
-        button_collection.setVisibility(View.GONE);
-        String finalTime_name2 = time_name;
-        view.setOnLongClickListener(V->{
-            删除窗口.删除收藏窗口(activity, finalTime_name2, view_HomeCollection);
-            return true;
-        });
-        view.setOnClickListener(V->{
-            able.传递数据 = post_data;
-            Intent intent = new Intent();
-            intent.setClass(activity, View_Post_Activity.class);
-            activity.startActivity(intent);
-        });
         return view;
     }
 

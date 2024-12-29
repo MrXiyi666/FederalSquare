@@ -63,15 +63,15 @@ public class View_Collectin extends AppCompatActivity {
     }
 
     public void 初始化数据(){
-        List<String> list = Fun_文章.获取收藏集合();
-        linear.post(()->{
-            linear.removeAllViews();
-        });
-        for(int i=0;i<list.size();i++){
-            try {
+        new Thread(()->{
+            List<String> list = Fun_文章.获取收藏集合();
+            able.handler.post(()->{
+                linear.removeAllViews();
+            });
+            for(int i=0;i<list.size();i++){
                 String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-                if(str.isEmpty()){
-                    Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
                 List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
@@ -79,144 +79,11 @@ public class View_Collectin extends AppCompatActivity {
                     Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
                     continue;
                 }
-                linear.post(()->{
-                   linear.addView(创建收藏贴子(post_data));
+                able.handler.post(()->{
+                    linear.addView(Fun_文章.Create_Post_View(this, post_data, 4));
                 });
-            }catch (Exception e){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
             }
-        }
-
-    }
-
-    public View 创建收藏贴子(List<Post_Data> post_data){
-        String time_name="";
-
-        View view = View.inflate(this, R.layout.create_post_layout, null);
-        LinearLayout button_message = view.findViewById(R.id.button_message);
-        LinearLayout button_collection = view.findViewById(R.id.button_collection);
-
-        View img_view = View.inflate(this, R.layout.create_post_img_layout, null);
-        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
-        TextView name_view = view.findViewById(R.id.name);
-        TextView sign_view = view.findViewById(R.id.sign);
-        RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
-        List<ImageView> img_list = new ArrayList<>();
-        TextView url_txt_id = view.findViewById(R.id.url_txt_id);
-        img_list.add(img_view.findViewById(R.id.img0));
-        img_list.add(img_view.findViewById(R.id.img1));
-        img_list.add(img_view.findViewById(R.id.img2));
-        LinearLayout linear = view.findViewById(R.id.linear);
-        int img_id=0;
-        String sb = "";
-        String 网址="";
-        String PassWord_txt="";
-        for(Post_Data pd : post_data){
-            switch (pd.getName()){
-                case "name":
-                    name_view.setText(pd.getText());
-                    break;
-                case "sign":
-                    sign_view.setText(pd.getText());
-                    break;
-                case "avatar":
-                    if(pd.getText().isEmpty()){
-                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
-                    }else{
-                        Glide.with(this)
-                                .load(pd.getText())
-                                .into(avatar_img);
-                    }
-                    break;
-                case "text":
-                    String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
-                    if(sb.length() >=50){
-                        break;
-                    }
-                    if(!sb.isEmpty()){
-                        sb = sb+"\n";
-                    }
-                    for(String s : str){
-                        if(sb.length() >= 50){
-                            break;
-                        }
-                        sb = sb+s;
-                    }
-                    break;
-                case "img":
-                    if(img_id < 3){
-                        img_linear1.setVisibility(View.VISIBLE);
-                        img_list.get(img_id).setImageBitmap(null);
-                        Glide.with(this)
-                                .load(pd.getText())
-                                .apply(new RequestOptions()
-                                        .error(R.drawable.glide_shibai)
-                                        .fallback(R.drawable.glide_duqushibai))
-                                .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
-                                .into(img_list.get(img_id));
-                        img_list.get(img_id).setOnClickListener(V->{
-                            查看图片窗口.启动(this, pd.getText());
-                        });
-                        img_id++;
-                    }
-                    break;
-                case "time":
-                    time_name = pd.getText();
-                    break;
-                case "url":
-                    网址 = pd.getText();
-                    break;
-                case "password":
-                    PassWord_txt = pd.getText();
-                    break;
-            }
-        }
-        if(!able.URL.equals(网址)){
-            url_txt_id.setText(网址);
-            url_txt_id.setVisibility(View.VISIBLE);
-        }
-        if(sb.length() >=50){
-            sb = sb+"...";
-        }
-        if(!sb.isEmpty()){
-            TextView textView = new TextView(this);
-            textView.setTextColor(Color.BLACK);
-            textView.setTextSize(15);
-            textView.setText(sb);
-            textView.setTextIsSelectable(true);
-            linear.addView(textView);
-        }
-        linear.addView(img_view);
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if(img_view.getHeight() > Fun.DPToPX(View_Collectin.this, 150)){
-                    ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                    params.height = Fun.DPToPX(View_Collectin.this, 150);
-                    img_view.setLayoutParams(params);
-                }
-            }
-        });
-        String finalTime_name = time_name;
-        String final网址 = 网址;
-        String finalPassWord_txt = PassWord_txt;
-        button_message.setOnClickListener(V->{
-            查看评论窗口.查看评论窗口(this, finalTime_name, final网址, finalPassWord_txt);
-        });
-
-        button_collection.setVisibility(View.GONE);
-        String finalTime_name2 = time_name;
-        view.setOnLongClickListener(V->{
-            删除窗口.删除所有收藏窗口(this, finalTime_name2);
-            return true;
-        });
-        view.setOnClickListener(V->{
-            able.传递数据 = post_data;
-            Intent intent = new Intent();
-            intent.setClass(this, View_Post_Activity.class);
-            this.startActivity(intent);
-        });
-        return view;
+        }).start();
     }
 
     @Override

@@ -9,13 +9,11 @@ import okhttp3.FormBody;
 
 public class NetWork_我的_收藏_删除 extends NetWork_Main{
     private String time;
-    private View_Home_Collection view_HomeCollection;
     public NetWork_我的_收藏_删除(Activity activity ) {
         super(activity);
     }
 
-    public void 传递参数(String account_id, String time, View_Home_Collection view_HomeCollection){
-        this.view_HomeCollection = view_HomeCollection;
+    public void 传递参数(String account_id, String time){
         this.time = time;
         formBody = new FormBody.Builder()
                 .add("PassWord", able.PassWord)
@@ -45,7 +43,7 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
     @Override
     public void 刷新() {
         super.刷新();
-        view_HomeCollection.初始化收藏();
+        able.view_home.view_home_page.view_home_collection.初始化收藏();
     }
 
 

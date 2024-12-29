@@ -25,6 +25,9 @@ public class View_Home_Page extends View_Main{
     public LinearLayout linear;
     private RelativeLayout top_relati, relati_page;
     private AppCompatButton button_article, button_collection, button_system;
+
+    public View_Home_Essay view_home_essay;
+    public View_Home_Collection view_home_collection;
     public View_Home_Page(MainActivity activity) {
         super(activity);
     }
@@ -46,6 +49,7 @@ public class View_Home_Page extends View_Main{
         button_article = view.findViewById(R.id.button_article);
         button_collection = view.findViewById(R.id.button_collection);
         button_system = view.findViewById(R.id.button_system);
+        view_home_essay = new View_Home_Essay(activity_main);
     }
 
     @Override
@@ -84,13 +88,15 @@ public class View_Home_Page extends View_Main{
         back_img.setOnClickListener(V->{
             选择背景窗口.启动(activity_main, this);
         });
-        linear.addView(new View_Home_Essay(activity_main).getView());
+
+        linear.addView(view_home_essay.getView());
         button_article.setTextColor(Color.rgb(0,0,0));
         button_collection.setTextColor(Color.rgb(128,128,128));
         button_system.setTextColor(Color.rgb(128,128,128));
         button_article.setOnClickListener(V->{
             linear.removeAllViews();
-            linear.addView(new View_Home_Essay(activity_main).getView());
+            view_home_essay = new View_Home_Essay(activity_main);
+            linear.addView(view_home_essay.getView());
             button_article.setTextColor(Color.rgb(0,0,0));
             button_collection.setTextColor(Color.rgb(128,128,128));
             button_system.setTextColor(Color.rgb(128,128,128));
@@ -98,7 +104,8 @@ public class View_Home_Page extends View_Main{
 
         button_collection.setOnClickListener(V->{
             linear.removeAllViews();
-            linear.addView(new View_Home_Collection(activity_main).getView());
+            view_home_collection = new View_Home_Collection(activity_main);
+            linear.addView(view_home_collection.getView());
             button_article.setTextColor(Color.rgb(128,128,128));
             button_collection.setTextColor(Color.rgb(0,0,0));
             button_system.setTextColor(Color.rgb(128,128,128));

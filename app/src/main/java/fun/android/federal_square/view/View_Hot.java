@@ -1,10 +1,14 @@
 package fun.android.federal_square.view;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -19,6 +23,8 @@ public class View_Hot extends View_Main{
     private TextView top_title;
     private SwipeRefreshLayout swiperefee;
     public LinearLayout linear;
+    private ScrollView scrollView;
+
     public View_Hot(MainActivity activity) {
         super(activity);
 
@@ -30,6 +36,7 @@ public class View_Hot extends View_Main{
         view = View.inflate(activity_main, R.layout.view_hot, null);
         top_title = view.findViewById(R.id.top_title);
         swiperefee = view.findViewById(R.id.swiperefee);
+        scrollView = view.findViewById(R.id.scrollView);
         linear = view.findViewById(R.id.linear);
         初始化数据();
     }
@@ -58,33 +65,39 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        List<String> filename = Fun_文章.获取热门集合();
-        linear.post(()->{
-            linear.removeAllViews();
-        });
-        if(filename == null){
-            return;
-        }
-        int index=50;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }
-        for(int i=0;i<index;i++){
-            if(i >= filename.size()){
+        new Thread(()->{
+            List<String> filename = Fun_文章.获取热门集合();
+            able.handler.post(()->{
+                linear.removeAllViews();
+            });
+            if(filename == null){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-                continue;
+            int index=50;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
             }
-            linear.post(()->{
-                linear.addView(Fun_文章.创建文章(activity_main,able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType())));
+            for(int i=0;i<index;i++){
+                if(i >= filename.size()){
+                    return;
+                }
+                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
+                able.handler.post(()->{
+                    linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 0));
+                });
+            }
+            able.handler.post(()->{
+                scrollView.scrollTo(0, 0);
             });
-        }
-
-
-
+        }).start();
     }
 }

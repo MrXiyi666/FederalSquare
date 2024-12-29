@@ -2,16 +2,15 @@ package fun.android.federal_square.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.google.gson.reflect.TypeToken;
-
 import java.util.List;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.View_Essay;
@@ -26,6 +25,8 @@ public class View_Home_Essay extends View_Main{
     public LinearLayout linear;
     private SwipeRefreshLayout swiperefee;
     private AppCompatButton button_loading;
+    private ScrollView scrollView;
+
     public View_Home_Essay(Activity activity){
         super((MainActivity) activity);
     }
@@ -36,6 +37,7 @@ public class View_Home_Essay extends View_Main{
         view = View.inflate(activity_main, R.layout.view_home_essay, null);
         linear = view.findViewById(R.id.linear);
         swiperefee = view.findViewById(R.id.swiperefee);
+        scrollView = view.findViewById(R.id.scrollView);
         button_loading = view.findViewById(R.id.button_loading);
         初始化数据();
     }
@@ -46,7 +48,6 @@ public class View_Home_Essay extends View_Main{
 
         swiperefee.setOnRefreshListener(()->{
             NetWork_我的_文章_刷新 netWork_我的_文章刷新 = new NetWork_我的_文章_刷新(activity_main);
-            netWork_我的_文章刷新.传递参数(View_Home_Essay.this);
             netWork_我的_文章刷新.start();
             swiperefee.setRefreshing(false);
         });
@@ -72,33 +73,41 @@ public class View_Home_Essay extends View_Main{
     }
 
     public void 初始化数据(){
-        List<String> list = Fun_文章.获取我的文章集合();
-        linear.post(()->{
-            linear.removeAllViews();button_loading.setVisibility(View.VISIBLE);
-        });
-        int index=50;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }
-        for(int i=0;i<index;i++){
-            if(i >= list.size()){
-                return;
-            }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                continue;
-            }
-            linear.post(()->{
-                linear.addView(Fun_文章.创建我的文章(activity_main, able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType()), View_Home_Essay.this));
+        new Thread(()->{
+            List<String> list = Fun_文章.获取我的文章集合();
+            able.handler.post(()->{
+                linear.removeAllViews();button_loading.setVisibility(View.VISIBLE);
             });
-        }
-        linear.post(()->{
-            if(list.size() > linear.getChildCount()){
-                button_loading.setVisibility(View.VISIBLE);
+            int index=50;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
             }
-        });
-
+            for(int i=0;i<index;i++){
+                if(i >= list.size()){
+                    return;
+                }
+                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
+                able.handler.post(()->{
+                    linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 1));
+                });
+            }
+            able.handler.post(()->{
+                if(list.size() > linear.getChildCount()){
+                    button_loading.setVisibility(View.VISIBLE);
+                }
+            });
+            able.handler.post(()->{
+                scrollView.scrollTo(0, 0);
+            });
+        }).start();
     }
 }

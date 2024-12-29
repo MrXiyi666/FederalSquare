@@ -12,6 +12,7 @@ import fun.android.federal_square.fun.Fun_文件;
 
 public class View_Home extends View_Main{
     public LinearLayout linear_main;
+    public View_Home_Page view_home_page;
     public View_Home(MainActivity activity) {
         super(activity);
 
@@ -22,6 +23,7 @@ public class View_Home extends View_Main{
         super.初始化();
         view = View.inflate(activity_main, R.layout.view_home, null);
         linear_main = view.findViewById(R.id.linear_main);
+        view_home_page = new View_Home_Page(activity_main);
     }
 
     @Override
@@ -32,7 +34,8 @@ public class View_Home extends View_Main{
             linear_main.addView(new View_Login(activity_main).getView());
         }else{
             linear_main.removeAllViews();
-            linear_main.addView(new View_Home_Page(activity_main).getView());
+
+            linear_main.addView(view_home_page.getView());
         }
 
 

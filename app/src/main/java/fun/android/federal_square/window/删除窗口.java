@@ -57,7 +57,7 @@ public class 删除窗口 {
         dialog.show();
     }
 
-    public static void 删除收藏窗口(Activity activity, String time, View_Home_Collection view_我的_收藏){
+    public static void 删除收藏窗口(Activity activity, String time){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_delete_file, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
@@ -70,7 +70,7 @@ public class 删除窗口 {
 
         button_ok.setOnClickListener(V->{
             NetWork_我的_收藏_删除 netWork_我的_收藏_删除 = new NetWork_我的_收藏_删除(activity);
-            netWork_我的_收藏_删除.传递参数(Fun_账号.GetID(), time, view_我的_收藏);
+            netWork_我的_收藏_删除.传递参数(Fun_账号.GetID(), time);
             netWork_我的_收藏_删除.start();
             dialog.dismiss();
         });
@@ -121,7 +121,7 @@ public class 删除窗口 {
         dialog.show();
     }
 
-    public static void 删除我的文章窗口(Activity activity, String time, View_Home_Essay view_HomeArticle){
+    public static void 删除我的文章窗口(Activity activity, String time){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_delete_file, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
@@ -134,7 +134,7 @@ public class 删除窗口 {
 
         button_ok.setOnClickListener(V->{
             NetWork_我的_文章_删除 netWork_我的_文章_删除 = new NetWork_我的_文章_删除(activity);
-            netWork_我的_文章_删除.传递参数(Fun_账号.GetID(), time, view_HomeArticle);
+            netWork_我的_文章_删除.传递参数(Fun_账号.GetID(), time);
             netWork_我的_文章_删除.start();
             dialog.dismiss();
         });

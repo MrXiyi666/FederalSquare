@@ -1,6 +1,5 @@
 package fun.android.federal_square.view;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,6 +8,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -141,31 +142,37 @@ public class View_Square extends View_Main{
     }
 
     public void 初始化本地数据(){
-        List<String> list = Fun_文章.获取广场集合();
-        able.handler.post(()->{
-            linear.removeAllViews();
-        });
-        int index=50;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }
-        for(int i=0;i<index;i++){
-            if(i >= list.size()){
-                return;
-            }
-            String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-            if(!Fun.StrBoolJSON(txt)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                continue;
-            }
-            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+        new Thread(()->{
             able.handler.post(()->{
-                linear.addView(Fun_文章.创建文章(activity_main, post_data));
+                linear.removeAllViews();
             });
-        }
-        able.handler.post(()->{
-            scrollView.scrollTo(0, 0);
-        });
+            List<String> list = Fun_文章.获取广场集合();
+            int index=50;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
+            }
+            for(int i=0;i<index;i++){
+                if(i >= list.size()){
+                    return;
+                }
+                String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+                if(!Fun.StrBoolJSON(txt)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+                if(post_data == null){
+                    continue;
+                }
+                able.handler.post(()->{
+                    linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 0));
+                });
+
+            }
+            able.handler.post(()->{
+                scrollView.scrollTo(0, 0);
+            });
+        }).start();
     }
 }

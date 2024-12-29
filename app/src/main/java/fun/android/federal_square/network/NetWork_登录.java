@@ -61,7 +61,7 @@ public class NetWork_登录 extends NetWork_Main {
     public void 刷新() {
         super.刷新();
         able.view_home.linear_main.removeAllViews();
-        able.view_home.linear_main.addView(new View_Home_Page((MainActivity) activity).getView());
+        able.view_home.linear_main.addView(able.view_home.view_home_page.getView());
     }
 
 }
