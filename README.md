@@ -136,11 +136,11 @@
 #
 #
 #
-v5.5.8更新信息<br>
-修复了评论刷新 BUG<br>
+v5.5.9更新信息<br>
+修复了BUG BUG<br>
 
 PHP Read_Txt.php 更新<br>
-优化了逻辑
+没加括号 改过来了
 PassWord_Data.php 更新<br>
 优化了逻辑
 #
