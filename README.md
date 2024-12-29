@@ -203,5 +203,5 @@ PassWord_Data.php 更新<br>
 # 感谢赞助
 如果您喜欢这个项目 那么你可以少许赞助 我会更有动力 谢谢 我喜欢人民币
 #
-![赞助二维码](https://github.com/MrXiyi666/FederalSquare/blob/main/1735449596605.jpg "赞助二维码")
+![赞助二维码](https://github.com/MrXiyi666/FederalSquare/blob/main/zanzhu.jpg "赞助二维码")
 
