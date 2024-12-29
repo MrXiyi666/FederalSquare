@@ -15,6 +15,6 @@
 		die("no_file");
 	}
     if(strlen($str) == 0){
-        die "no_file";
+        die ("no_file");
     }
     echo $str;
