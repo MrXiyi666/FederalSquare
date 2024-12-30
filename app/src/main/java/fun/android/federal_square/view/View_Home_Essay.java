@@ -90,17 +90,12 @@ public class View_Home_Essay extends View_Main{
                     return;
                 }
                 String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+                List<Post_Data> post_data;
                 if(!Fun.StrBoolJSON(str)){
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                List<Post_Data> post_data;
-                try {
-                    post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                }catch (JsonSyntaxException e){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
+                post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
                     linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 1));
                 });

@@ -68,11 +68,11 @@ public class View_Hot extends View_Main{
     }
     public void 初始化数据(){
         new Thread(()->{
-            List<String> filename = Fun_文章.获取热门集合();
+            List<String> list = Fun_文章.获取热门集合();
             able.handler.post(()->{
                 linear.removeAllViews();
             });
-            if(filename == null){
+            if(list == null){
                 return;
             }
             int index=50;
@@ -81,21 +81,16 @@ public class View_Hot extends View_Main{
                 index = Integer.parseInt(sindex);
             }
             for(int i=0;i<index;i++){
-                if(i >= filename.size()){
+                if(i >= list.size()){
                     return;
                 }
-                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-                if(!Fun.StrBoolJSON(str)){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
-                    continue;
-                }
+                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
                 List<Post_Data> post_data;
-                try {
-                    post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                }catch (JsonSyntaxException e){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
                     continue;
                 }
+                post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
                     linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 0));
                 });

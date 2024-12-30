@@ -169,18 +169,12 @@ public class View_Square extends View_Main{
                     return;
                 }
                 String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+                List<Post_Data> post_data;
                 if(!Fun.StrBoolJSON(txt)){
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                List<Post_Data> post_data;
-                try {
-                    post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-                }catch (JsonSyntaxException e){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-
+                post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
                 String xu_url="";
                 for(Post_Data pd : post_data){
                     if(pd.getName().equals("url")){

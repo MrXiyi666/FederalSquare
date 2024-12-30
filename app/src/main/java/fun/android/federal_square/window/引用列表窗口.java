@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 
 public class 引用列表窗口 {
@@ -66,7 +68,11 @@ public class 引用列表窗口 {
         dialog.show();
     }
     public static List<URL_PassWord_Data> 获取引用列表(){
-        List<URL_PassWord_Data> list = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "YinYong_Data/List.json"), new TypeToken<>() {});
+        String str = Fun_文件.读取文件(able.app_path + "YinYong_Data/List.json");
+        if(!Fun.StrBoolJSON(str)){
+            return new ArrayList<>();
+        }
+        List<URL_PassWord_Data> list = able.gson.fromJson(str, new TypeToken<List<URL_PassWord_Data>>() {});
         if(list == null){
             Fun_文件.写入文件(able.app_path + "YinYong_Data/List.json", able.gson.toJson(new ArrayList<>()));
             return new ArrayList<>();

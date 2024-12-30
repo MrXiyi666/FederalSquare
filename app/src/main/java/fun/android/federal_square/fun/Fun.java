@@ -11,25 +11,20 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.documentfile.provider.DocumentFile;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.TypeAdapter;
-
-import java.io.IOException;
+import com.google.gson.reflect.TypeToken;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.Post_Data;
+import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
 
 public class Fun {
@@ -152,14 +147,28 @@ public class Fun {
         return (int)(dp * density);
     }
 
-    public static boolean StrBoolJSON(String json){
-        TypeAdapter<JsonElement> strictAdapter=new Gson().getAdapter(JsonElement.class);
-        try {
-            strictAdapter.fromJson(json);
-        }catch (JsonSyntaxException | IOException e){
+    public static boolean StrBoolJSON(String str){
+        if(str == null){
             return false;
         }
-        return true;
-    }
+        if(str.isEmpty()){
+            return false;
+        }
+        boolean for_bool = false;
+        try {
+            List<Post_Data> pd = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            for_bool = true;
+        }catch (JsonSyntaxException ignored){
 
+        }
+        if(!for_bool){
+            try {
+                List<URL_PassWord_Data> pd = able.gson.fromJson(str, new TypeToken<List<URL_PassWord_Data>>(){}.getType());
+                for_bool = true;
+            }catch (JsonSyntaxException ignored){
+            }
+        }
+
+        return for_bool;
+    }
 }
