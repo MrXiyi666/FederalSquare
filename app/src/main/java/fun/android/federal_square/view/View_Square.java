@@ -104,27 +104,28 @@ public class View_Square extends View_Main{
 
     public void 启动刷新(){
         b_time_update = true;
-        if(time_thread == null){
-            int index;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Time_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
-            } else {
-                index = 5000;
-            }
-            time_thread = new Thread(()->{
-                NetWork_多少秒获取广场数据 fun_多少秒获取广场数据 = new NetWork_多少秒获取广场数据(activity_main);
-                while (b_time_update){
-                    fun_多少秒获取广场数据.start();
-                    try {
-                        Thread.sleep(index);
-                    }catch (Exception e){
-                    }
-                }
-
-            });
-
+        if(time_thread != null){
+            time_thread.interrupt();
+            time_thread = null;
         }
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Time_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        } else {
+            index = 5000;
+        }
+        time_thread = new Thread(()->{
+            NetWork_多少秒获取广场数据 fun_多少秒获取广场数据 = new NetWork_多少秒获取广场数据(activity_main);
+            while (b_time_update){
+                fun_多少秒获取广场数据.start();
+                try {
+                    Thread.sleep(index);
+                }catch (Exception e){
+                }
+            }
+
+        });
         time_thread.start();
     }
     @Override

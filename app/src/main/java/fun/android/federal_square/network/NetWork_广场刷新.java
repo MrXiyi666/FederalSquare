@@ -59,9 +59,14 @@ public class NetWork_广场刷新 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        if(able.view_square.new_icon.getVisibility() == View.VISIBLE){
-            able.view_square.new_icon.setVisibility(View.GONE);
+        if(able.view_square.new_icon!=null){
+            if(able.view_square.new_icon.getVisibility() == View.VISIBLE){
+                able.view_square.new_icon.setVisibility(View.GONE);
+            }
         }
-        able.view_square.初始化本地数据();
+
+        if(able.view_square!=null){
+            able.view_square.初始化本地数据();
+        }
     }
 }

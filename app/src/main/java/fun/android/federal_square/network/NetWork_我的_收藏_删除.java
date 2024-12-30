@@ -43,7 +43,8 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_home.view_home_page.view_home_collection.初始化收藏();
+        if(able.view_home.view_home_page.view_home_collection!=null){
+        }
     }
 
 

@@ -26,10 +26,10 @@ import fun.android.federal_square.view.View_Square;
 public class MainActivity extends AppCompatActivity {
     private ViewPager pager;
     private final List<View> pager_view = new ArrayList<>();
-    private Main_Pager_Adapter adapter;
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
     private LinearLayout linear_create, button_menu;
+    private View_Create view_create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +59,12 @@ public class MainActivity extends AppCompatActivity {
         img_square = findViewById(R.id.img_square);
         img_hot = findViewById(R.id.img_hot);
         img_home = findViewById(R.id.img_home);
-        able.view_square = new View_Square(this);
-        able.view_hot = new View_Hot(this);
-        able.view_home = new View_Home(this);
-        pager_view.add(able.view_square.getView());
-        pager_view.add(able.view_hot.getView());
-        pager_view.add(able.view_home.getView());
-        adapter = new Main_Pager_Adapter(pager_view);
+        view_create = new View_Create(this);
+        view_create.传递参数(pager, pager_view, linear_create, button_menu);
     }
 
     public void 事件(){
-
-
-        View_Create view_create = new View_Create(this);
-        view_create.传递参数(pager, linear_create, button_menu);
         linear_create.addView(view_create.getView());
-
-        pager.setAdapter(adapter);
-        pager.setCurrentItem(0);
         able.pager_id = 0;
         img_square.setImageResource(R.drawable.square_checked_true_icon);
         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
@@ -153,21 +141,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        able.view_square.onStart();
+        if(able.view_square!=null){
+            able.view_square.onStart();
+        }
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        able.view_square.onStop();
+        if(able.view_square != null){
+            able.view_square.onStop();
+        }
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        able.view_square.释放();
-        able.view_hot.释放();
-        able.view_home.释放();
+        if(able.view_square!=null){
+            able.view_square.释放();
+        }
+        if(able.view_hot!=null){
+            able.view_hot.释放();
+        }
+        if( able.view_home != null){
+            able.view_home.释放();
+        }
+
         Glide.get(this).clearMemory();
     }
 

@@ -22,7 +22,10 @@ public class NetWork_读取热门 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_hot.初始化数据();
+        if(able.view_hot!=null){
+            able.view_hot.初始化数据();
+        }
+
     }
 
     @Override
