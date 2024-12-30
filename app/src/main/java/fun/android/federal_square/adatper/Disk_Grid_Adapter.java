@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import java.util.List;
-
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_账号;
@@ -61,7 +59,6 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         Glide.with(activity)
                 .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
                 .apply(requestOptions)
-                .transition(DrawableTransitionOptions.with(factory))
                 .into(gui.img);
             return convertView;
     }

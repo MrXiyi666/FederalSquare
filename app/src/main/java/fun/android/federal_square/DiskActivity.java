@@ -120,7 +120,7 @@ public class DiskActivity extends AppCompatActivity {
     public void 初始化数据(){
         this.button_network_disk.setEnabled(true);
         List<String> file_list = Fun_图片.遍历所有图片不带域名();
-        title_index.setText(String.valueOf(file_list.size()));
+        title_index.setText("统计数量： " + file_list.size());
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             查看图片窗口.启动(DiskActivity.this, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));

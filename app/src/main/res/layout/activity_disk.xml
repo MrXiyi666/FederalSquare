@@ -10,32 +10,13 @@
         android:id="@+id/relati"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginStart="10dp"
-            android:stateListAnimator="@null"
-            android:id="@+id/button_network_disk"
-            android:textColor="@color/black"
-            android:background="@drawable/button_color_selected_selector"
-            android:layout_centerVertical="true"
-            android:text="上传图片"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"/>
         <TextView
             android:id="@+id/title_txt"
             android:textColor="@color/black"
             android:layout_centerInParent="true"
-            android:text="网盘资源 →"
+            android:text="网盘资源"
             android:textSize="18sp"
             android:gravity="bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_toEndOf="@id/title_txt"
-            android:id="@+id/title_index"
-            android:textSize="18sp"
-            android:gravity="bottom"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
@@ -53,8 +34,35 @@
         android:background="#808080"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <LinearLayout
+        android:padding="10dp"
         android:layout_below="@id/xian1"
+        android:id="@+id/linear_menu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:id="@+id/button_network_disk"
+            android:textColor="@color/black"
+            android:background="@drawable/button_color_selected_selector"
+            android:text="上传图片"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:id="@+id/title_index"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_below="@id/linear_menu"
         android:id="@+id/swiperefee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,7 +75,6 @@
             android:numColumns="3"
             android:horizontalSpacing="10dp"
             android:verticalSpacing="10dp"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
