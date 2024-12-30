@@ -7,8 +7,6 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_marginTop="5dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -34,8 +32,6 @@
     </RelativeLayout>
     <TextView
         android:textIsSelectable="true"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:background="#ffffff"
         android:gravity="start"
         android:id="@+id/text"

@@ -75,6 +75,8 @@
                 android:background="#ffffff"
                 android:orientation="vertical"
                 android:id="@+id/linear"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
