@@ -156,11 +156,13 @@ public class View_Square extends View_Main{
             if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
                 able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
             }
-            for(int i=0;i<index;i++){
+
+            int exxay_index=0;
+            for(int i=0;i<list.size();i++){
                 if(able.URL.isEmpty()){
                     return;
                 }
-                if(i >= list.size()){
+                if(exxay_index >= index){
                     return;
                 }
                 String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
@@ -187,9 +189,12 @@ public class View_Square extends View_Main{
                 if(able.URL.equals(xu_url)){
                     for_bool = true;
                 }
-                for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
-                    if(url_passWord_data.getURL().equals(xu_url)){
-                        for_bool = true;
+                if(!for_bool){
+                    for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
+                        if (url_passWord_data.getURL().equals(xu_url)) {
+                            for_bool = true;
+                            break;
+                        }
                     }
                 }
                 if(!for_bool){
@@ -198,7 +203,7 @@ public class View_Square extends View_Main{
                 able.handler.post(()->{
                     linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 0));
                 });
-
+                exxay_index++;
             }
             able.handler.post(()->{
                 scrollView.scrollTo(0, 0);
