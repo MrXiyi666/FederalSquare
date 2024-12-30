@@ -1,5 +1,6 @@
 package fun.android.federal_square.view;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -152,7 +153,13 @@ public class View_Square extends View_Main{
             if(!sindex.isEmpty()){
                 index = Integer.parseInt(sindex);
             }
+            if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
+                able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
+            }
             for(int i=0;i<index;i++){
+                if(able.URL.isEmpty()){
+                    return;
+                }
                 if(i >= list.size()){
                     return;
                 }
@@ -163,6 +170,29 @@ public class View_Square extends View_Main{
                 }
                 List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
                 if(post_data == null){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                    continue;
+                }
+                String xu_url="";
+                for(Post_Data pd : post_data){
+                    if(pd.getName().equals("url")){
+                        xu_url = pd.getText();
+                    }
+                }
+                if(xu_url.isEmpty()){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                    continue;
+                }
+                boolean for_bool = false;
+                if(able.URL.equals(xu_url)){
+                    for_bool = true;
+                }
+                for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
+                    if(url_passWord_data.getURL().equals(xu_url)){
+                        for_bool = true;
+                    }
+                }
+                if(!for_bool){
                     continue;
                 }
                 able.handler.post(()->{

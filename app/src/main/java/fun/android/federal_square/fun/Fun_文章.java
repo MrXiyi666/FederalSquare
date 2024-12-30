@@ -118,6 +118,7 @@ public class Fun_文章 {
             url_txt_id.setText(url_txt);
             url_txt_id.setVisibility(View.VISIBLE);
         }
+
         if(sb.length() >=50){
             sb.append("...");
         }

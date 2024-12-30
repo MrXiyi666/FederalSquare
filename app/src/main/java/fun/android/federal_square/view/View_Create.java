@@ -1,5 +1,6 @@
 package fun.android.federal_square.view;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,7 +29,6 @@ public class View_Create extends View_Main{
             linear_di.setVisibility(View.VISIBLE);
             able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
             able.PassWord = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1] + "";
-
         }
     }
     @Override
