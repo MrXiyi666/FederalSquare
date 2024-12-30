@@ -3,6 +3,7 @@ package fun.android.federal_square.network;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.text.Transliterator;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -11,10 +12,15 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;

@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import net.csdn.roundview.RoundImageView;
@@ -79,8 +80,10 @@ public class View_Essay extends AppCompatActivity {
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
+                List<Post_Data> post_data;
+                try {
+                    post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                }catch (JsonSyntaxException e){
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }

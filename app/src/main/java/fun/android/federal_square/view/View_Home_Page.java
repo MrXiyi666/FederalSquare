@@ -95,6 +95,7 @@ public class View_Home_Page extends View_Main{
         button_system.setTextColor(Color.rgb(128,128,128));
         button_article.setOnClickListener(V->{
             linear.removeAllViews();
+            view_home_essay= null;
             view_home_essay = new View_Home_Essay(activity_main);
             linear.addView(view_home_essay.getView());
             button_article.setTextColor(Color.rgb(0,0,0));
@@ -104,6 +105,7 @@ public class View_Home_Page extends View_Main{
 
         button_collection.setOnClickListener(V->{
             linear.removeAllViews();
+            view_home_collection = null;
             view_home_collection = new View_Home_Collection(activity_main);
             linear.addView(view_home_collection.getView());
             button_article.setTextColor(Color.rgb(128,128,128));

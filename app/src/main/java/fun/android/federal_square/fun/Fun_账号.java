@@ -1,5 +1,6 @@
 package fun.android.federal_square.fun;
 
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,12 @@ public class Fun_账号 {
         if(txt.isEmpty()){
             return new ArrayList<>();
         }
-        return able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        try {
+            return able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
+            return new ArrayList<>();
+        }
+
     }
 
     public static String 读取账号_String(){
@@ -69,8 +75,10 @@ public class Fun_账号 {
     }
 
     public static String GetID(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -85,8 +93,10 @@ public class Fun_账号 {
     }
 
     public static String GetPassWord(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -100,8 +110,10 @@ public class Fun_账号 {
         return "";
     }
     public static String GetName(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -115,8 +127,10 @@ public class Fun_账号 {
         return "";
     }
     public static String GetSign(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -131,8 +145,10 @@ public class Fun_账号 {
     }
 
     public static String GetAvatar_Url(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -147,8 +163,10 @@ public class Fun_账号 {
     }
 
     public static String GetBack_Url(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -163,8 +181,10 @@ public class Fun_账号 {
     }
 
     public static String Get发贴开关(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){
@@ -179,8 +199,10 @@ public class Fun_账号 {
     }
 
     public static String Get评论开关(){
-        List<Post_Data> post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
-        if(post_dataList == null){
+        List<Post_Data> post_dataList;
+        try {
+            post_dataList = able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+        }catch (JsonSyntaxException e){
             return "";
         }
         if(post_dataList.isEmpty()){

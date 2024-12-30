@@ -9,6 +9,8 @@ import android.widget.ScrollView;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
@@ -92,8 +94,11 @@ public class View_Home_Essay extends View_Main{
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
+                List<Post_Data> post_data;
+                try {
+                    post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                }catch (JsonSyntaxException e){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
                 able.handler.post(()->{

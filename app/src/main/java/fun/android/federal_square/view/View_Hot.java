@@ -6,6 +6,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -87,8 +89,11 @@ public class View_Hot extends View_Main{
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
                     continue;
                 }
-                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
+                List<Post_Data> post_data;
+                try {
+                    post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                }catch (JsonSyntaxException e){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + filename.get(i) + ".json");
                     continue;
                 }
                 able.handler.post(()->{

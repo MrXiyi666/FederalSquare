@@ -8,6 +8,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -171,11 +173,14 @@ public class View_Square extends View_Main{
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
-                List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-                if(post_data == null){
+                List<Post_Data> post_data;
+                try {
+                    post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+                }catch (JsonSyntaxException e){
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
+
                 String xu_url="";
                 for(Post_Data pd : post_data){
                     if(pd.getName().equals("url")){
