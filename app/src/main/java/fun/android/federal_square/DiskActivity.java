@@ -37,7 +37,8 @@ public class DiskActivity extends AppCompatActivity {
     public GridView gridView;
     private AppCompatButton button_network_disk;
     private NetWork_网盘_上传 netWork_网盘_上传;
-    ImageView return_icon;
+    private TextView title_index;
+    private ImageView return_icon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,7 @@ public class DiskActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridview);
         swiperefre = findViewById(R.id.swiperefee);
         return_icon = findViewById(R.id.return_icon);
+        title_index = findViewById(R.id.title_index);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         netWork_网盘_上传 = new NetWork_网盘_上传(this);
         加载图片初始化(Fun_账号.GetID());
@@ -118,6 +120,7 @@ public class DiskActivity extends AppCompatActivity {
     public void 初始化数据(){
         this.button_network_disk.setEnabled(true);
         List<String> file_list = Fun_图片.遍历所有图片不带域名();
+        title_index.setText(String.valueOf(file_list.size()));
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             查看图片窗口.启动(DiskActivity.this, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
