@@ -12,7 +12,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:gravity="center"
-        android:text="您必须填写您的域名地址\n例如 http://federal-square.top/\n如果你输入错误\n必须进入系统设置清除数据重新进入软件"
+        android:text="您必须填写您的域名地址，\n例如：http://federal-square.top/\n如果你输入错误，\n必须进入系统设置清除数据重新进入软件。\n注意：结尾请加上 / 符号。"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText

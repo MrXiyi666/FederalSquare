@@ -37,7 +37,7 @@
         android:textSize="15sp"
         android:textColor="@color/black"
         android:gravity="start"
-        android:text="说明：引用可以让你和更多的人进行互动\n            你必须输入正确的域名和密码"
+        android:text="说明：引用可以让你和更多的人进行互动，\n            你必须输入正确的域名和密码。\n注意：结尾请加上 / 符号。"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
