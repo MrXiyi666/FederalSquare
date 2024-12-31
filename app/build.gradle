@@ -5,7 +5,20 @@ plugins {
 android {
     namespace 'fun.android.federal_square'
     compileSdk 35
-
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/layout/activity',
+                    'src/main/res/layout/view',
+                    'src/main/res/layout/window',
+                    'src/main/res/layout/discuss',
+                    'src/main/res/layout/post',
+                    'src/main/res/layout/item',
+                    'src/main/res/layout',
+                    'src/main/res'
+            ]
+        }
+    }
     defaultConfig {
         applicationId "fun.android.federal_square"
         minSdk 26
