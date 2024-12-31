@@ -31,11 +31,19 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
         if(string.equals("no")){
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Collection"));
             Fun_文件.创建文件夹(able.app_path + "Account/Collection");
-            able.handler.post(()-> able.view_home.view_home_page.view_home_collection.linear.removeAllViews());
+            able.handler.post(()-> {
+                if(able.view_home.view_home_page.view_home_collection != null){
+                    able.view_home.view_home_page.view_home_collection.linear.removeAllViews();
+                }
+            });
             return;
         }
         if(string.equals("no_folder")){
-            able.handler.post(()-> able.view_home.view_home_page.view_home_collection.linear.removeAllViews());
+            able.handler.post(()-> {
+                if(able.view_home.view_home_page.view_home_collection != null){
+                    able.view_home.view_home_page.view_home_collection.linear.removeAllViews();
+                }
+            });
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Collection"));
             Fun_文件.创建文件夹(able.app_path + "Account/Collection");
         }

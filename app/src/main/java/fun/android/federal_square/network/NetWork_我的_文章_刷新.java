@@ -29,13 +29,21 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no")){
-            able.handler.post(()-> able.view_home.view_home_page.view_home_essay.linear.removeAllViews());
+            able.handler.post(()-> {
+                if(able.view_home.view_home_page.view_home_essay != null){
+                    able.view_home.view_home_page.view_home_essay.linear.removeAllViews();
+                }
+            });
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Data"));
             Fun_文件.创建文件夹(able.app_path + "Account/Data");
             return;
         }
         if(string.equals("no_folder")){
-            able.handler.post(()-> able.view_home.view_home_page.view_home_essay.linear.removeAllViews());
+            able.handler.post(()-> {
+                if(able.view_home.view_home_page.view_home_essay != null){
+                    able.view_home.view_home_page.view_home_essay.linear.removeAllViews();
+                }
+            });
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Data"));
             Fun_文件.创建文件夹(able.app_path + "Account/Data");
         }
