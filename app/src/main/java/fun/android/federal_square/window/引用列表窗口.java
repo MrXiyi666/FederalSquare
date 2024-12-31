@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.google.gson.reflect.TypeToken;
@@ -17,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import fun.android.federal_square.R;
-import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -72,7 +73,8 @@ public class 引用列表窗口 {
         if(!Fun.StrBoolJSON(str)){
             return new ArrayList<>();
         }
-        List<URL_PassWord_Data> list = able.gson.fromJson(str, new TypeToken<List<URL_PassWord_Data>>() {});
+        List<URL_PassWord_Data> list = able.gson.fromJson(str, new TypeToken<>() {
+        });
         if(list == null){
             Fun_文件.写入文件(able.app_path + "YinYong_Data/List.json", able.gson.toJson(new ArrayList<>()));
             return new ArrayList<>();
@@ -81,9 +83,14 @@ public class 引用列表窗口 {
     }
     public View 创建子布局(Activity activity, URL_PassWord_Data url_passWord_data, LinearLayout linear, List<URL_PassWord_Data> list){
         View view = View.inflate(activity, R.layout.view_yinyong_list_item_view, null);
-        EditText edit_text = view.findViewById(R.id.edit_text);
-        edit_text.setText(url_passWord_data.getURL());
-        edit_text.setEnabled(false);
+        TextView text = view.findViewById(R.id.text);
+
+        String str = "域名：" + url_passWord_data.getURL();
+        if(!url_passWord_data.getPassWord().isEmpty()){
+            str = str + "\n密码：" + url_passWord_data.getPassWord();
+        }
+
+        text.setText(str);
         AppCompatButton button_system = view.findViewById(R.id.button_system);
         button_system.setOnClickListener(V->{
             list.remove(url_passWord_data);

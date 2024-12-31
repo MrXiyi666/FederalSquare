@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="52dp">
-    <EditText
-        android:layout_weight="1"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/edit_back"
-        android:padding="15dp"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/edit_text"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:stateListAnimator="@null"
-        android:background="@drawable/button_color_selected_selector"
-        android:id="@+id/button_system"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:text="删除"
-        android:layout_width="150dp"
-        android:layout_height="52dp"/>
+        android:layout_height="52dp">
+        <TextView
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:background="@drawable/button_color_selected_selector"
+            android:id="@+id/button_system"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="删除"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:background="#00f2f3f7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 </LinearLayout>

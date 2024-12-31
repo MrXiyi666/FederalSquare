@@ -43,20 +43,20 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="130dp">
         <LinearLayout
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <EditText
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:background="@drawable/edit_back"
                 android:padding="15dp"
                 android:id="@+id/edit_text"
-                android:hint="添加新的网址"
+                android:hint="输入新的域名"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <EditText
@@ -80,9 +80,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="添加"
+            android:text="添\n加"
             android:layout_width="150dp"
-            android:layout_height="50dp"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <ScrollView

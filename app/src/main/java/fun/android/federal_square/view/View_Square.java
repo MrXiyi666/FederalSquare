@@ -56,6 +56,8 @@ public class View_Square extends View_Main{
         scrollView = view.findViewById(R.id.scrollView);
         初始化本地数据();
         new_icon.setVisibility(View.GONE);
+
+
     }
 
     @Override
