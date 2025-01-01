@@ -33,7 +33,7 @@
         android:padding="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="62dp">
+        android:layout_height="68dp">
         <EditText
             android:id="@+id/edit_text_1"
             android:background="@drawable/edit_back"
