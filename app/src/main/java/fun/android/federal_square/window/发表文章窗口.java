@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
+import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_广场上传;
 
@@ -142,7 +144,15 @@ public class 发表文章窗口 {
             Fun.mess(activity, "网盘数据为空");
             return;
         }
-        gridview.setAdapter(new Disk_Grid_Adapter(activity, list));
+        int Disk_Index = 3;
+        String Str_index = Fun_文件.读取文件(able.app_path + "System_Data/Disk_index.txt");
+        if(!Str_index.isEmpty()){
+            Disk_Index = Integer.parseInt(Str_index);
+        }
+        Log.w("数量", Disk_Index+"");
+        gridview.setNumColumns(Disk_Index);
+        Log.w("数量", gridview.getNumColumns()+"");
+        gridview.setAdapter(new Disk_Grid_Adapter(activity, list, Disk_Index));
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             Post_Data post_data = new Post_Data();
             post_data.setName("img");

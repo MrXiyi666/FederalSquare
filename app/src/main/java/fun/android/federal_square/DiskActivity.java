@@ -25,17 +25,19 @@ import fun.android.federal_square.adatper.Disk_Grid_Adapter;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
+import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_网盘_上传;
 import fun.android.federal_square.network.NetWork_网盘_刷新;
 import fun.android.federal_square.window.删除窗口;
+import fun.android.federal_square.window.网盘设置窗口;
 
 public class DiskActivity extends AppCompatActivity {
     ActivityResultLauncher<PickVisualMediaRequest> 上传图片;
     public SwipeRefreshLayout swiperefre;
     public GridView gridView;
-    private AppCompatButton button_network_disk;
+    private AppCompatButton button_network_disk, button_menu;
     private NetWork_网盘_上传 netWork_网盘_上传;
     private TextView title_index;
     private ImageView return_icon;
@@ -53,6 +55,7 @@ public class DiskActivity extends AppCompatActivity {
 
     public void 初始化(){
         button_network_disk = findViewById(R.id.button_network_disk);
+        button_menu = findViewById(R.id.button_menu);
         gridView = findViewById(R.id.gridview);
         swiperefre = findViewById(R.id.swiperefee);
         return_icon = findViewById(R.id.return_icon);
@@ -61,6 +64,7 @@ public class DiskActivity extends AppCompatActivity {
         netWork_网盘_上传 = new NetWork_网盘_上传(this);
         加载图片初始化(Fun_账号.GetID());
         初始化数据();
+
     }
 
     public void 事件(){
@@ -73,6 +77,10 @@ public class DiskActivity extends AppCompatActivity {
             button_network_disk.setEnabled(false);
             上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
         });
+        button_menu.setOnClickListener(V->{
+            网盘设置窗口.启动(this);
+        });
+
         return_icon.setOnClickListener(V->{
             finish();
         });
@@ -118,10 +126,18 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 初始化数据(){
+        int Disk_Index = 3;
+        String Str_index = Fun_文件.读取文件(able.app_path + "System_Data/Disk_index.txt");
+        if(!Str_index.isEmpty()){
+            Disk_Index = Integer.parseInt(Str_index);
+        }
+        Log.w("数量", Disk_Index+"");
+        gridView.setNumColumns(Disk_Index);
+        Log.w("数量", gridView.getNumColumns()+"");
         this.button_network_disk.setEnabled(true);
         List<String> file_list = Fun_图片.遍历所有图片不带域名();
         title_index.setText("统计数量： " + file_list.size());
-        gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list));
+        gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             查看图片窗口.启动(DiskActivity.this, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
         });

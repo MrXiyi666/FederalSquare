@@ -60,8 +60,20 @@
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:id="@+id/button_menu"
+            android:textColor="@color/black"
+            android:background="@drawable/button_color_selected_selector"
+            android:text="设置"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@id/linear_menu"
         android:id="@+id/swiperefee"
         android:layout_width="match_parent"
@@ -69,10 +81,10 @@
         android:orientation="vertical">
         <GridView
             android:scrollbars="none"
-            android:fadeScrollbars="false"
+            android:fadeScrollbars="true"
             android:id="@+id/gridview"
+            android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
-            android:numColumns="3"
             android:horizontalSpacing="10dp"
             android:verticalSpacing="10dp"
             android:layout_width="match_parent"

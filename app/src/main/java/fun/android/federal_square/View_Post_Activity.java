@@ -103,10 +103,8 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
             }
         }
-        if(!able.URL.equals(url_txt)){
-            url_txt_id.setText(url_txt);
-            url_txt_id.setVisibility(View.VISIBLE);
-        }
+        url_txt_id.setText(url_txt);
+        url_txt_id.setVisibility(View.VISIBLE);
 
         if(!time.isEmpty() && !url_txt.isEmpty()){
             NetWork_评论_读取 netWork_讨论_读取 = new NetWork_评论_读取(this);
