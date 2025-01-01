@@ -2,14 +2,8 @@ package fun.android.federal_square.network;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.icu.text.SimpleDateFormat;
 import androidx.appcompat.widget.AppCompatButton;
-import com.google.gson.reflect.TypeToken;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import fun.android.federal_square.DiskActivity;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -51,7 +45,6 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
         if(this.body == null){
             return;
         }
-
         if(string.equals("no_up")){
             Fun.mess(activity, "上传失败 数据出错");
             return;
@@ -59,6 +52,9 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
         if(string.equals("no_file")){
             Fun.mess(activity, "上传失败 存储失败");
             return;
+        }
+        if(!string.equals("ok")){
+            Fun.mess(activity, string);
         }
         Fun.mess(activity, "上传成功");
         this.b_update = true;
@@ -69,13 +65,20 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
     @Override
     public void 失败() {
         super.失败();
-        button_network_disk.setEnabled(true);
+        if(button_network_disk!=null){
+            button_network_disk.setEnabled(true);
+        }
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-        diskActivity.初始化数据();
+        if(diskActivity!=null){
+            diskActivity.初始化数据();
+        }
+        if(button_network_disk!=null){
+            button_network_disk.setEnabled(true);
+        }
     }
 
 }

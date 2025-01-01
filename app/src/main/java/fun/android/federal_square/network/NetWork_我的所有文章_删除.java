@@ -37,16 +37,20 @@ public class NetWork_我的所有文章_删除 extends NetWork_Main{
             Fun.mess(activity, "删除失败");
             return;
         }
+        if(!string.equals("yes")){
+            Fun.mess(activity, string);
+            return;
+        }
         Fun.mess(activity, "删除成功");
         this.b_update = true;
         Fun_文件.删除文件(able.app_path + "Account/Data/" + time + ".json");
-        b_mess = true;
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-        view_essay.初始化数据();
+        if(view_essay!=null){
+            view_essay.初始化数据();
+        }
     }
-
 }

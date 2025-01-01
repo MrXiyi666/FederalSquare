@@ -36,10 +36,12 @@ public class NetWork_评论_发表 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(string.equals("ok")){
-            this.b_update = true;
-            Fun.mess(activity, "评价成功");
+        if(!string.equals("ok")){
+            Fun.mess(activity, string);
+            return;
         }
+        this.b_update = true;
+        Fun.mess(activity, "评价成功");
     }
 
 }

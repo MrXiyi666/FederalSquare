@@ -29,10 +29,16 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
         super.事件(string);
         if(string.equals("no_file")){
             Fun.mess(activity, "文件不存在");
+            this.b_update = true;
+            Fun_文件.删除文件(able.app_path + "Account/Collection/" + time + ".json");
             return;
         }
         if(string.equals("no_delete")){
             Fun.mess(activity, "删除失败");
+            return;
+        }
+        if(!string.equals("yes")){
+            Fun.mess(activity, string);
             return;
         }
         Fun.mess(activity, "删除成功");
@@ -44,6 +50,7 @@ public class NetWork_我的_收藏_删除 extends NetWork_Main{
     public void 刷新() {
         super.刷新();
         if(able.view_home.view_home_page.view_home_collection!=null){
+            able.view_home.view_home_page.view_home_collection.初始化收藏();
         }
     }
 

@@ -32,6 +32,11 @@ public class NetWork_读取热门 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         List<String> filename = new ArrayList<>(Arrays.asList(string.split("\n")));
+        if(filename.isEmpty()){
+            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
+            b_update = true;
+            return;
+        }
         Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(filename));
         for(String name : filename){
             if(Fun_文件.是否存在(able.app_path + "Square_Data/" + name + ".json")){

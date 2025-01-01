@@ -28,9 +28,9 @@ import okhttp3.Response;
 public class NetWork_Main_MultipartBody {
     public boolean b_update = false;
     public Activity activity;
-    public String class_name = "";
+    public String class_name;
     public RequestBody body;
-    private AlertDialog dialog;
+    private AlertDialog dialog=null;
     public Request request;
     public boolean 账号检测 = false;
     public MultipartBody multipartBody;
@@ -38,6 +38,21 @@ public class NetWork_Main_MultipartBody {
     public NetWork_Main_MultipartBody(Activity activity){
         this.class_name = this.getClass().getSimpleName();
         this.activity = activity;
+        初始化等待窗口();
+    }
+
+    public void 事件(String string){
+
+    }
+
+    public void 失败(){
+
+    }
+    public void 刷新(){
+
+    }
+
+    private void 初始化等待窗口(){
         able.handler.post(()->{
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
@@ -54,18 +69,6 @@ public class NetWork_Main_MultipartBody {
             dialog.getWindow().setGravity(Gravity.TOP);
         });
     }
-
-    public void 事件(String string){
-
-    }
-
-    public void 失败(){
-
-    }
-    public void 刷新(){
-
-    }
-
     public void start(){
         b_update = false;
         if(账号检测){
@@ -79,6 +82,9 @@ public class NetWork_Main_MultipartBody {
         if(multipartBody == null){
             return;
         }
+        if(dialog==null){
+            初始化等待窗口();
+        }
         able.handler.post(()->{
             dialog.show();
         });
@@ -90,11 +96,13 @@ public class NetWork_Main_MultipartBody {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-
                 Log.w(class_name, e);
                 Fun.mess(activity, class_name + e);
                 able.handler.post(()->{
-                    dialog.dismiss();
+                    if(dialog!=null){
+                        dialog.dismiss();
+                        dialog=null;
+                    }
                     失败();
                 });
             }
@@ -102,7 +110,10 @@ public class NetWork_Main_MultipartBody {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 able.handler.post(()->{
-                    dialog.dismiss();
+                    if(dialog!=null){
+                        dialog.dismiss();
+                        dialog=null;
+                    }
                 });
                 if(response.body() == null){
                     Log.w(class_name, "null");

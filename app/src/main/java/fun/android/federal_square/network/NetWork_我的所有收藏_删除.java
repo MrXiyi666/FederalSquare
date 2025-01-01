@@ -36,6 +36,10 @@ public class NetWork_我的所有收藏_删除 extends NetWork_Main{
             Fun.mess(activity, "删除失败");
             return;
         }
+        if(!string.equals("yes")){
+            Fun.mess(activity, string);
+            return;
+        }
         Fun.mess(activity, "删除成功");
         this.b_update = true;
         Fun_文件.删除文件(able.app_path + "Account/Collection/" + time + ".json");
@@ -44,6 +48,8 @@ public class NetWork_我的所有收藏_删除 extends NetWork_Main{
     @Override
     public void 刷新() {
         super.刷新();
-        view_collectin.初始化数据();
+        if(view_collectin!=null){
+            view_collectin.初始化数据();
+        }
     }
 }

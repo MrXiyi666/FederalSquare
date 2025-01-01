@@ -34,9 +34,8 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
         String[] dd = string.split("\n");
         for(String da : dd){
             Fun_文件.写入文件(able.app_path + "Disk_Data/" + da, "");
-            this.b_update = true;
         }
-
+        this.b_update = true;
     }
 
     @Override

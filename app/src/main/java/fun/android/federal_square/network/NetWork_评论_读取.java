@@ -1,6 +1,7 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.LinearLayout;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
         super(activity);
     }
     private LinearLayout linear;
-    private String string;
+    private List<View> list_view = new ArrayList<>();
     public void 传递参数(String square_time, LinearLayout linear, String 网址 , String PassWord){
         this.linear = linear;
         formBody = new FormBody.Builder()
@@ -33,29 +34,41 @@ public class NetWork_评论_读取 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-
         if(string.equals("no")){
             return;
         }
         if(string.equals("no_folder")){
             return;
         }
-        this.string = string;
+        String[] dd = string.split("\n");
+        List<String> filename = new ArrayList<>(Arrays.asList(dd));
+        if(filename.isEmpty()){
+            return;
+        }
+        for(String data : filename) {
+            if(Fun.StrBoolJSON(data)){
+                List<Post_Data> post_data = able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType());
+                list_view.add(查看评论窗口.添加评论布局(activity, post_data));
+            }
+        }
         this.b_update = true;
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-        String[] dd = string.split("\n");
-        List<String> filename = new ArrayList<>(Arrays.asList(dd));
-        linear.removeAllViews();
-        for(String data : filename){
-            if(!Fun.StrBoolJSON(data)){
-                continue;
-            }
-            linear.addView(查看评论窗口.添加评论布局(activity, able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType())));
+        able.handler.post(()->{
+            linear.removeAllViews();
+        });
+        if(list_view.isEmpty()){
+            return;
         }
+        new Thread(()->{
+            for(View view : list_view){
+                able.handler.post(()->{
+                    linear.addView(view);
+                });
+            }
+        }).start();
     }
-
 }

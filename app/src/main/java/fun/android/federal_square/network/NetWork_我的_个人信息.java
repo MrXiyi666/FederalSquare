@@ -44,14 +44,18 @@ public class NetWork_我的_个人信息 extends NetWork_Main {
         Fun_文件.写入文件(able.app_path + "Account/account.json", able.gson.toJson(post_dataList));
         this.b_update = true;
         Fun.mess(activity, "修改成功");
-        this.dialog.dismiss();
+        able.handler.post(()->{
+            this.dialog.dismiss();
+        });
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_home.linear_main.removeAllViews();
-        able.view_home.linear_main.addView(new View_Home_Page((MainActivity) activity).getView());
+        if(able.view_home.linear_main!=null){
+            able.view_home.linear_main.removeAllViews();
+            able.view_home.linear_main.addView(new View_Home_Page((MainActivity) activity).getView());
+        }
     }
 
 }

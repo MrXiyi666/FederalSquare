@@ -36,6 +36,7 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
                     able.view_home.view_home_page.view_home_collection.linear.removeAllViews();
                 }
             });
+            this.b_update = true;
             return;
         }
         if(string.equals("no_folder")){
@@ -44,11 +45,16 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
                     able.view_home.view_home_page.view_home_collection.linear.removeAllViews();
                 }
             });
+            this.b_update = true;
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Collection"));
             Fun_文件.创建文件夹(able.app_path + "Account/Collection");
+            return;
         }
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
+        if(filename.isEmpty()){
+            return;
+        }
         for(String name : filename){
             if(!Fun_文件.是否存在(able.app_path + "Account/Collection/" + name)){
                 this.b_update = true;

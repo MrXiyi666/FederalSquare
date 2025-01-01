@@ -31,16 +31,21 @@ public class NetWork_我的_文章_删除 extends NetWork_Main{
         if(string.equals("no_file")){
             Fun.mess(activity, "文件不存在");
             Fun_文件.删除文件(able.app_path + "Account/Data/" + time + ".json");
+            this.b_update = true;
+            Fun_文件.删除文件(able.app_path + "Account/Data/" + time + ".json");
             return;
         }
         if(string.equals("no_delete")){
             Fun.mess(activity, "删除失败");
             return;
         }
+        if(!string.equals("yes")){
+            Fun.mess(activity, string);
+            return;
+        }
         Fun.mess(activity, "删除成功");
         this.b_update = true;
         Fun_文件.删除文件(able.app_path + "Account/Data/" + time + ".json");
-        b_mess = true;
     }
 
     @Override

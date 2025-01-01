@@ -38,7 +38,7 @@ public class NetWork_背景_上传 extends NetWork_Main{
     public void 事件(String string) {
         super.事件(string);
         if(!string.equals("ok")){
-            Fun.mess(activity, "保存失败");
+            Fun.mess(activity, string);
             return;
         }
         Fun.mess(activity, "保存成功");

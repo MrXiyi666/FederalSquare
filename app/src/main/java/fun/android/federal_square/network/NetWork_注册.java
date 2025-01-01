@@ -45,7 +45,11 @@ public class NetWork_注册 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_home.linear_main.removeAllViews();
-        able.view_home.linear_main.addView(new View_Login((MainActivity) activity).getView());
+        if(able.view_home!=null){
+            if(able.view_home.linear_main!=null){
+                able.view_home.linear_main.removeAllViews();
+                able.view_home.linear_main.addView(new View_Login((MainActivity) activity).getView());
+            }
+        }
     }
 }

@@ -38,21 +38,20 @@ public class NetWork_登录 extends NetWork_Main {
         if(string.equals("no_file")){
             return;
         }
-        try {
-            List<Post_Data> post_dataList = able.gson.fromJson(string, new TypeToken<List<Post_Data>>(){}.getType());
-            for(Post_Data pd : post_dataList){
-                if(pd.getName().equals("PassWord")){
-                    if(pd.getText().equals(n_PassWord)){
-                        Fun.mess(activity, "登陆成功");
-                        this.b_update = true;
-                        Fun_账号.保存账号(post_dataList);
-                    }else{
-                        Fun.mess(activity, "密码错误");
-                    }
+        if(!Fun.StrBoolJSON(string)){
+            return;
+        }
+        List<Post_Data> post_dataList = able.gson.fromJson(string, new TypeToken<List<Post_Data>>(){}.getType());
+        for(Post_Data pd : post_dataList){
+            if(pd.getName().equals("PassWord")){
+                if(pd.getText().equals(n_PassWord)){
+                    Fun.mess(activity, "登陆成功");
+                    this.b_update = true;
+                    Fun_账号.保存账号(post_dataList);
+                }else{
+                    Fun.mess(activity, "密码错误");
                 }
             }
-        }catch (Exception e){
-            this.b_update = false;
         }
 
     }
@@ -60,8 +59,12 @@ public class NetWork_登录 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.view_home.linear_main.removeAllViews();
-        able.view_home.linear_main.addView(able.view_home.view_home_page.getView());
+        if(able.view_home!=null){
+            able.view_home.linear_main.removeAllViews();
+            if(able.view_home.view_home_page!=null){
+                able.view_home.linear_main.addView(able.view_home.view_home_page.getView());
+            }
+        }
     }
 
 }

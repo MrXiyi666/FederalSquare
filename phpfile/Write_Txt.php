@@ -6,7 +6,7 @@
 
     $file = fopen($path, "w");
     if(!$file){
-        echo "np";
+        echo "no";
     }
 	echo "ok";
     fwrite($file, $data);

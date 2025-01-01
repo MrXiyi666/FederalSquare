@@ -38,6 +38,10 @@ public class NetWork_删除网盘图片 extends NetWork_Main {
             Fun.mess(activity, "删除失败");
             return;
         }
+        if(!string.equals("yes")){
+            Fun.mess(activity, string);
+            return;
+        }
         Fun.mess(activity, "删除成功");
         this.b_update = true;
         Fun_文件.删除文件(able.app_path + "Disk_Data/" + name);
@@ -46,7 +50,9 @@ public class NetWork_删除网盘图片 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        diskActivity.初始化数据();
+        if(diskActivity!=null){
+            diskActivity.初始化数据();
+        }
     }
 
 }

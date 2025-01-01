@@ -2,7 +2,6 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import java.util.List;
-
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -39,10 +38,11 @@ public class NetWork_添加收藏 extends NetWork_Main {
             Fun.mess(activity, "收藏失败");
             return;
         }
-        if(string.equals("ok")){
-            Fun.mess(activity, "收藏成功");
-            Fun_文件.写入文件(able.app_path + "Account/Collection/" + post_time + ".json", able.gson.toJson(this.post_data));
+        if(!string.equals("ok")){
+            Fun.mess(activity, string);
         }
+        Fun.mess(activity, "收藏成功");
+        Fun_文件.写入文件(able.app_path + "Account/Collection/" + post_time + ".json", able.gson.toJson(this.post_data));
     }
 
 }

@@ -49,6 +49,9 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
         }
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
+        if(filename.isEmpty()){
+            return;
+        }
         for(String name : filename){
             if(!Fun_文件.是否存在(able.app_path + "Square_Data/" + name)){
                 down_list_data.add(name);
@@ -67,7 +70,5 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
         if(able.view_home.view_home_page.view_home_essay!=null){
             able.view_home.view_home_page.view_home_essay.初始化数据();
         }
-
     }
-
 }

@@ -49,7 +49,5 @@ public class NetWork_多少秒获取广场数据 extends NetWork_Main{
         if(able.view_square.new_icon!=null){
             able.view_square.new_icon.setVisibility(View.VISIBLE);
         }
-
     }
-
 }

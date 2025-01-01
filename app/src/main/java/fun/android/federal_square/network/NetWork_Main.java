@@ -3,7 +3,6 @@ package fun.android.federal_square.network;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.icu.text.Transliterator;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -12,15 +11,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import fun.android.federal_square.R;
-import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
@@ -33,8 +27,8 @@ public class NetWork_Main {
     public Activity activity;
     public String class_name;
     public boolean b_update = false, b_account = false, b_mess = true;
-    private AlertDialog dialog;
-    public FormBody formBody;
+    private AlertDialog dialog=null;
+    public FormBody formBody=null;
     public String url, url_path, password;
     public boolean b_dialog = true;
     public List<String> down_list_data = new ArrayList<>();
@@ -76,7 +70,15 @@ public class NetWork_Main {
     }
 
     public void 刷新(){
-
+        if(b_dialog){
+            able.handler.post(()-> {
+                if(dialog==null){
+                    return;
+                }
+                dialog.dismiss();
+                dialog = null;
+            });
+        }
     }
 
     public void start(){
@@ -127,9 +129,12 @@ public class NetWork_Main {
                     Log.w(class_name, url + "string null");
                     return;
                 }
-                if(string.equals("Null_PassWord") | string.equals("Error_PassWord")){
-                    Fun.mess(activity, url + "\n" + string);
-
+                if(string.equals("Null_PassWord")){
+                    Fun.mess(activity, url + "\n没有密码");
+                    return;
+                }
+                if(string.equals("Error_PassWord")){
+                    Fun.mess(activity, url + "\n密码错误");
                     return;
                 }
 
@@ -158,6 +163,10 @@ public class NetWork_Main {
                         Log.w(class_name + "下载", "string null");
                         continue;
                     }
+                    if(d_string.equals("no_file")){
+                        Log.w(class_name + "下载", "no_file");
+                        continue;
+                    }
                     Fun_文件.写入文件(able.app_path + "Square_Data/" + name, d_string);
                 }
 
@@ -173,7 +182,6 @@ public class NetWork_Main {
                     Response d_response = able.okHttpClient.newCall(d_request).execute();
                     if(!d_response.isSuccessful()){
                         Log.w(class_name + "下载", "null");
-
                         continue;
                     }
                     if(d_response.body() == null){
@@ -184,6 +192,10 @@ public class NetWork_Main {
                     d_response.close();
                     if(d_string.isEmpty()){
                         Log.w(class_name + "下载", "null");
+                        continue;
+                    }
+                    if(d_string.equals("no_file")){
+                        Log.w(class_name + "下载", "no_file");
                         continue;
                     }
                     Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
@@ -202,12 +214,10 @@ public class NetWork_Main {
             if(b_dialog){
                 able.handler.post(()-> {
                     new Thread(()->{
-                        try {
+                        try{
                             Thread.sleep(300);
-                        } catch (Exception ignored) {
-
-                        }
-                        if(dialog == null){
+                        }catch(Exception ignored) {}
+                        if(dialog==null){
                             return;
                         }
                         dialog.dismiss();
@@ -215,7 +225,6 @@ public class NetWork_Main {
                     }).start();
                 });
             }
-
         }).start();
     }
 }
