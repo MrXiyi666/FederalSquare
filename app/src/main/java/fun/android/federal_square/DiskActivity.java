@@ -131,9 +131,7 @@ public class DiskActivity extends AppCompatActivity {
         if(!Str_index.isEmpty()){
             Disk_Index = Integer.parseInt(Str_index);
         }
-        Log.w("数量", Disk_Index+"");
         gridView.setNumColumns(Disk_Index);
-        Log.w("数量", gridView.getNumColumns()+"");
         this.button_network_disk.setEnabled(true);
         List<String> file_list = Fun_图片.遍历所有图片不带域名();
         title_index.setText("统计数量： " + file_list.size());

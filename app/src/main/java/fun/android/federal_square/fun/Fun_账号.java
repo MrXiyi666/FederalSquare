@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import fun.android.federal_square.data.Post_Data;
@@ -16,8 +17,15 @@ public class Fun_账号 {
         if(txt.isEmpty()){
             return new ArrayList<>();
         }
+        List<Post_Data> post_dataList = new ArrayList<>();
         if(Fun.StrBoolJSON(txt)){
-            return able.gson.fromJson(Fun_文件.读取文件(able.app_path + "Account/account.json"), new TypeToken<List<Post_Data>>(){}.getType());
+            post_dataList = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList==null){
+            return new ArrayList<>();
+        }
+        if(post_dataList.isEmpty()){
+            return new ArrayList<>();
         }
         return new ArrayList<>();
     }
@@ -75,12 +83,13 @@ public class Fun_账号 {
     }
 
     public static String GetID(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -92,14 +101,14 @@ public class Fun_账号 {
         }
         return "";
     }
-
     public static String GetPassWord(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -112,12 +121,13 @@ public class Fun_账号 {
         return "";
     }
     public static String GetName(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -130,12 +140,13 @@ public class Fun_账号 {
         return "";
     }
     public static String GetSign(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -149,12 +160,13 @@ public class Fun_账号 {
     }
 
     public static String GetAvatar_Url(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -168,12 +180,13 @@ public class Fun_账号 {
     }
 
     public static String GetBack_Url(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -187,12 +200,13 @@ public class Fun_账号 {
     }
 
     public static String Get发贴开关(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
@@ -206,12 +220,13 @@ public class Fun_账号 {
     }
 
     public static String Get评论开关(){
-        List<Post_Data> post_dataList;
+        List<Post_Data> post_dataList = new ArrayList<>();
         String str = 读取账号_String();
         if(Fun.StrBoolJSON(str)){
-            post_dataList = able.gson.fromJson(读取账号_String(), new TypeToken<List<Post_Data>>(){}.getType());
-        }else{
-            post_dataList = new ArrayList<>();
+            post_dataList = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+        }
+        if(post_dataList == null){
+            return "";
         }
         if(post_dataList.isEmpty()){
             return "";
