@@ -66,6 +66,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
                 case "avatar":
                     Glide.with(this)
+                            .asBitmap()
                             .load(post_data.getText())
                             .into(avatar_img);
                     break;
@@ -81,11 +82,11 @@ public class View_Post_Activity extends AppCompatActivity {
                 case "img":
                     ImageView img = new ImageView(this);
                     Glide.with(this)
+                            .asBitmap()
                             .load(post_data.getText())
                             .apply(new RequestOptions()
                                     .error(R.drawable.glide_shibai)
                                     .fallback(R.drawable.glide_duqushibai))
-                            .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                             .into(img);
                     img.setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(post_data.getText());

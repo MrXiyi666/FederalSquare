@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -86,6 +85,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
                 .error(R.drawable.glide_shibai)
                 .fallback(R.drawable.glide_duqushibai);
         Glide.with(activity)
+                .asBitmap()
                 .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
                 .apply(requestOptions)
                 .into(gui.img);

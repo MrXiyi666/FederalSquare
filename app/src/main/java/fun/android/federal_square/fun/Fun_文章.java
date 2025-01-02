@@ -66,6 +66,7 @@ public class Fun_文章 {
                         avatar_img.setImageResource(R.mipmap.ic_launcher_round);
                     }else{
                         Glide.with(activity)
+                                .asBitmap()
                                 .load(pd.getText())
                                 .into(avatar_img);
                     }
@@ -91,12 +92,13 @@ public class Fun_文章 {
                     }
                     img_linear1.setVisibility(View.VISIBLE);
                     img_list.get(img_id).setImageBitmap(null);
+
                     Glide.with(activity)
+                            .asBitmap()
                             .load(pd.getText())
                             .apply(new RequestOptions()
                                     .error(R.drawable.glide_shibai)
                                     .fallback(R.drawable.glide_duqushibai))
-                            .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                             .into(img_list.get(img_id));
                     img_list.get(img_id).setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(pd.getText());

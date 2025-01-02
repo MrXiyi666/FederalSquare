@@ -3,6 +3,13 @@ package fun.android.federal_square;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.android.exoplayer2.database.DatabaseProvider;
+import com.google.android.exoplayer2.database.ExoDatabaseProvider;
+import com.google.android.exoplayer2.upstream.cache.Cache;
+import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
+import com.google.android.exoplayer2.upstream.cache.SimpleCache;
+
+import java.io.File;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +21,7 @@ import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
 public class App extends Application {
-
+    private static SimpleCache simpleCache;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -59,6 +66,11 @@ public class App extends Application {
             Fun_文件.写入文件(able.app_path + "System_Data/Disk_index.txt", "3");
         }
 
+        simpleCache = new SimpleCache(new File(able.app_path + "video_cache"), new LeastRecentlyUsedCacheEvictor(100 * 1024 * 1024), new ExoDatabaseProvider(this));
+    }
+
+    public static SimpleCache getVideoCache(){
+        return simpleCache;
     }
 
 }
