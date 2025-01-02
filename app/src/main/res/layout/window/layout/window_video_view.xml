@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#00000000"
+    android:background="#000000"
     android:id="@+id/relati"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.google.android.exoplayer2.ui.PlayerView
-        android:visibility="invisible"
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:shutter_background_color="#00000000"
-        app:show_timeout="0"
-        app:hide_on_touch="false" />
+        android:layout_height="match_parent" />
 </RelativeLayout>
