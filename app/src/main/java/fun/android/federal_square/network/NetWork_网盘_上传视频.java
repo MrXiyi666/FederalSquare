@@ -2,8 +2,12 @@ package fun.android.federal_square.network;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.util.Log;
+
 import androidx.appcompat.widget.AppCompatButton;
+
 import java.io.File;
+
 import fun.android.federal_square.DiskActivity;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -12,15 +16,13 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
-    public NetWork_网盘_上传(Activity activity) {
+public class NetWork_网盘_上传视频 extends NetWork_Main_MultipartBody{
+    public NetWork_网盘_上传视频(Activity activity) {
         super(activity);
         this.账号检测 = true;
     }
     private String 后缀;
-
     private DiskActivity diskActivity;
-
     private AppCompatButton button_network_disk;
     private String file_name;
     @SuppressLint("SimpleDateFormat")
@@ -29,7 +31,7 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
         this.diskActivity = diskActivity;
         this.button_network_disk = button_network_disk;
         url = able.URL + "federal-square/Upload_Image.php";
-        this.body = RequestBody.Companion.create(new File(able.app_path + "/cache/cache." + 后缀), MediaType.Companion.parse("image/" + 后缀));
+        this.body = RequestBody.Companion.create(new File(able.app_path + "/cache/cache." + 后缀), MediaType.Companion.parse("video/" + 后缀));
         file_name = Fun.获取时间() + "." + 后缀;
         multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -38,7 +40,6 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
                 .build();
 
     }
-
     @Override
     public void 事件(String string) {
         super.事件(string);
@@ -63,14 +64,6 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
     }
 
     @Override
-    public void 失败() {
-        super.失败();
-        if(button_network_disk!=null){
-            button_network_disk.setEnabled(true);
-        }
-    }
-
-    @Override
     public void 刷新() {
         super.刷新();
         if(diskActivity!=null){
@@ -81,4 +74,11 @@ public class NetWork_网盘_上传 extends NetWork_Main_MultipartBody {
         }
     }
 
+    @Override
+    public void 失败() {
+        super.失败();
+        if(button_network_disk!=null){
+            button_network_disk.setEnabled(true);
+        }
+    }
 }

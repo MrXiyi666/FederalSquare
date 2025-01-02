@@ -44,6 +44,7 @@ public class 查看图片窗口 {
         photoView.setOnClickListener(V->{
             dialog.dismiss();
         });
+
         dialog.setView(view);
         dialog.setCancelable(true);
         Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);

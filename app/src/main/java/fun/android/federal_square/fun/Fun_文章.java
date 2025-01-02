@@ -3,6 +3,7 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,10 +25,9 @@ import fun.android.federal_square.View_Post_Activity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
-import fun.android.federal_square.view.View_Home_Essay;
-import fun.android.federal_square.view.View_Home_Collection;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看图片窗口;
+import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
 public class Fun_文章 {
@@ -99,7 +99,14 @@ public class Fun_文章 {
                             .transition(DrawableTransitionOptions.with(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                             .into(img_list.get(img_id));
                     img_list.get(img_id).setOnClickListener(V->{
-                        查看图片窗口.启动(activity, pd.getText());
+                        String 后缀 = Fun_文件.获取后缀(pd.getText());
+                        Log.w("后缀", 后缀);
+                        if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                            查看图片窗口.启动(activity, pd.getText());
+                        }
+                        if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                            查看视频窗口.启动_Dialog(activity, pd.getText());
+                        }
                     });
                     img_id++;
                     break;

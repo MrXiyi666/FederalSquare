@@ -2,6 +2,7 @@ package fun.android.federal_square.fun;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.documentfile.provider.DocumentFile;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -112,14 +115,18 @@ public class Fun {
     }
 
     public static int 获取Uri文件大小(Activity context, Uri fileUri){
-        if(fileUri == null){
+        try {
+            ContentResolver contentResolver = context.getContentResolver();
+            InputStream inputStream = contentResolver.openInputStream(fileUri);
+            if(inputStream ==null){
+                return 0;
+            }
+            int fileSize = inputStream.available();
+            inputStream.close();
+            return fileSize;
+        }catch (Exception e){
             return 0;
         }
-        DocumentFile documentFile = DocumentFile.fromSingleUri(context, fileUri);
-        if (documentFile == null){
-            return 0;
-        }
-        return (int)documentFile.length();
     }
 
 

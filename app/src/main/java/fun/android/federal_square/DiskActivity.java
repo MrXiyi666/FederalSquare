@@ -26,11 +26,13 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.network.NetWork_网盘_上传视频;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.network.NetWork_网盘_上传;
+import fun.android.federal_square.network.NetWork_网盘_上传图片;
 import fun.android.federal_square.network.NetWork_网盘_刷新;
 import fun.android.federal_square.window.删除窗口;
+import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.网盘设置窗口;
 
 public class DiskActivity extends AppCompatActivity {
@@ -38,7 +40,7 @@ public class DiskActivity extends AppCompatActivity {
     public SwipeRefreshLayout swiperefre;
     public GridView gridView;
     private AppCompatButton button_network_disk, button_menu;
-    private NetWork_网盘_上传 netWork_网盘_上传;
+    private NetWork_网盘_上传图片 netWork_网盘_上传图片;
     private TextView title_index;
     private ImageView return_icon;
     @Override
@@ -61,7 +63,7 @@ public class DiskActivity extends AppCompatActivity {
         return_icon = findViewById(R.id.return_icon);
         title_index = findViewById(R.id.title_index);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        netWork_网盘_上传 = new NetWork_网盘_上传(this);
+        netWork_网盘_上传图片 = new NetWork_网盘_上传图片(this);
         加载图片初始化(Fun_账号.GetID());
         初始化数据();
 
@@ -75,7 +77,7 @@ public class DiskActivity extends AppCompatActivity {
         });
         button_network_disk.setOnClickListener(V->{
             button_network_disk.setEnabled(false);
-            上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
+            上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE).build());
         });
         button_menu.setOnClickListener(V->{
             网盘设置窗口.启动(this);
@@ -94,33 +96,27 @@ public class DiskActivity extends AppCompatActivity {
                 return;
             }
             if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 10485760){
-                Fun.mess(DiskActivity.this, "图片大于10mb");
+                Fun.mess(DiskActivity.this, "文件大于 10mb 请压缩后上传");
                 button_network_disk.setEnabled(true);
                 return;
             }
-
             String 后缀 = Fun.获取文件扩展名(Fun.获取Uri文件名(this, uri));
-            Bitmap bitmap;
-            if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
 
-            }else{
-                后缀 = "";
-            }
-            if(后缀.isEmpty()){
-                button_network_disk.setEnabled(true);
+            if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
+                netWork_网盘_上传图片.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
+                netWork_网盘_上传图片.start();
                 return;
             }
-            try {
-                bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri));
-                Fun_图片.保存缓存图片(bitmap, 后缀);
-                netWork_网盘_上传.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
-                netWork_网盘_上传.start();
-            } catch (FileNotFoundException e) {
-                Log.w("加载图片初始化", e);
-                Fun.mess(DiskActivity.this, "加载失败");
-                button_network_disk.setEnabled(true);
+            if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
+                NetWork_网盘_上传视频 netWork_网盘_上传视频 = new NetWork_网盘_上传视频(this);
+                netWork_网盘_上传视频.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
+                netWork_网盘_上传视频.start();
+                return;
             }
 
+            Fun.mess(this, "不支持的格式 " + 后缀);
         });
 
     }
@@ -137,7 +133,14 @@ public class DiskActivity extends AppCompatActivity {
         title_index.setText("统计数量： " + file_list.size());
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index));
         gridView.setOnItemClickListener((parent, view, position, id) -> {
-            查看图片窗口.启动(DiskActivity.this, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position));
+            String 后缀 = Fun_文件.获取后缀(file_list.get(position));
+            String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position);
+            if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                查看图片窗口.启动(DiskActivity.this, url);
+            }
+            if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                查看视频窗口.启动_Dialog(this, url);
+            }
         });
         gridView.setOnItemLongClickListener((parent, view, position, id) -> {
             删除窗口.删除网盘图片窗口(DiskActivity.this, file_list.get(position));

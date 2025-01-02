@@ -1,11 +1,17 @@
 package fun.android.federal_square.fun;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -98,4 +104,40 @@ public class Fun_文件 {
         return list;
     }
 
+    /**
+     * 复制文件
+     *
+     * @param context     上下文
+     * @param fromUri     源文件Uri
+     * @param toFilePath  目标文件路径
+     */
+    public static void copy_Uri_File(Context context, Uri fromUri, String toFilePath) {
+        ContentResolver contentResolver = context.getContentResolver();
+        try {
+            InputStream inputStream = contentResolver.openInputStream(fromUri);
+            OutputStream outputStream = new FileOutputStream(toFilePath);
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, read);
+            }
+            outputStream.flush();
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String 获取后缀(String fileName){
+        if (fileName == null || fileName.isEmpty()) {
+            return "";
+        }
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex == -1 || dotIndex == fileName.length() - 1) {
+            return "";
+        } else {
+            return fileName.substring(dotIndex + 1).toLowerCase();
+        }
+    }
 }

@@ -174,7 +174,14 @@ public class 发表文章窗口 {
                 return true;
             });
             imageView.setOnClickListener(V->{
-                查看图片窗口.启动_Dialog(activity, able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
+                String 后缀 = Fun_文件.获取后缀(list.get(position));
+                String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position);
+                if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                    查看图片窗口.启动_Dialog(activity, url);
+                }
+                if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                    查看视频窗口.启动_Dialog(activity, url);
+                }
             });
             post_dataList.add(post_data);
             linear.addView(imageView);
