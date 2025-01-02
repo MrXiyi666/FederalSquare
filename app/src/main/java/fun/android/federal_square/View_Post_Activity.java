@@ -90,7 +90,6 @@ public class View_Post_Activity extends AppCompatActivity {
                             .into(img);
                     img.setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(post_data.getText());
-                        Log.w("后缀", 后缀);
                         if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
                             查看图片窗口.启动(this, post_data.getText());
                         }

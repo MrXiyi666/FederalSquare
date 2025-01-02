@@ -102,7 +102,6 @@ public class Fun_文章 {
                             .into(img_list.get(img_id));
                     img_list.get(img_id).setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(pd.getText());
-                        Log.w("后缀", 后缀);
                         if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
                             查看图片窗口.启动(activity, pd.getText());
                         }
