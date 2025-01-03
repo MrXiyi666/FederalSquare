@@ -2,14 +2,20 @@ package fun.android.federal_square.fun;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
@@ -89,7 +95,6 @@ public class Fun_文章 {
                     }
                     img_linear1.setVisibility(View.VISIBLE);
                     img_list.get(img_id).setImageBitmap(null);
-
                     Glide.with(activity)
                             .asBitmap()
                             .load(pd.getText())

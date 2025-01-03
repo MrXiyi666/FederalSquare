@@ -37,6 +37,8 @@ public class 重新设置域名窗口 {
             Fun_文件.删除文件夹(new File(able.app_path + "Square_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "YinYong_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Account"));
+            Fun_文件.删除文件夹(new File(able.app_path + "video_cache"));
+            Fun_文件.删除文件夹(new File(able.app_path + "cache"));
             System.exit(0);
         });
         button_exit.setOnClickListener(V->{
