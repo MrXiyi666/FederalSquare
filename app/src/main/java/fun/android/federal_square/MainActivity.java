@@ -175,14 +175,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
-                查看图片窗口.photoView.setVisibility(View.GONE);
-                return false;
-            }else if(pager.getCurrentItem() > 0){
+            if(pager.getCurrentItem() > 0){
                 pager.setCurrentItem(0);
                 return false;
             }
-
         }
         return super.onKeyUp(keyCode, event);
     }

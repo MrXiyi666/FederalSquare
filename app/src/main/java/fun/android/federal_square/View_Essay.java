@@ -89,20 +89,6 @@ public class View_Essay extends AppCompatActivity {
         }).start();
     }
 
-
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
-                查看图片窗口.photoView.setVisibility(View.GONE);
-                return false;
-            }
-
-        }
-        return super.onKeyUp(keyCode, event);
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

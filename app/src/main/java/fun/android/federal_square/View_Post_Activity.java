@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -18,6 +20,7 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import net.csdn.roundview.RoundImageView;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.network.NetWork_评论_读取;
@@ -85,13 +88,13 @@ public class View_Post_Activity extends AppCompatActivity {
                             .asBitmap()
                             .load(post_data.getText())
                             .apply(new RequestOptions()
-                                    .error(R.drawable.glide_shibai)
-                                    .fallback(R.drawable.glide_duqushibai))
+                            .error(R.drawable.glide_shibai)
+                            .fallback(R.drawable.glide_duqushibai))
                             .into(img);
                     img.setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(post_data.getText());
                         if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
-                            查看图片窗口.启动(this, post_data.getText());
+                            查看图片窗口.启动_Dialog(this, post_data.getText());
                         }
                         if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
                             查看视频窗口.启动_Dialog(this, post_data.getText());
@@ -121,18 +124,6 @@ public class View_Post_Activity extends AppCompatActivity {
             netWork_讨论_读取.传递参数(time, linear_check, url_txt, PassWord_txt);
             netWork_讨论_读取.start();
         }
-    }
-
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
-                查看图片窗口.photoView.setVisibility(View.GONE);
-                return false;
-            }
-        }
-        return super.onKeyUp(keyCode, event);
     }
 
     @Override

@@ -136,7 +136,7 @@ public class DiskActivity extends AppCompatActivity {
             String 后缀 = Fun_文件.获取后缀(file_list.get(position));
             String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position);
             if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
-                查看图片窗口.启动(DiskActivity.this, url);
+                查看图片窗口.启动_Dialog(this, url);
             }
             if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
                 查看视频窗口.启动_Dialog(this, url);
@@ -146,18 +146,6 @@ public class DiskActivity extends AppCompatActivity {
             删除窗口.删除网盘图片窗口(DiskActivity.this, file_list.get(position));
             return true;
         });
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
-                查看图片窗口.photoView.setVisibility(View.GONE);
-                return false;
-            }
-
-        }
-        return super.onKeyUp(keyCode, event);
     }
 
     @Override

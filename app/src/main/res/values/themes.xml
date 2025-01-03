@@ -7,8 +7,6 @@
     <style name="Theme.FederalSquare" parent="Base.Theme.FederalSquare" />
 
     <style name="AlertDialog_Null" parent="android:Theme.Dialog">
-        <item name="android:windowEnterAnimation">@null</item>
-        <item name="android:windowExitAnimation">@null</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>

@@ -1,12 +1,8 @@
 package fun.android.federal_square;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,21 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import net.csdn.roundview.RoundImageView;
-import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.window.删除窗口;
-import fun.android.federal_square.window.查看图片窗口;
-import fun.android.federal_square.window.查看评论窗口;
 import fun.android.federal_square.fun.Fun_文章;
 
 public class View_Collectin extends AppCompatActivity {
@@ -82,18 +69,6 @@ public class View_Collectin extends AppCompatActivity {
                 });
             }
         }).start();
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(查看图片窗口.photoView != null && 查看图片窗口.photoView.getVisibility() == View.VISIBLE){
-                查看图片窗口.photoView.setVisibility(View.GONE);
-                return false;
-            }
-
-        }
-        return super.onKeyUp(keyCode, event);
     }
 
     @Override

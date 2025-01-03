@@ -50,9 +50,4 @@
 
         </LinearLayout>
     </ScrollView>
-    <com.github.chrisbanes.photoview.PhotoView
-        android:visibility="gone"
-        android:id="@+id/photoView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </RelativeLayout>

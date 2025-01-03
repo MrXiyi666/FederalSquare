@@ -3,16 +3,13 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
@@ -103,7 +100,7 @@ public class Fun_文章 {
                     img_list.get(img_id).setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(pd.getText());
                         if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
-                            查看图片窗口.启动(activity, pd.getText());
+                            查看图片窗口.启动_Dialog(activity, pd.getText());
                         }
                         if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
                             查看视频窗口.启动_Dialog(activity, pd.getText());
