@@ -29,6 +29,7 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.window.查看图片窗口;
 
 public class Fun {
 
@@ -177,5 +178,19 @@ public class Fun {
         }
 
         return for_bool;
+    }
+
+    public static boolean 视频格式判断(String name){
+        if(name.equals("mp4") | name.equals("3gp") | name.equals("mov") | name.equals("avi") | name.equals("mkv") | name.equals("flv") | name.equals("webm")){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean 图片格式判断(String name){
+        if(name.equals("jpg") | name.equals("jpeg") | name.equals("png") | name.equals("webp")){
+            return true;
+        }
+        return false;
     }
 }

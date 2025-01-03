@@ -103,7 +103,6 @@
 
             </LinearLayout>
             <TextView
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/text_time"
                 android:textColor="#808080"

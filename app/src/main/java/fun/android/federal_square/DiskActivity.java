@@ -95,20 +95,20 @@ public class DiskActivity extends AppCompatActivity {
                 button_network_disk.setEnabled(true);
                 return;
             }
-            if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 10485760){
-                Fun.mess(DiskActivity.this, "文件大于 10mb 请压缩后上传");
+            if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 5242880){
+                Fun.mess(DiskActivity.this, "文件大于 5 MB 请压缩后上传");
                 button_network_disk.setEnabled(true);
                 return;
             }
             String 后缀 = Fun.获取文件扩展名(Fun.获取Uri文件名(this, uri));
 
-            if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+            if(Fun.图片格式判断(后缀)){
                 Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
                 netWork_网盘_上传图片.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
                 netWork_网盘_上传图片.start();
                 return;
             }
-            if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+            if(Fun.视频格式判断(后缀)){
                 Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
                 NetWork_网盘_上传视频 netWork_网盘_上传视频 = new NetWork_网盘_上传视频(this);
                 netWork_网盘_上传视频.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);

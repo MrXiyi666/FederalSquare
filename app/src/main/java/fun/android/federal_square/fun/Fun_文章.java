@@ -104,10 +104,10 @@ public class Fun_文章 {
                             .into(img_list.get(img_id));
                     img_list.get(img_id).setOnClickListener(V->{
                         String 后缀 = Fun_文件.获取后缀(pd.getText());
-                        if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                        if(Fun.图片格式判断(后缀)){
                             查看图片窗口.启动_Dialog(activity, pd.getText());
                         }
-                        if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                        if(Fun.视频格式判断(后缀)){
                             查看视频窗口.启动_Dialog(activity, pd.getText());
                         }
                     });
