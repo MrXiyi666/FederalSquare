@@ -149,9 +149,7 @@ public class 发表文章窗口 {
         if(!Str_index.isEmpty()){
             Disk_Index = Integer.parseInt(Str_index);
         }
-        Log.w("数量", Disk_Index+"");
         gridview.setNumColumns(Disk_Index);
-        Log.w("数量", gridview.getNumColumns()+"");
         gridview.setAdapter(new Disk_Grid_Adapter(activity, list, Disk_Index));
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             Post_Data post_data = new Post_Data();

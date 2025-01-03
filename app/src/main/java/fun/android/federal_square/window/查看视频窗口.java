@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
@@ -20,28 +19,21 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
-
 import java.util.Objects;
-
 import fun.android.federal_square.App;
 import fun.android.federal_square.R;
 import fun.android.federal_square.fun.Fun;
 
 public class 查看视频窗口 {
-    private static ExoPlayer player;
+
     public static void 启动_Dialog(Activity activity, String url){
-        player = null;
         Window window = activity.getWindow();
         window.setNavigationBarColor(Color.BLACK);
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
         View view = View.inflate(activity, R.layout.window_video_view, null);
-        RelativeLayout relati = view.findViewById(R.id.relati);
-        player = new ExoPlayer.Builder(activity).build();
+        final ExoPlayer player = new ExoPlayer.Builder(activity).build();
         PlayerView playerView = view.findViewById(R.id.video_view);
-        //VideoCacheDataSourceFactory dataSourceFactory = new VideoCacheDataSourceFactory(activity);
         MediaItem mediaItem = MediaItem.fromUri(url);
-        //MediaSource mediaSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem);
-
         DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true);
         DefaultDataSource.Factory defaultDataSourceFactory = new DefaultDataSource.Factory(activity, httpDataSourceFactory);
 
@@ -70,27 +62,15 @@ public class 查看视频窗口 {
             public void onPlayerError(PlaybackException error) {
                 Player.Listener.super.onPlayerError(error);
                 Fun.mess(activity, "播放错误");
-                if(player!=null){
-                    player.release();
-                    player = null;
-                }
-                if(dialog!=null){
-                    dialog.dismiss();
-                }
-                Window window = activity.getWindow();
+                player.release();
+                dialog.dismiss();
                 window.setNavigationBarColor(Color.WHITE);
             }
         });
         dialog.setOnCancelListener(dialog1 -> {
-            if(player!=null){
-                player.release();
-                player = null;
-            }
-            if(dialog!=null){
-                dialog.dismiss();
-            }
-            Window window1 = activity.getWindow();
-            window1.setNavigationBarColor(Color.WHITE);
+            player.release();
+            dialog.dismiss();
+            window.setNavigationBarColor(Color.WHITE);
         });
         dialog.setView(view);
         dialog.setCancelable(true);

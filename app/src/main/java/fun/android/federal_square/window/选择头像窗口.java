@@ -42,9 +42,7 @@ public class 选择头像窗口 {
         if(!Str_index.isEmpty()){
             Disk_Index = Integer.parseInt(Str_index);
         }
-        Log.w("数量", Disk_Index+"");
         gridview.setNumColumns(Disk_Index);
-        Log.w("数量", gridview.getNumColumns()+"");
         gridview.setAdapter(new Disk_Grid_Adapter(activity, file_list,Disk_Index));
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             List<Post_Data> post_dataList = Fun_账号.重新生成(Fun_账号.GetID(), Fun_账号.GetPassWord(), Fun_账号.GetName(), Fun_账号.GetSign(), able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position), Fun_账号.GetBack_Url(), Fun_账号.Get发贴开关(), Fun_账号.Get评论开关());
