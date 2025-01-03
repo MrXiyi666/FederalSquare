@@ -138,7 +138,7 @@ public class DiskActivity extends AppCompatActivity {
             if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
                 查看图片窗口.启动_Dialog(this, url);
             }
-            if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+            if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv") | 后缀.equals("flv") | 后缀.equals("rmvb")){
                 查看视频窗口.启动_Dialog(this, url);
             }
         });

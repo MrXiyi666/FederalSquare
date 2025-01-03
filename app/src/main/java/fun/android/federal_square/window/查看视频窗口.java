@@ -17,9 +17,14 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DefaultDataSource;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
+
 import java.util.Objects;
+
+import fun.android.federal_square.App;
 import fun.android.federal_square.R;
-import fun.android.federal_square.data.VideoCacheDataSourceFactory;
 import fun.android.federal_square.fun.Fun;
 
 public class 查看视频窗口 {
@@ -33,10 +38,21 @@ public class 查看视频窗口 {
         RelativeLayout relati = view.findViewById(R.id.relati);
         player = new ExoPlayer.Builder(activity).build();
         PlayerView playerView = view.findViewById(R.id.video_view);
-        VideoCacheDataSourceFactory dataSourceFactory = new VideoCacheDataSourceFactory(activity);
+        //VideoCacheDataSourceFactory dataSourceFactory = new VideoCacheDataSourceFactory(activity);
         MediaItem mediaItem = MediaItem.fromUri(url);
-        MediaSource mediaSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem);
-        player.setMediaSource(mediaSource);
+        //MediaSource mediaSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem);
+
+        DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true);
+        DefaultDataSource.Factory defaultDataSourceFactory = new DefaultDataSource.Factory(activity, httpDataSourceFactory);
+
+        CacheDataSource.Factory cacheDataSourceFactory = new CacheDataSource.Factory()
+                .setCache(App.getVideoCache())
+                .setUpstreamDataSourceFactory(defaultDataSourceFactory)
+                .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR);
+
+        MediaSource mediaSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory)
+                .createMediaSource(mediaItem);
+        player.setMediaSource(mediaSource, true);
         player.prepare();
         player.play();
         playerView.setPlayer(player);

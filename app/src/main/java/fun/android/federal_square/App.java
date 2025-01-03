@@ -65,8 +65,9 @@ public class App extends Application {
         if(!Fun_文件.是否存在(able.app_path + "System_Data/Disk_index.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/Disk_index.txt", "3");
         }
-
-        simpleCache = new SimpleCache(new File(able.app_path + "video_cache"), new LeastRecentlyUsedCacheEvictor(100 * 1024 * 1024), new ExoDatabaseProvider(this));
+        LeastRecentlyUsedCacheEvictor leastRecentlyUsedCacheEvictor = new
+                LeastRecentlyUsedCacheEvictor(100 * 1024 * 1024);
+        simpleCache = new SimpleCache(new File(able.app_path + "video_cache"), leastRecentlyUsedCacheEvictor, new ExoDatabaseProvider(this));
     }
 
     public static SimpleCache getVideoCache(){
