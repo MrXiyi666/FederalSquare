@@ -57,7 +57,7 @@ public class 查看评论窗口 {
                 post_dataList.add(post_data_name);
                 post_dataList.add(post_data_sign);
                 post_dataList.add(post_data_text);
-                查看评论窗口.发布新的讨论(activity, linear, post_dataList, time_name, 网址, PassWord);
+                发布新的评论(activity, linear, post_dataList, time_name, 网址, PassWord);
                 edit_text.setText("");
             });
         }
@@ -78,7 +78,7 @@ public class 查看评论窗口 {
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
-    public static void 发布新的讨论(Activity activity, LinearLayout linear, List<Post_Data> post_dataList, String time_name, String 网址, String PassWord){
+    public static void 发布新的评论(Activity activity, LinearLayout linear, List<Post_Data> post_dataList, String time_name, String 网址, String PassWord){
         View view = 添加评论布局(activity, post_dataList);
         NetWork_评论_发表 netWork_讨论_发表 = new NetWork_评论_发表(activity);
         netWork_讨论_发表.传递参数(网址, PassWord, time_name, Fun.获取时间(), able.gson.toJson(post_dataList), view, linear);

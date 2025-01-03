@@ -68,16 +68,13 @@ public class View_Square extends View_Main{
             if(able.view_square.new_icon.getVisibility() == View.VISIBLE){
                 able.view_square.new_icon.setVisibility(View.GONE);
             }
-
             NetWork_广场刷新 netWork_广场刷新 = new NetWork_广场刷新(activity_main);
-            netWork_广场刷新.传递参数(able.URL, able.PassWord);
             netWork_广场刷新.start();
             for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
                 NetWork_广场刷新 zi_network = new NetWork_广场刷新(activity_main);
                 zi_network.传递参数(url_passWord_data.getURL(), url_passWord_data.getPassWord());
                 zi_network.start();
             }
-
             swiperefee.setRefreshing(false);
         });
         button_add.setOnClickListener(V->{

@@ -48,7 +48,6 @@ public class NetWork_Main {
             ImageView return_icon = view.findViewById(R.id.return_icon);
             return_icon.setVisibility(View.GONE);
             text_id.setText("  ✍  ");
-
             view.setOnClickListener(V->{
                 dialog.dismiss();
                 dialog = null;

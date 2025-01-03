@@ -139,7 +139,7 @@ public class 发表文章窗口 {
         return_icon.setOnClickListener(V->{
             选择图片窗口句柄.dismiss();
         });
-        List<String> list = Fun_图片.遍历所有图片不带域名();
+        List<String> list = Fun_图片.遍历所有图片();
         if(list.isEmpty()){
             Fun.mess(activity, "网盘数据为空");
             return;

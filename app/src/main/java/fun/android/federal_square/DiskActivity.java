@@ -129,7 +129,7 @@ public class DiskActivity extends AppCompatActivity {
         }
         gridView.setNumColumns(Disk_Index);
         this.button_network_disk.setEnabled(true);
-        List<String> file_list = Fun_图片.遍历所有图片不带域名();
+        List<String> file_list = Fun_图片.遍历所有图片();
         title_index.setText("统计数量： " + file_list.size());
         gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index));
         gridView.setOnItemClickListener((parent, view, position, id) -> {

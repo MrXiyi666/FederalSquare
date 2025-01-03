@@ -32,7 +32,7 @@ public class 选择头像窗口 {
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-        List<String> file_list = Fun_图片.遍历所有图片不带域名();
+        List<String> file_list = Fun_图片.遍历所有图片();
         if(file_list.isEmpty()){
             Fun.mess(activity, "网盘数据为空");
             return;
