@@ -176,10 +176,18 @@ public class View_Square extends View_Main{
                 post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
                 String xu_url="";
                 for(Post_Data pd : post_data){
-                    if(pd.getName().equals("url")){
-                        xu_url = pd.getText();
+                    if(pd.getName().equals("forward")){
+                        xu_url = able.URL;
                     }
                 }
+                if(xu_url.isEmpty()){
+                    for(Post_Data pd : post_data){
+                        if(pd.getName().equals("url")){
+                            xu_url = pd.getText();
+                        }
+                    }
+                }
+
                 if(xu_url.isEmpty()){
                     Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
@@ -197,6 +205,7 @@ public class View_Square extends View_Main{
                     }
                 }
                 if(!for_bool){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                     continue;
                 }
                 able.handler.post(()->{

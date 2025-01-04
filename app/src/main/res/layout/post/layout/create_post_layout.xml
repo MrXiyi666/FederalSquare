@@ -73,6 +73,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/button_forward"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/button_forward_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="9sp"
+                android:textColor="@color/black"
+                android:text="转发"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginStart="20dp"
             android:id="@+id/button_message"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -108,6 +128,26 @@
                 android:textSize="9sp"
                 android:textColor="@color/black"
                 android:text="收藏"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginStart="20dp"
+            android:id="@+id/button_reshipped"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/button_reshipped_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="9sp"
+                android:textColor="@color/black"
+                android:text="转载"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

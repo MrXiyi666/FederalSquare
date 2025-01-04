@@ -28,6 +28,7 @@ import fun.android.federal_square.View_Post_Activity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
+import fun.android.federal_square.network.NetWork_转发功能;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.window.查看视频窗口;
@@ -37,6 +38,7 @@ public class Fun_文章 {
 
     public static View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
         View view = View.inflate(activity, R.layout.create_post_layout, null);
+        LinearLayout button_forward = view.findViewById(R.id.button_forward);
         LinearLayout button_message = view.findViewById(R.id.button_message);
         LinearLayout button_collection = view.findViewById(R.id.button_collection);
         View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
@@ -153,6 +155,17 @@ public class Fun_文章 {
         String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
+
+        button_forward.setOnClickListener(V->{
+            Post_Data postData = new Post_Data();
+            postData.setName("forward");
+            postData.setText("true");
+            post_data.add(postData);
+            NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
+            netWork_转发功能.传递参数(post_data, finalTime_txt);
+            netWork_转发功能.start();
+        });
+
         button_message.setOnClickListener(V->{
             查看评论窗口.查看评论窗口(activity, finalTime_txt, finalUrl_txt, finalPassWord_txt);
         });
