@@ -176,7 +176,7 @@ public class Fun_文章 {
                 postData.setText("true");
                 post_data.add(postData);
                 NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
-                netWork_转发功能.传递参数(post_data, finalTime_txt, button_forward, view);
+                netWork_转发功能.传递参数(post_data, finalTime_txt);
                 netWork_转发功能.start();
             }else{
                 Fun.mess(activity, "已存在");

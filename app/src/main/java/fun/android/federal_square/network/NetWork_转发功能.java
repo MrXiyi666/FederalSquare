@@ -20,11 +20,8 @@ public class NetWork_转发功能 extends NetWork_Main{
     }
     private String time;
     private List<Post_Data> postData;
-    private LinearLayout button_forward;
-    private View post_view;
-    public void 传递参数(List<Post_Data> postData, String time, LinearLayout button_forward, View post_view){
-        this.button_forward = button_forward;
-        this.post_view = post_view;
+
+    public void 传递参数(List<Post_Data> postData, String time){
         this.time = time;
         this.postData = postData;
         formBody = new FormBody.Builder()
