@@ -28,7 +28,6 @@ public class 查看视频窗口 {
 
     public static void 启动_Dialog(Activity activity, String url){
         Window window = activity.getWindow();
-        window.setNavigationBarColor(Color.BLACK);
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
         View view = View.inflate(activity, R.layout.window_video_view, null);
         final ExoPlayer player = new ExoPlayer.Builder(activity).build();
@@ -55,22 +54,25 @@ public class 查看视频窗口 {
 
                 }
                 if(playbackState == Player.STATE_READY){
-
+                    window.setNavigationBarColor(Color.BLACK);
+                    window.setStatusBarColor(Color.BLACK);
                 }
             }
             @Override
             public void onPlayerError(PlaybackException error) {
                 Player.Listener.super.onPlayerError(error);
-                Fun.mess(activity, "播放错误");
+                Fun.mess(activity, "播放错误", 2000);
                 player.release();
                 dialog.dismiss();
                 window.setNavigationBarColor(Color.WHITE);
+                window.setStatusBarColor(Color.TRANSPARENT);
             }
         });
         dialog.setOnCancelListener(dialog1 -> {
             player.release();
             dialog.dismiss();
             window.setNavigationBarColor(Color.WHITE);
+            window.setStatusBarColor(Color.TRANSPARENT);
         });
         dialog.setView(view);
         dialog.setCancelable(true);

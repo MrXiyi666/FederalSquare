@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.documentfile.provider.DocumentFile;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +28,6 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.window.查看图片窗口;
 
 public class Fun {
 
@@ -73,9 +71,48 @@ public class Fun {
         });
     }
 
+    public static void mess(Activity activity, String name, int time){
 
-    private static int Random_Data = 0;
+        able.handler.post(()->{
+            AlertDialog dialog = new AlertDialog.Builder(activity,  R.style.AlertDialog_Loading).create();
+            View view = View.inflate(activity, R.layout.window_toast_view, null);
+            TextView text_id = view.findViewById(R.id.text_id);
+            ImageView return_icon = view.findViewById(R.id.return_icon);
+            ScrollView scrollView = view.findViewById(R.id.scrollView);
+            return_icon.setVisibility(View.GONE);
+            view.post(()->{
+                if(text_id.getHeight() > able.高度){
+                    scrollView.getLayoutParams().height = able.高度 / 2;
+                    scrollView.requestLayout();
+                }
+            });
+            text_id.setText(name);
+
+            return_icon.setOnClickListener(V->{
+                dialog.dismiss();
+            });
+            dialog.setView(view);
+            dialog.setCancelable(false);
+            Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setGravity(Gravity.TOP);
+            dialog.show();
+            new Thread(()->{
+                try {
+                    Thread.sleep(time);
+                    dialog.dismiss();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+
+        });
+    }
+
     public static String 获取时间() {
+        int Random_Data = 0;
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS");
         Date date = new Date(System.currentTimeMillis());

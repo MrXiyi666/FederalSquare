@@ -37,7 +37,6 @@ public class NetWork_Main {
     public NetWork_Main(Activity activity){
         this.activity = activity;
         this.class_name = this.getClass().getSimpleName();
-        初始化等待窗口();
     }
 
     private void 初始化等待窗口(){
@@ -69,15 +68,7 @@ public class NetWork_Main {
     }
 
     public void 刷新(){
-        if(b_dialog){
-            able.handler.post(()-> {
-                if(dialog==null){
-                    return;
-                }
-                dialog.dismiss();
-                dialog = null;
-            });
-        }
+        关闭等待窗口();
     }
 
     public void start(){
@@ -105,6 +96,7 @@ public class NetWork_Main {
             able.handler.post(()-> dialog.show());
         }
         new Thread(()->{
+
             try {
                 Request request = new Request.Builder()
                         .url(url + url_path)
@@ -210,20 +202,25 @@ public class NetWork_Main {
             }catch (Exception e){
                Log.w(class_name, e);
             }
-            if(b_dialog){
-                able.handler.post(()-> {
-                    new Thread(()->{
-                        try{
-                            Thread.sleep(300);
-                        }catch(Exception ignored) {}
-                        if(dialog==null){
-                            return;
-                        }
-                        dialog.dismiss();
-                        dialog = null;
-                    }).start();
-                });
-            }
+            关闭等待窗口();
         }).start();
     }
+
+    private void 关闭等待窗口(){
+        if(b_dialog){
+            able.handler.post(()-> {
+                new Thread(()->{
+                    try{
+                        Thread.sleep(300);
+                    }catch(Exception ignored) {}
+                    if(dialog==null){
+                        return;
+                    }
+                    dialog.dismiss();
+                    dialog = null;
+                }).start();
+            });
+        }
+    }
+
 }
