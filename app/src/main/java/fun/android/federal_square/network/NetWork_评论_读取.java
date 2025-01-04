@@ -57,9 +57,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        able.handler.post(()->{
-            linear.removeAllViews();
-        });
+        linear.removeAllViews();
         if(list_view.isEmpty()){
             return;
         }

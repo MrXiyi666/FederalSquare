@@ -58,6 +58,7 @@ public class Fun_文章 {
         String url_txt="";
         String PassWord_txt="";
         String time_txt = "";
+        String forward = "";
         for(Post_Data pd : post_data){
             switch(pd.getName()){
                 case "name":
@@ -124,13 +125,24 @@ public class Fun_文章 {
                 case "time":
                     time_txt = pd.getText();
                     break;
+                case "forward":
+                    forward = pd.getText();
+                    break;
             }
         }
+        button_forward.setVisibility(View.GONE);
         if(!able.URL.equals(url_txt)){
+            button_forward.setVisibility(View.VISIBLE);
             url_txt_id.setText(url_txt);
+            if(!forward.isEmpty()){
+                url_txt_id.setText(url_txt + " - 转发");
+                button_forward.setVisibility(View.GONE);
+            }
             url_txt_id.setVisibility(View.VISIBLE);
         }
-
+        if(index>0){
+            button_forward.setVisibility(View.GONE);
+        }
         if(sb.length() >=50){
             sb.append("...");
         }
@@ -156,14 +168,21 @@ public class Fun_文章 {
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
 
+        String finalForward = forward;
         button_forward.setOnClickListener(V->{
-            Post_Data postData = new Post_Data();
-            postData.setName("forward");
-            postData.setText("true");
-            post_data.add(postData);
-            NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
-            netWork_转发功能.传递参数(post_data, finalTime_txt);
-            netWork_转发功能.start();
+            if(finalForward.isEmpty() && !able.URL.equals(finalUrl_txt)){
+                Post_Data postData = new Post_Data();
+                postData.setName("forward");
+                postData.setText("true");
+                post_data.add(postData);
+                NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
+                netWork_转发功能.传递参数(post_data, finalTime_txt, button_forward, view);
+                netWork_转发功能.start();
+            }else{
+                Fun.mess(activity, "已存在");
+
+            }
+
         });
 
         button_message.setOnClickListener(V->{

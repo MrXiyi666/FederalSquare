@@ -59,6 +59,7 @@ public class View_Post_Activity extends AppCompatActivity {
             finish();
         }
         String time = "";
+        String forward="";
         for(Post_Data post_data : able.传递数据){
             switch(post_data.getName()){
                 case "name":
@@ -114,9 +115,15 @@ public class View_Post_Activity extends AppCompatActivity {
                 case "password":
                     PassWord_txt = post_data.getText();
                     break;
+                case "forward":
+                    forward = post_data.getText();
+                    break;
             }
         }
         url_txt_id.setText(url_txt);
+        if(!forward.isEmpty()){
+            url_txt_id.setText(url_txt + " - 转发");
+        }
         url_txt_id.setVisibility(View.VISIBLE);
 
         if(!time.isEmpty() && !url_txt.isEmpty()){

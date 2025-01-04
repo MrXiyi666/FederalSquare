@@ -16,15 +16,14 @@ public class NetWork_读取热门 extends NetWork_Main {
         url_path = "federal-square/Read_Hot_List.php";
         formBody = new FormBody.Builder().add("PassWord", able.PassWord).build();
         b_mess = false;
+        b_update=false;
     }
 
 
     @Override
     public void 刷新() {
         super.刷新();
-        if(able.view_hot!=null){
-            able.view_hot.初始化数据();
-        }
+
 
     }
 
@@ -44,6 +43,8 @@ public class NetWork_读取热门 extends NetWork_Main {
             }
             down_list_data.add(name + ".json");
         }
-        b_update = true;
+        if(able.view_hot!=null){
+            able.view_hot.初始化数据();
+        }
     }
 }
