@@ -44,9 +44,10 @@ public class 查看视频窗口 {
         MediaSource mediaSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory)
                 .createMediaSource(mediaItem);
         player.setMediaSource(mediaSource, true);
+        playerView.setPlayer(player);
         player.prepare();
         player.play();
-        playerView.setPlayer(player);
+
         player.addListener(new Player.Listener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {

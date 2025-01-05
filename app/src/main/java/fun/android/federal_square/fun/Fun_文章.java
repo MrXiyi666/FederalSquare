@@ -149,6 +149,7 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         if(img_id > 0){
+            img_view.setPadding(0,0,0, 0);
             linear.addView(img_view);
         }
         img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
