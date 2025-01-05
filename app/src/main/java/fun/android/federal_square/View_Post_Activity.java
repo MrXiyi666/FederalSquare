@@ -7,24 +7,34 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import net.csdn.roundview.RoundImageView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.fun.Fun_账号;
+import fun.android.federal_square.network.NetWork_查看文章_评论发布;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.network.NetWork_评论_读取;
 import fun.android.federal_square.window.查看视频窗口;
+import fun.android.federal_square.window.查看评论窗口;
 
 public class View_Post_Activity extends AppCompatActivity {
     private TextView top_title;
@@ -46,6 +56,10 @@ public class View_Post_Activity extends AppCompatActivity {
         RoundImageView avatar_img = findViewById(R.id.avatar_img);
         TextView text_time = findViewById(R.id.text_time);
         TextView url_txt_id = findViewById(R.id.url_txt_id);
+        AppCompatButton button_ok = findViewById(R.id.button_ok);
+        EditText edit_text = findViewById(R.id.edit_text);
+
+
         top_title.post(()->{
             top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         });
@@ -131,6 +145,34 @@ public class View_Post_Activity extends AppCompatActivity {
             netWork_讨论_读取.传递参数(time, linear_check, url_txt, PassWord_txt);
             netWork_讨论_读取.start();
         }
+
+        if(!Fun_账号.GetID().isEmpty()){
+            String finalTime = time;
+            button_ok.setOnClickListener(V->{
+                String text = edit_text.getText().toString();
+                if(text.isEmpty()){
+                    return;
+                }
+                Post_Data post_data_name = new Post_Data();
+                post_data_name.setName("Name");
+                post_data_name.setText(Fun_账号.GetName());
+                Post_Data post_data_sign = new Post_Data();
+                post_data_sign.setName("Sign");
+                post_data_sign.setText(Fun_账号.GetSign());
+                Post_Data post_data_text = new Post_Data();
+                post_data_text.setName("Text");
+                post_data_text.setText(text);
+                List<Post_Data> post_dataList = new ArrayList<>();
+                post_dataList.add(post_data_name);
+                post_dataList.add(post_data_sign);
+                post_dataList.add(post_data_text);
+                NetWork_查看文章_评论发布 netWork_查看文章_评论发布 = new NetWork_查看文章_评论发布(this);
+                netWork_查看文章_评论发布.传递参数(url_txt, PassWord_txt, finalTime, Fun.获取时间(), able.gson.toJson(post_dataList), 查看评论窗口.添加评论布局(this, post_dataList), linear_check);
+                netWork_查看文章_评论发布.start();
+                edit_text.setText("");
+            });
+        }
+
     }
 
     @Override

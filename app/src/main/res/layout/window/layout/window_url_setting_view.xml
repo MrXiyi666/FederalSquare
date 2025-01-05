@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:id="@+id/button_ok"
             android:text="重新启动并删除数据"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:id="@+id/button_exit"
             android:text="不再显示"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>

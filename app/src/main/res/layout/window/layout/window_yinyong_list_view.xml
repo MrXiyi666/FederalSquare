@@ -75,7 +75,7 @@
             android:stateListAnimator="@null"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:id="@+id/button_add"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"

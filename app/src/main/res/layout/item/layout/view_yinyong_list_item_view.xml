@@ -19,7 +19,7 @@
             android:layout_height="match_parent"/>
         <androidx.appcompat.widget.AppCompatButton
             android:stateListAnimator="@null"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:id="@+id/button_system"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"

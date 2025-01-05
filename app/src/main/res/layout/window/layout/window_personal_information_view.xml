@@ -80,14 +80,14 @@
             android:layout_marginBottom="10dp"
             android:stateListAnimator="@null"
             android:id="@+id/button_ok"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:text="提交"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
             android:stateListAnimator="@null"
             android:id="@+id/button_delete"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:text="登出"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

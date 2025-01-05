@@ -44,7 +44,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
@@ -55,7 +55,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/button_color_selected_selector"
+            android:background="@drawable/button_event_back_tran"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
@@ -93,7 +93,7 @@
         android:stateListAnimator="@null"
         android:id="@+id/button_ok"
         android:layout_above="@id/di"
-        android:background="@drawable/button_color_selected_selector"
+        android:background="@drawable/button_event_back_tran"
         android:text="发表"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
