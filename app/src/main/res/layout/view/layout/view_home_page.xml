@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <net.csdn.roundview.CircleImageView
-                    android:layout_centerVertical="true"
                     android:scaleType="centerCrop"
                     android:id="@+id/avatar_img"
                     android:src="@mipmap/ic_launcher_round"

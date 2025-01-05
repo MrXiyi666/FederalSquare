@@ -56,10 +56,10 @@ public class Fun_文章 {
         for(Post_Data pd : post_data){
             switch(pd.getName()){
                 case "name":
-                    name_view.setText(pd.getText());
+                    name_view.setText(pd.getText().replace("\n", " ").replace("\r", " "));
                     break;
                 case "sign":
-                    sign_view.setText(pd.getText());
+                    sign_view.setText(pd.getText().replace("\n", " ").replace("\r", " "));
                     break;
                 case "avatar":
                     if(pd.getText().isEmpty()){
