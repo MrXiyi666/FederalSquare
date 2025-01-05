@@ -23,6 +23,7 @@ import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.network.NetWork_转发功能;
+import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.window.查看视频窗口;
@@ -41,7 +42,7 @@ public class Fun_文章 {
         TextView sign_view = view.findViewById(R.id.sign);
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         TextView url_txt_id = view.findViewById(R.id.url_txt_id);
-        List<ImageView> img_list = new ArrayList<>();
+        List<Video_ImageView> img_list = new ArrayList<>();
         img_list.add(img_view.findViewById(R.id.img0));
         img_list.add(img_view.findViewById(R.id.img1));
         img_list.add(img_view.findViewById(R.id.img2));
@@ -99,8 +100,14 @@ public class Fun_文章 {
                                     .error(R.drawable.glide_shibai)
                                     .fallback(R.drawable.glide_duqushibai))
                             .into(img_list.get(img_id));
+                    String 后缀 = Fun_文件.获取后缀(pd.getText());
+                    if(Fun.视频格式判断(后缀)){
+                        img_list.get(img_id).for_video = true;
+                        img_list.get(img_id).setBackgroundColor(Color.BLACK);
+                    }else{
+                        img_list.get(img_id).for_video = false;
+                    }
                     img_list.get(img_id).setOnClickListener(V->{
-                        String 后缀 = Fun_文件.获取后缀(pd.getText());
                         if(Fun.图片格式判断(后缀)){
                             查看图片窗口.启动_Dialog(activity, pd.getText());
                         }

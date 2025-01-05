@@ -2,18 +2,23 @@ package fun.android.federal_square.adatper;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
+import fun.android.federal_square.view.Video_ImageView;
 
 public class Disk_Grid_Adapter extends BaseAdapter {
     private final Activity activity;
@@ -76,6 +81,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
             gui = new MyGui();
             convertView = LayoutInflater.from(activity).inflate(R.layout.disk_item, null);
             gui.img = convertView.findViewById(R.id.img);
+            gui.linear = convertView.findViewById(R.id.linear);
             convertView.setTag(gui);
         }else{
             gui = (MyGui) convertView.getTag();
@@ -89,14 +95,24 @@ public class Disk_Grid_Adapter extends BaseAdapter {
                 .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
                 .apply(requestOptions)
                 .into(gui.img);
+        String 后缀 = Fun_文件.获取后缀(url.get(position));
+        if(Fun.视频格式判断(后缀)){
+            gui.img.for_video = true;
+            gui.linear.setBackgroundColor(Color.BLACK);
+        }else{
+            gui.img.for_video = false;
+            gui.linear.setBackgroundColor(Color.TRANSPARENT);
+        }
         ViewGroup.LayoutParams params = gui.img.getLayoutParams();
         gui.img.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             params.height = Fun.DPToPX(activity, height);
             gui.img.setLayoutParams(params);
         });
+
             return convertView;
     }
     class MyGui{
-        ImageView img;
+        LinearLayout linear;
+        Video_ImageView img;
     }
 }
