@@ -37,40 +37,51 @@
             android:background="#00000000"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <net.csdn.roundview.CircleImageView
-                android:scaleType="centerCrop"
-                android:id="@+id/avatar_img"
-                android:src="@mipmap/ic_launcher_round"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:rStrokeWidth="1dp"
-                app:rStrokeColor="#f2f3f7" />
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <net.csdn.roundview.CircleImageView
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/avatar_img"
+                    android:src="@mipmap/ic_launcher_round"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:rStrokeWidth="1dp"
+                    app:rStrokeColor="#f2f3f7" />
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/avatar_img"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/name"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:text="这个是昵称"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="小尾巴"
+                        android:id="@+id/sign"
+                        android:textSize="13sp"
+                        android:gravity="start"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
             <TextView
-                android:id="@+id/name"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:text="这个是昵称"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/avatar_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="小尾巴"
-                android:id="@+id/sign"
-                android:layout_marginStart="12dp"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:layout_toEndOf="@id/avatar_img"
-                android:layout_below="@id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/account_id"
                 android:textColor="@color/black"
                 android:layout_above="@id/linear_menu"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <LinearLayout

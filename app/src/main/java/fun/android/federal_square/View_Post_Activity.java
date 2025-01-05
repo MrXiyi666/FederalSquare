@@ -94,7 +94,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     text1_view.setTextSize(15);
                     text1_view.setText(post_data.getText());
                     text1_view.setTextIsSelectable(true);
-                    text1_view.setPadding(0,0,0,10);
+                    text1_view.setPadding(0,0,0, Fun.DPToPX(this, 10));
                     linear.addView(text1_view);
                     break;
                 case "img":
@@ -115,7 +115,7 @@ public class View_Post_Activity extends AppCompatActivity {
                             查看视频窗口.启动_Dialog(this, post_data.getText());
                         }
                     });
-                    img.setPadding(0,0,0,10);
+                    img.setPadding(0,0,0,Fun.DPToPX(this, 10));
                     linear.addView(img);
                     break;
                 case "time":
