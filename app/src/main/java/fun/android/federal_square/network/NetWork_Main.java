@@ -42,11 +42,10 @@ public class NetWork_Main {
     private void 初始化等待窗口(){
         able.handler.post(()->{
             dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
-            View view = View.inflate(activity, R.layout.window_toast_view, null);
+            View view = View.inflate(activity, R.layout.window_load_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
             ImageView return_icon = view.findViewById(R.id.return_icon);
             return_icon.setVisibility(View.GONE);
-            text_id.setText("  ✍  ");
             view.setOnClickListener(V->{
                 dialog.dismiss();
                 dialog = null;
@@ -54,6 +53,57 @@ public class NetWork_Main {
             if(dialog == null){
                 return;
             }
+            new Thread(()->{
+                int i=0;
+                 while (dialog != null && text_id!=null){
+                     switch(i){
+                         case 0:
+                             text_id.post(()->{
+                                 text_id.setText("  ✍  ");
+                             });
+                             break;
+                         case 1:
+                             text_id.post(()->{
+                                 text_id.setText("  .✍  ");
+                             });
+                             break;
+                         case 2:
+                             text_id.post(()->{
+                                 text_id.setText("  ..✍  ");
+                             });
+                             break;
+                         case 3:
+                             text_id.post(()->{
+                                 text_id.setText("  ...✍  ");
+                             });
+                             break;
+                         case 4:
+                             text_id.post(()->{
+                                 text_id.setText("  ....✍  ");
+                             });
+                             break;
+                         case 5:
+                             text_id.post(()->{
+                                 text_id.setText("  .....✍  ");
+                             });
+                             break;
+                         case 6:
+                             text_id.post(()->{
+                                 text_id.setText("  ......✍  ");
+                             });
+                             break;
+                     }
+                     try {
+                         Thread.sleep(300);
+                         i++;
+                         if(i > 6){
+                             i=0;
+                         }
+                     }catch (Exception e){
+
+                     }
+                 }
+            }).start();
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
