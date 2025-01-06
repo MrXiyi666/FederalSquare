@@ -19,13 +19,12 @@ import java.util.List;
 
 public class Fun_文件 {
     public static boolean 写入文件(String path, String data){
-        File file = new File(path);
         try {
-            file.delete();
-            OutputStreamWriter oStreamWriter = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
-            oStreamWriter.append(data);
-            oStreamWriter.flush();
+            FileOutputStream fos = new FileOutputStream(path, false);
+            OutputStreamWriter oStreamWriter = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+            oStreamWriter.write(data);
             oStreamWriter.close();
+            fos.close();
             return true;
         } catch (Exception e) {
             Log.w("写入文件", e);

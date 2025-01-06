@@ -132,15 +132,15 @@ public class Fun_文章 {
                     break;
             }
         }
-        button_forward.setVisibility(View.GONE);
+        if(able.URL.equals(url_txt)){
+            button_forward.setVisibility(View.GONE);
+        }
         if(!able.URL.equals(url_txt)){
-            button_forward.setVisibility(View.VISIBLE);
             url_txt_id.setText(url_txt);
-            if(!forward.isEmpty()){
-                url_txt_id.setText(url_txt + " - 转发");
-                button_forward.setVisibility(View.GONE);
-            }
             url_txt_id.setVisibility(View.VISIBLE);
+        }
+        if(!forward.isEmpty()){
+            button_forward.setVisibility(View.GONE);
         }
         if(index>0){
             button_forward.setVisibility(View.GONE);
