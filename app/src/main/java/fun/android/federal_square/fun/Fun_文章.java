@@ -104,6 +104,7 @@ public class Fun_文章 {
                     if(Fun.视频格式判断(后缀)){
                         img_list.get(img_id).for_video = true;
                         img_list.get(img_id).setBackgroundColor(Color.BLACK);
+                        img_list.get(img_id).setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                     }else{
                         img_list.get(img_id).for_video = false;
                     }

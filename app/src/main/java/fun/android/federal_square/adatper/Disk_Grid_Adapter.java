@@ -98,10 +98,8 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         String 后缀 = Fun_文件.获取后缀(url.get(position));
         if(Fun.视频格式判断(后缀)){
             gui.img.for_video = true;
-            gui.linear.setBackgroundColor(Color.BLACK);
         }else{
             gui.img.for_video = false;
-            gui.linear.setBackgroundColor(Color.TRANSPARENT);
         }
         ViewGroup.LayoutParams params = gui.img.getLayoutParams();
         gui.img.getViewTreeObserver().addOnGlobalLayoutListener(() -> {

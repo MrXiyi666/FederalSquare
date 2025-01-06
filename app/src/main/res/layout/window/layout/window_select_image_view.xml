@@ -30,12 +30,12 @@
         android:layout_height="1dp"/>
     <GridView
         android:scrollbars="none"
-        android:fadeScrollbars="false"
+        android:fadeScrollbars="true"
         android:id="@+id/gridview"
         android:stretchMode="columnWidth"
-        android:numColumns="3"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

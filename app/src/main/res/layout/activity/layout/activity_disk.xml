@@ -85,8 +85,8 @@
             android:id="@+id/gridview"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
-            android:horizontalSpacing="10dp"
-            android:verticalSpacing="10dp"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
