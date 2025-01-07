@@ -46,6 +46,7 @@ public class 发表文章窗口 {
         EditText edit_text = view.findViewById(R.id.edit_text);
         AppCompatButton add_img = view.findViewById(R.id.add_img);
         AppCompatButton add_text = view.findViewById(R.id.add_text);
+        AppCompatButton add_img_or_video_url = view.findViewById(R.id.add_img_or_video_url);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         linear = view.findViewById(R.id.linear);
         post_dataList = new ArrayList<>();
@@ -84,6 +85,10 @@ public class 发表文章窗口 {
                 Fun.mess(activity, "数据为空");
             }
 
+        });
+
+        add_img_or_video_url.setOnClickListener(V->{
+            图片链接输入窗口(activity);
         });
 
         button_ok.setOnClickListener(V->{
@@ -195,5 +200,63 @@ public class 发表文章窗口 {
         选择图片窗口句柄.getWindow().setGravity(Gravity.CENTER);
         选择图片窗口句柄.show();
 
+    }
+
+    public void 图片链接输入窗口(Activity activity){
+        AlertDialog dialog = new AlertDialog.Builder(activity).create();
+        View view = View.inflate(activity, R.layout.window_post_add_img_url_view, null);
+        ImageView return_icon = view.findViewById(R.id.return_icon);
+        AppCompatButton button_ok = view.findViewById(R.id.button_ok);
+        EditText edit_url = view.findViewById(R.id.edit_url);
+        return_icon.setOnClickListener(V->{
+            dialog.dismiss();
+        });
+
+        button_ok.setOnClickListener(V->{
+            String str_url = edit_url.getText().toString();
+            if(str_url.isEmpty()){
+                return;
+            }
+            Post_Data post_data = new Post_Data();
+            post_data.setName("img");
+            post_data.setText(str_url);
+            ImageView imageView = new ImageView(activity);
+            Glide.with(activity)
+                    .load(str_url)
+                    .into(imageView);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
+            params.setMargins(0, 0, 0, 10);
+            params.gravity = Gravity.START;
+            imageView.setLayoutParams(params);
+            imageView.setOnLongClickListener(V1->{
+                Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(10);
+                linear.removeView(imageView);
+                post_dataList.remove(post_data);
+                return true;
+            });
+            imageView.setOnClickListener(V1->{
+                String 后缀 = Fun_文件.获取后缀(str_url);
+                if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                    查看图片窗口.启动_Dialog(activity, str_url);
+                }
+                if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                    查看视频窗口.启动_Dialog(activity, str_url);
+                }
+            });
+            post_dataList.add(post_data);
+            linear.addView(imageView);
+            dialog.dismiss();
+        });
+
+        dialog.setView(view);
+        dialog.setCancelable(false);
+        Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.show();
     }
 }

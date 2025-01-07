@@ -21,6 +21,7 @@ public class NetWork_评论_读取 extends NetWork_Main {
     private List<View> list_view = new ArrayList<>();
     public void 传递参数(String square_time, LinearLayout linear, String 网址 , String PassWord){
         this.linear = linear;
+        list_view.clear();
         formBody = new FormBody.Builder()
                 .add("PassWord", PassWord)
                 .add("path", "./Discuss_Data/" + square_time)
@@ -68,5 +69,6 @@ public class NetWork_评论_读取 extends NetWork_Main {
                 });
             }
         }).start();
+
     }
 }

@@ -65,6 +65,7 @@ public class 查看评论窗口 {
         netWork_讨论_读取.传递参数(time_name, linear, 网址, PassWord);
         netWork_讨论_读取.start();
         swiperefee.setOnRefreshListener(()->{
+            netWork_讨论_读取.传递参数(time_name, linear, 网址, PassWord);
             netWork_讨论_读取.start();
             swiperefee.setRefreshing(false);
         });
