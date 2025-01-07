@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -29,18 +30,13 @@ public class 查看图片窗口 {
         photoView.getLayoutParams().height = able.高度;
         photoView.setVisibility(View.VISIBLE);
         Glide.with(activity)
-                .asBitmap()
                 .load(url)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(new RequestOptions()
+                        .placeholder(R.drawable.glide_zhanwei)
                         .error(R.drawable.glide_shibai)
                         .fallback(R.drawable.glide_duqushibai))
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
-                        photoView.setImageBitmap(resource);
-
-                    }
-                });
+                .into(photoView);
         photoView.setOnClickListener(V->{
             dialog.dismiss();
         });

@@ -27,6 +27,7 @@ import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.network.NetWork_网盘_上传视频;
+import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_网盘_上传图片;
@@ -107,14 +108,14 @@ public class DiskActivity extends AppCompatActivity {
                 netWork_网盘_上传图片.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
                 netWork_网盘_上传图片.start();
                 return;
-            }
-            if(Fun.视频格式判断(后缀)){
+            }else if(Fun.视频格式判断(后缀)){
                 Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
                 NetWork_网盘_上传视频 netWork_网盘_上传视频 = new NetWork_网盘_上传视频(this);
                 netWork_网盘_上传视频.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
                 netWork_网盘_上传视频.start();
                 return;
             }
+
 
             Fun.mess(this, "不支持的格式 " + 后缀);
         });
@@ -135,11 +136,12 @@ public class DiskActivity extends AppCompatActivity {
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             String 后缀 = Fun_文件.获取后缀(file_list.get(position));
             String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position);
-            if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+            if(Fun.图片格式判断(后缀)){
                 查看图片窗口.启动_Dialog(this, url);
-            }
-            if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv") | 后缀.equals("flv") | 后缀.equals("rmvb")){
+            }else if(Fun.视频格式判断(后缀)){
                 查看视频窗口.启动_Dialog(this, url);
+            }else{
+                打开方式窗口.启动(this, url);
             }
         });
         gridView.setOnItemLongClickListener((parent, view, position, id) -> {

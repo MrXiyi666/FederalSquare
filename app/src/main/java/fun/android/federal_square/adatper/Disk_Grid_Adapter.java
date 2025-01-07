@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 import fun.android.federal_square.R;
@@ -91,8 +92,8 @@ public class Disk_Grid_Adapter extends BaseAdapter {
                 .error(R.drawable.glide_shibai)
                 .fallback(R.drawable.glide_duqushibai);
         Glide.with(activity)
-                .asBitmap()
                 .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(requestOptions)
                 .into(gui.img);
         String 后缀 = Fun_文件.获取后缀(url.get(position));

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
@@ -25,6 +26,7 @@ import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.network.NetWork_转发功能;
 import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.删除窗口;
+import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.查看评论窗口;
@@ -103,7 +105,7 @@ public class Fun_文章 {
                     String 后缀 = Fun_文件.获取后缀(pd.getText());
                     if(Fun.图片格式判断(后缀)){
                         img_list.get(img_id).for_video = false;
-                    }else{
+                    }else if(Fun.视频格式判断(后缀)){
                         img_list.get(img_id).for_video = true;
                         img_list.get(img_id).setBackgroundColor(Color.BLACK);
                         img_list.get(img_id).setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -111,8 +113,10 @@ public class Fun_文章 {
                     img_list.get(img_id).setOnClickListener(V->{
                         if(Fun.图片格式判断(后缀)){
                             查看图片窗口.启动_Dialog(activity, pd.getText());
-                        }else{
+                        }else if(Fun.视频格式判断(后缀)){
                             查看视频窗口.启动_Dialog(activity, pd.getText());
+                        }else{
+                            打开方式窗口.启动(activity, pd.getText());
                         }
                     });
                     img_id++;

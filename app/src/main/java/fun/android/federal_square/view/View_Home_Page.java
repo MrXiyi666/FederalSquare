@@ -61,14 +61,14 @@ public class View_Home_Page extends View_Main{
         name_view.setText(Fun_账号.GetName() + "");
         sign_view.setText(Fun_账号.GetSign() + "");
         account_id.setText("ID: " + Fun_账号.GetID() + "");
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.glide_zhanwei)
+                .circleCropTransform()
+                .error(R.drawable.glide_shibai)
+                .fallback(R.drawable.glide_duqushibai);
         if(Fun_账号.GetAvatar_Url().isEmpty()){
             avatar_img.setImageResource(R.mipmap.ic_launcher_round);
         }else{
-            RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(R.drawable.glide_zhanwei)
-                    .circleCropTransform()
-                    .error(R.drawable.glide_shibai)
-                    .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity_main)
                     .asBitmap()
                     .load(Fun_账号.GetAvatar_Url())
@@ -76,7 +76,7 @@ public class View_Home_Page extends View_Main{
                     .into(avatar_img);
         }
         if(!Fun_账号.GetBack_Url().isEmpty()){
-            Glide.with(activity_main).asBitmap().load(Fun_账号.GetBack_Url()).into(back_img);
+            Glide.with(activity_main).asBitmap().load(Fun_账号.GetBack_Url()).apply(requestOptions).into(back_img);
         }
         top_relati.post(()->{
             top_relati.getLayoutParams().height = top_relati.getHeight() + able.状态栏高度;

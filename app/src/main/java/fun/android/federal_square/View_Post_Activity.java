@@ -32,6 +32,7 @@ import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_查看文章_评论发布;
 import fun.android.federal_square.view.Video_ImageView;
+import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.network.NetWork_评论_读取;
 import fun.android.federal_square.window.查看视频窗口;
@@ -103,22 +104,22 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .asBitmap()
                             .load(post_data.getText())
-                            .apply(new RequestOptions()
-                            .error(R.drawable.glide_shibai)
-                            .fallback(R.drawable.glide_duqushibai))
                             .into(img);
                     String 后缀 = Fun_文件.获取后缀(post_data.getText());
                     if(Fun.图片格式判断(后缀)){
                         img.for_video = false;
                     }else{
                         img.for_video = true;
+                        img.setBackgroundColor(Color.BLACK);
+                        img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                     }
                     img.setOnClickListener(V->{
-
                         if(Fun.图片格式判断(后缀)){
                             查看图片窗口.启动_Dialog(this, post_data.getText());
-                        }else{
+                        }else if(Fun.视频格式判断(后缀)){
                             查看视频窗口.启动_Dialog(this, post_data.getText());
+                        }else{
+                            打开方式窗口.启动(this, post_data.getText());
                         }
                     });
                     img.setPadding(0,0,0,Fun.DPToPX(this, 10));

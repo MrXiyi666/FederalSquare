@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import fun.android.federal_square.R;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
 import fun.android.federal_square.data.Post_Data;
@@ -167,12 +164,11 @@ public class 发表文章窗口 {
                     .error(R.drawable.glide_shibai)
                     .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
-                    .asBitmap()
-                    .apply(requestOptions)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
+                    .apply(requestOptions)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
+                    ViewGroup.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
@@ -186,11 +182,12 @@ public class 发表文章窗口 {
             imageView.setOnClickListener(V->{
                 String 后缀 = Fun_文件.获取后缀(list.get(position));
                 String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position);
-                if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                if(Fun.图片格式判断(后缀)){
                     查看图片窗口.启动_Dialog(activity, url);
-                }
-                if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                }else if(Fun.视频格式判断(后缀)){
                     查看视频窗口.启动_Dialog(activity, url);
+                }else{
+                    打开方式窗口.启动(activity, url);
                 }
             });
             post_dataList.add(post_data);
@@ -233,12 +230,11 @@ public class 发表文章窗口 {
                     .error(R.drawable.glide_shibai)
                     .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
-                    .asBitmap()
-                    .apply(requestOptions)
                     .load(str_url)
+                    .apply(requestOptions)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
+                    ViewGroup.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
@@ -251,11 +247,12 @@ public class 发表文章窗口 {
             });
             imageView.setOnClickListener(V1->{
                 String 后缀 = Fun_文件.获取后缀(str_url);
-                if(后缀.equals("jpg") | 后缀.equals("jpeg") | 后缀.equals("png") | 后缀.equals("webp")){
+                if(Fun.图片格式判断(后缀)){
                     查看图片窗口.启动_Dialog(activity, str_url);
-                }
-                if(后缀.equals("mp4") | 后缀.equals("3gp") | 后缀.equals("mov") | 后缀.equals("avi") | 后缀.equals("mkv")){
+                }else if(Fun.视频格式判断(后缀)){
                     查看视频窗口.启动_Dialog(activity, str_url);
+                }else{
+                    打开方式窗口.启动(activity, str_url);
                 }
             });
             post_dataList.add(post_data);
