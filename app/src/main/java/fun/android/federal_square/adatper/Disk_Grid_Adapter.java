@@ -96,10 +96,10 @@ public class Disk_Grid_Adapter extends BaseAdapter {
                 .apply(requestOptions)
                 .into(gui.img);
         String 后缀 = Fun_文件.获取后缀(url.get(position));
-        if(Fun.视频格式判断(后缀)){
-            gui.img.for_video = true;
-        }else{
+        if(Fun.图片格式判断(后缀)){
             gui.img.for_video = false;
+        }else{
+            gui.img.for_video = true;
         }
         ViewGroup.LayoutParams params = gui.img.getLayoutParams();
         gui.img.getViewTreeObserver().addOnGlobalLayoutListener(() -> {

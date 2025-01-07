@@ -108,17 +108,16 @@ public class View_Post_Activity extends AppCompatActivity {
                             .fallback(R.drawable.glide_duqushibai))
                             .into(img);
                     String 后缀 = Fun_文件.获取后缀(post_data.getText());
-                    if(Fun.视频格式判断(后缀)){
-                        img.for_video = true;
-                    }else{
+                    if(Fun.图片格式判断(后缀)){
                         img.for_video = false;
+                    }else{
+                        img.for_video = true;
                     }
                     img.setOnClickListener(V->{
 
                         if(Fun.图片格式判断(后缀)){
                             查看图片窗口.启动_Dialog(this, post_data.getText());
-                        }
-                        if(Fun.视频格式判断(后缀)){
+                        }else{
                             查看视频窗口.启动_Dialog(this, post_data.getText());
                         }
                     });
