@@ -1,11 +1,7 @@
 package fun.android.federal_square.fun;
 
-import android.util.Log;
-
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import fun.android.federal_square.data.Post_Data;
@@ -13,7 +9,7 @@ import fun.android.federal_square.data.able;
 
 public class Fun_账号 {
     public static List<Post_Data> 读取账号(){
-        String txt = Fun_文件.读取文件(able.app_path + "Account/account.json");
+        String txt = 读取账号_String();
         if(txt.isEmpty()){
             return new ArrayList<>();
         }
@@ -27,7 +23,7 @@ public class Fun_账号 {
         if(post_dataList.isEmpty()){
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        return post_dataList;
     }
 
     public static String 读取账号_String(){
@@ -80,6 +76,9 @@ public class Fun_账号 {
 
     public static boolean 保存账号(List<Post_Data> post_dataList){
         return Fun_文件.写入文件(able.app_path + "Account/account.json", able.gson.toJson(post_dataList));
+    }
+    public static boolean 保存账号(String str){
+        return Fun_文件.写入文件(able.app_path + "Account/account.json", str);
     }
 
     public static String GetID(){

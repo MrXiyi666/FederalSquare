@@ -10,12 +10,10 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import java.io.File;
 import java.util.Objects;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -23,6 +21,7 @@ import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_我的_个人信息;
+import fun.android.federal_square.network.NetWork_账号同步;
 import fun.android.federal_square.view.View_Login;
 
 public class 个人信息窗口 {
@@ -33,6 +32,7 @@ public class 个人信息窗口 {
         EditText edit_name = view.findViewById(R.id.edit_name);
         EditText edit_sign = view.findViewById(R.id.edit_sign);
         EditText edit_password = view.findViewById(R.id.edit_password);
+        AppCompatButton button_sync = view.findViewById(R.id.button_sync);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         AppCompatButton button_delete = view.findViewById(R.id.button_delete);
         TextView text_url = view.findViewById(R.id.text_url);
@@ -40,6 +40,11 @@ public class 个人信息窗口 {
             dialog.dismiss();
         });
         text_url.setText("我的网址: "+able.URL + "\n我的密码: " + able.PassWord);
+        button_sync.setOnClickListener(V->{
+            NetWork_账号同步 netWork_账号同步 = new NetWork_账号同步(activity);
+            netWork_账号同步.传递参数(dialog);
+            netWork_账号同步.start();
+        });
         button_ok.setOnClickListener(V->{
             String name_txt="";
             String sign_txt="";

@@ -81,9 +81,17 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_marginBottom="10dp"
             android:stateListAnimator="@null"
+            android:id="@+id/button_sync"
+            android:background="@drawable/button_event_back_tran"
+            android:text="从云端同步"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginBottom="10dp"
+            android:stateListAnimator="@null"
             android:id="@+id/button_ok"
             android:background="@drawable/button_event_back_tran"
-            android:text="提交"
+            android:text="提交到云端"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
