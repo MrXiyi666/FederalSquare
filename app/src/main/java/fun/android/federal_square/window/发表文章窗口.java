@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,7 +162,13 @@ public class 发表文章窗口 {
             post_data.setName("img");
             post_data.setText(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
             ImageView imageView = new ImageView(activity);
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.drawable.glide_zhanwei)
+                    .error(R.drawable.glide_shibai)
+                    .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
+                    .asBitmap()
+                    .apply(requestOptions)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -221,7 +228,13 @@ public class 发表文章窗口 {
             post_data.setName("img");
             post_data.setText(str_url);
             ImageView imageView = new ImageView(activity);
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.drawable.glide_zhanwei)
+                    .error(R.drawable.glide_shibai)
+                    .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
+                    .asBitmap()
+                    .apply(requestOptions)
                     .load(str_url)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
