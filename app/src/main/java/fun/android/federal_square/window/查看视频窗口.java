@@ -28,6 +28,7 @@ public class 查看视频窗口 {
 
     public static void 启动_Dialog(Activity activity, String url){
         Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
         View view = View.inflate(activity, R.layout.window_video_view, null);
         final ExoPlayer player = new ExoPlayer.Builder(activity).build();
@@ -65,6 +66,7 @@ public class 查看视频窗口 {
                 Fun.mess(activity, "播放错误", 2000);
                 player.release();
                 dialog.dismiss();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 window.setNavigationBarColor(Color.WHITE);
                 window.setStatusBarColor(Color.TRANSPARENT);
             }
@@ -72,6 +74,7 @@ public class 查看视频窗口 {
         dialog.setOnCancelListener(dialog1 -> {
             player.release();
             dialog.dismiss();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             window.setNavigationBarColor(Color.WHITE);
             window.setStatusBarColor(Color.TRANSPARENT);
         });

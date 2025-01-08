@@ -80,7 +80,6 @@
     <EditText
         android:layout_below="@id/linear_bu2"
         android:textColor="@color/black"
-        android:maxLength="100"
         android:textSize="15sp"
         android:hint="这里写文章"
         android:layout_margin="10dp"
