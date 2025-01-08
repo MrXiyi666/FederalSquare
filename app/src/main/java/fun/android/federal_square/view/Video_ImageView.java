@@ -7,12 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-
-import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 
-public class Video_ImageView extends AppCompatImageView {
+public class Video_ImageView extends net.csdn.roundview.RoundImageView {
     private Paint paint_fill, paint_stroke;
     private void init(Context context){
         paint_fill = new Paint();
