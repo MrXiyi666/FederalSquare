@@ -2,29 +2,21 @@ package fun.android.federal_square;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import net.csdn.roundview.RoundImageView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -101,9 +93,20 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
                 case "img":
                     Video_ImageView img = new Video_ImageView(this);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
+                    params.setMargins(0, 0, 0, 10);
+                    params.gravity = Gravity.START;
+                    img.setLayoutParams(params);
+                    RequestOptions requestOptions = new RequestOptions()
+                            .placeholder(R.drawable.glide_zhanwei)
+                            .error(R.drawable.glide_shibai)
+                            .fallback(R.drawable.glide_duqushibai);
                     Glide.with(this)
                             .asBitmap()
                             .load(post_data.getText())
+                            .fitCenter()
+                            .apply(requestOptions)
                             .into(img);
                     String 后缀 = Fun_文件.获取后缀(post_data.getText());
                     if(Fun.图片格式判断(后缀)){
@@ -122,7 +125,6 @@ public class View_Post_Activity extends AppCompatActivity {
                             打开方式窗口.启动(this, post_data.getText());
                         }
                     });
-                    img.setPadding(0,0,0,Fun.DPToPX(this, 10));
                     linear.addView(img);
                     break;
                 case "time":

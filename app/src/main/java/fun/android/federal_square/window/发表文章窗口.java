@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
@@ -168,7 +169,7 @@ public class 发表文章窗口 {
                     .apply(requestOptions)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, able.宽度 / 2);
+                    LinearLayout.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
@@ -230,11 +231,13 @@ public class 发表文章窗口 {
                     .error(R.drawable.glide_shibai)
                     .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
+                    .asBitmap()
                     .load(str_url)
+                    .fitCenter()
                     .apply(requestOptions)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, able.宽度 / 2);
+                    LinearLayout.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             params.gravity = Gravity.START;
             imageView.setLayoutParams(params);

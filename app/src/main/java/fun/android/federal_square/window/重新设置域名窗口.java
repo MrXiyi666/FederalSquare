@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
+
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 import java.util.Objects;
 import fun.android.federal_square.R;
@@ -31,15 +34,21 @@ public class 重新设置域名窗口 {
         });
 
         button_ok.setOnClickListener(V->{
-            Fun_文件.删除文件夹(new File(able.app_path + "System_Data"));
-            Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
-            Fun_文件.删除文件夹(new File(able.app_path + "Hot_Data"));
-            Fun_文件.删除文件夹(new File(able.app_path + "Square_Data"));
-            Fun_文件.删除文件夹(new File(able.app_path + "YinYong_Data"));
-            Fun_文件.删除文件夹(new File(able.app_path + "Account"));
-            Fun_文件.删除文件夹(new File(able.app_path + "video_cache"));
-            Fun_文件.删除文件夹(new File(able.app_path + "cache"));
-            System.exit(0);
+            Glide.get(activity).clearMemory();
+            new Thread(()->{
+                Glide.get(activity).clearDiskCache();
+                Fun_文件.删除文件夹(new File(able.app_path + "System_Data"));
+                Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
+                Fun_文件.删除文件夹(new File(able.app_path + "Hot_Data"));
+                Fun_文件.删除文件夹(new File(able.app_path + "Square_Data"));
+                Fun_文件.删除文件夹(new File(able.app_path + "YinYong_Data"));
+                Fun_文件.删除文件夹(new File(able.app_path + "Account"));
+                Fun_文件.删除文件夹(new File(able.app_path + "video_cache"));
+                Fun_文件.删除文件夹(new File(able.app_path + "cache"));
+                able.handler.post(()->{
+                    System.exit(0);
+                });
+            }).start();
         });
         button_exit.setOnClickListener(V->{
             Fun_文件.写入文件(able.app_path + "System_Data/url_setting_boolean.txt", "");
