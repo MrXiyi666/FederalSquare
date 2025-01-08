@@ -37,10 +37,10 @@ public class 查看图片窗口 {
         Glide.with(activity)
                 .load(url)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .listener(new RequestListener<Drawable>() {
+                .listener(new RequestListener<>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
-                        new Thread(()->{
+                        new Thread(() -> {
                             try {
                                 Thread.sleep(300);
                             } catch (InterruptedException e1) {
@@ -55,7 +55,7 @@ public class 查看图片窗口 {
 
                     @Override
                     public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
-                        new Thread(()->{
+                        new Thread(() -> {
                             try {
                                 Thread.sleep(300);
                             } catch (InterruptedException e) {

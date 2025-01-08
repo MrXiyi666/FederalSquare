@@ -225,7 +225,7 @@ public class Fun {
     }
 
     public static boolean 图片格式判断(String name){
-        if(name.equals("jpg") | name.equals("jpeg") | name.equals("png") | name.equals("webp")){
+        if(name.equals("jpg") | name.equals("jpeg") | name.equals("png") | name.equals("webp") | name.equals("gif")){
             return true;
         }
         return false;
