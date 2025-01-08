@@ -41,11 +41,12 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
         init(context);
     }
     public boolean for_video=false;
+    public String 后缀="";
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(for_video){
-            String str = "视频";
+        if(Fun.视频格式判断(后缀) | 后缀.equals("gif")){
+            String str = 后缀;
             int x_width = this.getWidth() / 2;
             int p_width = (int) ((paint_stroke.getTextSize() / 2) * str.length());
             int x = x_width - p_width;

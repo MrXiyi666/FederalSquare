@@ -10,7 +10,6 @@
     <fun.android.federal_square.view.Video_ImageView
         android:background="@drawable/round_white_stroke_black"
         android:layout_gravity="bottom"
-        android:scaleType="fitStart"
         android:id="@+id/img0"
         android:layout_weight="1"
         android:layout_width="0dp"
@@ -20,7 +19,6 @@
         app:rRadius="10dp"/>
     <fun.android.federal_square.view.Video_ImageView
         android:layout_gravity="bottom"
-        android:scaleType="fitStart"
         android:layout_marginStart="5dp"
         android:id="@+id/img1"
         android:layout_weight="1"
@@ -31,7 +29,6 @@
         app:rRadius="10dp"/>
     <fun.android.federal_square.view.Video_ImageView
         android:layout_gravity="bottom"
-        android:scaleType="fitStart"
         android:layout_marginStart="5dp"
         android:id="@+id/img2"
         android:layout_weight="1"

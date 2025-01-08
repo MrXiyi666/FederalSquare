@@ -109,12 +109,10 @@ public class View_Post_Activity extends AppCompatActivity {
                             .apply(requestOptions)
                             .into(img);
                     String 后缀 = Fun_文件.获取后缀(post_data.getText());
-                    if(Fun.图片格式判断(后缀)){
-                        img.for_video = false;
-                    }else{
-                        img.for_video = true;
+                    img.后缀 = 后缀;
+                    img.for_video = true;
+                    if(!Fun.图片格式判断(后缀)){
                         img.setBackgroundColor(Color.BLACK);
-                        img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                     }
                     img.setOnClickListener(V->{
                         if(Fun.图片格式判断(后缀)){

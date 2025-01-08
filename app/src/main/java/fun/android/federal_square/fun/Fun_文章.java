@@ -76,14 +76,14 @@ public class Fun_文章 {
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
-                    if(sb.length() >=50){
+                    if(sb.length() >=100){
                         break;
                     }
                     if(!sb.toString().isEmpty()){
                         sb.append("\n");
                     }
                     for(String s : str){
-                        if(sb.length() >= 50){
+                        if(sb.length() >= 100){
                             break;
                         }
                         sb.append(s);
@@ -103,12 +103,10 @@ public class Fun_文章 {
                                     .fallback(R.drawable.glide_duqushibai))
                             .into(img_list.get(img_id));
                     String 后缀 = Fun_文件.获取后缀(pd.getText());
-                    if(Fun.图片格式判断(后缀)){
-                        img_list.get(img_id).for_video = false;
-                    }else if(Fun.视频格式判断(后缀)){
-                        img_list.get(img_id).for_video = true;
+                    img_list.get(img_id).后缀 = 后缀;
+                    img_list.get(img_id).for_video = true;
+                    if(!Fun.图片格式判断(后缀)){
                         img_list.get(img_id).setBackgroundColor(Color.BLACK);
-                        img_list.get(img_id).setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                     }
                     img_list.get(img_id).setOnClickListener(V->{
                         if(Fun.图片格式判断(后缀)){
@@ -148,7 +146,7 @@ public class Fun_文章 {
         if(index>0){
             button_forward.setVisibility(View.GONE);
         }
-        if(sb.length() >=50){
+        if(sb.length() >=100){
             sb.append("...");
         }
         if(!sb.toString().isEmpty()){
