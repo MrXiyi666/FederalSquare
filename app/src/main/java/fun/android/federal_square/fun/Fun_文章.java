@@ -96,15 +96,11 @@ public class Fun_文章 {
                     img_linear1.setVisibility(View.VISIBLE);
                     img_list.get(img_id).setImageBitmap(null);
                     Glide.with(activity)
-                            .asBitmap()
                             .load(pd.getText())
-                            .apply(new RequestOptions()
-                                    .error(R.drawable.glide_shibai)
-                                    .fallback(R.drawable.glide_duqushibai))
+                            .transition(DrawableTransitionOptions.withCrossFade())
                             .into(img_list.get(img_id));
                     String 后缀 = Fun_文件.获取后缀(pd.getText());
                     img_list.get(img_id).后缀 = 后缀;
-                    img_list.get(img_id).for_video = true;
                     if(!Fun.图片格式判断(后缀)){
                         img_list.get(img_id).setBackgroundColor(Color.BLACK);
                     }

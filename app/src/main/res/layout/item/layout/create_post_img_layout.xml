@@ -8,7 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <fun.android.federal_square.view.Video_ImageView
-        android:background="@drawable/round_white_stroke_black"
         android:layout_gravity="bottom"
         android:id="@+id/img0"
         android:layout_weight="1"

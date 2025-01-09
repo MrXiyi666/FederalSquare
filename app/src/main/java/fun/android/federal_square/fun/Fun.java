@@ -218,14 +218,14 @@ public class Fun {
     }
 
     public static boolean 视频格式判断(String name){
-        if(name.equals("mp4") | name.equals("3gp") | name.equals("mov") | name.equals("avi") | name.equals("mkv") | name.equals("flv") | name.equals("webm")){
+        if(name.equals("mp4") || name.equals("3gp") || name.equals("mov") || name.equals("avi") || name.equals("mkv") || name.equals("flv") || name.equals("webm")){
             return true;
         }
         return false;
     }
 
     public static boolean 图片格式判断(String name){
-        if(name.equals("jpg") | name.equals("jpeg") | name.equals("png") | name.equals("webp") | name.equals("gif")){
+        if(name.equals("jpg") || name.equals("jpeg") || name.equals("png") || name.equals("webp") || name.equals("gif")){
             return true;
         }
         return false;

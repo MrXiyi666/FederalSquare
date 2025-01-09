@@ -4,12 +4,14 @@ import android.os.Handler;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import fun.android.federal_square.MainActivity;
+import fun.android.federal_square.R;
 import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Hot;
 import fun.android.federal_square.view.View_Main;
@@ -36,5 +38,10 @@ public class able {
     public static View_Home view_home;
 
     public static List<Post_Data> 传递数据;
+
+    public static RequestOptions requestOptions = new RequestOptions()
+            .placeholder(R.drawable.glide_zhanwei)
+            .error(R.drawable.glide_shibai)
+            .fallback(R.drawable.glide_duqushibai);
 
 }

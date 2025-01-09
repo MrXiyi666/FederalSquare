@@ -35,7 +35,7 @@
         android:layout_margin="10dp"
         android:textSize="15sp"
         android:textColor="@color/black"
-        android:text="无法判断文件类型 请选择打开方式"
+        android:text="选择打开方式"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

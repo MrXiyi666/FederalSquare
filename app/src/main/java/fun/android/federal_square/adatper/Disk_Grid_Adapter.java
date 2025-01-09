@@ -2,17 +2,12 @@ package fun.android.federal_square.adatper;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -83,32 +78,19 @@ public class Disk_Grid_Adapter extends BaseAdapter {
             convertView = LayoutInflater.from(activity).inflate(R.layout.disk_item, null);
             gui.img = convertView.findViewById(R.id.img);
             gui.linear = convertView.findViewById(R.id.linear);
+            String 后缀 = Fun_文件.获取后缀(url.get(position));
+            gui.img.后缀 = 后缀;
+            ViewGroup.LayoutParams params = gui.img.getLayoutParams();
+            params.height = Fun.DPToPX(activity, height);
+            gui.img.setLayoutParams(params);
             convertView.setTag(gui);
         }else{
             gui = (MyGui) convertView.getTag();
         }
-        RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.glide_zhanwei)
-                .error(R.drawable.glide_shibai)
-                .fallback(R.drawable.glide_duqushibai);
         Glide.with(activity)
                 .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(requestOptions)
                 .into(gui.img);
-        String 后缀 = Fun_文件.获取后缀(url.get(position));
-        if(Fun.图片格式判断(后缀)){
-            gui.img.for_video = false;
-        }else{
-            gui.img.for_video = true;
-        }
-        ViewGroup.LayoutParams params = gui.img.getLayoutParams();
-        gui.img.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            params.height = Fun.DPToPX(activity, height);
-            gui.img.setLayoutParams(params);
-        });
-
-            return convertView;
+        return convertView;
     }
     class MyGui{
         LinearLayout linear;

@@ -40,15 +40,13 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
         super(context, attrs, defStyleAttr);
         init(context);
     }
-    public boolean for_video=false;
     public String 后缀="";
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(Fun.视频格式判断(后缀) | 后缀.equals("gif")){
-            String str = 后缀;
+        if(Fun.视频格式判断(后缀)){
             int x_width = this.getWidth() / 2;
-            int p_width = (int) ((paint_stroke.getTextSize() / 2) * str.length());
+            int p_width = (int) ((paint_stroke.getTextSize() / 2) * 后缀.length());
             int x = x_width - p_width;
             int y=0;
             if(this.getHeight() > paint_stroke.getTextSize()){
@@ -56,8 +54,8 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
             }else{
                 y = (int) paint_stroke.getTextSize();
             }
-            canvas.drawText(str, x, y, paint_stroke);
-            canvas.drawText(str, x, y, paint_fill);
+            canvas.drawText(后缀, x, y, paint_stroke);
+            canvas.drawText(后缀, x, y, paint_fill);
         }
     }
 }
