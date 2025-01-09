@@ -79,24 +79,21 @@ public class View_Square extends View_Main{
             swiperefee.setRefreshing(false);
         });
 
-        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Rect scrollBounds = new Rect();
-                scrollView.getHitRect(scrollBounds);
-                for(int i=0;i<linear.getChildCount();i++){
-                    View view = linear.getChildAt(i);
-                    if (view.getLocalVisibleRect(scrollBounds)) {
-                        view.setVisibility(View.VISIBLE);
-                        // 子控件至少有一个像素在可视范围内
-                        if (scrollBounds.bottom >= (view.getHeight() / 2)) {
-                        // 子控件的可见区域是否超过了50%
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            Rect scrollBounds = new Rect();
+            scrollView.getHitRect(scrollBounds);
+            for(int i=0;i<linear.getChildCount();i++){
+                View view = linear.getChildAt(i);
+                if (view.getLocalVisibleRect(scrollBounds)) {
+                    view.setVisibility(View.VISIBLE);
+                    // 子控件至少有一个像素在可视范围内
+                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
+                    // 子控件的可见区域是否超过了50%
 
-                        }
-                    } else {
-                        view.setVisibility(View.INVISIBLE);
-                        // 子控件完全不在可视范围内
                     }
+                } else {
+                    view.setVisibility(View.INVISIBLE);
+                    // 子控件完全不在可视范围内
                 }
             }
         });
@@ -234,7 +231,11 @@ public class View_Square extends View_Main{
                     continue;
                 }
                 able.handler.post(()->{
-                    linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 0));
+                    View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+                    if(linear.getChildCount() >= 50){
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                    linear.addView(view);
                 });
                 exxay_index++;
             }

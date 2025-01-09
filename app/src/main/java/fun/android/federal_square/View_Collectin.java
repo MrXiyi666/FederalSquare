@@ -1,11 +1,13 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class View_Collectin extends AppCompatActivity {
     private ImageView return_icon;
     private TextView top_title;
     private LinearLayout linear;
+    private ScrollView scrollView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class View_Collectin extends AppCompatActivity {
         top_title = findViewById(R.id.top_title);
         return_icon = findViewById(R.id.return_icon);
         linear = findViewById(R.id.linear);
+        scrollView = findViewById(R.id.scrollView);
         初始化数据();
     }
 
@@ -47,6 +51,24 @@ public class View_Collectin extends AppCompatActivity {
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         return_icon.setOnClickListener(V->{
             finish();
+        });
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            Rect scrollBounds = new Rect();
+            scrollView.getHitRect(scrollBounds);
+            for(int i=0;i<linear.getChildCount();i++){
+                View view = linear.getChildAt(i);
+                if (view.getLocalVisibleRect(scrollBounds)) {
+                    view.setVisibility(View.VISIBLE);
+                    // 子控件至少有一个像素在可视范围内
+                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
+                        // 子控件的可见区域是否超过了50%
+
+                    }
+                } else {
+                    view.setVisibility(View.INVISIBLE);
+                    // 子控件完全不在可视范围内
+                }
+            }
         });
     }
 
@@ -65,7 +87,11 @@ public class View_Collectin extends AppCompatActivity {
                 }
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
-                    linear.addView(Fun_文章.Create_Post_View(this, post_data, 4));
+                    View view = Fun_文章.Create_Post_View(this, post_data, 4);
+                    if(linear.getChildCount() >= 50){
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                    linear.addView(view);
                 });
             }
         }).start();

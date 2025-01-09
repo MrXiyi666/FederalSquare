@@ -64,9 +64,8 @@ public class Fun_文章 {
                         avatar_img.setImageResource(R.mipmap.ic_launcher_round);
                     }else{
                         Glide.with(activity)
-                                .asBitmap()
                                 .load(pd.getText())
-                                .override(Fun.DPToPX(activity,40), Fun.DPToPX(activity,40))
+                                .override(Fun.DPToPX(activity, 40), Fun.DPToPX(activity, 40))
                                 .into(avatar_img);
                     }
                     break;
@@ -159,21 +158,6 @@ public class Fun_文章 {
                 img_view = Fun_文章_子布局.getImg_View_6(activity, img_url);
                 linear.addView(img_view);
         }
-
-        /*
-        if(img_id > 0){
-            img_view.setPadding(0,Fun.DPToPX(activity, 2),0, 0);
-            linear.addView(img_view);
-        }
-
-        img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
-                ViewGroup.LayoutParams params = img_view.getLayoutParams();
-                params.height = Fun.DPToPX(activity, 150);
-                img_view.setLayoutParams(params);
-            }
-        });
-         */
         String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;

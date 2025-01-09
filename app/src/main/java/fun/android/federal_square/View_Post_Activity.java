@@ -2,6 +2,7 @@ package fun.android.federal_square;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -64,7 +66,7 @@ public class View_Post_Activity extends AppCompatActivity {
         TextView url_txt_id = findViewById(R.id.url_txt_id);
         AppCompatButton button_ok = findViewById(R.id.button_ok);
         EditText edit_text = findViewById(R.id.edit_text);
-
+        ScrollView scrollView = findViewById(R.id.scrollView);
 
         top_title.post(()->{
             top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
@@ -200,7 +202,24 @@ public class View_Post_Activity extends AppCompatActivity {
                 edit_text.setText("");
             });
         }
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            Rect scrollBounds = new Rect();
+            scrollView.getHitRect(scrollBounds);
+            for(int i=0;i<linear.getChildCount();i++){
+                View view = linear.getChildAt(i);
+                if (view.getLocalVisibleRect(scrollBounds)) {
+                    view.setVisibility(View.VISIBLE);
+                    // 子控件至少有一个像素在可视范围内
+                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
+                        // 子控件的可见区域是否超过了50%
 
+                    }
+                } else {
+                    view.setVisibility(View.INVISIBLE);
+                    // 子控件完全不在可视范围内
+                }
+            }
+        });
     }
 
     @Override

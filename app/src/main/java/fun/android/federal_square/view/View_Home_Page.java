@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.window.选择头像窗口;
 import fun.android.federal_square.window.选择背景窗口;

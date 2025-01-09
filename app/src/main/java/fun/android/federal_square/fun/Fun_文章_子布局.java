@@ -25,7 +25,6 @@ public class Fun_文章_子布局 {
         img_0 = img_view.findViewById(R.id.img_0);
         img_0.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(0))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
@@ -47,7 +46,6 @@ public class Fun_文章_子布局 {
         img_0.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(0))
                     .into(finalImg_);
             return true;
@@ -64,7 +62,6 @@ public class Fun_文章_子布局 {
         img_1 = img_view.findViewById(R.id.img_1);
         img_0.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(0))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
@@ -86,7 +83,6 @@ public class Fun_文章_子布局 {
         img_0.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(0))
                     .into(finalImg_);
             return true;
@@ -94,7 +90,6 @@ public class Fun_文章_子布局 {
 
         img_1.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(1))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
@@ -116,7 +111,6 @@ public class Fun_文章_子布局 {
         img_1.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(1))
                     .into(finalImg_1);
             return true;
@@ -134,7 +128,6 @@ public class Fun_文章_子布局 {
         img_2 = img_view.findViewById(R.id.img_2);
         img_0.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(0))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
@@ -156,7 +149,6 @@ public class Fun_文章_子布局 {
         img_0.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(0))
                     .into(finalImg_);
             return true;
@@ -164,7 +156,6 @@ public class Fun_文章_子布局 {
 
         img_1.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(1))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
@@ -186,7 +177,6 @@ public class Fun_文章_子布局 {
         img_1.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(1))
                     .into(finalImg_1);
             return true;
@@ -194,7 +184,6 @@ public class Fun_文章_子布局 {
 
         img_2.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(2))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
@@ -216,7 +205,6 @@ public class Fun_文章_子布局 {
         img_2.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(2))
                     .into(finalImg_2);
             return true;
@@ -235,7 +223,6 @@ public class Fun_文章_子布局 {
         img_3 = img_view.findViewById(R.id.img_3);
         img_0.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(0))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
@@ -257,7 +244,6 @@ public class Fun_文章_子布局 {
         img_0.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(0))
                     .into(finalImg_);
             return true;
@@ -265,7 +251,6 @@ public class Fun_文章_子布局 {
 
         img_1.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(1))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
@@ -287,7 +272,6 @@ public class Fun_文章_子布局 {
         img_1.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(1))
                     .into(finalImg_1);
             return true;
@@ -295,7 +279,6 @@ public class Fun_文章_子布局 {
 
         img_2.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(2))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
@@ -317,7 +300,6 @@ public class Fun_文章_子布局 {
         img_2.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(2))
                     .into(finalImg_2);
             return true;
@@ -325,7 +307,6 @@ public class Fun_文章_子布局 {
 
         img_3.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(3))
                 .apply(able.requestOptions_yasuo)
                 .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
@@ -350,7 +331,6 @@ public class Fun_文章_子布局 {
         img_3.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(3))
                     .apply(able.requestOptions_yasuo)
                     .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
@@ -373,7 +353,6 @@ public class Fun_文章_子布局 {
         img_4 = img_view.findViewById(R.id.img_4);
         img_0.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(0))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
@@ -395,7 +374,6 @@ public class Fun_文章_子布局 {
         img_0.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(0))
                     .into(finalImg_);
             return true;
@@ -403,7 +381,6 @@ public class Fun_文章_子布局 {
 
         img_1.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(1))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
@@ -425,7 +402,6 @@ public class Fun_文章_子布局 {
         img_1.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(1))
                     .into(finalImg_1);
             return true;
@@ -433,7 +409,6 @@ public class Fun_文章_子布局 {
 
         img_2.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(2))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
@@ -455,7 +430,6 @@ public class Fun_文章_子布局 {
         img_2.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(2))
                     .into(finalImg_2);
             return true;
@@ -463,7 +437,6 @@ public class Fun_文章_子布局 {
 
         img_3.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(3))
                 .into(img_3);
         后缀 = Fun_文件.获取后缀(img_url.get(3));
@@ -486,7 +459,6 @@ public class Fun_文章_子布局 {
         img_3.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(3))
                     .into(finalImg_3);
             return true;
@@ -494,7 +466,6 @@ public class Fun_文章_子布局 {
 
         img_4.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(4))
                 .into(img_4);
         后缀 = Fun_文件.获取后缀(img_url.get(4));
@@ -517,7 +488,6 @@ public class Fun_文章_子布局 {
         img_4.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(4))
                     .into(finalImg_4);
             return true;
@@ -539,7 +509,6 @@ public class Fun_文章_子布局 {
         img_5 = img_view.findViewById(R.id.img_5);
         img_0.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(0))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
@@ -561,7 +530,6 @@ public class Fun_文章_子布局 {
         img_0.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(0))
                     .into(finalImg_);
             return true;
@@ -569,7 +537,6 @@ public class Fun_文章_子布局 {
 
         img_1.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(1))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
@@ -591,7 +558,6 @@ public class Fun_文章_子布局 {
         img_1.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(1))
                     .into(finalImg_1);
             return true;
@@ -599,7 +565,6 @@ public class Fun_文章_子布局 {
 
         img_2.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(2))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
@@ -621,7 +586,6 @@ public class Fun_文章_子布局 {
         img_2.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(2))
                     .into(finalImg_2);
             return true;
@@ -629,7 +593,6 @@ public class Fun_文章_子布局 {
 
         img_3.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(3))
                 .into(img_3);
         后缀 = Fun_文件.获取后缀(img_url.get(3));
@@ -652,7 +615,6 @@ public class Fun_文章_子布局 {
         img_3.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(3))
                     .into(finalImg_3);
             return true;
@@ -660,7 +622,6 @@ public class Fun_文章_子布局 {
 
         img_4.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(4))
                 .into(img_4);
         后缀 = Fun_文件.获取后缀(img_url.get(4));
@@ -683,7 +644,6 @@ public class Fun_文章_子布局 {
         img_4.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(4))
                     .into(finalImg_4);
             return true;
@@ -691,7 +651,6 @@ public class Fun_文章_子布局 {
 
         img_5.setImageBitmap(null);
         Glide.with(activity)
-                .asBitmap()
                 .load(img_url.get(5))
                 .into(img_5);
         后缀 = Fun_文件.获取后缀(img_url.get(5));
@@ -714,7 +673,6 @@ public class Fun_文章_子布局 {
         img_5.setOnLongClickListener(V->{
             Fun.mess(activity, "重新加载");
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(5))
                     .into(finalImg_5);
             return true;

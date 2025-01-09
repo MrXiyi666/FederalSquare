@@ -2,6 +2,7 @@ package fun.android.federal_square.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,24 @@ public class View_Home_Collection extends View_Main{
             Intent intent = new Intent(activity_main, View_Collectin.class);
             activity_main.startActivity(intent);
         });
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            Rect scrollBounds = new Rect();
+            scrollView.getHitRect(scrollBounds);
+            for(int i=0;i<linear.getChildCount();i++){
+                View view = linear.getChildAt(i);
+                if (view.getLocalVisibleRect(scrollBounds)) {
+                    view.setVisibility(View.VISIBLE);
+                    // 子控件至少有一个像素在可视范围内
+                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
+                        // 子控件的可见区域是否超过了50%
+
+                    }
+                } else {
+                    view.setVisibility(View.INVISIBLE);
+                    // 子控件完全不在可视范围内
+                }
+            }
+        });
     }
 
 
@@ -85,7 +104,11 @@ public class View_Home_Collection extends View_Main{
                 }
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
-                    linear.addView(Fun_文章.Create_Post_View(activity_main, post_data, 2));
+                    View view = Fun_文章.Create_Post_View(activity_main, post_data, 2);
+                    if(linear.getChildCount() >= 50){
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                    linear.addView(view);
                 });
             }
             able.handler.post(()->{
