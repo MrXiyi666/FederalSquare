@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
@@ -38,19 +36,15 @@ public class Fun_文章 {
         LinearLayout button_forward = view.findViewById(R.id.button_forward);
         LinearLayout button_message = view.findViewById(R.id.button_message);
         LinearLayout button_collection = view.findViewById(R.id.button_collection);
-        View img_view = View.inflate(activity, R.layout.create_post_img_layout, null);
-        LinearLayout img_linear1 = img_view.findViewById(R.id.img_linear1);
         TextView name_view = view.findViewById(R.id.name);
         TextView sign_view = view.findViewById(R.id.sign);
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         TextView url_txt_id = view.findViewById(R.id.url_txt_id);
-        List<Video_ImageView> img_list = new ArrayList<>();
-        img_list.add(img_view.findViewById(R.id.img0));
-        img_list.add(img_view.findViewById(R.id.img1));
-        img_list.add(img_view.findViewById(R.id.img2));
+
         LinearLayout linear = view.findViewById(R.id.linear);
 
         StringBuffer sb = new StringBuffer();
+        List<String> img_url = new ArrayList<>();
         int img_id=0;
         String url_txt="";
         String PassWord_txt="";
@@ -90,30 +84,10 @@ public class Fun_文章 {
                     }
                     break;
                 case "img":
-                    if(img_id >= 3){
+                    if(img_url.size() > 8){
                         continue;
                     }
-                    img_linear1.setVisibility(View.VISIBLE);
-                    img_list.get(img_id).setImageBitmap(null);
-                    Glide.with(activity)
-                            .load(pd.getText())
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(img_list.get(img_id));
-                    String 后缀 = Fun_文件.获取后缀(pd.getText());
-                    img_list.get(img_id).后缀 = 后缀;
-                    if(!Fun.图片格式判断(后缀)){
-                        img_list.get(img_id).setBackgroundColor(Color.BLACK);
-                    }
-                    img_list.get(img_id).setOnClickListener(V->{
-                        if(Fun.图片格式判断(后缀)){
-                            查看图片窗口.启动_Dialog(activity, pd.getText());
-                        }else if(Fun.视频格式判断(后缀)){
-                            查看视频窗口.启动_Dialog(activity, pd.getText());
-                        }else{
-                            打开方式窗口.启动(activity, pd.getText());
-                        }
-                    });
-                    img_id++;
+                    img_url.add(pd.getText());
                     break;
                 case "url":
                     url_txt = pd.getText();
@@ -153,10 +127,43 @@ public class Fun_文章 {
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
+        View img_view;
+        switch (img_url.size()){
+            case 0:
+                break;
+            case 1:
+                img_view = Fun_文章_子布局.getImg_View_1(activity, img_url);
+                if(img_view != null){
+                    linear.addView(img_view);
+                }
+                break;
+            case 2:
+                img_view = Fun_文章_子布局.getImg_View_2(activity, img_url);
+                linear.addView(img_view);
+                break;
+            case 3:
+                img_view = Fun_文章_子布局.getImg_View_3(activity, img_url);
+                linear.addView(img_view);
+                break;
+            case 4:
+                img_view = Fun_文章_子布局.getImg_View_4(activity, img_url);
+                linear.addView(img_view);
+                break;
+            case 5:
+                img_view = Fun_文章_子布局.getImg_View_5(activity, img_url);
+                linear.addView(img_view);
+                break;
+            default:
+                img_view = Fun_文章_子布局.getImg_View_6(activity, img_url);
+                linear.addView(img_view);
+        }
+
+        /*
         if(img_id > 0){
             img_view.setPadding(0,Fun.DPToPX(activity, 2),0, 0);
             linear.addView(img_view);
         }
+
         img_view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             if(img_view.getHeight() > Fun.DPToPX(activity, 150)){
                 ViewGroup.LayoutParams params = img_view.getLayoutParams();
@@ -164,6 +171,7 @@ public class Fun_文章 {
                 img_view.setLayoutParams(params);
             }
         });
+         */
         String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
@@ -264,5 +272,6 @@ public class Fun_文章 {
             return new ArrayList<>();
         }
     }
+
 
 }
