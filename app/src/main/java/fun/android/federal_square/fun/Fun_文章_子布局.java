@@ -8,6 +8,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.manager.TargetTracker;
 import com.bumptech.glide.request.target.Target;
 
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -18,666 +19,82 @@ import fun.android.federal_square.window.查看视频窗口;
 
 public class Fun_文章_子布局 {
     private static String 后缀="";
-    public static View getImg_View_1(Activity activity, List<String> img_url){
-        View img_view;
-        Video_ImageView img_0;
-        img_view = View.inflate(activity, R.layout.create_post_img_layout_1, null);
-        img_0 = img_view.findViewById(R.id.img_0);
-        img_0.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(0))
-                .into(img_0);
-        后缀 = Fun_文件.获取后缀(img_url.get(0));
-        img_0.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_0.setBackgroundColor(Color.BLACK);
+    public static View getImg_View(Activity activity, List<String> img_url){
+        View view=null;
+
+        List<Video_ImageView> video_imageViews = new ArrayList<>();
+        switch (img_url.size()){
+            case 0:
+
+                break;
+            case 1:
+                view = View.inflate(activity, R.layout.create_post_img_layout_1, null);
+                video_imageViews.add(view.findViewById(R.id.img_0));
+                break;
+            case 2:
+                view = View.inflate(activity, R.layout.create_post_img_layout_2, null);
+                video_imageViews.add(view.findViewById(R.id.img_0));
+                video_imageViews.add(view.findViewById(R.id.img_1));
+                break;
+            case 3:
+                view = View.inflate(activity, R.layout.create_post_img_layout_3, null);
+                video_imageViews.add(view.findViewById(R.id.img_0));
+                video_imageViews.add(view.findViewById(R.id.img_1));
+                video_imageViews.add(view.findViewById(R.id.img_2));
+                break;
+            case 4:
+                view = View.inflate(activity, R.layout.create_post_img_layout_4, null);
+                video_imageViews.add(view.findViewById(R.id.img_0));
+                video_imageViews.add(view.findViewById(R.id.img_1));
+                video_imageViews.add(view.findViewById(R.id.img_2));
+                video_imageViews.add(view.findViewById(R.id.img_3));
+                break;
+            case 5:
+                view = View.inflate(activity, R.layout.create_post_img_layout_5, null);
+                video_imageViews.add(view.findViewById(R.id.img_0));
+                video_imageViews.add(view.findViewById(R.id.img_1));
+                video_imageViews.add(view.findViewById(R.id.img_2));
+                video_imageViews.add(view.findViewById(R.id.img_3));
+                video_imageViews.add(view.findViewById(R.id.img_4));
+                break;
+            default:
+                view = View.inflate(activity, R.layout.create_post_img_layout_6, null);
+                video_imageViews.add(view.findViewById(R.id.img_0));
+                video_imageViews.add(view.findViewById(R.id.img_1));
+                video_imageViews.add(view.findViewById(R.id.img_2));
+                video_imageViews.add(view.findViewById(R.id.img_3));
+                video_imageViews.add(view.findViewById(R.id.img_4));
+                video_imageViews.add(view.findViewById(R.id.img_5));
         }
-        img_0.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(0));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(0));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(0));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(0));
-            }
-        });
-        Video_ImageView finalImg_ = img_0;
-        img_0.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
+        for(int i=0;i<video_imageViews.size();i++){
             Glide.with(activity)
-                    .load(img_url.get(0))
-                    .into(finalImg_);
-            return true;
-        });
-
-        return img_view;
-    }
-    public static View getImg_View_2(Activity activity, List<String> img_url){
-        View img_view;
-        Video_ImageView img_0, img_1;
-
-        img_view = View.inflate(activity, R.layout.create_post_img_layout_2, null);
-        img_0 = img_view.findViewById(R.id.img_0);
-        img_1 = img_view.findViewById(R.id.img_1);
-        img_0.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(0))
-                .into(img_0);
-        后缀 = Fun_文件.获取后缀(img_url.get(0));
-        img_0.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_0.setBackgroundColor(Color.BLACK);
+                    .load(img_url.get(i))
+                    .into(video_imageViews.get(i));
+            后缀 = Fun_文件.获取后缀(img_url.get(i));
+            video_imageViews.get(i).后缀 = 后缀;
+            if(!Fun.图片格式判断(后缀)){
+                video_imageViews.get(i).setBackgroundColor(Color.BLACK);
+            }
+            int finalI = i;
+            video_imageViews.get(i).setOnClickListener(V->{
+                后缀 = Fun_文件.获取后缀(img_url.get(finalI));
+                if(Fun.图片格式判断(后缀)){
+                    查看图片窗口.启动_Dialog(activity, img_url.get(finalI));
+                }else if(Fun.视频格式判断(后缀)){
+                    查看视频窗口.启动_Dialog(activity, img_url.get(finalI));
+                }else{
+                    打开方式窗口.启动(activity, img_url.get(finalI));
+                }
+            });
+            video_imageViews.get(i).setOnLongClickListener(V->{
+                Fun.mess(activity, "重新加载");
+                Glide.with(activity)
+                        .load(img_url.get(finalI))
+                        .into(video_imageViews.get(finalI));
+                return true;
+            });
         }
-        img_0.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(0));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(0));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(0));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(0));
-            }
-        });
-        Video_ImageView finalImg_ = img_0;
-        img_0.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(0))
-                    .into(finalImg_);
-            return true;
-        });
-
-        img_1.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(1))
-                .into(img_1);
-        后缀 = Fun_文件.获取后缀(img_url.get(1));
-        img_1.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_1.setBackgroundColor(Color.BLACK);
-        }
-        img_1.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(1));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(1));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(1));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(1));
-            }
-        });
-        Video_ImageView finalImg_1 = img_1;
-        img_1.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(1))
-                    .into(finalImg_1);
-            return true;
-        });
-
-        return img_view;
-    }
-    public static View getImg_View_3(Activity activity, List<String> img_url){
-        View img_view;
-        Video_ImageView img_0, img_1, img_2;
-
-        img_view = View.inflate(activity, R.layout.create_post_img_layout_3, null);
-        img_0 = img_view.findViewById(R.id.img_0);
-        img_1 = img_view.findViewById(R.id.img_1);
-        img_2 = img_view.findViewById(R.id.img_2);
-        img_0.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(0))
-                .into(img_0);
-        后缀 = Fun_文件.获取后缀(img_url.get(0));
-        img_0.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_0.setBackgroundColor(Color.BLACK);
-        }
-        img_0.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(0));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(0));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(0));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(0));
-            }
-        });
-        Video_ImageView finalImg_ = img_0;
-        img_0.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(0))
-                    .into(finalImg_);
-            return true;
-        });
-
-        img_1.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(1))
-                .into(img_1);
-        后缀 = Fun_文件.获取后缀(img_url.get(1));
-        img_1.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_1.setBackgroundColor(Color.BLACK);
-        }
-        img_1.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(1));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(1));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(1));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(1));
-            }
-        });
-        Video_ImageView finalImg_1 = img_1;
-        img_1.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(1))
-                    .into(finalImg_1);
-            return true;
-        });
-
-        img_2.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(2))
-                .into(img_2);
-        后缀 = Fun_文件.获取后缀(img_url.get(2));
-        img_2.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_2.setBackgroundColor(Color.BLACK);
-        }
-        img_2.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(2));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(2));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(2));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(2));
-            }
-        });
-        Video_ImageView finalImg_2 = img_2;
-        img_2.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(2))
-                    .into(finalImg_2);
-            return true;
-        });
-
-        return img_view;
+        return view;
     }
 
-    public static View getImg_View_4(Activity activity, List<String> img_url){
-        View img_view;
-        Video_ImageView img_0, img_1, img_2, img_3;
-        img_view = View.inflate(activity, R.layout.create_post_img_layout_4, null);
-        img_0 = img_view.findViewById(R.id.img_0);
-        img_1 = img_view.findViewById(R.id.img_1);
-        img_2 = img_view.findViewById(R.id.img_2);
-        img_3 = img_view.findViewById(R.id.img_3);
-        img_0.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(0))
-                .into(img_0);
-        后缀 = Fun_文件.获取后缀(img_url.get(0));
-        img_0.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_0.setBackgroundColor(Color.BLACK);
-        }
-        img_0.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(0));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(0));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(0));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(0));
-            }
-        });
-        Video_ImageView finalImg_ = img_0;
-        img_0.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(0))
-                    .into(finalImg_);
-            return true;
-        });
-
-        img_1.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(1))
-                .into(img_1);
-        后缀 = Fun_文件.获取后缀(img_url.get(1));
-        img_1.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_1.setBackgroundColor(Color.BLACK);
-        }
-        img_1.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(1));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(1));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(1));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(1));
-            }
-        });
-        Video_ImageView finalImg_1 = img_1;
-        img_1.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(1))
-                    .into(finalImg_1);
-            return true;
-        });
-
-        img_2.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(2))
-                .into(img_2);
-        后缀 = Fun_文件.获取后缀(img_url.get(2));
-        img_2.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_2.setBackgroundColor(Color.BLACK);
-        }
-        img_2.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(2));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(2));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(2));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(2));
-            }
-        });
-        Video_ImageView finalImg_2 = img_2;
-        img_2.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(2))
-                    .into(finalImg_2);
-            return true;
-        });
-
-        img_3.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(3))
-                .apply(able.requestOptions_yasuo)
-                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
-                .into(img_3);
-        后缀 = Fun_文件.获取后缀(img_url.get(3));
-        img_3.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_3.setBackgroundColor(Color.BLACK);
-        }
-        img_3.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(3));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(3));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(3));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(3));
-            }
-        });
-
-        Video_ImageView finalImg_3 = img_3;
-        img_3.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(3))
-                    .apply(able.requestOptions_yasuo)
-                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
-                    .into(finalImg_3);
-            return true;
-        });
-
-        return img_view;
-    }
-
-    public static View getImg_View_5(Activity activity, List<String> img_url){
-        View img_view;
-        Video_ImageView img_0, img_1, img_2, img_3, img_4;
-
-        img_view = View.inflate(activity, R.layout.create_post_img_layout_5, null);
-        img_0 = img_view.findViewById(R.id.img_0);
-        img_1 = img_view.findViewById(R.id.img_1);
-        img_2 = img_view.findViewById(R.id.img_2);
-        img_3 = img_view.findViewById(R.id.img_3);
-        img_4 = img_view.findViewById(R.id.img_4);
-        img_0.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(0))
-                .into(img_0);
-        后缀 = Fun_文件.获取后缀(img_url.get(0));
-        img_0.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_0.setBackgroundColor(Color.BLACK);
-        }
-        img_0.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(0));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(0));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(0));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(0));
-            }
-        });
-        Video_ImageView finalImg_ = img_0;
-        img_0.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(0))
-                    .into(finalImg_);
-            return true;
-        });
-
-        img_1.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(1))
-                .into(img_1);
-        后缀 = Fun_文件.获取后缀(img_url.get(1));
-        img_1.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_1.setBackgroundColor(Color.BLACK);
-        }
-        img_1.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(1));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(1));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(1));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(1));
-            }
-        });
-        Video_ImageView finalImg_1 = img_1;
-        img_1.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(1))
-                    .into(finalImg_1);
-            return true;
-        });
-
-        img_2.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(2))
-                .into(img_2);
-        后缀 = Fun_文件.获取后缀(img_url.get(2));
-        img_2.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_2.setBackgroundColor(Color.BLACK);
-        }
-        img_2.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(2));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(2));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(2));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(2));
-            }
-        });
-        Video_ImageView finalImg_2 = img_2;
-        img_2.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(2))
-                    .into(finalImg_2);
-            return true;
-        });
-
-        img_3.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(3))
-                .into(img_3);
-        后缀 = Fun_文件.获取后缀(img_url.get(3));
-        img_3.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_3.setBackgroundColor(Color.BLACK);
-        }
-        img_3.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(3));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(3));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(3));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(3));
-            }
-        });
-
-        Video_ImageView finalImg_3 = img_3;
-        img_3.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(3))
-                    .into(finalImg_3);
-            return true;
-        });
-
-        img_4.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(4))
-                .into(img_4);
-        后缀 = Fun_文件.获取后缀(img_url.get(4));
-        img_4.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_4.setBackgroundColor(Color.BLACK);
-        }
-        img_4.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(4));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(4));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(4));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(4));
-            }
-        });
-
-        Video_ImageView finalImg_4 = img_4;
-        img_4.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(4))
-                    .into(finalImg_4);
-            return true;
-        });
-
-        return img_view;
-    }
-
-    public static View getImg_View_6(Activity activity, List<String> img_url){
-        View img_view;
-        Video_ImageView img_0, img_1, img_2, img_3, img_4, img_5;
-
-        img_view = View.inflate(activity, R.layout.create_post_img_layout_6, null);
-        img_0 = img_view.findViewById(R.id.img_0);
-        img_1 = img_view.findViewById(R.id.img_1);
-        img_2 = img_view.findViewById(R.id.img_2);
-        img_3 = img_view.findViewById(R.id.img_3);
-        img_4 = img_view.findViewById(R.id.img_4);
-        img_5 = img_view.findViewById(R.id.img_5);
-        img_0.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(0))
-                .into(img_0);
-        后缀 = Fun_文件.获取后缀(img_url.get(0));
-        img_0.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_0.setBackgroundColor(Color.BLACK);
-        }
-        img_0.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(0));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(0));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(0));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(0));
-            }
-        });
-        Video_ImageView finalImg_ = img_0;
-        img_0.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(0))
-                    .into(finalImg_);
-            return true;
-        });
-
-        img_1.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(1))
-                .into(img_1);
-        后缀 = Fun_文件.获取后缀(img_url.get(1));
-        img_1.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_1.setBackgroundColor(Color.BLACK);
-        }
-        img_1.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(1));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(1));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(1));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(1));
-            }
-        });
-        Video_ImageView finalImg_1 = img_1;
-        img_1.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(1))
-                    .into(finalImg_1);
-            return true;
-        });
-
-        img_2.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(2))
-                .into(img_2);
-        后缀 = Fun_文件.获取后缀(img_url.get(2));
-        img_2.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_2.setBackgroundColor(Color.BLACK);
-        }
-        img_2.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(2));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(2));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(2));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(2));
-            }
-        });
-        Video_ImageView finalImg_2 = img_2;
-        img_2.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(2))
-                    .into(finalImg_2);
-            return true;
-        });
-
-        img_3.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(3))
-                .into(img_3);
-        后缀 = Fun_文件.获取后缀(img_url.get(3));
-        img_3.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_3.setBackgroundColor(Color.BLACK);
-        }
-        img_3.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(3));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(3));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(3));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(3));
-            }
-        });
-
-        Video_ImageView finalImg_3 = img_3;
-        img_3.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(3))
-                    .into(finalImg_3);
-            return true;
-        });
-
-        img_4.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(4))
-                .into(img_4);
-        后缀 = Fun_文件.获取后缀(img_url.get(4));
-        img_4.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_4.setBackgroundColor(Color.BLACK);
-        }
-        img_4.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(4));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(4));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(4));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(4));
-            }
-        });
-
-        Video_ImageView finalImg_4 = img_4;
-        img_4.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(4))
-                    .into(finalImg_4);
-            return true;
-        });
-
-        img_5.setImageBitmap(null);
-        Glide.with(activity)
-                .load(img_url.get(5))
-                .into(img_5);
-        后缀 = Fun_文件.获取后缀(img_url.get(5));
-        img_5.后缀 = 后缀;
-        if(!Fun.图片格式判断(后缀)){
-            img_5.setBackgroundColor(Color.BLACK);
-        }
-        img_5.setOnClickListener(V->{
-            后缀 = Fun_文件.获取后缀(img_url.get(5));
-            if(Fun.图片格式判断(后缀)){
-                查看图片窗口.启动_Dialog(activity, img_url.get(5));
-            }else if(Fun.视频格式判断(后缀)){
-                查看视频窗口.启动_Dialog(activity, img_url.get(5));
-            }else{
-                打开方式窗口.启动(activity, img_url.get(5));
-            }
-        });
-
-        Video_ImageView finalImg_5 = img_5;
-        img_5.setOnLongClickListener(V->{
-            Fun.mess(activity, "重新加载");
-            Glide.with(activity)
-                    .load(img_url.get(5))
-                    .into(finalImg_5);
-            return true;
-        });
-
-        return img_view;
-    }
 }

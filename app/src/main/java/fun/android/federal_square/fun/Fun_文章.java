@@ -128,36 +128,11 @@ public class Fun_文章 {
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
-        View img_view;
-        switch (img_url.size()){
-            case 0:
-                break;
-            case 1:
-                img_view = Fun_文章_子布局.getImg_View_1(activity, img_url);
-                if(img_view != null){
-                    linear.addView(img_view);
-                }
-                break;
-            case 2:
-                img_view = Fun_文章_子布局.getImg_View_2(activity, img_url);
-                linear.addView(img_view);
-                break;
-            case 3:
-                img_view = Fun_文章_子布局.getImg_View_3(activity, img_url);
-                linear.addView(img_view);
-                break;
-            case 4:
-                img_view = Fun_文章_子布局.getImg_View_4(activity, img_url);
-                linear.addView(img_view);
-                break;
-            case 5:
-                img_view = Fun_文章_子布局.getImg_View_5(activity, img_url);
-                linear.addView(img_view);
-                break;
-            default:
-                img_view = Fun_文章_子布局.getImg_View_6(activity, img_url);
-                linear.addView(img_view);
+        View img_view = Fun_文章_子布局.getImg_View(activity, img_url);
+        if(img_view!=null){
+            linear.addView(img_view);
         }
+
         String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
