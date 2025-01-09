@@ -143,8 +143,20 @@ public class Fun_文章 {
                 img_view = Fun_文章_子布局.getImg_View_2(activity, img_url);
                 linear.addView(img_view);
                 break;
-            default:
+            case 3:
                 img_view = Fun_文章_子布局.getImg_View_3(activity, img_url);
+                linear.addView(img_view);
+                break;
+            case 4:
+                img_view = Fun_文章_子布局.getImg_View_4(activity, img_url);
+                linear.addView(img_view);
+                break;
+            case 5:
+                img_view = Fun_文章_子布局.getImg_View_5(activity, img_url);
+                linear.addView(img_view);
+                break;
+            default:
+                img_view = Fun_文章_子布局.getImg_View_6(activity, img_url);
                 linear.addView(img_view);
         }
 

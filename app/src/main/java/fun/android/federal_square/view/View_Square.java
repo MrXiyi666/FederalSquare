@@ -1,5 +1,6 @@
 package fun.android.federal_square.view;
 
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -77,6 +78,30 @@ public class View_Square extends View_Main{
             }
             swiperefee.setRefreshing(false);
         });
+
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Rect scrollBounds = new Rect();
+                scrollView.getHitRect(scrollBounds);
+                for(int i=0;i<linear.getChildCount();i++){
+                    View view = linear.getChildAt(i);
+                    if (view.getLocalVisibleRect(scrollBounds)) {
+                        view.setVisibility(View.VISIBLE);
+                        // 子控件至少有一个像素在可视范围内
+                        if (scrollBounds.bottom >= (view.getHeight() / 2)) {
+                        // 子控件的可见区域是否超过了50%
+
+                        }
+                    } else {
+                        view.setVisibility(View.INVISIBLE);
+                        // 子控件完全不在可视范围内
+                    }
+                }
+            }
+        });
+
+
         button_add.setOnClickListener(V->{
             if(!Fun_账号.GetID().isEmpty()){
                 _发表文章窗口 = new 发表文章窗口();
