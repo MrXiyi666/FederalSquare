@@ -15,7 +15,6 @@
         android:layout_height="wrap_content">
         <fun.android.federal_square.view.Video_ImageView
             android:layout_gravity="bottom"
-            android:scaleType="centerCrop"
             android:layout_marginEnd="2dp"
             android:id="@+id/img_0"
             android:layout_weight="1"
@@ -27,7 +26,6 @@
         <fun.android.federal_square.view.Video_ImageView
             android:layout_gravity="bottom"
             android:layout_marginStart="2dp"
-            android:scaleType="centerCrop"
             android:layout_marginEnd="2dp"
             android:id="@+id/img_1"
             android:layout_weight="1"
@@ -39,7 +37,6 @@
         <fun.android.federal_square.view.Video_ImageView
             android:layout_gravity="bottom"
             android:layout_marginStart="2dp"
-            android:scaleType="centerCrop"
             android:id="@+id/img_2"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -55,7 +52,6 @@
         android:layout_height="wrap_content">
         <fun.android.federal_square.view.Video_ImageView
             android:layout_marginEnd="2dp"
-            android:scaleType="centerCrop"
             android:id="@+id/img_3"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -66,7 +62,6 @@
         <fun.android.federal_square.view.Video_ImageView
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
-            android:scaleType="centerCrop"
             android:id="@+id/img_4"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -76,7 +71,6 @@
             app:rRadius="10dp"/>
         <fun.android.federal_square.view.Video_ImageView
             android:layout_marginStart="2dp"
-            android:scaleType="centerCrop"
             android:id="@+id/img_5"
             android:layout_weight="1"
             android:layout_width="0dp"

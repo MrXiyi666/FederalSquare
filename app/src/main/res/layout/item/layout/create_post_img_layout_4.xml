@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <fun.android.federal_square.view.Video_ImageView
-            android:scaleType="centerCrop"
             android:layout_gravity="bottom"
             android:layout_marginEnd="2dp"
             android:id="@+id/img_0"
@@ -25,7 +24,6 @@
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
         <fun.android.federal_square.view.Video_ImageView
-            android:scaleType="centerCrop"
             android:layout_gravity="bottom"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
@@ -37,7 +35,6 @@
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
         <fun.android.federal_square.view.Video_ImageView
-            android:scaleType="centerCrop"
             android:layout_gravity="bottom"
             android:layout_marginStart="2dp"
             android:id="@+id/img_2"
@@ -51,7 +48,6 @@
     <fun.android.federal_square.view.Video_ImageView
         android:layout_marginTop="4dp"
         android:id="@+id/img_3"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:rStrokeWidth="1dp"

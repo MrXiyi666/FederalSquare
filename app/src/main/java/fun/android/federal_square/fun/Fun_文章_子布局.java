@@ -5,6 +5,9 @@ import android.graphics.Color;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.manager.TargetTracker;
+import com.bumptech.glide.request.target.Target;
+
 import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -25,6 +28,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(0))
                 .apply(able.requestOptions_yasuo)
+                .override(Fun.DPToPX(activity,150))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
         img_0.后缀 = 后缀;
@@ -48,6 +52,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(0))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                     .into(finalImg_);
             return true;
         });
@@ -66,6 +71,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(0))
                 .apply(able.requestOptions_yasuo)
+                .override(Fun.DPToPX(activity,150))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
         img_0.后缀 = 后缀;
@@ -89,6 +95,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(0))
                     .apply(able.requestOptions_yasuo)
+                    .override(Fun.DPToPX(activity,150))
                     .into(finalImg_);
             return true;
         });
@@ -98,6 +105,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(1))
                 .apply(able.requestOptions_yasuo)
+                .override(Fun.DPToPX(activity,150))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
         img_1.后缀 = 后缀;
@@ -121,13 +129,13 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(1))
                     .apply(able.requestOptions_yasuo)
+                    .override(Fun.DPToPX(activity,150))
                     .into(finalImg_1);
             return true;
         });
 
         return img_view;
     }
-
     public static View getImg_View_3(Activity activity, List<String> img_url){
         View img_view;
         Video_ImageView img_0, img_1, img_2;
@@ -141,6 +149,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(0))
                 .apply(able.requestOptions_yasuo)
+                .override(Fun.DPToPX(activity,100))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
         img_0.后缀 = 后缀;
@@ -164,6 +173,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(0))
                     .apply(able.requestOptions_yasuo)
+                    .override(Fun.DPToPX(activity,100))
                     .into(finalImg_);
             return true;
         });
@@ -173,6 +183,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(1))
                 .apply(able.requestOptions_yasuo)
+                .override(Fun.DPToPX(activity,100))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
         img_1.后缀 = 后缀;
@@ -195,6 +206,7 @@ public class Fun_文章_子布局 {
             Glide.with(activity)
                     .asBitmap()
                     .load(img_url.get(1)).apply(able.requestOptions_yasuo)
+                    .override(Fun.DPToPX(activity,100))
                     .into(finalImg_1);
             return true;
         });
@@ -204,6 +216,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(2))
                 .apply(able.requestOptions_yasuo)
+                .override(Fun.DPToPX(activity,100))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
         img_2.后缀 = 后缀;
@@ -227,6 +240,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(2))
                     .apply(able.requestOptions_yasuo)
+                    .override(Fun.DPToPX(activity,100))
                     .into(finalImg_2);
             return true;
         });
@@ -235,9 +249,8 @@ public class Fun_文章_子布局 {
     }
 
     public static View getImg_View_4(Activity activity, List<String> img_url){
-        View img_view = null;
+        View img_view;
         Video_ImageView img_0, img_1, img_2, img_3;
-
         img_view = View.inflate(activity, R.layout.create_post_img_layout_4, null);
         img_0 = img_view.findViewById(R.id.img_0);
         img_1 = img_view.findViewById(R.id.img_1);
@@ -248,6 +261,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(0))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
         img_0.后缀 = 后缀;
@@ -271,6 +285,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(0))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_);
             return true;
         });
@@ -280,6 +295,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(1))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
         img_1.后缀 = 后缀;
@@ -303,6 +319,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(1))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_1);
             return true;
         });
@@ -312,6 +329,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(2))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
         img_2.后缀 = 后缀;
@@ -335,6 +353,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(2))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_2);
             return true;
         });
@@ -344,6 +363,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(3))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                 .into(img_3);
         后缀 = Fun_文件.获取后缀(img_url.get(3));
         img_3.后缀 = 后缀;
@@ -368,6 +388,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(3))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                     .into(finalImg_3);
             return true;
         });
@@ -390,6 +411,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(0))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
         img_0.后缀 = 后缀;
@@ -413,6 +435,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(0))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_);
             return true;
         });
@@ -422,6 +445,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(1))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
         img_1.后缀 = 后缀;
@@ -445,6 +469,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(1))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_1);
             return true;
         });
@@ -454,6 +479,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(2))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
         img_2.后缀 = 后缀;
@@ -477,6 +503,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(2))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_2);
             return true;
         });
@@ -486,6 +513,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(3))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                 .into(img_3);
         后缀 = Fun_文件.获取后缀(img_url.get(3));
         img_3.后缀 = 后缀;
@@ -510,6 +538,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(3))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                     .into(finalImg_3);
             return true;
         });
@@ -519,6 +548,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(4))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                 .into(img_4);
         后缀 = Fun_文件.获取后缀(img_url.get(4));
         img_4.后缀 = 后缀;
@@ -543,6 +573,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(4))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,150))
                     .into(finalImg_4);
             return true;
         });
@@ -566,6 +597,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(0))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_0);
         后缀 = Fun_文件.获取后缀(img_url.get(0));
         img_0.后缀 = 后缀;
@@ -589,6 +621,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(0))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_);
             return true;
         });
@@ -598,6 +631,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(1))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_1);
         后缀 = Fun_文件.获取后缀(img_url.get(1));
         img_1.后缀 = 后缀;
@@ -621,6 +655,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(1))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_1);
             return true;
         });
@@ -630,6 +665,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(2))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_2);
         后缀 = Fun_文件.获取后缀(img_url.get(2));
         img_2.后缀 = 后缀;
@@ -653,6 +689,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(2))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_2);
             return true;
         });
@@ -662,6 +699,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(3))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_3);
         后缀 = Fun_文件.获取后缀(img_url.get(3));
         img_3.后缀 = 后缀;
@@ -686,6 +724,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(3))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_3);
             return true;
         });
@@ -695,6 +734,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(4))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_4);
         后缀 = Fun_文件.获取后缀(img_url.get(4));
         img_4.后缀 = 后缀;
@@ -719,6 +759,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(4))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                     .into(finalImg_4);
             return true;
         });
@@ -728,6 +769,7 @@ public class Fun_文章_子布局 {
                 .asBitmap()
                 .load(img_url.get(5))
                 .apply(able.requestOptions_yasuo)
+                .override(Target.SIZE_ORIGINAL, Fun.DPToPX(activity,100))
                 .into(img_5);
         后缀 = Fun_文件.获取后缀(img_url.get(5));
         img_5.后缀 = 后缀;
@@ -752,6 +794,7 @@ public class Fun_文章_子布局 {
                     .asBitmap()
                     .load(img_url.get(5))
                     .apply(able.requestOptions_yasuo)
+                    .override(Target.SIZE_ORIGINAL,Fun.DPToPX(activity,100))
                     .into(finalImg_5);
             return true;
         });

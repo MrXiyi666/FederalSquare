@@ -8,8 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <fun.android.federal_square.view.Video_ImageView
-        android:layout_marginTop="4dp"
         android:scaleType="centerCrop"
+        android:layout_marginTop="4dp"
         android:layout_gravity="bottom"
         android:layout_marginEnd="2dp"
         android:id="@+id/img_0"

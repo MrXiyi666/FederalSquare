@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.target.Target;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class Fun_文章 {
                         Glide.with(activity)
                                 .asBitmap()
                                 .load(pd.getText())
+                                .override(Fun.DPToPX(activity,40), Fun.DPToPX(activity,40))
                                 .into(avatar_img);
                     }
                     break;
@@ -141,20 +143,8 @@ public class Fun_文章 {
                 img_view = Fun_文章_子布局.getImg_View_2(activity, img_url);
                 linear.addView(img_view);
                 break;
-            case 3:
-                img_view = Fun_文章_子布局.getImg_View_3(activity, img_url);
-                linear.addView(img_view);
-                break;
-            case 4:
-                img_view = Fun_文章_子布局.getImg_View_4(activity, img_url);
-                linear.addView(img_view);
-                break;
-            case 5:
-                img_view = Fun_文章_子布局.getImg_View_5(activity, img_url);
-                linear.addView(img_view);
-                break;
             default:
-                img_view = Fun_文章_子布局.getImg_View_6(activity, img_url);
+                img_view = Fun_文章_子布局.getImg_View_3(activity, img_url);
                 linear.addView(img_view);
         }
 

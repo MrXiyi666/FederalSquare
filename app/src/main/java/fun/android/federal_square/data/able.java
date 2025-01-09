@@ -45,6 +45,6 @@ public class able {
             .fallback(R.drawable.glide_duqushibai);
 
     public static RequestOptions requestOptions_yasuo = new RequestOptions()
-            .encodeQuality(50);
+            .encodeQuality(10);
 
 }
