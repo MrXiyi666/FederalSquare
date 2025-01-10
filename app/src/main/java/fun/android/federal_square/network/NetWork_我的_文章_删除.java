@@ -51,7 +51,7 @@ public class NetWork_我的_文章_删除 extends NetWork_Main{
     @Override
     public void 刷新() {
         super.刷新();
-        if(able.view_home.view_home_page.view_home_essay!=null){
+        if(able.view_home.view_home_page.view_home_essay != null){
             able.view_home.view_home_page.view_home_essay.初始化数据();
         }
     }

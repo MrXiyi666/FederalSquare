@@ -95,7 +95,7 @@
                     android:text="我的文章"
                     android:textColor="@color/black"
                     android:layout_marginEnd="5dp"
-                    android:id="@+id/button_article"
+                    android:id="@+id/button_essay"
                     android:layout_weight="1"
                     android:background="@drawable/button_event_back_tran"
                     android:layout_width="0dp"

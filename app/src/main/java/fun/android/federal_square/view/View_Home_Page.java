@@ -7,11 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -25,8 +22,8 @@ public class View_Home_Page extends View_Main{
     private TextView top_title;
     public TextView name_view, sign_view, account_id;
     public LinearLayout linear;
-    private RelativeLayout top_relati, relati_page;
-    private AppCompatButton button_article, button_collection, button_system;
+    private RelativeLayout top_relati;
+    private AppCompatButton button_essay, button_collection, button_system;
 
     public View_Home_Essay view_home_essay;
     public View_Home_Collection view_home_collection;
@@ -40,7 +37,6 @@ public class View_Home_Page extends View_Main{
         view = View.inflate(activity_main, R.layout.view_home_page, null);
         top_title = view.findViewById(R.id.top_title);
         top_relati = view.findViewById(R.id.top_relati);
-        relati_page = view.findViewById(R.id.relati_page);
         linear = view.findViewById(R.id.linear);
         avatar_img = view.findViewById(R.id.avatar_img);
         back_img = view.findViewById(R.id.back_img);
@@ -48,7 +44,7 @@ public class View_Home_Page extends View_Main{
         name_view = view.findViewById(R.id.name);
         sign_view = view.findViewById(R.id.sign);
         account_id = view.findViewById(R.id.account_id);
-        button_article = view.findViewById(R.id.button_article);
+        button_essay = view.findViewById(R.id.button_essay);
         button_collection = view.findViewById(R.id.button_collection);
         button_system = view.findViewById(R.id.button_system);
         view_home_essay = new View_Home_Essay(activity_main);
@@ -69,6 +65,7 @@ public class View_Home_Page extends View_Main{
             Glide.with(activity_main)
                     .load(Fun_账号.GetAvatar_Url())
                     .transition(DrawableTransitionOptions.withCrossFade())
+                    .override(Fun.DPToPX(activity_main, 80))
                     .into(avatar_img);
         }
         if(!Fun_账号.GetBack_Url().isEmpty()){
@@ -89,33 +86,29 @@ public class View_Home_Page extends View_Main{
         });
 
         linear.addView(view_home_essay.getView());
-        button_article.setTextColor(Color.rgb(0,0,0));
+        button_essay.setTextColor(Color.rgb(0,0,0));
         button_collection.setTextColor(Color.rgb(128,128,128));
         button_system.setTextColor(Color.rgb(128,128,128));
-        button_article.setOnClickListener(V->{
+        button_essay.setOnClickListener(V->{
             linear.removeAllViews();
-            view_home_essay= null;
             view_home_essay = new View_Home_Essay(activity_main);
             linear.addView(view_home_essay.getView());
-            button_article.setTextColor(Color.rgb(0,0,0));
+            button_essay.setTextColor(Color.rgb(0,0,0));
             button_collection.setTextColor(Color.rgb(128,128,128));
             button_system.setTextColor(Color.rgb(128,128,128));
         });
-
         button_collection.setOnClickListener(V->{
             linear.removeAllViews();
-            view_home_collection = null;
             view_home_collection = new View_Home_Collection(activity_main);
             linear.addView(view_home_collection.getView());
-            button_article.setTextColor(Color.rgb(128,128,128));
+            button_essay.setTextColor(Color.rgb(128,128,128));
             button_collection.setTextColor(Color.rgb(0,0,0));
             button_system.setTextColor(Color.rgb(128,128,128));
         });
-
         button_system.setOnClickListener(V->{
             linear.removeAllViews();
             linear.addView(new View_Home_System(activity_main).getView());
-            button_article.setTextColor(Color.rgb(128,128,128));
+            button_essay.setTextColor(Color.rgb(128,128,128));
             button_collection.setTextColor(Color.rgb(128,128,128));
             button_system.setTextColor(Color.rgb(0,0,0));
         });

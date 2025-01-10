@@ -151,7 +151,16 @@ public class View_Post_Activity extends AppCompatActivity {
                 case "time":
                     time = post_data.getText();
                     String[] time_shuzu = post_data.getText().split("_");
-                    text_time.setText(time_shuzu[0] + ":" + time_shuzu[1] + ":" + time_shuzu[2] + ":" + time_shuzu[3] + ":" + time_shuzu[4] + ":" + time_shuzu[5]);
+                    StringBuffer time_data = new StringBuffer();
+                    for(int i=0;i<time_shuzu.length; i++){
+                        if(i < 5){
+                            if(!time_data.toString().isEmpty()){
+                                time_data.append(":");
+                            }
+                            time_data.append(time_shuzu[i]);
+                        }
+                    }
+                    text_time.setText(time_data);
                     break;
                 case "url":
                     url_txt = post_data.getText();

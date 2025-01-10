@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 able.view_square.scrollView.fullScroll(View.FOCUS_UP);
                 return;
             }
+            able.view_square.scrollView.scrollTo(able.view_square.scrollView.getScrollX(), able.view_square.scrollView.getScrollY());
             pager.setCurrentItem(0);
         });
         menu_hot.setOnClickListener(menu_square_v-> pager.setCurrentItem(1));
