@@ -3,9 +3,12 @@ package fun.android.federal_square.view;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.JsonSyntaxException;
@@ -112,7 +115,7 @@ public class View_Hot extends View_Main{
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
                     View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-                    if(linear.getChildCount() >= 50){
+                    if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }
                     linear.addView(view);

@@ -6,9 +6,11 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -79,7 +81,6 @@ public class View_Home_Collection extends View_Main{
         });
     }
 
-
     public void 初始化收藏(){
         new Thread(()->{
             List<String> list = Fun_文章.获取收藏集合();
@@ -105,7 +106,7 @@ public class View_Home_Collection extends View_Main{
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
                     View view = Fun_文章.Create_Post_View(activity_main, post_data, 2);
-                    if(linear.getChildCount() >= 50){
+                    if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }
                     linear.addView(view);
@@ -115,8 +116,6 @@ public class View_Home_Collection extends View_Main{
                 if(list.size() > linear.getChildCount()){
                     button_loading.setVisibility(View.VISIBLE);
                 }
-            });
-            able.handler.post(()->{
                 scrollView.scrollTo(0, 0);
             });
         }).start();

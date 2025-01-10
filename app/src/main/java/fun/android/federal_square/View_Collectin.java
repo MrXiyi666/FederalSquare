@@ -4,12 +4,14 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
@@ -71,7 +73,6 @@ public class View_Collectin extends AppCompatActivity {
             }
         });
     }
-
     public void 初始化数据(){
         new Thread(()->{
             List<String> list = Fun_文章.获取收藏集合();
@@ -88,7 +89,7 @@ public class View_Collectin extends AppCompatActivity {
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
                     View view = Fun_文章.Create_Post_View(this, post_data, 4);
-                    if(linear.getChildCount() >= 50){
+                    if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }
                     linear.addView(view);

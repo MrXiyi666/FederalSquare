@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -106,7 +107,7 @@ public class View_Essay extends AppCompatActivity {
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
                     View view = Fun_文章.Create_Post_View(this, post_data, 3);
-                    if(linear.getChildCount() >= 50){
+                    if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }
                     linear.addView(view);

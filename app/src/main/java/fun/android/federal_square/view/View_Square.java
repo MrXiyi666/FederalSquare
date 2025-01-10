@@ -3,11 +3,14 @@ package fun.android.federal_square.view;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.JsonSyntaxException;
@@ -165,7 +168,6 @@ public class View_Square extends View_Main{
     public void 释放() {
         super.释放();
     }
-
     public void 初始化本地数据(){
         new Thread(()->{
             able.handler.post(()->{
@@ -232,7 +234,7 @@ public class View_Square extends View_Main{
                 }
                 able.handler.post(()->{
                     View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-                    if(linear.getChildCount() >= 50){
+                    if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }
                     linear.addView(view);
