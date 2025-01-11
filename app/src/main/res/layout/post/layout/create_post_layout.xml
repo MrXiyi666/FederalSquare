@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fun.android.federal_square.view.Create_Post_View xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#ffffff"
@@ -146,4 +146,4 @@
         android:background="#f2f3f7"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
-</LinearLayout>
+</fun.android.federal_square.view.Create_Post_View>

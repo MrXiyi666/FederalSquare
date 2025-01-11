@@ -1,24 +1,14 @@
 package fun.android.federal_square.data;
 
 import android.os.Handler;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Hot;
-import fun.android.federal_square.view.View_Main;
 import fun.android.federal_square.view.View_Square;
-import okhttp3.CookieJar;
-import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
 public class able {

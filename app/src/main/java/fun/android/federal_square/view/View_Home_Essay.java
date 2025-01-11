@@ -121,6 +121,8 @@ public class View_Home_Essay extends View_Main{
                     View view = Fun_文章.Create_Post_View(activity_main, post_data, 1);
                     if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
+                    }else{
+                        view.setVisibility(View.VISIBLE);
                     }
                     linear.addView(view);
                 });

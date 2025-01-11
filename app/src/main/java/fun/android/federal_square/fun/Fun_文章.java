@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.target.Target;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
@@ -23,17 +20,14 @@ import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.network.NetWork_转发功能;
-import fun.android.federal_square.view.Video_ImageView;
+import fun.android.federal_square.view.Create_Post_View;
 import fun.android.federal_square.window.删除窗口;
-import fun.android.federal_square.window.打开方式窗口;
-import fun.android.federal_square.window.查看图片窗口;
-import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
 public class Fun_文章 {
 
     public static View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
-        View view = View.inflate(activity, R.layout.create_post_layout, null);
+        Create_Post_View view = (Create_Post_View) View.inflate(activity, R.layout.create_post_layout, null);
         LinearLayout button_forward = view.findViewById(R.id.button_forward);
         LinearLayout button_message = view.findViewById(R.id.button_message);
         LinearLayout button_collection = view.findViewById(R.id.button_collection);
@@ -41,12 +35,9 @@ public class Fun_文章 {
         TextView sign_view = view.findViewById(R.id.sign);
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         TextView url_txt_id = view.findViewById(R.id.url_txt_id);
-
         LinearLayout linear = view.findViewById(R.id.linear);
-
         StringBuffer sb = new StringBuffer();
         List<String> img_url = new ArrayList<>();
-        int img_id=0;
         String url_txt="";
         String PassWord_txt="";
         String time_txt = "";
@@ -128,15 +119,15 @@ public class Fun_文章 {
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
-        View img_view = Fun_文章_子布局.getImg_View(activity, img_url);
-        if(img_view!=null){
-            linear.addView(img_view);
+        Fun_文章子布局 fun_文章子布局 = new Fun_文章子布局(activity, img_url);
+        if(fun_文章子布局.getView() != null){
+            linear.addView(fun_文章子布局.getView());
         }
 
+        view.传递参数(fun_文章子布局);
         String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
-
         String finalForward = forward;
         button_forward.setOnClickListener(V->{
             if(finalForward.isEmpty() && !able.URL.equals(finalUrl_txt)){

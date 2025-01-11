@@ -3,9 +3,12 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
+
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.view.Video_ImageView;
@@ -13,11 +16,15 @@ import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.window.查看视频窗口;
 
-public class Fun_文章_子布局 {
-    private static String 后缀="";
-    public static View getImg_View(Activity activity, List<String> img_url){
-        View view=null;
-        List<Video_ImageView> video_imageViews = new ArrayList<>();
+public class Fun_文章子布局 {
+    private String 后缀="";
+    private View view;
+    private List<Video_ImageView> video_imageViews = new ArrayList<>();
+    private Activity activity;
+    private List<String> img_url;
+    public Fun_文章子布局(Activity activity, List<String> img_url){
+        this.activity = activity;
+        this.img_url = img_url;
         switch (img_url.size()){
             case 0:
 
@@ -62,15 +69,6 @@ public class Fun_文章_子布局 {
                 video_imageViews.add(view.findViewById(R.id.img_5));
         }
         for(int i=0;i<video_imageViews.size();i++){
-            Glide.with(activity)
-                    .load(img_url.get(i))
-                    .apply(able.requestOptions)
-                    .into(video_imageViews.get(i));
-            后缀 = Fun_文件.获取后缀(img_url.get(i));
-            video_imageViews.get(i).后缀 = 后缀;
-            if(!Fun.图片格式判断(后缀)){
-                video_imageViews.get(i).setBackgroundColor(Color.BLACK);
-            }
             int finalI = i;
             video_imageViews.get(i).setOnClickListener(V->{
                 后缀 = Fun_文件.获取后缀(img_url.get(finalI));
@@ -82,14 +80,24 @@ public class Fun_文章_子布局 {
                     打开方式窗口.启动(activity, img_url.get(finalI));
                 }
             });
-            video_imageViews.get(i).setOnLongClickListener(V->{
-                Glide.with(activity)
-                        .load(img_url.get(finalI))
-                        .apply(able.requestOptions)
-                        .into(video_imageViews.get(finalI));
-                return true;
-            });
+            后缀 = Fun_文件.获取后缀(img_url.get(i));
+            video_imageViews.get(i).后缀 = 后缀;
+            if(!Fun.图片格式判断(后缀)){
+                video_imageViews.get(i).setBackgroundColor(Color.BLACK);
+            }
         }
+    }
+
+    public View getView() {
         return view;
+    }
+
+    public void 加载图片(){
+        for(int i=0;i<video_imageViews.size();i++){
+            Glide.with(activity)
+                    .load(img_url.get(i))
+                    .apply(able.requestOptions)
+                    .into(video_imageViews.get(i));
+        }
     }
 }

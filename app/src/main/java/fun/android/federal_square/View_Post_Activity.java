@@ -92,8 +92,8 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
                 case "avatar":
                     Glide.with(this)
-                            .asBitmap()
                             .load(post_data.getText())
+                            .apply(able.requestOptions)
                             .into(avatar_img);
                     break;
                 case "text":
@@ -141,6 +141,29 @@ public class View_Post_Activity extends AppCompatActivity {
                         }else{
                             打开方式窗口.启动(this, post_data.getText());
                         }
+                    });
+                    img.setOnLongClickListener(V->{
+                        Glide.with(this)
+                                .load(post_data.getText())
+                                .apply(able.requestOptions)
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+                                    @Override
+                                    public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
+                                        if(!Fun.图片格式判断(img.后缀)){
+                                            img.setBackgroundColor(Color.BLACK);
+                                        }else{
+                                            img.setBackgroundColor(Color.TRANSPARENT);
+                                        }
+                                        img.setPadding(0,0,0, 0);
+                                        return false;
+                                    }
+                                })
+                                .into(img);
+                        return true;
                     });
                     linear.addView(img);
                     TextView textView = new TextView(this);

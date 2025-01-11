@@ -109,6 +109,8 @@ public class View_Essay extends AppCompatActivity {
                     View view = Fun_文章.Create_Post_View(this, post_data, 3);
                     if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
+                    }else{
+                        view.setVisibility(View.VISIBLE);
                     }
                     linear.addView(view);
                 });
