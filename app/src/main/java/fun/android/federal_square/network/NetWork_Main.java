@@ -156,11 +156,13 @@ public class NetWork_Main {
                 if(!response.isSuccessful()){
                     Log.w(class_name, url + " isSuccessfulnull");
                     Fun.mess(activity, url + "isSuccessfulnull");
+                    关闭等待窗口();
                     return;
                 }
                 if(response.body() == null){
                     Log.w(class_name, url + "response.body() null");
                     Fun.mess(activity, url + "response.body() null");
+                    关闭等待窗口();
                     return;
                 }
                 String string=response.body().string();
@@ -168,14 +170,17 @@ public class NetWork_Main {
                 if(string.isEmpty()){
                     Fun.mess(activity, url + "string null");
                     Log.w(class_name, url + "string null");
+                    关闭等待窗口();
                     return;
                 }
                 if(string.equals("Null_PassWord")){
                     Fun.mess(activity, url + "\n没有密码");
+                    关闭等待窗口();
                     return;
                 }
                 if(string.equals("Error_PassWord")){
                     Fun.mess(activity, url + "\n密码错误");
+                    关闭等待窗口();
                     return;
                 }
 

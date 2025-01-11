@@ -114,6 +114,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     img.后缀 = 后缀;
                     Glide.with(this)
                             .load(post_data.getText())
+                            .apply(able.requestOptions)
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {

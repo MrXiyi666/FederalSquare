@@ -69,6 +69,7 @@ public class Fun_文章_子布局 {
         for(int i=0;i<video_imageViews.size();i++){
             Glide.with(activity)
                     .load(img_url.get(i))
+                    .apply(able.requestOptions)
                     .into(video_imageViews.get(i));
             后缀 = Fun_文件.获取后缀(img_url.get(i));
             video_imageViews.get(i).后缀 = 后缀;
@@ -90,6 +91,7 @@ public class Fun_文章_子布局 {
                 Fun.mess(activity, "重新加载");
                 Glide.with(activity)
                         .load(img_url.get(finalI))
+                        .apply(able.requestOptions)
                         .into(video_imageViews.get(finalI));
                 return true;
             });

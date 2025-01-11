@@ -89,6 +89,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         }
         Glide.with(activity)
                 .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
+                .apply(able.requestOptions)
                 .into(gui.img);
         return convertView;
     }
