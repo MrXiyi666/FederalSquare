@@ -30,8 +30,8 @@ public class App extends Application {
         Fun_文件.创建文件夹(able.app_path + "Hot_Data");
         Fun_文件.创建文件夹(able.app_path + "YinYong_Data");
         Dispatcher dispatcher = new Dispatcher();
-        dispatcher.setMaxRequests(9999);
-        dispatcher.setMaxRequestsPerHost(9999);
+        dispatcher.setMaxRequests(999999);
+        dispatcher.setMaxRequestsPerHost(999999);
         able.okHttpClient = new OkHttpClient().newBuilder()
                 .cookieJar(CookieJar.NO_COOKIES)
                 .connectTimeout(5, TimeUnit.MINUTES)
