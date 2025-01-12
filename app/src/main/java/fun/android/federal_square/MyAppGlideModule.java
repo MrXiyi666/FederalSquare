@@ -3,22 +3,14 @@ package fun.android.federal_square;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
-import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
-import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
-import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.GlideBuilder;
 import android.content.Context;
-import android.os.Environment;
-
 import androidx.annotation.NonNull;
-
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
-
-import fun.android.federal_square.data.able;
 import okhttp3.CookieJar;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
@@ -29,7 +21,7 @@ public class MyAppGlideModule extends AppGlideModule {
         // 自定义磁盘缓存路径和大小
         String cacheDir = "image_cache";
         int diskCacheSizeBytes = 1024 * 1024 * 1000;
-        builder.setDiskCache(new InternalCacheDiskCacheFactory(context, cacheDir, diskCacheSizeBytes));
+        builder.setDiskCache(new DiskLruCacheFactory(cacheDir, diskCacheSizeBytes));
     }
 
     @Override

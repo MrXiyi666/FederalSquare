@@ -1,6 +1,8 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
+import android.view.View;
+
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -8,6 +10,7 @@ import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.fun.Fun_文章;
+import fun.android.federal_square.view.Create_Post_View;
 import okhttp3.FormBody;
 
 public class NetWork_广场上传 extends NetWork_Main {
@@ -55,10 +58,15 @@ public class NetWork_广场上传 extends NetWork_Main {
         }
 
         if(able.view_square.linear!=null){
-            able.view_square.linear.addView(Fun_文章.Create_Post_View(activity, this.post_dataList, 0), 0);
+            Create_Post_View view = Fun_文章.Create_Post_View(activity, this.post_dataList, 0);
+            able.view_square.linear.addView(view, 0);
+            view.setVisibility(View.VISIBLE);
             if(able.view_square.linear.getChildCount() >= Integer.parseInt(Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt"))){
                 able.view_square.linear.removeViewAt(able.view_square.linear.getChildCount()-1);
             }
+            able.view_square.linear.post(()->{
+                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+            });
         }
     }
 }

@@ -87,10 +87,19 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         }else{
             gui = (MyGui) convertView.getTag();
         }
-        Glide.with(activity)
-                .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
-                .apply(able.requestOptions)
-                .into(gui.img);
+        if(Fun.图片格式判断(gui.img.后缀)){
+            Glide.with(activity)
+                    .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
+                    .apply(able.requestOptions)
+                    .into(gui.img);
+        }else{
+            Glide.with(activity)
+                    .asBitmap()
+                    .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position))
+                    .apply(able.requestOptions)
+                    .into(gui.img);
+        }
+
         return convertView;
     }
     class MyGui{

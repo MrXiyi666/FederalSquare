@@ -26,7 +26,7 @@ import fun.android.federal_square.window.查看评论窗口;
 
 public class Fun_文章 {
 
-    public static View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
+    public static Create_Post_View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
         Create_Post_View view = (Create_Post_View) View.inflate(activity, R.layout.create_post_layout, null);
         LinearLayout button_forward = view.findViewById(R.id.button_forward);
         LinearLayout button_message = view.findViewById(R.id.button_message);
