@@ -70,9 +70,10 @@ public class View_Home_Page extends View_Main{
                     .into(avatar_img);
         }
         if(!Fun_账号.GetBack_Url().isEmpty()){
-            Glide.with(activity_main).load(Fun_账号.GetBack_Url()).apply(able.requestOptions)
-                    .transition(DrawableTransitionOptions.withCrossFade())
+            Glide.with(activity_main)
+                    .load(Fun_账号.GetBack_Url())
                     .apply(able.requestOptions)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .into(back_img);
         }
         top_relati.post(()->{

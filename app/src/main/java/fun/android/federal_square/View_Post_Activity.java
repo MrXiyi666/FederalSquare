@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import net.csdn.roundview.RoundImageView;
@@ -84,6 +85,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
                 case "avatar":
                     Glide.with(this)
+                            .asBitmap()
                             .load(post_data.getText())
                             .apply(able.requestOptions)
                             .into(avatar_img);
@@ -107,6 +109,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .load(post_data.getText())
                             .apply(able.requestOptions)
+                            .transition(DrawableTransitionOptions.withCrossFade())
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
@@ -138,6 +141,7 @@ public class View_Post_Activity extends AppCompatActivity {
                         Glide.with(this)
                                 .load(post_data.getText())
                                 .apply(able.requestOptions)
+                                .transition(DrawableTransitionOptions.withCrossFade())
                                 .listener(new RequestListener<Drawable>() {
                                     @Override
                                     public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {

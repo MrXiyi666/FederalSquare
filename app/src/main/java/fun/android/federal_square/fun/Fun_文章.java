@@ -38,6 +38,7 @@ public class Fun_文章 {
         LinearLayout linear = view.findViewById(R.id.linear);
         StringBuffer sb = new StringBuffer();
         List<String> img_url = new ArrayList<>();
+        String avatar_url = "";
         String url_txt="";
         String PassWord_txt="";
         String time_txt = "";
@@ -51,6 +52,7 @@ public class Fun_文章 {
                     sign_view.setText(pd.getText().replace("\n", " ").replace("\r", " "));
                     break;
                 case "avatar":
+                    avatar_url = pd.getText();
                     if(pd.getText().isEmpty()){
                         avatar_img.setImageResource(R.mipmap.ic_launcher_round);
                     }else{
@@ -121,6 +123,7 @@ public class Fun_文章 {
         }
         Fun_文章子布局 fun_文章子布局 = new Fun_文章子布局(activity, img_url);
         view.传递参数(fun_文章子布局);
+        view.传递参数(activity, avatar_img, avatar_url);
         if(fun_文章子布局.getView() != null){
             linear.addView(fun_文章子布局.getView());
         }

@@ -3,21 +3,16 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.R;
@@ -108,13 +103,12 @@ public class Fun_文章子布局 {
                     Glide.with(activity)
                             .load(img_url.get(finalI1))
                             .apply(able.requestOptions)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .transition(DrawableTransitionOptions.withCrossFade())
                             .into(video_imageViews.get(finalI1));
                 }else{
                     Glide.with(activity)
                             .asBitmap()
                             .load(img_url.get(finalI1))
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .apply(able.requestOptions)
                             .into(video_imageViews.get(finalI1));
                 }
@@ -189,7 +183,7 @@ public class Fun_文章子布局 {
         for(int i=0;i<video_imageViews.size();i++){
             是否缓存.set(i, false);
             是否正在加载.set(i, false);
-            video_imageViews.get(i).setImageBitmap(null);
+            Glide.with(activity).clear(video_imageViews.get(i));
         }
     }
 }
