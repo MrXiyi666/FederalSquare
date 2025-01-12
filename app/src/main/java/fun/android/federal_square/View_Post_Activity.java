@@ -1,21 +1,16 @@
 package fun.android.federal_square;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +18,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
 import java.util.List;
@@ -245,7 +237,6 @@ public class View_Post_Activity extends AppCompatActivity {
                     // 子控件至少有一个像素在可视范围内
                     if (scrollBounds.bottom >= (view.getHeight() / 2)) {
                         // 子控件的可见区域是否超过了50%
-
                     }
                 } else {
                     view.setVisibility(View.INVISIBLE);
