@@ -80,11 +80,13 @@ public class MainActivity extends AppCompatActivity {
                         img_square.setImageResource(R.drawable.square_checked_true_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
+                        able.view_square.恢复界面();
                         break;
                     case 1:
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
+                        able.view_hot.恢复界面();
                         break;
                     case 2:
                         img_square.setImageResource(R.drawable.square_checked_false_icon);

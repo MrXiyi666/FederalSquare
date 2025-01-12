@@ -23,7 +23,7 @@ android {
         minSdk 26
         targetSdk 35
         versionCode 5
-        versionName "5.7.8-alpha4"
+        versionName "5.7.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

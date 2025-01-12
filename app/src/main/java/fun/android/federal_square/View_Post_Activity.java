@@ -40,6 +40,7 @@ import fun.android.federal_square.window.查看评论窗口;
 public class View_Post_Activity extends AppCompatActivity {
     private TextView top_title;
     private String url_txt, PassWord_txt="";
+    private List<Video_ImageView> imageViews = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,19 +111,20 @@ public class View_Post_Activity extends AppCompatActivity {
                             .load(post_data.getText())
                             .apply(able.requestOptions)
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .listener(new RequestListener<Drawable>() {
+                            .listener(new RequestListener<>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
                                     return false;
                                 }
+
                                 @Override
                                 public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
-                                    if(!Fun.图片格式判断(img.后缀)){
+                                    if (!Fun.图片格式判断(img.后缀)) {
                                         img.setBackgroundColor(Color.BLACK);
-                                    }else{
+                                    } else {
                                         img.setBackgroundColor(Color.TRANSPARENT);
                                     }
-                                    img.setPadding(0,0,0, 0);
+                                    img.setPadding(0, 0, 0, 0);
                                     return false;
                                 }
                             })
@@ -167,6 +169,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     textView.setBackgroundColor(Color.WHITE);
                     textView.setLayoutParams(params);
                     linear.addView(textView);
+                    imageViews.add(img);
                     break;
                 case "time":
                     time = post_data.getText();
@@ -244,7 +247,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     }
                 } else {
                     view.setVisibility(View.INVISIBLE);
-                    // 子控件完全不在可视范围内
+
                 }
             }
         });
@@ -253,5 +256,11 @@ public class View_Post_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        for(Video_ImageView imageView : imageViews){
+            imageView.setImageResource(0);
+            imageView.setImageBitmap(null);
+        }
     }
+
+
 }

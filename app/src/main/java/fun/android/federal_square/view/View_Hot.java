@@ -30,6 +30,7 @@ public class View_Hot extends View_Main{
     private SwipeRefreshLayout swiperefee;
     public LinearLayout linear;
     private ScrollView scrollView;
+    private int view_id=0;
 
     public View_Hot(MainActivity activity) {
         super(activity);
@@ -63,6 +64,7 @@ public class View_Hot extends View_Main{
                 View view = linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
                     view.setVisibility(View.VISIBLE);
+                    view_id = i;
                     // 子控件至少有一个像素在可视范围内
                     if (scrollBounds.bottom >= (view.getHeight() / 2)) {
                         // 子控件的可见区域是否超过了50%
@@ -127,5 +129,26 @@ public class View_Hot extends View_Main{
                 scrollView.scrollTo(0, 0);
             });
         }).start();
+    }
+
+    public void 恢复界面(){
+        int ii=0;
+        int 当前编号;
+        if(view_id > 10){
+            当前编号 = view_id - 10;
+        }else{
+            当前编号 = 0;
+        }
+        for(int i=0;i<linear.getChildCount();i++){
+            if(ii>=20){
+                return;
+            }
+            if(当前编号 >= 0 && 当前编号 < linear.getChildCount()){
+                Post_View view = (Post_View)linear.getChildAt(当前编号);
+                view.setVisibility(View.VISIBLE);
+                ii++;
+                当前编号++;
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -44,6 +45,7 @@ public class DiskActivity extends AppCompatActivity {
     private NetWork_网盘_上传图片 netWork_网盘_上传图片;
     private TextView title_index;
     private ImageView return_icon;
+    private Disk_Grid_Adapter disk_grid_adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +134,8 @@ public class DiskActivity extends AppCompatActivity {
         this.button_network_disk.setEnabled(true);
         List<String> file_list = Fun_图片.遍历所有图片();
         title_index.setText("统计数量： " + file_list.size());
-        gridView.setAdapter(new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index));
+        disk_grid_adapter = new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index);
+        gridView.setAdapter(disk_grid_adapter);
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             String 后缀 = Fun_文件.获取后缀(file_list.get(position));
             String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position);
@@ -153,5 +156,9 @@ public class DiskActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        for(ImageView imageView : disk_grid_adapter.imageViewList){
+            imageView.setImageResource(0);
+            imageView.setImageBitmap(null);
+        }
     }
 }
