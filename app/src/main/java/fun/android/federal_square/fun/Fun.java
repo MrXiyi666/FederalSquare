@@ -20,6 +20,7 @@ import androidx.documentfile.provider.DocumentFile;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -300,5 +301,18 @@ public class Fun {
         dialog.getWindow().setGravity(Gravity.TOP);
 
         return dialog;
+    }
+
+    public static String 网址获取文件名(String txt){
+        try {
+            URL url = new URL(txt);
+            String[] url_shuzu = url.getFile().split("/");
+            if(url_shuzu.length > 0){
+                return url_shuzu[url_shuzu.length-1];
+            }
+            return "";
+        }catch (Exception e){
+            return "";
+        }
     }
 }

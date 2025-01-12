@@ -25,8 +25,8 @@ public class able {
     public static View_Home view_home;
     public static List<Post_Data> 传递数据;
     public static RequestOptions requestOptions = new RequestOptions()
-            .skipMemoryCache(false)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .skipMemoryCache(true)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
 

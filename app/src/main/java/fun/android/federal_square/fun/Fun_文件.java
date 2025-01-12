@@ -4,6 +4,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+
+import com.google.common.io.Files;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -126,6 +129,22 @@ public class Fun_文件 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * 复制文件
+     *
+     * @param context     上下文
+     * @param fromUri     源文件Uri
+     * @param toFilePath  目标文件路径
+     */
+    public static boolean copy_Uri_File(File fromUri, File toFilePath) {
+        try {
+            Files.copy(fromUri, toFilePath);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     public static String 获取后缀(String fileName){

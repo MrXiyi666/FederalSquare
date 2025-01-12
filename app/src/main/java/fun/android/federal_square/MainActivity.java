@@ -3,6 +3,7 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -10,18 +11,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-import com.bumptech.glide.Glide;
+
+import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
+
 import java.util.ArrayList;
 import java.util.List;
-import fun.android.federal_square.adatper.Main_Pager_Adapter;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
-import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.view.View_Create;
-import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Home_Page;
-import fun.android.federal_square.view.View_Hot;
-import fun.android.federal_square.view.View_Square;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager pager;
@@ -137,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             pager.setCurrentItem(2);
             return true;
         });
+
     }
 
     @Override
@@ -169,8 +168,6 @@ public class MainActivity extends AppCompatActivity {
         if( able.view_home != null){
             able.view_home.释放();
         }
-
-        Glide.get(this).clearMemory();
     }
 
     @Override

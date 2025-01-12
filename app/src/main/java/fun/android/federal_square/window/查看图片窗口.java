@@ -34,8 +34,10 @@ public class 查看图片窗口 {
         photoView.getLayoutParams().width = able.宽度;
         photoView.getLayoutParams().height = able.高度;
         photoView.setVisibility(View.VISIBLE);
+
         Glide.with(activity)
                 .load(url)
+                .apply(able.requestOptions)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .listener(new RequestListener<>() {
                     @Override
@@ -67,6 +69,7 @@ public class 查看图片窗口 {
                     }
                 })
                 .into(photoView);
+
         photoView.setOnClickListener(V->{
             dialog.dismiss();
         });

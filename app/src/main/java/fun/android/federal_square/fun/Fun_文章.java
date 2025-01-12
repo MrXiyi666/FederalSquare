@@ -20,14 +20,14 @@ import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.network.NetWork_转发功能;
-import fun.android.federal_square.view.Create_Post_View;
+import fun.android.federal_square.view.Post_View;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
 public class Fun_文章 {
 
-    public static Create_Post_View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
-        Create_Post_View view = (Create_Post_View) View.inflate(activity, R.layout.create_post_layout, null);
+    public static Post_View Create_Post_View(Activity activity, List<Post_Data> post_data, int index){
+        Post_View view =  (Post_View)View.inflate(activity, R.layout.create_post_layout, null);
         LinearLayout button_forward = view.findViewById(R.id.button_forward);
         LinearLayout button_message = view.findViewById(R.id.button_message);
         LinearLayout button_collection = view.findViewById(R.id.button_collection);
@@ -120,11 +120,11 @@ public class Fun_文章 {
             linear.addView(textView);
         }
         Fun_文章子布局 fun_文章子布局 = new Fun_文章子布局(activity, img_url);
+        view.传递参数(fun_文章子布局);
         if(fun_文章子布局.getView() != null){
             linear.addView(fun_文章子布局.getView());
         }
 
-        view.传递参数(fun_文章子布局);
         String finalTime_txt = time_txt;
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;

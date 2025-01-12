@@ -86,7 +86,7 @@ public class View_Square extends View_Main{
             Rect scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
             for(int i=0;i<linear.getChildCount();i++){
-                View view = linear.getChildAt(i);
+                Post_View view = (Post_View)linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
                     view.setVisibility(View.VISIBLE);
                     // 子控件至少有一个像素在可视范围内
@@ -233,7 +233,7 @@ public class View_Square extends View_Main{
                     continue;
                 }
                 able.handler.post(()->{
-                    View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+                    Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
                     if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }else{

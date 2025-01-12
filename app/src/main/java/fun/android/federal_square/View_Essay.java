@@ -32,6 +32,7 @@ import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.view.Post_View;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看图片窗口;
 import fun.android.federal_square.window.查看评论窗口;
@@ -76,7 +77,7 @@ public class View_Essay extends AppCompatActivity {
             Rect scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
             for(int i=0;i<linear.getChildCount();i++){
-                View view = linear.getChildAt(i);
+                Post_View view = (Post_View)linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
                     view.setVisibility(View.VISIBLE);
                     // 子控件至少有一个像素在可视范围内
@@ -106,7 +107,7 @@ public class View_Essay extends AppCompatActivity {
                 }
                 post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
                 able.handler.post(()->{
-                    View view = Fun_文章.Create_Post_View(this, post_data, 3);
+                    Post_View view = Fun_文章.Create_Post_View(this, post_data, 3);
                     if(linear.getChildCount() >= 10){
                         view.setVisibility(View.INVISIBLE);
                     }else{

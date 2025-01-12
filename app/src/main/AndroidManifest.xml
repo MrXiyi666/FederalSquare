@@ -21,7 +21,6 @@
         android:theme="@style/Theme.FederalSquare"
         tools:targetApi="31">
 
-        <!-- 注册 MyAppGlideModule -->
         <meta-data
             android:name="fun.android.federal_square.MyAppGlideModule"
             android:value="AppGlideModule" />

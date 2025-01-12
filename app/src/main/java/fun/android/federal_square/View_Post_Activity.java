@@ -258,6 +258,5 @@ public class View_Post_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Glide.get(this).clearMemory();
     }
 }
