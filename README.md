@@ -139,15 +139,11 @@
 #
 #
 #
-# v5.7.8-alpha3更新信息
+# v5.7.9更新信息
 #
-修复了缓存问题 修复了滑动加载问题
+缓存问题彻底修复
 #
-data/fun.android.federal_square/cache/glide_cache 下面 缓存了所有的图片文件数据
-#
-data/fun.android.federal_square/file/video_cache 缓存了所有的视频文件数据
-#
-如果遇到了闪退等问题 请不要担心 这是正常现象 会尽快修复
+修复了加载突然切换会空白的问题
 #
 #
 #
