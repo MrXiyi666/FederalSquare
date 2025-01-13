@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Objects;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -71,12 +72,14 @@ public class 个人信息窗口 {
         });
 
         button_delete.setOnClickListener(V->{
+            Fun_文件.删除文件夹(new File(able.app_path + "YinYong_Data"));
             Fun_文件.删除文件夹(new File(able.app_path + "Account"));
             Fun_文件.删除文件夹(new File(able.app_path + "Disk_Data"));
             Fun_文件.创建文件夹(able.app_path + "Account");
             Fun_文件.创建文件夹(able.app_path + "Account/Data");
             Fun_文件.创建文件夹(able.app_path + "Disk_Data");
             Fun_文件.创建文件夹(able.app_path + "Account/Collection");
+            Fun_文件.创建文件夹(able.app_path + "YinYong_Data");
             able.view_home.linear_main.removeAllViews();
             able.view_home.linear_main.addView(new View_Login((MainActivity) activity).getView());
             Fun.mess(activity, "成功登出");

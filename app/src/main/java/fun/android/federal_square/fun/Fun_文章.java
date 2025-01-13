@@ -133,6 +133,10 @@ public class Fun_文章 {
         String finalPassWord_txt = PassWord_txt;
         String finalForward = forward;
         button_forward.setOnClickListener(V->{
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity, "没有登陆 无法转发");
+                return;
+            }
             if(finalForward.isEmpty() && !able.URL.equals(finalUrl_txt)){
                 Post_Data postData = new Post_Data();
                 postData.setName("forward");

@@ -92,15 +92,16 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        if(Fun_账号.GetID().isEmpty()){
-            return;
-        }
+
         new Thread(()->{
-            List<String> list = Fun_文章.获取热门集合();
             able.handler.post(()->{
                 linear.removeAllViews();
             });
+            List<String> list = Fun_文章.获取热门集合();
             if(list == null){
+                return;
+            }
+            if(Fun_账号.GetID().isEmpty()){
                 return;
             }
             int index=50;
