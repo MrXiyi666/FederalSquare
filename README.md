@@ -177,6 +177,9 @@
 #
 若没有 **Access_PassWord.txt** 或者 内容为空 都算没有密码
 #
+# 如何禁用注册功能呢？
+禁用注册功能方法.txt 这个文件修改为 Create_Account.php 替换掉原本的Create_Account.php 即可禁用注册
+#
 #
 #
 ![image](https://img1.lookpic.cn/2025/01/06/jiaocheng.png)
