@@ -149,6 +149,10 @@ public class Fun_文章 {
         });
 
         button_message.setOnClickListener(V->{
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity, "没有登陆 无法查看");
+                return;
+            }
             查看评论窗口.查看评论窗口(activity, finalTime_txt, finalUrl_txt, finalPassWord_txt);
         });
         button_collection.setOnClickListener(V->{
@@ -157,6 +161,10 @@ public class Fun_文章 {
             netWork_添加_收藏.start();
         });
         view.setOnClickListener(V->{
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity, "没有登陆 无法查看");
+                return;
+            }
             able.传递数据 = post_data;
             Intent intent = new Intent();
             intent.setClass(activity, View_Post_Activity.class);

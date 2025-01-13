@@ -61,7 +61,6 @@ public class View_Post_Activity extends AppCompatActivity {
         AppCompatButton button_ok = findViewById(R.id.button_ok);
         EditText edit_text = findViewById(R.id.edit_text);
         ScrollView scrollView = findViewById(R.id.scrollView);
-
         top_title.post(()->{
             top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         });
@@ -71,6 +70,7 @@ public class View_Post_Activity extends AppCompatActivity {
         if(able.传递数据 == null){
             finish();
         }
+
         if(able.传递数据.isEmpty()){
             finish();
         }

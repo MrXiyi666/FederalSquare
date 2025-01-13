@@ -22,10 +22,15 @@ import java.util.Objects;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_账号;
 
 public class 查看图片窗口 {
     @SuppressLint("ResourceType")
     public static void 启动_Dialog(Activity activity, String url){
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity, "没有登陆 无法查看");
+            return;
+        }
         AlertDialog load_dialog = Fun.初始化等待窗口(activity);
         load_dialog.show();
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();

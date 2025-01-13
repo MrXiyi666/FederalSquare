@@ -23,6 +23,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
+import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_读取热门;
 
 public class View_Hot extends View_Main{
@@ -91,6 +92,9 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
+        if(Fun_账号.GetID().isEmpty()){
+            return;
+        }
         new Thread(()->{
             List<String> list = Fun_文章.获取热门集合();
             able.handler.post(()->{

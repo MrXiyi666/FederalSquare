@@ -23,10 +23,15 @@ import java.util.Objects;
 import fun.android.federal_square.App;
 import fun.android.federal_square.R;
 import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.fun.Fun_账号;
 
 public class 查看视频窗口 {
 
     public static void 启动_Dialog(Activity activity, String url){
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity, "没有登陆 无法查看");
+            return;
+        }
         Window window = activity.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();

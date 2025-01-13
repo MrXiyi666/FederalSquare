@@ -187,6 +187,11 @@ public class View_Square extends View_Main{
 
             int exxay_index=0;
             for(int i=0;i<list.size();i++){
+                if(Fun_账号.GetID().isEmpty()){
+                    if(i >= 10){
+                        return;
+                    }
+                }
                 if(able.URL.isEmpty()){
                     return;
                 }
