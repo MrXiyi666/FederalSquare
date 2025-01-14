@@ -56,9 +56,13 @@ public class View_Hot extends View_Main{
         super.事件();
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         swiperefee.setOnRefreshListener(()->{
+            swiperefee.setRefreshing(false);
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity_main, "没有登陆 无法刷新");
+                return;
+            }
             NetWork_读取热门 netWork_读取_热门 = new NetWork_读取热门(activity_main);
             netWork_读取_热门.start();
-            swiperefee.setRefreshing(false);
         });
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             Rect scrollBounds = new Rect();
@@ -98,7 +102,6 @@ public class View_Hot extends View_Main{
         linear.removeAllViews();
         List<String> list = Fun_文章.获取热门集合();
         if(Fun_账号.GetID().isEmpty()){
-            Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
         int index;

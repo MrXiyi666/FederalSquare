@@ -151,6 +151,10 @@ public class Fun_文章 {
             查看评论窗口.查看评论窗口(activity, finalTime_txt, finalUrl_txt, finalPassWord_txt);
         });
         button_collection.setOnClickListener(V->{
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity, "没有登陆 无法收藏");
+                return;
+            }
             NetWork_添加收藏 netWork_添加_收藏 = new NetWork_添加收藏(activity);
             netWork_添加_收藏.传递参数(finalTime_txt, post_data);
             netWork_添加_收藏.start();
@@ -184,34 +188,6 @@ public class Fun_文章 {
             button_collection.setVisibility(View.GONE);
         }
         return view;
-    }
-
-    public static List<String> 获取广场集合(){
-        try {
-            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
-            Comparator<String> comparator = Comparator.reverseOrder();
-            list.sort(comparator);
-            int index;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
-            }else{
-                index = 50;
-            }
-            List<String> return_list = new ArrayList<>();
-            for(int i=0; i < index; i++){
-                if(i >= list.size()){
-                    break;
-                }
-                return_list.add(list.get(i));
-            }
-            if(return_list.isEmpty()){
-                return new ArrayList<>();
-            }
-            return return_list;
-        }catch (Exception e){
-            return new ArrayList<>();
-        }
     }
 
     public static List<String> 获取广场所有集合(){
