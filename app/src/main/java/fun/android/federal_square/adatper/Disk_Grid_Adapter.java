@@ -92,16 +92,15 @@ public class Disk_Grid_Adapter extends BaseAdapter {
             convertView = LayoutInflater.from(activity).inflate(R.layout.disk_item, null);
             gui.img = convertView.findViewById(R.id.img);
             gui.linear = convertView.findViewById(R.id.linear);
-            ViewGroup.LayoutParams params = gui.img.getLayoutParams();
-            params.height = Fun.DPToPX(activity, height);
-            gui.img.setLayoutParams(params);
-            String 后缀 = Fun_文件.获取后缀(url.get(position));
-            gui.img.后缀 = 后缀;
             convertView.setTag(gui);
         }else{
             gui = (MyGui) convertView.getTag();
         }
-
+        ViewGroup.LayoutParams params = gui.img.getLayoutParams();
+        params.height = Fun.DPToPX(activity, height);
+        gui.img.setLayoutParams(params);
+        String 后缀 = Fun_文件.获取后缀(url.get(position));
+        gui.img.后缀 = 后缀;
         String url_txt = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position);
         Glide.with(activity).load(url_txt)
                 .override(Fun.DPToPX(activity, height))

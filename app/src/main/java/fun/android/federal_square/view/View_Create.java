@@ -1,10 +1,13 @@
 package fun.android.federal_square.view;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -16,9 +19,12 @@ import fun.android.federal_square.fun.Fun_文件;
 
 public class View_Create extends View_Main{
     private AppCompatButton button_ok;
+    private MainActivity activity;
     private EditText edit_url, edit_password;
     public View_Create(MainActivity activity) {
         super(activity);
+        this.activity = activity;
+        activity.square_menu.setVisibility(View.GONE);
     }
     private ViewPager pager;
     private List<View> pager_view;
@@ -48,7 +54,7 @@ public class View_Create extends View_Main{
         Main_Pager_Adapter adapter = new Main_Pager_Adapter(pager_view);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
-
+        activity.square_menu.setVisibility(View.VISIBLE);
     }
     @Override
     public void 初始化() {

@@ -8,14 +8,12 @@ import java.util.List;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.view.View_Home_Collection;
 import okhttp3.FormBody;
 
 public class NetWork_我的_收藏_刷新 extends NetWork_Main {
     public NetWork_我的_收藏_刷新(Activity activity ){
         super(activity);
         this.b_account = true;
-
         formBody = new FormBody.Builder()
                 .add("PassWord", able.PassWord)
                 .add("path", "./Account/" + Fun_账号.GetID() + "/Collection")
@@ -31,20 +29,10 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
         if(string.equals("no")){
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Collection"));
             Fun_文件.创建文件夹(able.app_path + "Account/Collection");
-            able.handler.post(()-> {
-                if(able.view_home.view_home_page.view_home_collection != null){
-                    able.view_home.view_home_page.view_home_collection.linear.removeAllViews();
-                }
-            });
             this.b_update = true;
             return;
         }
         if(string.equals("no_folder")){
-            able.handler.post(()-> {
-                if(able.view_home.view_home_page.view_home_collection != null){
-                    able.view_home.view_home_page.view_home_collection.linear.removeAllViews();
-                }
-            });
             this.b_update = true;
             Fun_文件.删除文件夹(new File(able.app_path + "Account/Collection"));
             Fun_文件.创建文件夹(able.app_path + "Account/Collection");

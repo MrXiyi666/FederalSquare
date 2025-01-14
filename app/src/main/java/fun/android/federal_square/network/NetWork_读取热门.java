@@ -24,7 +24,9 @@ public class NetWork_读取热门 extends NetWork_Main {
     public void 刷新() {
         super.刷新();
 
-
+        if(able.view_hot!=null){
+            able.view_hot.初始化数据();
+        }
     }
 
     @Override
@@ -33,7 +35,6 @@ public class NetWork_读取热门 extends NetWork_Main {
         List<String> filename = new ArrayList<>(Arrays.asList(string.split("\n")));
         if(filename.isEmpty()){
             Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
-            b_update = true;
             return;
         }
         Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(filename));
@@ -43,8 +44,6 @@ public class NetWork_读取热门 extends NetWork_Main {
             }
             down_list_data.add(name + ".json");
         }
-        if(able.view_hot!=null){
-            able.view_hot.初始化数据();
-        }
+        b_update = true;
     }
 }

@@ -2,22 +2,18 @@ package fun.android.federal_square.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-
-import androidx.appcompat.app.AlertDialog;
+import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.View_Collectin;
@@ -33,6 +29,7 @@ public class View_Home_Collection extends View_Main{
     public LinearLayout linear;
     private AppCompatButton button_loading;
     private ScrollView scrollView;
+    private Handler handler;
     public View_Home_Collection(Activity activity) {
         super((MainActivity) activity);
     }
@@ -40,6 +37,7 @@ public class View_Home_Collection extends View_Main{
     @Override
     public void 初始化() {
         super.初始化();
+        handler = new Handler();
         view = View.inflate(activity_main, R.layout.view_home_collection, null);
         swiperefee = view.findViewById(R.id.swiperefee);
         scrollView = view.findViewById(R.id.scrollView);
@@ -82,45 +80,41 @@ public class View_Home_Collection extends View_Main{
     }
 
     public void 初始化收藏(){
-        new Thread(()->{
-            List<String> list = Fun_文章.获取收藏集合();
-            able.handler.post(()->{
-                linear.removeAllViews();
-                button_loading.setVisibility(View.VISIBLE);
-            });
-            int index=50;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
+        List<String> list = Fun_文章.获取我的收藏集合();
+        linear.removeAllViews();
+        button_loading.setVisibility(View.VISIBLE);
+        if(list.isEmpty()){
+            button_loading.setVisibility(View.GONE);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            TextView textView = new TextView(activity_main);
+            textView.setTextColor(Color.rgb(128, 128, 128));
+            textView.setTextSize(15);
+            textView.setText("收藏为空");
+            textView.setTextIsSelectable(true);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(params);
+            linear.addView(textView);
+            return;
+        }else{
+            button_loading.setVisibility(View.VISIBLE);
+        }
+        for(int i=0; i<list.size(); i++){
+            String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                continue;
             }
-            for(int i=0;i<index;i++){
-                if(i>=list.size()){
-                    return;
-                }
-                String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-                List<Post_Data> post_data;
-                if(!Fun.StrBoolJSON(str)){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                able.handler.post(()->{
-                    View view = Fun_文章.Create_Post_View(activity_main, post_data, 2);
-                    if(linear.getChildCount() >= 10){
-                        view.setVisibility(View.INVISIBLE);
-                    }else{
-                        view.setVisibility(View.VISIBLE);
-                    }
-                    linear.addView(view);
-                });
+            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(activity_main, post_data, 2);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
             }
-            able.handler.post(()->{
-                if(list.size() > linear.getChildCount()){
-                    button_loading.setVisibility(View.VISIBLE);
-                }
-                scrollView.scrollTo(0, 0);
-            });
-        }).start();
+            linear.addView(view);
+        }
     }
 
 

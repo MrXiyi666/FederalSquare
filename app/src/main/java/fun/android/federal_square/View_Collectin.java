@@ -3,6 +3,7 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
@@ -28,6 +31,9 @@ public class View_Collectin extends AppCompatActivity {
     private TextView top_title;
     private LinearLayout linear;
     private ScrollView scrollView;
+    public AppCompatButton button_top, button_up, button_down, button_update;
+    public int 第一个文章编号 = 0;
+    public int index=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,10 @@ public class View_Collectin extends AppCompatActivity {
         return_icon = findViewById(R.id.return_icon);
         linear = findViewById(R.id.linear);
         scrollView = findViewById(R.id.scrollView);
+        button_top = findViewById(R.id.button_top);
+        button_up = findViewById(R.id.button_up);
+        button_down = findViewById(R.id.button_down);
+        button_update = findViewById(R.id.button_update);
         初始化数据();
     }
 
@@ -73,32 +83,123 @@ public class View_Collectin extends AppCompatActivity {
                 }
             }
         });
+        button_top.setOnClickListener(V->{
+            scrollView.fullScroll(View.FOCUS_UP);
+        });
+        button_up.setOnClickListener(V->{
+            上一页();
+        });
+        button_down.setOnClickListener(V->{
+            下一页();
+        });
+        button_update.setOnClickListener(V->{
+            初始化数据();
+        });
     }
     public void 初始化数据(){
-        new Thread(()->{
-            List<String> list = Fun_文章.获取收藏集合();
-            able.handler.post(()->{
-                linear.removeAllViews();
-            });
-            for(int i=0;i<list.size();i++){
-                String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-                List<Post_Data> post_data;
-                if(!Fun.StrBoolJSON(str)){
-                    Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
-                    continue;
-                }
-                post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                able.handler.post(()->{
-                    Post_View view = Fun_文章.Create_Post_View(this, post_data, 4);
-                    if(linear.getChildCount() >= 10){
-                        view.setVisibility(View.INVISIBLE);
-                    }else{
-                        view.setVisibility(View.VISIBLE);
-                    }
-                    linear.addView(view);
-                });
+        第一个文章编号=0;
+        List<String> list = Fun_文章.获取所有收藏集合();
+        linear.removeAllViews();
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        for(int i=0; i<list.size(); i++){
+            if(i >= index){
+                return;
             }
-        }).start();
+            String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+            List<Post_Data> post_data;
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                continue;
+            }
+            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(this, post_data, 4);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+        }
+    }
+
+    public void 上一页(){
+        scrollView.fullScroll(View.FOCUS_UP);
+        List<String> list = Fun_文章.获取所有收藏集合();
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        for(int i=0;i<index;i++){
+            第一个文章编号--;
+        }
+        if(第一个文章编号 < 0){
+            第一个文章编号 = 0;
+        }
+        linear.removeAllViews();
+        int 遍历数量 = 0;
+        for(int i=第一个文章编号; i<list.size(); i++){
+            if(遍历数量 >= index){
+                return;
+            }
+            String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+            List<Post_Data> post_data;
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                continue;
+            }
+            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(this, post_data, 4);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
+    }
+
+    public void 下一页(){
+        scrollView.fullScroll(View.FOCUS_UP);
+        List<String> list = Fun_文章.获取所有收藏集合();
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        for(int i=0;i<index;i++){
+            第一个文章编号++;
+        }
+        linear.removeAllViews();
+        int 遍历数量 = 0;
+        for(int i=第一个文章编号; i<list.size(); i++){
+            if(遍历数量 >= index){
+                return;
+            }
+            String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+            List<Post_Data> post_data;
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                continue;
+            }
+            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(this, post_data, 4);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
     }
 
     @Override

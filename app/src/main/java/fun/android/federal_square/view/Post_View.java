@@ -47,8 +47,7 @@ public class Post_View extends LinearLayout {
         if(visibility == View.VISIBLE){
             fun_文章子布局.加载图片();
             加载头像();
-        }
-        if(visibility == View.INVISIBLE){
+        }else if(visibility == View.INVISIBLE){
             fun_文章子布局.清除图片();
             清除头像();
         }

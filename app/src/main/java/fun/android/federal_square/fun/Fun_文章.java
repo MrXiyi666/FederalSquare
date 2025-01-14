@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
@@ -53,14 +52,6 @@ public class Fun_文章 {
                     break;
                 case "avatar":
                     avatar_url = pd.getText();
-                    if(pd.getText().isEmpty()){
-                        avatar_img.setImageResource(R.mipmap.ic_launcher_round);
-                    }else{
-                        Glide.with(activity)
-                                .load(pd.getText())
-                                .override(Fun.DPToPX(activity, 40), Fun.DPToPX(activity, 40))
-                                .into(avatar_img);
-                    }
                     break;
                 case "text":
                     String [] str = pd.getText().replace("\n", " ").replace("\r", " ").split("");
@@ -143,7 +134,7 @@ public class Fun_文章 {
                 postData.setText("true");
                 post_data.add(postData);
                 NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
-                netWork_转发功能.传递参数(post_data, finalTime_txt);
+                netWork_转发功能.传递参数(post_data, finalTime_txt, button_forward);
                 netWork_转发功能.start();
             }else{
                 Fun.mess(activity, "已存在");
@@ -192,7 +183,6 @@ public class Fun_文章 {
         if(index==2){
             button_collection.setVisibility(View.GONE);
         }
-
         return view;
     }
 
@@ -201,6 +191,37 @@ public class Fun_文章 {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
             Comparator<String> comparator = Comparator.reverseOrder();
             list.sort(comparator);
+            int index;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
+            }else{
+                index = 50;
+            }
+            List<String> return_list = new ArrayList<>();
+            for(int i=0; i < index; i++){
+                if(i >= list.size()){
+                    break;
+                }
+                return_list.add(list.get(i));
+            }
+            if(return_list.isEmpty()){
+                return new ArrayList<>();
+            }
+            return return_list;
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<String> 获取广场所有集合(){
+        try {
+            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
+            Comparator<String> comparator = Comparator.reverseOrder();
+            list.sort(comparator);
+            if(list.isEmpty()){
+                return new ArrayList<>();
+            }
             return list;
         }catch (Exception e){
             return new ArrayList<>();
@@ -212,22 +233,55 @@ public class Fun_文章 {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
             Comparator<String> comparator = Comparator.reverseOrder();
             list.sort(comparator);
-            return list;
+            int index;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
+            }else{
+                index = 10;
+            }
+            List<String> return_list = new ArrayList<>();
+            for(int i=0; i < index; i++){
+                if(i >= list.size()){
+                    break;
+                }
+                return_list.add(list.get(i));
+            }
+            if(!return_list.isEmpty()){
+                return return_list;
+            }
+            return new ArrayList<>();
         }catch (Exception e){
             return new ArrayList<>();
         }
     }
-    public static List<String> 获取收藏集合(){
+    public static List<String> 获取我的收藏集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
             Comparator<String> comparator = Comparator.reverseOrder();
             list.sort(comparator);
-            return list;
+            int index;
+            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+            if(!sindex.isEmpty()){
+                index = Integer.parseInt(sindex);
+            }else{
+                index = 10;
+            }
+            List<String> return_list = new ArrayList<>();
+            for(int i=0; i < index; i++){
+                if(i >= list.size()){
+                    break;
+                }
+                return_list.add(list.get(i));
+            }
+            if(!return_list.isEmpty()){
+                return return_list;
+            }
+            return new ArrayList<>();
         }catch (Exception e){
             return new ArrayList<>();
         }
     }
-
     public static List<String> 获取热门集合(){
         try {
             String txt = Fun_文件.读取文件(able.app_path + "Hot_Data/list.json");
@@ -240,5 +294,31 @@ public class Fun_文章 {
         }
     }
 
+    public static List<String> 获取所有文章集合(){
+        try {
+            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
+            Comparator<String> comparator = Comparator.reverseOrder();
+            list.sort(comparator);
+            if(list.isEmpty()){
+                return new ArrayList<>();
+            }
+            return list;
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
 
+    public static List<String> 获取所有收藏集合(){
+        try {
+            List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
+            Comparator<String> comparator = Comparator.reverseOrder();
+            list.sort(comparator);
+            if(list.isEmpty()){
+                return new ArrayList<>();
+            }
+            return list;
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
 }

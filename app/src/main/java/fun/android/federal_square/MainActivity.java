@@ -3,17 +3,14 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
-
-import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.able;
@@ -28,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView img_square, img_hot, img_home;
     private LinearLayout linear_create, button_menu;
     private View_Create view_create;
+    public LinearLayout square_menu;
+
+    public AppCompatButton button_top, button_up, button_down, button_update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,13 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         able.宽度 = displayMetrics.widthPixels;
         able.高度 = displayMetrics.heightPixels;
-
+        square_menu = findViewById(R.id.square_menu);
         linear_create = findViewById(R.id.linear_create);
         button_menu = findViewById(R.id.button_menu);
+        button_top = findViewById(R.id.button_top);
+        button_up = findViewById(R.id.button_up);
+        button_down = findViewById(R.id.button_down);
+        button_update = findViewById(R.id.button_update);
         pager = findViewById(R.id.pager);
         menu_square = findViewById(R.id.menu_square);
         menu_hot = findViewById(R.id.menu_hot);
@@ -77,18 +81,21 @@ public class MainActivity extends AppCompatActivity {
                 able.pager_id = position;
                 switch (position){
                     case 0:
+                        square_menu.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_true_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_square.恢复界面();
                         break;
                     case 1:
+                        square_menu.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_hot.恢复界面();
                         break;
                     case 2:
+                        square_menu.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.home_checked_true_icon);
@@ -106,14 +113,12 @@ public class MainActivity extends AppCompatActivity {
                 able.view_square.scrollView.fullScroll(View.FOCUS_UP);
                 return;
             }
-            able.view_square.scrollView.scrollTo(able.view_square.scrollView.getScrollX(), able.view_square.scrollView.getScrollY());
             pager.setCurrentItem(0);
         });
         menu_hot.setOnClickListener(menu_square_v-> pager.setCurrentItem(1));
         menu_home.setOnClickListener(menu_square_v-> pager.setCurrentItem(2));
         menu_square.setOnLongClickListener(v -> {
             if(pager.getCurrentItem() == 0){
-                able.view_square.初始化本地数据();
                 able.view_square.scrollView.fullScroll(View.FOCUS_UP);
                 return true;
             }
@@ -122,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         });
         menu_hot.setOnLongClickListener(v -> {
             if(pager.getCurrentItem() == 1) {
-                able.view_hot.初始化数据();
+                able.view_hot.scrollView.fullScroll(View.FOCUS_UP);
                 return true;
             }
             pager.setCurrentItem(1);
@@ -137,7 +142,36 @@ public class MainActivity extends AppCompatActivity {
             pager.setCurrentItem(2);
             return true;
         });
+        button_top.setOnClickListener(V->{
+            if(pager.getCurrentItem() == 0){
+                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+            }else if(pager.getCurrentItem() == 1){
+                able.view_hot.scrollView.fullScroll(View.FOCUS_UP);
+            }
+        });
+        button_up.setOnClickListener(V->{
+            if(pager.getCurrentItem() == 0){
+                able.view_square.上一页();
+            }else if(pager.getCurrentItem() == 1){
+                able.view_hot.上一页();
+            }
 
+        });
+        button_down.setOnClickListener(V->{
+            if(pager.getCurrentItem() == 0){
+                able.view_square.下一页();
+            }else if(pager.getCurrentItem() == 1){
+                able.view_hot.下一页();
+            }
+
+        });
+        button_update.setOnClickListener(V->{
+            if(pager.getCurrentItem() == 0){
+                able.view_square.初始化本地数据();
+            }else if(pager.getCurrentItem() == 1){
+                able.view_hot.初始化数据();
+            }
+        });
     }
 
     @Override

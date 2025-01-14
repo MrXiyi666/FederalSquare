@@ -1,21 +1,16 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
@@ -34,6 +29,7 @@ import fun.android.federal_square.window.引用列表窗口;
 import fun.android.federal_square.window.重新设置域名窗口;
 
 public class View_Square extends View_Main{
+
     private TextView top_title;
     public ImageView new_icon;
     private SwipeRefreshLayout swiperefee;
@@ -44,6 +40,8 @@ public class View_Square extends View_Main{
     private boolean b_time_update = true;
     private Thread time_thread=null;
     public int view_id;
+    public List<String> 所有文章 = new ArrayList<>();
+    public int 第一个文章编号 = 0;
     public View_Square(MainActivity activity) {
         super(activity);
     }
@@ -51,6 +49,7 @@ public class View_Square extends View_Main{
     @Override
     public void 初始化() {
         super.初始化();
+
         view = View.inflate(activity_main, R.layout.view_square, null);
         top_title = view.findViewById(R.id.top_title);
         new_icon = view.findViewById(R.id.new_icon);
@@ -61,7 +60,6 @@ public class View_Square extends View_Main{
         scrollView = view.findViewById(R.id.scrollView);
         初始化本地数据();
         new_icon.setVisibility(View.GONE);
-
 
     }
 
@@ -171,91 +169,210 @@ public class View_Square extends View_Main{
         super.释放();
     }
     public void 初始化本地数据(){
-        new Thread(()->{
-            able.handler.post(()->{
-                linear.removeAllViews();
-            });
-            List<String> list = Fun_文章.获取广场集合();
-            int index=50;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
-            }
-            if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-                able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
-            }
-
-            int exxay_index=0;
-            for(int i=0;i<list.size();i++){
-                if(Fun_账号.GetID().isEmpty()){
-                    if(i >= 10){
-                        return;
-                    }
-                }
-                if(able.URL.isEmpty()){
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        第一个文章编号=0;
+        所有文章 = Fun_文章.获取广场所有集合();
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        int 遍历数量 = 0;
+        for(int i=0;i<所有文章.size();i++){
+            if(Fun_账号.GetID().isEmpty()){
+                if(遍历数量 >= 10){
                     return;
                 }
-                if(exxay_index >= index){
-                    return;
-                }
-                String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-                List<Post_Data> post_data;
-                if(!Fun.StrBoolJSON(txt)){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-                String xu_url="";
-                for(Post_Data pd : post_data){
-                    if(pd.getName().equals("forward")){
-                        xu_url = able.URL;
-                    }
-                }
-                if(xu_url.isEmpty()){
-                    for(Post_Data pd : post_data){
-                        if(pd.getName().equals("url")){
-                            xu_url = pd.getText();
-                        }
-                    }
-                }
-
-                if(xu_url.isEmpty()){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                boolean for_bool = false;
-                if(able.URL.equals(xu_url)){
-                    for_bool = true;
-                }
-                if(!for_bool){
-                    for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
-                        if (url_passWord_data.getURL().equals(xu_url)) {
-                            for_bool = true;
-                            break;
-                        }
-                    }
-                }
-                if(!for_bool){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
-                    continue;
-                }
-                able.handler.post(()->{
-                    Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-                    if(linear.getChildCount() >= 10){
-                        view.setVisibility(View.INVISIBLE);
-                    }else{
-                        view.setVisibility(View.VISIBLE);
-                    }
-                    linear.addView(view);
-                });
-                exxay_index++;
             }
-            able.handler.post(()->{
-                scrollView.scrollTo(0, 0);
-            });
-        }).start();
+            if(遍历数量 >= index){
+                return;
+            }
+            //读取json判断json格式是否正确
+            String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+            if(!Fun.StrBoolJSON(txt)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                continue;
+            }
+            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+            //获取文章内的域名
+            String url_data="";
+            for(Post_Data pd : post_data){
+                if(pd.getName().equals("url")){
+                    url_data = pd.getText();
+                }
+            }
+            if(url_data.isEmpty()){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+            }
+            Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
     }
 
+    public void 上一页(){
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity_main, "没有登陆 无法使用");
+            return;
+        }
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        String url="";
+        所有文章 = Fun_文章.获取广场所有集合();
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
+            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
+        }
+        if(url.isEmpty()){
+            return;
+        }
+        for(int i=0;i<index;i++){
+            第一个文章编号--;
+        }
+        if(第一个文章编号 < 0){
+            第一个文章编号 = 0;
+        }
+
+        int 遍历数量 = 0;
+        for(int i=第一个文章编号; i<所有文章.size(); i++){
+            if(Fun_账号.GetID().isEmpty()){
+                if(遍历数量>=10){
+                    return;
+                }
+            }
+            if(遍历数量 >= index){
+                return;
+            }
+            //读取json判断json格式是否正确
+            String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+            if(!Fun.StrBoolJSON(txt)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                continue;
+            }
+            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+            //获取文章内的域名
+            String url_data="";
+            for(Post_Data pd : post_data){
+                if(pd.getName().equals("url")){
+                    url_data = pd.getText();
+                }
+            }
+            //域名和当前我的域名对比较 如果一样就设置为 true
+            boolean for_bool = url.equals(url_data);
+            if(!for_bool){
+                for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
+                    if (url_passWord_data.getURL().equals(url_data)) {
+                        for_bool = true;
+                        break;
+                    }
+                }
+            }
+            //不是我的域名 也不是 引用的域名 删除文章数据
+            if(!for_bool){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                continue;
+            }
+            Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
+
+    }
+
+    public void 下一页(){
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity_main, "没有登陆 无法使用");
+            return;
+        }
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        String url="";
+        所有文章 = Fun_文章.获取广场所有集合();
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
+            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
+        }
+        if(url.isEmpty()){
+            return;
+        }
+        for(int i=0;i<index;i++){
+            第一个文章编号++;
+        }
+        int 遍历数量=0;
+        for(int i=第一个文章编号;i<所有文章.size();i++){
+            if(Fun_账号.GetID().isEmpty()){
+                if(遍历数量 >= 10){
+                    return;
+                }
+            }
+            if(遍历数量 >= index){
+                return;
+            }
+            //读取json判断json格式是否正确
+            String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+            if(!Fun.StrBoolJSON(txt)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                continue;
+            }
+            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+            //获取文章内的域名
+            String url_data="";
+            for(Post_Data pd : post_data){
+                if(pd.getName().equals("url")){
+                    url_data = pd.getText();
+                }
+            }
+            //域名和当前我的域名对比较 如果一样就设置为 true
+            boolean for_bool = url.equals(url_data);
+            if(!for_bool){
+                for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
+                    if (url_passWord_data.getURL().equals(url_data)) {
+                        for_bool = true;
+                        break;
+                    }
+                }
+            }
+            //不是我的域名 也不是 引用的域名 删除文章数据
+            if(!for_bool){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                continue;
+            }
+            Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
+
+    }
     public void 恢复界面(){
         int ii=0;
         int 当前编号;
@@ -269,7 +386,7 @@ public class View_Square extends View_Main{
                 return;
             }
             if(当前编号 >= 0 && 当前编号 < linear.getChildCount()){
-                Post_View view = (Post_View)linear.getChildAt(当前编号);
+                View view = linear.getChildAt(当前编号);
                 view.setVisibility(View.VISIBLE);
                 ii++;
                 当前编号++;

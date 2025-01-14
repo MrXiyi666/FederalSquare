@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -20,8 +22,10 @@ public class NetWork_转发功能 extends NetWork_Main{
     }
     private String time;
     private List<Post_Data> postData;
+    private LinearLayout button_forward;
 
-    public void 传递参数(List<Post_Data> postData, String time){
+    public void 传递参数(List<Post_Data> postData, String time, LinearLayout button_forward){
+        this.button_forward = button_forward;
         this.time = time;
         this.postData = postData;
         formBody = new FormBody.Builder()
@@ -42,12 +46,13 @@ public class NetWork_转发功能 extends NetWork_Main{
         }
         Fun_文件.写入文件(able.app_path + "Square_Data/" + time + ".json", able.gson.toJson(this.postData));
         Fun.mess(activity, "转发成功");
-        able.view_square.初始化本地数据();
+        this.button_forward.post(()->{
+            this.button_forward.setVisibility(View.GONE);
+        });
     }
 
     @Override
     public void 刷新() {
         super.刷新();
-
     }
 }

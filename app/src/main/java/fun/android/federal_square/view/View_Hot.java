@@ -1,7 +1,9 @@
 package fun.android.federal_square.view;
 
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
@@ -30,9 +32,9 @@ public class View_Hot extends View_Main{
     private TextView top_title;
     private SwipeRefreshLayout swiperefee;
     public LinearLayout linear;
-    private ScrollView scrollView;
+    public ScrollView scrollView;
     private int view_id=0;
-
+    public int 第一个文章编号 = 0;
     public View_Hot(MainActivity activity) {
         super(activity);
 
@@ -92,48 +94,129 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
+        第一个文章编号=0;
+        linear.removeAllViews();
+        List<String> list = Fun_文章.获取热门集合();
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity_main, "没有登陆 无法查看");
+            return;
+        }
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 10;
+        }
+        int 遍历数量 = 0;
+        for(int i=0;i<list.size();i++){
+            if(遍历数量 >= index){
+                return;
+            }
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+            List<Post_Data> post_data;
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                continue;
+            }
+            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
 
-        new Thread(()->{
-            able.handler.post(()->{
-                linear.removeAllViews();
-            });
-            List<String> list = Fun_文章.获取热门集合();
-            if(list == null){
+    }
+
+    public void 上一页(){
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        List<String> list = Fun_文章.获取热门集合();
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity_main, "没有登陆 无法查看");
+            return;
+        }
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 10;
+        }
+        int 遍历数量 = 0;
+        for(int i=0;i<index;i++){
+            第一个文章编号--;
+        }
+        if(第一个文章编号 < 0){
+            第一个文章编号 = 0;
+        }
+        for(int i=第一个文章编号;i<list.size();i++){
+            if(遍历数量 >= index){
                 return;
             }
-            if(Fun_账号.GetID().isEmpty()){
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+            List<Post_Data> post_data;
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                continue;
+            }
+            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
+            }
+            linear.addView(view);
+            遍历数量++;
+        }
+
+    }
+
+    public void 下一页(){
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        List<String> list = Fun_文章.获取热门集合();
+        if(Fun_账号.GetID().isEmpty()){
+            Fun.mess(activity_main, "没有登陆 无法查看");
+            return;
+        }
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 10;
+        }
+        int 遍历数量 = 0;
+        for(int i=0;i<index;i++){
+            第一个文章编号++;
+        }
+        for(int i=第一个文章编号;i<list.size();i++){
+            if(遍历数量 >= index){
                 return;
             }
-            int index=50;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+            List<Post_Data> post_data;
+            if(!Fun.StrBoolJSON(str)){
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                continue;
             }
-            for(int i=0;i<index;i++){
-                if(i >= list.size()){
-                    return;
-                }
-                String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-                List<Post_Data> post_data;
-                if(!Fun.StrBoolJSON(str)){
-                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-                    continue;
-                }
-                post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-                able.handler.post(()->{
-                    View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-                    if(linear.getChildCount() >= 10){
-                        view.setVisibility(View.INVISIBLE);
-                    }else{
-                        view.setVisibility(View.VISIBLE);
-                    }
-                    linear.addView(view);
-                });
+            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            if(linear.getChildCount() >= 10){
+                view.setVisibility(View.INVISIBLE);
+            }else{
+                view.setVisibility(View.VISIBLE);
             }
-            able.handler.post(()->{
-                scrollView.scrollTo(0, 0);
-            });
-        }).start();
+            linear.addView(view);
+            遍历数量++;
+        }
+
     }
 
     public void 恢复界面(){
@@ -149,7 +232,7 @@ public class View_Hot extends View_Main{
                 return;
             }
             if(当前编号 >= 0 && 当前编号 < linear.getChildCount()){
-                Post_View view = (Post_View)linear.getChildAt(当前编号);
+                View view = linear.getChildAt(当前编号);
                 view.setVisibility(View.VISIBLE);
                 ii++;
                 当前编号++;
