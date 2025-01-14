@@ -103,7 +103,7 @@ public class View_Home_Collection extends View_Main{
             String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
 
             if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());

@@ -264,28 +264,6 @@ public class View_Square extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            //获取文章内的域名
-            String url_data="";
-            for(Post_Data pd : post_data){
-                if(pd.getName().equals("url")){
-                    url_data = pd.getText();
-                }
-            }
-            //域名和当前我的域名对比较 如果一样就设置为 true
-            boolean for_bool = url.equals(url_data);
-            if(!for_bool){
-                for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
-                    if (url_passWord_data.getURL().equals(url_data)) {
-                        for_bool = true;
-                        break;
-                    }
-                }
-            }
-            //不是我的域名 也不是 引用的域名 删除文章数据
-            if(!for_bool){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-                continue;
-            }
             Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
@@ -340,28 +318,6 @@ public class View_Square extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            //获取文章内的域名
-            String url_data="";
-            for(Post_Data pd : post_data){
-                if(pd.getName().equals("url")){
-                    url_data = pd.getText();
-                }
-            }
-            //域名和当前我的域名对比较 如果一样就设置为 true
-            boolean for_bool = url.equals(url_data);
-            if(!for_bool){
-                for(URL_PassWord_Data url_passWord_data : 引用列表窗口.获取引用列表()){
-                    if (url_passWord_data.getURL().equals(url_data)) {
-                        for_bool = true;
-                        break;
-                    }
-                }
-            }
-            //不是我的域名 也不是 引用的域名 删除文章数据
-            if(!for_bool){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-                continue;
-            }
             Post_View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);

@@ -98,7 +98,7 @@ public class View_Essay extends AppCompatActivity {
         第一个文章编号=0;
         List<String> list = Fun_文章.获取所有文章集合();
         linear.removeAllViews();
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
         if(!sindex.isEmpty()){
             index = Integer.parseInt(sindex);
         }else{
@@ -145,10 +145,10 @@ public class View_Essay extends AppCompatActivity {
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             List<Post_Data> post_data;
             if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                 continue;
             }
             post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
@@ -181,10 +181,10 @@ public class View_Essay extends AppCompatActivity {
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             List<Post_Data> post_data;
             if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                 continue;
             }
             post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
