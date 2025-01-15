@@ -8,17 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.OptIn;
 import androidx.appcompat.app.AlertDialog;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.PlaybackException;
-import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSource;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
-import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
+import androidx.media3.common.MediaItem;
+import androidx.media3.common.PlaybackException;
+import androidx.media3.common.Player;
+import androidx.media3.common.util.UnstableApi;
+import androidx.media3.datasource.DefaultDataSource;
+import androidx.media3.datasource.DefaultHttpDataSource;
+import androidx.media3.datasource.cache.CacheDataSource;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.exoplayer.source.MediaSource;
+import androidx.media3.exoplayer.source.ProgressiveMediaSource;
+import androidx.media3.ui.PlayerView;
+
 import java.util.Objects;
 import fun.android.federal_square.App;
 import fun.android.federal_square.R;
@@ -27,6 +32,7 @@ import fun.android.federal_square.fun.Fun_账号;
 
 public class 查看视频窗口 {
 
+    @OptIn(markerClass = UnstableApi.class)
     public static void 启动_Dialog(Activity activity, String url){
         if(Fun_账号.GetID().isEmpty()){
             Fun.mess(activity, "没有登陆 无法查看");
@@ -53,21 +59,19 @@ public class 查看视频窗口 {
         playerView.setPlayer(player);
         player.prepare();
         player.play();
-
         player.addListener(new Player.Listener() {
             @Override
-            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                if (playbackState == Player.STATE_ENDED) {
-
-                }
-                if(playbackState == Player.STATE_READY){
+            public void onPlaybackStateChanged(@Player.State int state) {
+                if (state == Player.STATE_READY) {
                     window.setNavigationBarColor(Color.BLACK);
                     window.setStatusBarColor(Color.BLACK);
+                    playerView.hideController();
                 }
             }
+
             @Override
-            public void onPlayerError(PlaybackException error) {
-                Player.Listener.super.onPlayerError(error);
+            public void onPlayerErrorChanged(@Nullable PlaybackException error) {
+                Player.Listener.super.onPlayerErrorChanged(error);
                 Fun.mess(activity, "播放错误", 2000);
                 player.release();
                 dialog.dismiss();
@@ -76,6 +80,7 @@ public class 查看视频窗口 {
                 window.setStatusBarColor(Color.TRANSPARENT);
             }
         });
+
         dialog.setOnCancelListener(dialog1 -> {
             player.release();
             dialog.dismiss();

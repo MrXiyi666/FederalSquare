@@ -98,19 +98,23 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        第一个文章编号=0;
         linear.removeAllViews();
-        List<String> list = Fun_文章.获取热门集合();
         if(Fun_账号.GetID().isEmpty()){
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            TextView textView = new TextView(activity_main);
+            textView.setTextColor(Color.rgb(128, 128, 128));
+            textView.setTextSize(15);
+            textView.setText("没有登录 无法查看");
+            textView.setTextIsSelectable(true);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(params);
+            linear.addView(textView);
             return;
         }
-        int index;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 10;
-        }
+        第一个文章编号=0;
+        List<String> list = Fun_文章.获取热门集合();
+        int index = Fun.获取热门数量();
         int 遍历数量 = 0;
         for(int i=0;i<list.size();i++){
             if(遍历数量 >= index){
@@ -136,20 +140,14 @@ public class View_Hot extends View_Main{
     }
 
     public void 上一页(){
-        scrollView.fullScroll(View.FOCUS_UP);
-        linear.removeAllViews();
-        List<String> list = Fun_文章.获取热门集合();
         if(Fun_账号.GetID().isEmpty()){
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
-        int index;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 10;
-        }
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        List<String> list = Fun_文章.获取热门集合();
+        int index = Fun.获取热门数量();
         int 遍历数量 = 0;
         for(int i=0;i<index;i++){
             第一个文章编号--;
@@ -181,20 +179,14 @@ public class View_Hot extends View_Main{
     }
 
     public void 下一页(){
-        scrollView.fullScroll(View.FOCUS_UP);
-        linear.removeAllViews();
-        List<String> list = Fun_文章.获取热门集合();
         if(Fun_账号.GetID().isEmpty()){
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
-        int index;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 10;
-        }
+        scrollView.fullScroll(View.FOCUS_UP);
+        linear.removeAllViews();
+        List<String> list = Fun_文章.获取热门集合();
+        int index = Fun.获取热门数量();
         int 遍历数量 = 0;
         for(int i=0;i<index;i++){
             第一个文章编号++;

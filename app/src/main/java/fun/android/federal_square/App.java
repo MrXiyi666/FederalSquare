@@ -1,9 +1,12 @@
 package fun.android.federal_square;
 
 import android.app.Application;
-import com.google.android.exoplayer2.database.ExoDatabaseProvider;
-import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
-import com.google.android.exoplayer2.upstream.cache.SimpleCache;
+
+import androidx.media3.common.util.UnstableApi;
+import androidx.media3.database.ExoDatabaseProvider;
+import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor;
+import androidx.media3.datasource.cache.SimpleCache;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import fun.android.federal_square.data.able;
@@ -12,6 +15,7 @@ import okhttp3.CookieJar;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
+@UnstableApi
 public class App extends Application {
     private static SimpleCache simpleCache;
     @Override
@@ -58,8 +62,7 @@ public class App extends Application {
         if(!Fun_文件.是否存在(able.app_path + "System_Data/Disk_index.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/Disk_index.txt", "3");
         }
-        LeastRecentlyUsedCacheEvictor leastRecentlyUsedCacheEvictor = new
-                LeastRecentlyUsedCacheEvictor(100 * 1024 * 1024);
+        LeastRecentlyUsedCacheEvictor leastRecentlyUsedCacheEvictor = new LeastRecentlyUsedCacheEvictor(1000 * 1024 * 1024);
         simpleCache = new SimpleCache(new File(able.app_path + "video_cache"), leastRecentlyUsedCacheEvictor, new ExoDatabaseProvider(this));
     }
 

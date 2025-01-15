@@ -98,9 +98,7 @@ public class View_Home_Essay extends View_Main{
     public void 初始化数据(){
         List<String> list = Fun_文章.获取我的文章集合();
         linear.removeAllViews();
-
         if(list.isEmpty()){
-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             TextView textView = new TextView(activity_main);

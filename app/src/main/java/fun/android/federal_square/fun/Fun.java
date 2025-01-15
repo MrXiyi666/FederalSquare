@@ -315,4 +315,64 @@ public class Fun {
             return "";
         }
     }
+
+    public static String 获取域名(){
+        String url="";
+        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
+            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
+        }
+        return url;
+    }
+
+    public static String 获取密码(){
+        String url="";
+        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
+            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1]+"";
+        }
+        return url;
+    }
+
+    public static int 获取广场文章数量(){
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 50;
+        }
+        return index;
+    }
+
+    public static int 获取热门数量(){
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Hot_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 10;
+        }
+        return index;
+    }
+
+    public static int 获取我的文章数量(){
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 10;
+        }
+        return index;
+    }
+
+    public static int 获取我的收藏数量(){
+        int index;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }else{
+            index = 10;
+        }
+        return index;
+    }
 }

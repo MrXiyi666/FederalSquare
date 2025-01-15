@@ -23,7 +23,7 @@ android {
         minSdk 26
         targetSdk 35
         versionCode 5
-        versionName "5.8.0"
+        versionName "5.8.1-alpha1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,8 +54,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation 'io.github.csdn-mobile:RoundView:1.8.1'
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.5'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.5'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.5'
-    implementation 'com.google.android.exoplayer:extension-okhttp:2.18.5'
+    implementation 'androidx.media3:media3-exoplayer:1.5.1'
+    implementation 'androidx.media3:media3-exoplayer-dash:1.5.1'
+    implementation 'androidx.media3:media3-ui:1.5.1'
+    implementation 'androidx.media3:media3-datasource-okhttp:1.5.1'
 }

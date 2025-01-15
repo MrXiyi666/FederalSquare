@@ -209,13 +209,7 @@ public class Fun_文章 {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
             Comparator<String> comparator = Comparator.reverseOrder();
             list.sort(comparator);
-            int index;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Essay_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
-            }else{
-                index = 10;
-            }
+            int index = Fun.获取我的文章数量();
             List<String> return_list = new ArrayList<>();
             for(int i=0; i < index; i++){
                 if(i >= list.size()){
@@ -236,13 +230,7 @@ public class Fun_文章 {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
             Comparator<String> comparator = Comparator.reverseOrder();
             list.sort(comparator);
-            int index;
-            String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
-            if(!sindex.isEmpty()){
-                index = Integer.parseInt(sindex);
-            }else{
-                index = 10;
-            }
+            int index = Fun.获取我的收藏数量();
             List<String> return_list = new ArrayList<>();
             for(int i=0; i < index; i++){
                 if(i >= list.size()){

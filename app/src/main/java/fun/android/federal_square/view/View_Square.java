@@ -172,15 +172,13 @@ public class View_Square extends View_Main{
         scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         第一个文章编号=0;
+        String url = Fun.获取域名();
         所有文章 = Fun_文章.获取广场所有集合();
-        int index;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 50;
-        }
+        int index = Fun.获取广场文章数量();
         int 遍历数量 = 0;
+        if(url.isEmpty()){
+            return;
+        }
         for(int i=0;i<所有文章.size();i++){
             if(Fun_账号.GetID().isEmpty()){
                 if(遍历数量 >= 10){
@@ -225,18 +223,9 @@ public class View_Square extends View_Main{
         }
         scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
-        String url="";
+        String url = Fun.获取域名();
         所有文章 = Fun_文章.获取广场所有集合();
-        int index;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 50;
-        }
-        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
-        }
+        int index = Fun.获取广场文章数量();
         if(url.isEmpty()){
             return;
         }
@@ -257,7 +246,6 @@ public class View_Square extends View_Main{
             if(遍历数量 >= index){
                 return;
             }
-            //读取json判断json格式是否正确
             String txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
             if(!Fun.StrBoolJSON(txt)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
@@ -283,18 +271,9 @@ public class View_Square extends View_Main{
         }
         scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
-        String url="";
+        String url = Fun.获取域名();
         所有文章 = Fun_文章.获取广场所有集合();
-        int index;
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 50;
-        }
-        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
-        }
+        int index = Fun.获取广场文章数量();
         if(url.isEmpty()){
             return;
         }
