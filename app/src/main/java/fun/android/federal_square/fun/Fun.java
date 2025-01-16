@@ -203,14 +203,21 @@ public class Fun {
         boolean for_bool = false;
         try {
             List<Post_Data> pd = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            for_bool = true;
-        }catch (JsonSyntaxException ignored){
+            if(pd==null){
+            }else{
+                for_bool = true;
+            }
 
+        }catch (JsonSyntaxException ignored){
         }
         if(!for_bool){
             try {
                 List<URL_PassWord_Data> pd = able.gson.fromJson(str, new TypeToken<List<URL_PassWord_Data>>(){}.getType());
-                for_bool = true;
+                if(pd==null){
+                }else{
+                    for_bool = true;
+                }
+
             }catch (JsonSyntaxException ignored){
             }
         }

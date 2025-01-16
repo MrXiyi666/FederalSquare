@@ -3,11 +3,16 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
@@ -23,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private final List<View> pager_view = new ArrayList<>();
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
-    private LinearLayout linear_create, button_menu;
+    private LinearLayout linear_create, linear_menu;
     private View_Create view_create;
-    public LinearLayout square_menu;
+    public LinearLayout square_menu, menu_system;
+    public TextView menu_text;
 
     public AppCompatButton button_top, button_up, button_down, button_update;
 
@@ -47,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         able.宽度 = displayMetrics.widthPixels;
         able.高度 = displayMetrics.heightPixels;
+        menu_system = findViewById(R.id.menu_system);
         square_menu = findViewById(R.id.square_menu);
         linear_create = findViewById(R.id.linear_create);
-        button_menu = findViewById(R.id.button_menu);
+        linear_menu = findViewById(R.id.linear_menu);
         button_top = findViewById(R.id.button_top);
         button_up = findViewById(R.id.button_up);
         button_down = findViewById(R.id.button_down);
@@ -61,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
         img_square = findViewById(R.id.img_square);
         img_hot = findViewById(R.id.img_hot);
         img_home = findViewById(R.id.img_home);
+        menu_text = findViewById(R.id.menu_text);
         view_create = new View_Create(this);
-        view_create.传递参数(pager, pager_view, linear_create, button_menu);
+        view_create.传递参数(pager, pager_view, linear_create, linear_menu);
     }
 
     public void 事件(){
@@ -81,21 +89,25 @@ public class MainActivity extends AppCompatActivity {
                 able.pager_id = position;
                 switch (position){
                     case 0:
-                        square_menu.setVisibility(View.VISIBLE);
+                        menu_system.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_true_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_square.恢复界面();
+                        able.view_square.修改底部空间();
+                        able.view_hot.修改底部空间();
                         break;
                     case 1:
-                        square_menu.setVisibility(View.VISIBLE);
+                        menu_system.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_hot.恢复界面();
+                        able.view_square.修改底部空间();
+                        able.view_hot.修改底部空间();
                         break;
                     case 2:
-                        square_menu.setVisibility(View.GONE);
+                        menu_system.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.home_checked_true_icon);
@@ -107,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-
         menu_square.setOnClickListener(menu_square_v-> {
             if(pager.getCurrentItem() == 0){
                 able.view_square.scrollView.fullScroll(View.FOCUS_UP);
@@ -170,6 +181,22 @@ public class MainActivity extends AppCompatActivity {
                 able.view_square.初始化本地数据();
             }else if(pager.getCurrentItem() == 1){
                 able.view_hot.初始化数据();
+            }
+        });
+
+        menu_text.setOnClickListener(V->{
+            if(square_menu.getVisibility() == View.VISIBLE){
+                square_menu.setVisibility(View.GONE);
+                menu_text.setText("▲");
+                menu_text.setTextColor(Color.rgb(0,0,0));
+                able.view_square.修改底部空间();
+                able.view_hot.修改底部空间();
+            }else{
+                square_menu.setVisibility(View.VISIBLE);
+                menu_text.setText("▼");
+                menu_text.setTextColor(Color.rgb(128,128,128));
+                able.view_square.修改底部空间();
+                able.view_hot.修改底部空间();
             }
         });
     }

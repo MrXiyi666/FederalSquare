@@ -25,6 +25,7 @@ public class View_Create extends View_Main{
         super(activity);
         this.activity = activity;
         activity.square_menu.setVisibility(View.GONE);
+        activity.menu_text.setVisibility(View.GONE);
     }
     private ViewPager pager;
     private List<View> pager_view;
@@ -55,6 +56,7 @@ public class View_Create extends View_Main{
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
         activity.square_menu.setVisibility(View.VISIBLE);
+        activity.menu_text.setVisibility(View.VISIBLE);
     }
     @Override
     public void 初始化() {

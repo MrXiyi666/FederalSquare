@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -38,10 +39,12 @@ public class View_Square extends View_Main{
     public LinearLayout linear;
     public 发表文章窗口 _发表文章窗口;
     private boolean b_time_update = true;
+    private boolean scrollView_Di = false;
     private Thread time_thread=null;
     public int view_id;
     public List<String> 所有文章 = new ArrayList<>();
     public int 第一个文章编号 = 0;
+    public TextView di_title;
     public View_Square(MainActivity activity) {
         super(activity);
     }
@@ -58,6 +61,7 @@ public class View_Square extends View_Main{
         button_url_setting = view.findViewById(R.id.button_url_setting);
         linear = view.findViewById(R.id.linear);
         scrollView = view.findViewById(R.id.scrollView);
+        di_title = view.findViewById(R.id.di_title);
         初始化本地数据();
         new_icon.setVisibility(View.GONE);
 
@@ -84,6 +88,13 @@ public class View_Square extends View_Main{
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             Rect scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
+            int childHeight = scrollView.getChildAt(0).getHeight();
+            int scrollViewHeight = scrollView.getHeight();
+            if(scrollY + scrollViewHeight >= childHeight){
+                scrollView_Di = true;
+            }else{
+                scrollView_Di = false;
+            }
             for(int i=0;i<linear.getChildCount();i++){
                 Post_View view = (Post_View)linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
@@ -326,6 +337,24 @@ public class View_Square extends View_Main{
                 ii++;
                 当前编号++;
             }
+        }
+    }
+
+    public void 修改底部空间(){
+        ViewGroup.LayoutParams params = di_title.getLayoutParams();
+        if(activity_main.square_menu.getVisibility() == View.VISIBLE){
+            params.height = Fun.DPToPX(activity_main, 95);
+            di_title.setLayoutParams(params);
+        }else{
+            params.height = Fun.DPToPX(activity_main, 35);
+            di_title.setLayoutParams(params);
+        }
+        if(scrollView_Di){
+            scrollView.post(()->{
+               int childHeight = scrollView.getChildAt(0).getHeight();
+               int scrollViewHeight = scrollView.getHeight();
+               scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+            });
         }
     }
 }
