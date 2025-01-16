@@ -168,7 +168,7 @@ public class 发表文章窗口 {
                     .apply(requestOptions)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
+                    LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
