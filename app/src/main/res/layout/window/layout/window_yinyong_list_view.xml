@@ -38,7 +38,7 @@
         android:textSize="15sp"
         android:textColor="@color/black"
         android:gravity="start"
-        android:text="引用新的实例可以让多个服务器文章出现在同一个时间线内\n注意：结尾请加上 / 符号。"
+        android:text="引用新的广场实例可以让多个服务器文章出现在同一个时间线内\n注意：结尾请加上 / 符号。"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
