@@ -172,11 +172,11 @@
 #
 #
 #
-我的-引用列表 添加下面的域名和密码
+我的-引用列表 添加下面的实例地址
 #
-网址： http://federal-square.top/
+实例地址： http://federal-square.top/
 #
-密码： federal-square
+实例密码： federal-square
 #
 可以获取开发者的更新信息 以及最新版本
 #
