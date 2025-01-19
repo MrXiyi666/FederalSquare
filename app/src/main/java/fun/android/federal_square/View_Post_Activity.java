@@ -86,7 +86,6 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
                 case "avatar":
                     Glide.with(this)
-                            .asBitmap()
                             .load(post_data.getText())
                             .apply(able.requestOptions)
                             .into(avatar_img);

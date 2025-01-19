@@ -170,7 +170,6 @@ public class 发表文章窗口 {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
-            params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V->{
                 Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
@@ -230,15 +229,12 @@ public class 发表文章窗口 {
                     .error(R.drawable.glide_shibai)
                     .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
-                    .asBitmap()
                     .load(str_url)
-                    .fitCenter()
                     .apply(requestOptions)
                     .into(imageView);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, able.宽度 / 2);
+                    LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
-            params.gravity = Gravity.START;
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V1->{
                 Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);

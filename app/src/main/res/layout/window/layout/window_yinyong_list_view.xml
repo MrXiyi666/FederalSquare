@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/round_white"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -37,7 +38,7 @@
         android:textSize="15sp"
         android:textColor="@color/black"
         android:gravity="start"
-        android:text="说明：引用可以让你和更多的人进行互动，\n            你必须输入正确的域名和密码。\n注意：结尾请加上 / 符号。"
+        android:text="引用新的实例可以让多个服务器文章出现在同一个时间线内\n注意：结尾请加上 / 符号。"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
@@ -57,7 +58,7 @@
                 android:background="@drawable/edit_back"
                 android:padding="15dp"
                 android:id="@+id/edit_text"
-                android:hint="输入新的域名"
+                android:hint="引用的实例地址"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <EditText
@@ -68,9 +69,10 @@
                 android:background="@drawable/edit_back"
                 android:padding="15dp"
                 android:id="@+id/edit_text_password"
-                android:hint="有密码的话请输入"
+                android:hint="实例密码"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:ignore="TextFields" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton

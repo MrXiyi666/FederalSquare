@@ -39,13 +39,11 @@ public class 引用列表窗口 {
         List<URL_PassWord_Data>list = 获取引用列表();
         linear.removeAllViews();
         for(URL_PassWord_Data url_passWord_data : list){
-            linear.addView(创建子布局(activity, url_passWord_data, linear, list));
+            linear.addView(创建子布局(activity, url_passWord_data, linear, list), 0);
         }
         button_add.setOnClickListener(V->{
             String txt = edit_text.getText().toString();
             String txt_password = edit_text_password.getText().toString();
-
-
             txt = txt.replaceAll("\\s+", "");
             if(!txt.isEmpty()){
                 URL_PassWord_Data urlPassWordData = new URL_PassWord_Data();
@@ -85,7 +83,7 @@ public class 引用列表窗口 {
         View view = View.inflate(activity, R.layout.view_yinyong_list_item_view, null);
         TextView text = view.findViewById(R.id.text);
 
-        String str = "域名：" + url_passWord_data.getURL();
+        String str = "地址：" + url_passWord_data.getURL();
         if(!url_passWord_data.getPassWord().isEmpty()){
             str = str + "\n密码：" + url_passWord_data.getPassWord();
         }

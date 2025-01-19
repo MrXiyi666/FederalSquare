@@ -108,6 +108,7 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
+        scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         if(Fun_账号.GetID().isEmpty()){
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -185,7 +186,6 @@ public class View_Hot extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
-
     }
 
     public void 下一页(){
@@ -221,7 +221,6 @@ public class View_Hot extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
-
     }
 
     public void 恢复界面(){

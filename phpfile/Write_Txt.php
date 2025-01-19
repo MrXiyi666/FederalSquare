@@ -11,4 +11,3 @@
 	echo "ok";
     fwrite($file, $data);
     fclose($file);
-    

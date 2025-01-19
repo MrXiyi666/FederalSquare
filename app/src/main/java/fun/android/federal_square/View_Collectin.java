@@ -33,7 +33,6 @@ public class View_Collectin extends AppCompatActivity {
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;
     public int 第一个文章编号 = 0;
-    public int index=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,12 +99,7 @@ public class View_Collectin extends AppCompatActivity {
         第一个文章编号=0;
         List<String> list = Fun_文章.获取所有收藏集合();
         linear.removeAllViews();
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 50;
-        }
+        int index = Fun.获取我的收藏数量();
         for(int i=0; i<list.size(); i++){
             if(i >= index){
                 return;
@@ -130,12 +124,7 @@ public class View_Collectin extends AppCompatActivity {
     public void 上一页(){
         scrollView.fullScroll(View.FOCUS_UP);
         List<String> list = Fun_文章.获取所有收藏集合();
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 50;
-        }
+        int index = Fun.获取我的收藏数量();
         for(int i=0;i<index;i++){
             第一个文章编号--;
         }
@@ -169,12 +158,7 @@ public class View_Collectin extends AppCompatActivity {
     public void 下一页(){
         scrollView.fullScroll(View.FOCUS_UP);
         List<String> list = Fun_文章.获取所有收藏集合();
-        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Home_Collection_Essay_index.txt");
-        if(!sindex.isEmpty()){
-            index = Integer.parseInt(sindex);
-        }else{
-            index = 50;
-        }
+        int index = Fun.获取我的收藏数量();
         for(int i=0;i<index;i++){
             第一个文章编号++;
         }

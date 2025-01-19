@@ -10,16 +10,16 @@
         android:layout_height="wrap_content"/>
     <TextView
         android:layout_marginTop="60dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
         android:gravity="start"
-        android:text="您必须填写您的域名地址，\n例如：http://federal-square.top/\n如果你输入错误，\n必须进入系统设置清除数据重新进入软件。\n注意：结尾请加上 / 符号。"
+        android:text="您必须有一个广场实例 才可以进入联邦广场\nhttp://federal-square.top/\n我们称它为实例地址\n如果你输入错误 必须进清除数据重新进入软件\n注意：结尾请加上 / 符号。"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:inputType="text"
         android:layout_marginTop="10dp"
-        android:hint="这里写域名"
+        android:hint="实例地址"
         android:id="@+id/edit_url"
         android:textColor="@color/black"
         android:gravity="start"
@@ -31,16 +31,16 @@
         android:layout_height="wrap_content" />
     <TextView
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
         android:gravity="start"
-        android:text="没有密码可以留空，\n初始密码一般为federal-square。"
+        android:text="某些实例可能设置了密码\n初始密码比如 federal-square"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:inputType="text"
         android:layout_marginTop="10dp"
-        android:hint="这里写密码"
+        android:hint="实例密码"
         android:id="@+id/edit_password"
         android:textColor="@color/black"
         android:gravity="start"

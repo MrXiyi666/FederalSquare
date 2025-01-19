@@ -39,7 +39,7 @@ public class View_Square extends View_Main{
     public LinearLayout linear;
     public 发表文章窗口 _发表文章窗口;
     private boolean b_time_update = true;
-    private boolean scrollView_Di = false;
+    private boolean scrollView_Down_Y = false, scrollView_Up_Y;
     private Thread time_thread=null;
     public int view_id;
     public List<String> 所有文章 = new ArrayList<>();
@@ -90,10 +90,15 @@ public class View_Square extends View_Main{
             scrollView.getHitRect(scrollBounds);
             int childHeight = scrollView.getChildAt(0).getHeight();
             int scrollViewHeight = scrollView.getHeight();
-            if(scrollY + scrollViewHeight >= childHeight){
-                scrollView_Di = true;
+            if(scrollY == 0){
+                scrollView_Up_Y = true;
             }else{
-                scrollView_Di = false;
+                scrollView_Up_Y = false;
+            }
+            if(scrollY + scrollViewHeight >= childHeight){
+                scrollView_Down_Y = true;
+            }else{
+                scrollView_Down_Y = false;
             }
             for(int i=0;i<linear.getChildCount();i++){
                 Post_View view = (Post_View)linear.getChildAt(i);
@@ -272,7 +277,6 @@ public class View_Square extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
-
     }
 
     public void 下一页(){
@@ -317,7 +321,6 @@ public class View_Square extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
-
     }
     public void 恢复界面(){
         int ii=0;
@@ -349,7 +352,7 @@ public class View_Square extends View_Main{
             params.height = Fun.DPToPX(activity_main, 35);
             di_title.setLayoutParams(params);
         }
-        if(scrollView_Di){
+        if(scrollView_Down_Y){
             scrollView.post(()->{
                int childHeight = scrollView.getChildAt(0).getHeight();
                int scrollViewHeight = scrollView.getHeight();
