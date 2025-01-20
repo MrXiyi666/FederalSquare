@@ -30,4 +30,11 @@ public class able {
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
 
+    public static RequestOptions 占位_request = new RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .placeholder(R.drawable.glide_zhanwei)
+            .skipMemoryCache(true)
+            .error(R.drawable.glide_shibai)
+            .fallback(R.drawable.glide_duqushibai);
+
 }

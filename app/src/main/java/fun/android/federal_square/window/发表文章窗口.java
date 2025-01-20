@@ -176,7 +176,7 @@ public class 发表文章窗口 {
             Glide.with(activity)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .apply(able.requestOptions)
+                    .apply(able.占位_request)
                     .into(imageView);
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
@@ -237,7 +237,7 @@ public class 发表文章窗口 {
             Glide.with(activity)
                     .load(str_url)
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .apply(able.requestOptions)
+                    .apply(able.占位_request)
                     .into(imageView);
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
