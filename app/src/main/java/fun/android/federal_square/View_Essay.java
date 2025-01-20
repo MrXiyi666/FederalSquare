@@ -29,7 +29,7 @@ public class View_Essay extends AppCompatActivity {
     private TextView top_title;
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;
-    public int 第一个文章编号 = 0;
+    private int Post_Index = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,19 +63,22 @@ public class View_Essay extends AppCompatActivity {
             finish();
         });
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            Rect scrollBounds = new Rect();
+            var scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
-            for(int i=0;i<linear.getChildCount();i++){
-                Post_View view = (Post_View)linear.getChildAt(i);
+            for(var i=0;i<linear.getChildCount();i++){
+                var view = (Post_View)linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
-                    view.setVisibility(View.VISIBLE);
+                    if(view.getVisibility() == View.INVISIBLE){
+                        view.setVisibility(View.VISIBLE);
+                    }
                     // 子控件至少有一个像素在可视范围内
                     if (scrollBounds.bottom >= (view.getHeight() / 2)) {
                         // 子控件的可见区域是否超过了50%
-
                     }
                 } else {
-                    view.setVisibility(View.INVISIBLE);
+                    if(view.getVisibility() == View.VISIBLE){
+                        view.setVisibility(View.INVISIBLE);
+                    }
                     // 子控件完全不在可视范围内
                 }
             }
@@ -95,21 +98,21 @@ public class View_Essay extends AppCompatActivity {
     }
     public void 初始化数据(){
         scrollView.fullScroll(View.FOCUS_UP);
-        第一个文章编号=0;
-        List<String> list = Fun_文章.获取所有文章集合();
+        Post_Index=0;
+        var list = Fun_文章.获取所有文章集合();
         linear.removeAllViews();
-        int index = Fun.获取我的文章数量();
-        for(int i=0; i<list.size(); i++){
+        var index = Fun.获取我的文章数量();
+        for(var i=0; i<list.size(); i++){
             if(i>=index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(this, post_data, 3);
+            var view = Fun_文章.Create_Post_View(this, post_data, 3);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -118,31 +121,29 @@ public class View_Essay extends AppCompatActivity {
             linear.addView(view);
         }
     }
-
     public void 上一页(){
         scrollView.fullScroll(View.FOCUS_UP);
-        List<String> list = Fun_文章.获取所有文章集合();
-        int index = Fun.获取我的文章数量();
-        for(int i=0;i<index;i++){
-            第一个文章编号--;
+        var list = Fun_文章.获取所有文章集合();
+        var index = Fun.获取我的文章数量();
+        for(var i=0;i<index;i++){
+            Post_Index--;
         }
-        if(第一个文章编号 < 0){
-            第一个文章编号 = 0;
+        if(Post_Index < 0){
+            Post_Index = 0;
         }
         linear.removeAllViews();
-        int 遍历数量 = 0;
-        for(int i=第一个文章编号; i<list.size(); i++){
+        var 遍历数量 = 0;
+        for(var i=Post_Index; i<list.size(); i++){
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-            List<Post_Data> post_data;
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                 continue;
             }
-            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(this, post_data, 4);
+            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            var view = Fun_文章.Create_Post_View(this, post_data, 4);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -152,28 +153,30 @@ public class View_Essay extends AppCompatActivity {
             遍历数量++;
         }
     }
-
     public void 下一页(){
+        if(linear.getChildCount() == 0){
+            Fun.mess(this, "到底了");
+            return;
+        }
         scrollView.fullScroll(View.FOCUS_UP);
-        List<String> list = Fun_文章.获取所有文章集合();
-        int index = Fun.获取我的文章数量();
-        for(int i=0;i<index;i++){
-            第一个文章编号++;
+        var list = Fun_文章.获取所有文章集合();
+        var index = Fun.获取我的文章数量();
+        for(var i=0;i<index;i++){
+            Post_Index++;
         }
         linear.removeAllViews();
-        int 遍历数量 = 0;
-        for(int i=第一个文章编号; i<list.size(); i++){
+        var 遍历数量 = 0;
+        for(var i=Post_Index; i<list.size(); i++){
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
-            List<Post_Data> post_data;
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                 continue;
             }
-            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(this, post_data, 4);
+            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            var view = Fun_文章.Create_Post_View(this, post_data, 4);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -183,7 +186,6 @@ public class View_Essay extends AppCompatActivity {
             遍历数量++;
         }
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

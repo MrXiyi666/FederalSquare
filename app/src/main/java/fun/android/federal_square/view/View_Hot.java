@@ -2,22 +2,13 @@ package fun.android.federal_square.view;
 
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -31,12 +22,12 @@ import fun.android.federal_square.network.NetWork_读取热门;
 
 public class View_Hot extends View_Main{
     public TextView top_title, di_title;
-    private SwipeRefreshLayout swiperefee;
+    private SwipeRefreshLayout swipe_layout;
     public LinearLayout linear;
     public ScrollView scrollView;
     private int view_id=0;
     private boolean scrollView_Di = false;
-    public int 第一个文章编号 = 0;
+    public int Post_Index = 0;
     public View_Hot(MainActivity activity) {
         super(activity);
 
@@ -48,7 +39,7 @@ public class View_Hot extends View_Main{
         view = View.inflate(activity_main, R.layout.view_hot, null);
         top_title = view.findViewById(R.id.top_title);
         di_title = view.findViewById(R.id.di_title);
-        swiperefee = view.findViewById(R.id.swiperefee);
+        swipe_layout = view.findViewById(R.id.swiperefee);
         scrollView = view.findViewById(R.id.scrollView);
         linear = view.findViewById(R.id.linear);
         初始化数据();
@@ -58,29 +49,31 @@ public class View_Hot extends View_Main{
     public void 事件() {
         super.事件();
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
-        swiperefee.setOnRefreshListener(()->{
-            swiperefee.setRefreshing(false);
+        swipe_layout.setOnRefreshListener(()->{
+            swipe_layout.setRefreshing(false);
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity_main, "没有登陆 无法刷新");
                 return;
             }
-            NetWork_读取热门 netWork_读取_热门 = new NetWork_读取热门(activity_main);
+            var netWork_读取_热门 = new NetWork_读取热门(activity_main);
             netWork_读取_热门.start();
         });
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            Rect scrollBounds = new Rect();
+            var scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
-            int childHeight = scrollView.getChildAt(0).getHeight();
-            int scrollViewHeight = scrollView.getHeight();
+            var childHeight = scrollView.getChildAt(0).getHeight();
+            var scrollViewHeight = scrollView.getHeight();
             if(scrollY + scrollViewHeight >= childHeight){
                 scrollView_Di = true;
             }else{
                 scrollView_Di = false;
             }
-            for(int i=0;i<linear.getChildCount();i++){
-                View view = linear.getChildAt(i);
+            for(var i=0;i<linear.getChildCount();i++){
+                var view = linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
-                    view.setVisibility(View.VISIBLE);
+                    if(view.getVisibility() == View.INVISIBLE){
+                        view.setVisibility(View.VISIBLE);
+                    }
                     view_id = i;
                     // 子控件至少有一个像素在可视范围内
                     if (scrollBounds.bottom >= (view.getHeight() / 2)) {
@@ -88,7 +81,9 @@ public class View_Hot extends View_Main{
 
                     }
                 } else {
-                    view.setVisibility(View.INVISIBLE);
+                    if(view.getVisibility() == View.VISIBLE){
+                        view.setVisibility(View.INVISIBLE);
+                    }
                     // 子控件完全不在可视范围内
                 }
             }
@@ -111,9 +106,8 @@ public class View_Hot extends View_Main{
         scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         if(Fun_账号.GetID().isEmpty()){
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            TextView textView = new TextView(activity_main);
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            var textView = new TextView(activity_main);
             textView.setTextColor(Color.rgb(128, 128, 128));
             textView.setTextSize(15);
             textView.setText("没有登录 无法查看");
@@ -123,22 +117,21 @@ public class View_Hot extends View_Main{
             linear.addView(textView);
             return;
         }
-        第一个文章编号=0;
-        List<String> list = Fun_文章.获取热门集合();
-        int index = Fun.获取热门数量();
-        int 遍历数量 = 0;
-        for(int i=0;i<list.size();i++){
+        Post_Index=0;
+        var list = Fun_文章.获取热门集合();
+        var index = Fun.获取热门数量();
+        var 遍历数量 = 0;
+        for(var i=0;i<list.size();i++){
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-            List<Post_Data> post_data;
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
                 continue;
             }
-            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -157,27 +150,26 @@ public class View_Hot extends View_Main{
         }
         scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
-        List<String> list = Fun_文章.获取热门集合();
-        int index = Fun.获取热门数量();
-        int 遍历数量 = 0;
-        for(int i=0;i<index;i++){
-            第一个文章编号--;
+        var list = Fun_文章.获取热门集合();
+        var index = Fun.获取热门数量();
+        var 遍历数量 = 0;
+        for(var i=0;i<index;i++){
+            Post_Index--;
         }
-        if(第一个文章编号 < 0){
-            第一个文章编号 = 0;
+        if(Post_Index < 0){
+            Post_Index = 0;
         }
-        for(int i=第一个文章编号;i<list.size();i++){
+        for(var i=Post_Index;i<list.size();i++){
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-            List<Post_Data> post_data;
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
                 continue;
             }
-            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -189,30 +181,33 @@ public class View_Hot extends View_Main{
     }
 
     public void 下一页(){
+        if(linear.getChildCount() == 0){
+            Fun.mess(activity_main, "到底了");
+            return;
+        }
         if(Fun_账号.GetID().isEmpty()){
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
         scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
-        List<String> list = Fun_文章.获取热门集合();
-        int index = Fun.获取热门数量();
-        int 遍历数量 = 0;
-        for(int i=0;i<index;i++){
-            第一个文章编号++;
+        var list = Fun_文章.获取热门集合();
+        var index = Fun.获取热门数量();
+        var 遍历数量 = 0;
+        for(var i=0;i<index;i++){
+            Post_Index++;
         }
-        for(int i=第一个文章编号;i<list.size();i++){
+        for(var i=Post_Index;i<list.size();i++){
             if(遍历数量 >= index){
                 return;
             }
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-            List<Post_Data> post_data;
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
                 continue;
             }
-            post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -224,28 +219,24 @@ public class View_Hot extends View_Main{
     }
 
     public void 恢复界面(){
-        int ii=0;
-        int 当前编号;
-        if(view_id > 10){
+        var 遍历数量=0;
+        var 当前编号 = 0;
+        if(view_id >= 10){
             当前编号 = view_id - 10;
-        }else{
-            当前编号 = 0;
         }
-        for(int i=0;i<linear.getChildCount();i++){
-            if(ii>=20){
+        for(var i=0;i<linear.getChildCount();i++){
+            if(遍历数量>=10){
                 return;
             }
-            if(当前编号 >= 0 && 当前编号 < linear.getChildCount()){
-                View view = linear.getChildAt(当前编号);
-                view.setVisibility(View.VISIBLE);
-                ii++;
-                当前编号++;
-            }
+            var view = linear.getChildAt(当前编号);
+            view.setVisibility(View.VISIBLE);
+            遍历数量++;
+            当前编号++;
         }
     }
 
     public void 修改底部空间(){
-        ViewGroup.LayoutParams params = di_title.getLayoutParams();
+        var params = di_title.getLayoutParams();
         if(activity_main.square_menu.getVisibility() == View.VISIBLE){
             params.height = Fun.DPToPX(activity_main, 95);
             di_title.setLayoutParams(params);
@@ -255,8 +246,8 @@ public class View_Hot extends View_Main{
         }
         if(scrollView_Di){
             scrollView.post(()->{
-                int childHeight = scrollView.getChildAt(0).getHeight();
-                int scrollViewHeight = scrollView.getHeight();
+                var childHeight = scrollView.getChildAt(0).getHeight();
+                var scrollViewHeight = scrollView.getHeight();
                 scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
             });
         }

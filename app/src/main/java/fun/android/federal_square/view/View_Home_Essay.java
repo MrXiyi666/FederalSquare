@@ -29,7 +29,6 @@ public class View_Home_Essay extends View_Main{
     private SwipeRefreshLayout swiperefee;
     private AppCompatButton button_loading;
     private ScrollView scrollView;
-    private Handler handler;
 
     public View_Home_Essay(Activity activity){
         super((MainActivity) activity);
@@ -38,7 +37,6 @@ public class View_Home_Essay extends View_Main{
     @Override
     public void 初始化() {
         super.初始化();
-        handler = new Handler();
         view = View.inflate(activity_main, R.layout.view_home_essay, null);
         linear = view.findViewById(R.id.linear);
         swiperefee = view.findViewById(R.id.swiperefee);
@@ -57,24 +55,28 @@ public class View_Home_Essay extends View_Main{
             swiperefee.setRefreshing(false);
         });
         button_loading.setOnClickListener(V->{
-            Intent intent = new Intent(activity_main, View_Essay.class);
+            var intent = new Intent(activity_main, View_Essay.class);
             activity_main.startActivity(intent);
         });
 
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            Rect scrollBounds = new Rect();
+            var scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
-            for(int i=0;i<linear.getChildCount();i++){
-                View view = linear.getChildAt(i);
+            for(var i=0;i<linear.getChildCount();i++){
+                var view = linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
-                    view.setVisibility(View.VISIBLE);
+                    if(view.getVisibility() == View.INVISIBLE){
+                        view.setVisibility(View.VISIBLE);
+                    }
                     // 子控件至少有一个像素在可视范围内
                     if (scrollBounds.bottom >= (view.getHeight() / 2)) {
                         // 子控件的可见区域是否超过了50%
 
                     }
                 } else {
-                    view.setVisibility(View.INVISIBLE);
+                    if(view.getVisibility() == View.VISIBLE){
+                        view.setVisibility(View.INVISIBLE);
+                    }
                     // 子控件完全不在可视范围内
                 }
             }
@@ -96,12 +98,11 @@ public class View_Home_Essay extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        List<String> list = Fun_文章.获取我的文章集合();
+        var list = Fun_文章.获取我的文章集合();
         linear.removeAllViews();
         if(list.isEmpty()){
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            TextView textView = new TextView(activity_main);
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            var textView = new TextView(activity_main);
             textView.setTextColor(Color.rgb(128, 128, 128));
             textView.setTextSize(15);
             textView.setText("文章为空");
@@ -112,13 +113,13 @@ public class View_Home_Essay extends View_Main{
             return;
         }
         for(int i=0; i< list.size(); i++){
-            String str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
+            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            View view = Fun_文章.Create_Post_View(activity_main, post_data, 1);
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{

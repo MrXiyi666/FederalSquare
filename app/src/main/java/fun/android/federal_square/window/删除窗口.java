@@ -37,7 +37,7 @@ public class 删除窗口 {
         });
 
         button_ok.setOnClickListener(V->{
-            NetWork_删除网盘图片 netWork_删除网盘图片 = new NetWork_删除网盘图片(activity);
+            var netWork_删除网盘图片 = new NetWork_删除网盘图片(activity);
             netWork_删除网盘图片.传递参数(name, (DiskActivity) activity);
             netWork_删除网盘图片.start();
             dialog.dismiss();

@@ -88,6 +88,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .load(post_data.getText())
                             .apply(able.requestOptions)
+                            .transition(DrawableTransitionOptions.withCrossFade())
                             .into(avatar_img);
                     break;
                 case "text":
@@ -96,13 +97,11 @@ public class View_Post_Activity extends AppCompatActivity {
                     text1_view.setTextSize(15);
                     text1_view.setText(post_data.getText());
                     text1_view.setTextIsSelectable(true);
-                    text1_view.setPadding(0,0,0, Fun.DPToPX(this, 10));
                     linear.addView(text1_view);
                     break;
                 case "img":
                     Video_ImageView img = new Video_ImageView(this);
                     img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                    img.setPadding(0,0,0,Fun.DPToPX(this, 2));
                     img.setBackgroundColor(Color.rgb(242,243,247));
                     String 后缀 = Fun_文件.获取后缀(post_data.getText());
                     img.后缀 = 后缀;

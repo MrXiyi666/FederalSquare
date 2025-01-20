@@ -37,10 +37,10 @@ public class View_Login extends View_Main{
             able.view_home.linear_main.addView(new View_Enroll(activity_main).getView());
         });
         button_login.setOnClickListener(V->{
-            String account = enroll_edit_account.getText().toString();
-            String password = enroll_edit_password.getText().toString();
+            var account = enroll_edit_account.getText().toString();
+            var password = enroll_edit_password.getText().toString();
             if(!account.isEmpty() && !password.isEmpty()){
-                NetWork_登录 netWork_登录 = new NetWork_登录(activity_main);
+                var netWork_登录 = new NetWork_登录(activity_main);
                 netWork_登录.传递参数(account, password);
                 netWork_登录.start();
             }

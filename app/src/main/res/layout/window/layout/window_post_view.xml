@@ -91,6 +91,7 @@
         tools:ignore="HardcodedText" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:padding="10dp"
         android:layout_above="@id/button_ok"
         android:layout_below="@id/edit_text"

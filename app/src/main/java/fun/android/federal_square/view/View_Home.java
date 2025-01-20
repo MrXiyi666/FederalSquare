@@ -1,13 +1,10 @@
 package fun.android.federal_square.view;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 
 public class View_Home extends View_Main{

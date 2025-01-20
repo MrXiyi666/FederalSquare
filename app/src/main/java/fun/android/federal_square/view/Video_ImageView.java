@@ -45,10 +45,10 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(Fun.视频格式判断(后缀)){
-            int x_width = this.getWidth() / 2;
-            int p_width = (int) ((paint_stroke.getTextSize() / 2) * 后缀.length());
-            int x = x_width - p_width;
-            int y=0;
+            var x_width = this.getWidth() / 2;
+            var p_width = (int) ((paint_stroke.getTextSize() / 2) * 后缀.length());
+            var x = x_width - p_width;
+            var y=0;
             if(this.getHeight() > paint_stroke.getTextSize()){
                 y= (int) (this.getHeight() - paint_stroke.getTextSize());
             }else{

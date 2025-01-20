@@ -24,7 +24,6 @@ import fun.android.federal_square.window.查看视频窗口;
 
 public class Fun_文章子布局 {
     private String 后缀="";
-
     private List<Boolean> 是否缓存 = new ArrayList<>();
     private List<Boolean>是否正在加载 = new ArrayList<>();
     private View view;

@@ -8,12 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Objects;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -27,29 +25,29 @@ import fun.android.federal_square.view.View_Login;
 
 public class 个人信息窗口 {
     public static void 修改个人信息(Activity activity){
-        AlertDialog dialog = new AlertDialog.Builder(activity).create();
-        View view = View.inflate(activity, R.layout.window_personal_information_view, null);
-        ImageView return_icon = view.findViewById(R.id.return_icon);
-        EditText edit_name = view.findViewById(R.id.edit_name);
-        EditText edit_sign = view.findViewById(R.id.edit_sign);
-        EditText edit_password = view.findViewById(R.id.edit_password);
-        AppCompatButton button_sync = view.findViewById(R.id.button_sync);
-        AppCompatButton button_ok = view.findViewById(R.id.button_ok);
-        AppCompatButton button_delete = view.findViewById(R.id.button_delete);
-        TextView text_url = view.findViewById(R.id.text_url);
+        var dialog = new AlertDialog.Builder(activity).create();
+        var view = View.inflate(activity, R.layout.window_personal_information_view, null);
+        var return_icon = view.findViewById(R.id.return_icon);
+        var edit_name = (EditText)view.findViewById(R.id.edit_name);
+        var edit_sign = (EditText)view.findViewById(R.id.edit_sign);
+        var edit_password = (EditText)view.findViewById(R.id.edit_password);
+        var button_sync = (AppCompatButton)view.findViewById(R.id.button_sync);
+        var button_ok = (AppCompatButton)view.findViewById(R.id.button_ok);
+        var button_delete = (AppCompatButton)view.findViewById(R.id.button_delete);
+        var text_url = (TextView)view.findViewById(R.id.text_url);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
         text_url.setText("我的网址: "+able.URL + "\n我的密码: " + able.PassWord);
         button_sync.setOnClickListener(V->{
-            NetWork_账号同步 netWork_账号同步 = new NetWork_账号同步(activity);
+            var netWork_账号同步 = new NetWork_账号同步(activity);
             netWork_账号同步.传递参数(dialog);
             netWork_账号同步.start();
         });
         button_ok.setOnClickListener(V->{
-            String name_txt="";
-            String sign_txt="";
-            String password_txt="";
+            var name_txt="";
+            var sign_txt="";
+            var password_txt="";
             if(edit_name.getText().toString().isEmpty()){
                 name_txt = Fun_账号.GetName();
             }else{
@@ -65,7 +63,7 @@ public class 个人信息窗口 {
            }else{
                password_txt = edit_password.getText().toString();
            }
-            NetWork_我的_个人信息 netWork_我的_个人信息 = new NetWork_我的_个人信息(activity);
+            var netWork_我的_个人信息 = new NetWork_我的_个人信息(activity);
             netWork_我的_个人信息.传递参数(name_txt, password_txt, sign_txt, dialog);
             netWork_我的_个人信息.start();
 
@@ -95,6 +93,5 @@ public class 个人信息窗口 {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
-
     }
 }

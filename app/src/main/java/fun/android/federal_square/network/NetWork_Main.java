@@ -213,9 +213,10 @@ public class NetWork_Main {
                         Log.w(class_name + "下载", "no_file");
                         continue;
                     }
-                    Fun_文件.写入文件(able.app_path + "Square_Data/" + name, d_string);
+                    if(Fun.StrBoolJSON(d_string)){
+                        Fun_文件.写入文件(able.app_path + "Square_Data/" + name, d_string);
+                    }
                 }
-
                 for(String name : down_list_collection_data){
                     FormBody d_formBody = new FormBody.Builder()
                             .add("PassWord", password)
@@ -244,7 +245,9 @@ public class NetWork_Main {
                         Log.w(class_name + "下载", "no_file");
                         continue;
                     }
-                    Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
+                    if(Fun.StrBoolJSON(d_string)){
+                        Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
+                    }
                 }
                 if(b_update){
                     able.handler.post(()->{

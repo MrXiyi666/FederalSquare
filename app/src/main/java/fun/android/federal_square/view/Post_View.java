@@ -6,12 +6,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文章子布局;
 
@@ -59,6 +58,8 @@ public class Post_View extends LinearLayout {
         }else{
             Glide.with(activity)
                     .load(avatar_url)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .apply(able.requestOptions)
                     .override(Fun.DPToPX(activity, 40), Fun.DPToPX(activity, 40))
                     .into(avatar_img);
         }

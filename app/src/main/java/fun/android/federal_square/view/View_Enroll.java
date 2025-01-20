@@ -3,12 +3,9 @@ package fun.android.federal_square.view;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.widget.AppCompatButton;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
@@ -46,12 +43,12 @@ public class View_Enroll extends View_Main{
         });
 
         button_enroll.setOnClickListener(V->{
-            String account_text = enroll_edit_account.getText().toString();
-            String password = enroll_edit_password.getText().toString();
-            String password2 = enroll_edit_password2.getText().toString();
+            var account_text = enroll_edit_account.getText().toString();
+            var password = enroll_edit_password.getText().toString();
+            var password2 = enroll_edit_password2.getText().toString();
 
             if(!account_text.isEmpty() && !password.isEmpty() && !password2.isEmpty() && password.equals(password2)){
-                Post_Data post_id = new Post_Data();
+                var post_id = new Post_Data();
                 post_id.setName("ID");
                 post_id.setText(enroll_edit_account.getText().toString());
                 Post_Data post_password = new Post_Data();
@@ -84,7 +81,7 @@ public class View_Enroll extends View_Main{
                 post_dataList.add(post_sign);
                 post_dataList.add(发贴开关);
                 post_dataList.add(评论开关);
-                NetWork_注册 netWork_注册 = new NetWork_注册(activity_main);
+                var netWork_注册 = new NetWork_注册(activity_main);
                 netWork_注册.传递参数(post_dataList);
                 netWork_注册.start();
             }else{

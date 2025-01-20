@@ -1,16 +1,11 @@
 package fun.android.federal_square.view;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
-
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
@@ -52,7 +47,7 @@ public class View_Create extends View_Main{
         pager_view.add(able.view_square.getView());
         pager_view.add(able.view_hot.getView());
         pager_view.add(able.view_home.getView());
-        Main_Pager_Adapter adapter = new Main_Pager_Adapter(pager_view);
+        var adapter = new Main_Pager_Adapter(pager_view);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
         activity.square_menu.setVisibility(View.VISIBLE);
@@ -71,8 +66,8 @@ public class View_Create extends View_Main{
     public void 事件() {
         super.事件();
         button_ok.setOnClickListener(V->{
-            String txt_data = edit_url.getText().toString().replaceAll("\\s+", "");
-            String txt_password = edit_password.getText().toString();
+            var txt_data = edit_url.getText().toString().replaceAll("\\s+", "");
+            var txt_password = edit_password.getText().toString();
             if(txt_data.isEmpty()){
                 return;
             }

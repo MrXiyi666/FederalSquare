@@ -112,7 +112,7 @@ public class Fun_文章 {
             textView.setTextIsSelectable(true);
             linear.addView(textView);
         }
-        Fun_文章子布局 fun_文章子布局 = new Fun_文章子布局(activity, img_url);
+        var fun_文章子布局 = new Fun_文章子布局(activity, img_url);
         view.传递参数(fun_文章子布局);
         view.传递参数(activity, avatar_img, avatar_url);
         if(fun_文章子布局.getView() != null){

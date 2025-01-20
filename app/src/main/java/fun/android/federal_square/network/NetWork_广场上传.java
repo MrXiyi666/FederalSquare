@@ -3,6 +3,8 @@ package fun.android.federal_square.network;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -17,12 +19,14 @@ public class NetWork_广场上传 extends NetWork_Main {
 
     private String time;
     private List<Post_Data> post_dataList;
+    private AlertDialog dialog;
 
     public NetWork_广场上传(Activity activity) {
         super(activity);
     }
 
-    public void 传递数据(List<Post_Data> post_dataList, String time){
+    public void 传递数据(List<Post_Data> post_dataList, String time, AlertDialog dialog){
+        this.dialog = dialog;
         this.time = time;
         this.post_dataList = post_dataList;
         formBody = new FormBody.Builder()
@@ -53,10 +57,7 @@ public class NetWork_广场上传 extends NetWork_Main {
     @Override
     public void 刷新() {
         super.刷新();
-        if(able.view_square._发表文章窗口!=null){
-            able.view_square._发表文章窗口.dialog.dismiss();
-        }
-
+        dialog.dismiss();
         if(able.view_square.linear!=null){
             Post_View view = Fun_文章.Create_Post_View(activity, this.post_dataList, 0);
             able.view_square.linear.addView(view, 0);

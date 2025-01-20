@@ -382,4 +382,22 @@ public class Fun {
         }
         return index;
     }
+
+    public static int 获取广场计时数量(){
+        var index = 5000;
+        String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Time_index.txt");
+        if(!sindex.isEmpty()){
+            index = Integer.parseInt(sindex);
+        }
+        return index;
+    }
+
+    public static int 获取网盘数量(){
+        var Disk_Index = 3;
+        var Str_index = Fun_文件.读取文件(able.app_path + "System_Data/Disk_index.txt");
+        if(!Str_index.isEmpty()){
+            Disk_Index = Integer.parseInt(Str_index);
+        }
+        return Disk_Index;
+    }
 }

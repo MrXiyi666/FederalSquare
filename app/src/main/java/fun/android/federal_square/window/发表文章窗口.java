@@ -1,9 +1,9 @@
 package fun.android.federal_square.window;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
 import android.view.Gravity;
@@ -14,11 +14,12 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,12 +35,12 @@ import fun.android.federal_square.network.NetWork_广场上传;
 
 public class 发表文章窗口 {
     private LinearLayout linear;
-    public AlertDialog dialog;
     private List<Post_Data> post_dataList;
+    private ScrollView scrollView;
     public void 创建发表文章窗口(Activity activity ){
-
-        dialog = new AlertDialog.Builder(activity).create();
-        View view = View.inflate(activity, R.layout.window_post_view, null);
+        var dialog = new AlertDialog.Builder(activity).create();
+        var view = View.inflate(activity, R.layout.window_post_view, null);
+        scrollView = view.findViewById(R.id.scrollView);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         EditText edit_text = view.findViewById(R.id.edit_text);
         AppCompatButton add_img = view.findViewById(R.id.add_img);
@@ -51,26 +52,24 @@ public class 发表文章窗口 {
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-
         add_img.setOnClickListener(V->{
             选择图片(activity);
         });
         add_text.setOnClickListener(V->{
-            String text_data = edit_text.getText().toString();
+            var text_data = edit_text.getText().toString();
             if(!text_data.isEmpty()){
-                Post_Data post_data = new Post_Data();
+                var post_data = new Post_Data();
                 post_data.setName("text");
                 post_data.setText(text_data);
-                TextView textView = new TextView(activity);
+                var textView = new TextView(activity);
                 textView.setTextSize(15);
                 textView.setText(text_data);
                 textView.setTextColor(Color.BLACK);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0, 0, 0, 10);
                 textView.setLayoutParams(params);
                 textView.setOnLongClickListener(tV->{
-                    Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
+                    var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(10);
                     linear.removeView(textView);
                     post_dataList.remove(post_data);
@@ -79,6 +78,7 @@ public class 发表文章窗口 {
                 post_dataList.add(post_data);
                 linear.addView(textView);
                 edit_text.setText("");
+                滚动到底部();
             }else{
                 Fun.mess(activity, "数据为空");
             }
@@ -91,7 +91,6 @@ public class 发表文章窗口 {
 
         button_ok.setOnClickListener(V->{
             if(!post_dataList.isEmpty()){
-                NetWork_广场上传 netWork_广场上传 = new NetWork_广场上传(activity);
                 Post_Data name = new Post_Data();
                 name.setName("name");
                 name.setText(Fun_账号.GetName());
@@ -116,13 +115,34 @@ public class 发表文章窗口 {
                 post_dataList.add(time);
                 post_dataList.add(url);
                 post_dataList.add(password);
-                netWork_广场上传.传递数据(post_dataList, time.getText());
+                var netWork_广场上传 = new NetWork_广场上传(activity);
+                netWork_广场上传.传递数据(post_dataList, time.getText(), dialog);
                 netWork_广场上传.start();
             }else{
                 Fun.mess(activity, "内容为空");
             }
         });
-
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            var scrollBounds = new Rect();
+            scrollView.getHitRect(scrollBounds);
+            for(var i=0;i<linear.getChildCount();i++){
+                var zi_view = linear.getChildAt(i);
+                if (zi_view.getLocalVisibleRect(scrollBounds)) {
+                    if(zi_view.getVisibility() == View.INVISIBLE){
+                        zi_view.setVisibility(View.VISIBLE);
+                    }
+                    // 子控件至少有一个像素在可视范围内
+                    if (scrollBounds.bottom >= (zi_view.getHeight() / 2)) {
+                        // 子控件的可见区域是否超过了50%
+                    }
+                } else {
+                    if(zi_view.getVisibility() == View.VISIBLE){
+                        zi_view.setVisibility(View.INVISIBLE);
+                    }
+                    // 子控件完全不在可视范围内
+                }
+            }
+        });
         dialog.setView(view);
         dialog.setCancelable(false);
         Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -132,55 +152,45 @@ public class 发表文章窗口 {
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
-
-    @SuppressLint("RtlHardcoded")
     public void 选择图片(Activity activity){
-        AlertDialog 选择图片窗口句柄 = new AlertDialog.Builder(activity).create();
-        View view = View.inflate(activity, R.layout.window_select_image_view, null);
+        var 选择图片窗口句柄 = new AlertDialog.Builder(activity).create();
+        var view = View.inflate(activity, R.layout.window_select_image_view, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         GridView gridview = view.findViewById(R.id.gridview);
         return_icon.setOnClickListener(V->{
             选择图片窗口句柄.dismiss();
         });
-        List<String> list = Fun_图片.遍历所有图片();
+        var list = Fun_图片.遍历所有图片();
         if(list.isEmpty()){
             Fun.mess(activity, "网盘数据为空");
             return;
         }
-        int Disk_Index = 3;
-        String Str_index = Fun_文件.读取文件(able.app_path + "System_Data/Disk_index.txt");
-        if(!Str_index.isEmpty()){
-            Disk_Index = Integer.parseInt(Str_index);
-        }
+        var Disk_Index = Fun.获取网盘数量();
         gridview.setNumColumns(Disk_Index);
         gridview.setAdapter(new Disk_Grid_Adapter(activity, list, Disk_Index));
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
-            Post_Data post_data = new Post_Data();
+            var post_data = new Post_Data();
             post_data.setName("img");
             post_data.setText(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
-            ImageView imageView = new ImageView(activity);
-            RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(R.drawable.glide_zhanwei)
-                    .error(R.drawable.glide_shibai)
-                    .fallback(R.drawable.glide_duqushibai);
+            var imageView = new ImageView(activity);
             Glide.with(activity)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
-                    .apply(requestOptions)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .apply(able.requestOptions)
                     .into(imageView);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V->{
-                Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
+                var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(10);
                 linear.removeView(imageView);
                 post_dataList.remove(post_data);
                 return true;
             });
             imageView.setOnClickListener(V->{
-                String 后缀 = Fun_文件.获取后缀(list.get(position));
-                String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position);
+                var 后缀 = Fun_文件.获取后缀(list.get(position));
+                var url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position);
                 if(Fun.图片格式判断(后缀)){
                     查看图片窗口.启动_Dialog(activity, url);
                 }else if(Fun.视频格式判断(后缀)){
@@ -192,6 +202,7 @@ public class 发表文章窗口 {
             post_dataList.add(post_data);
             linear.addView(imageView);
             选择图片窗口句柄.dismiss();
+            滚动到底部();
         });
 
         选择图片窗口句柄.setView(view);
@@ -204,10 +215,9 @@ public class 发表文章窗口 {
         选择图片窗口句柄.show();
 
     }
-
     public void 图片链接输入窗口(Activity activity){
-        AlertDialog dialog = new AlertDialog.Builder(activity).create();
-        View view = View.inflate(activity, R.layout.window_post_add_img_url_view, null);
+        var dialog = new AlertDialog.Builder(activity).create();
+        var view = View.inflate(activity, R.layout.window_post_add_img_url_view, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         EditText edit_url = view.findViewById(R.id.edit_url);
@@ -216,35 +226,31 @@ public class 发表文章窗口 {
         });
 
         button_ok.setOnClickListener(V->{
-            String str_url = edit_url.getText().toString();
+            var str_url = edit_url.getText().toString();
             if(str_url.isEmpty()){
                 return;
             }
-            Post_Data post_data = new Post_Data();
+            var post_data = new Post_Data();
             post_data.setName("img");
             post_data.setText(str_url);
-            ImageView imageView = new ImageView(activity);
-            RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(R.drawable.glide_zhanwei)
-                    .error(R.drawable.glide_shibai)
-                    .fallback(R.drawable.glide_duqushibai);
+            var imageView = new ImageView(activity);
             Glide.with(activity)
                     .load(str_url)
-                    .apply(requestOptions)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .apply(able.requestOptions)
                     .into(imageView);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V1->{
-                Vibrator vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
+                var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(10);
                 linear.removeView(imageView);
                 post_dataList.remove(post_data);
                 return true;
             });
             imageView.setOnClickListener(V1->{
-                String 后缀 = Fun_文件.获取后缀(str_url);
+                var 后缀 = Fun_文件.获取后缀(str_url);
                 if(Fun.图片格式判断(后缀)){
                     查看图片窗口.启动_Dialog(activity, str_url);
                 }else if(Fun.视频格式判断(后缀)){
@@ -256,6 +262,7 @@ public class 发表文章窗口 {
             post_dataList.add(post_data);
             linear.addView(imageView);
             dialog.dismiss();
+            滚动到底部();
         });
 
         dialog.setView(view);
@@ -266,5 +273,12 @@ public class 发表文章窗口 {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+    }
+    private void 滚动到底部(){
+        scrollView.post(()->{
+           View contentView = scrollView.getChildAt(0);
+           int height = contentView.getMeasuredHeight();
+           scrollView.smoothScrollTo(0, height);
+        });
     }
 }

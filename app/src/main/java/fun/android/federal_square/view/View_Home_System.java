@@ -2,9 +2,7 @@ package fun.android.federal_square.view;
 
 import android.content.Intent;
 import android.view.View;
-
 import androidx.appcompat.widget.AppCompatButton;
-
 import fun.android.federal_square.DiskActivity;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -35,7 +33,7 @@ public class View_Home_System extends View_Main{
         super.事件();
         网盘按钮.setOnClickListener(V->{
             if(Fun_文件.是否存在(able.app_path + "Account/account.json")){
-                Intent intent = new Intent();
+                var intent = new Intent();
                 intent.setClass(activity_main, DiskActivity.class);
                 activity_main.startActivity(intent);
             }
