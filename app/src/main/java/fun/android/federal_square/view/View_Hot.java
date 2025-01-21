@@ -26,7 +26,7 @@ public class View_Hot extends View_Main{
     public LinearLayout linear;
     public ScrollView scrollView;
     private int view_id=0;
-    private boolean scrollView_Di = false;
+    private boolean scrollView_Di = false, scrollView_Up_Y = false;
     public int Post_Index = 0;
     public View_Hot(MainActivity activity) {
         super(activity);
@@ -68,6 +68,11 @@ public class View_Hot extends View_Main{
             }else{
                 scrollView_Di = false;
             }
+            if(scrollY == 0){
+                scrollView_Up_Y = true;
+            }else{
+                scrollView_Up_Y = false;
+            }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
@@ -103,7 +108,9 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        scrollView.fullScroll(View.FOCUS_UP);
+        if(!scrollView_Up_Y){
+            scrollView.fullScroll(View.FOCUS_UP);
+        }
         linear.removeAllViews();
         if(Fun_账号.GetID().isEmpty()){
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

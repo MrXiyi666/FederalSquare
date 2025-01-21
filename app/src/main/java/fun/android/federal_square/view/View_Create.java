@@ -19,6 +19,7 @@ public class View_Create extends View_Main{
     public View_Create(MainActivity activity) {
         super(activity);
         this.activity = activity;
+        activity.linear_menu.setVisibility(View.GONE);
         activity.square_menu.setVisibility(View.GONE);
         activity.menu_text.setVisibility(View.GONE);
     }
@@ -50,6 +51,7 @@ public class View_Create extends View_Main{
         var adapter = new Main_Pager_Adapter(pager_view);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
+        activity.linear_menu.setVisibility(View.VISIBLE);
         activity.square_menu.setVisibility(View.VISIBLE);
         activity.menu_text.setVisibility(View.VISIBLE);
     }

@@ -67,7 +67,9 @@ public class NetWork_广场上传 extends NetWork_Main {
             }
         }
         if(able.view_square.scrollView != null){
-            able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+            able.view_square.scrollView.post(()->{
+                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+            });
         }
     }
 }

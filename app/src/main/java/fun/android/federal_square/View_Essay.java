@@ -30,6 +30,7 @@ public class View_Essay extends AppCompatActivity {
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;
     private int Post_Index = 0;
+    private boolean scrollView_Up_Y;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,11 @@ public class View_Essay extends AppCompatActivity {
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             var scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
+            if(scrollY == 0){
+                scrollView_Up_Y = true;
+            }else{
+                scrollView_Up_Y = false;
+            }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = (Post_View)linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
@@ -97,7 +103,9 @@ public class View_Essay extends AppCompatActivity {
         });
     }
     public void 初始化数据(){
-        scrollView.fullScroll(View.FOCUS_UP);
+        if(!scrollView_Up_Y){
+            scrollView.fullScroll(View.FOCUS_UP);
+        }
         Post_Index=0;
         var list = Fun_文章.获取所有文章集合();
         linear.removeAllViews();

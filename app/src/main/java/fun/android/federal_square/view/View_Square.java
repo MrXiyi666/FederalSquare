@@ -33,7 +33,7 @@ public class View_Square extends View_Main{
     private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
     public TextView di_title;
-    private boolean scrollView_Down_Y = false;
+    private boolean scrollView_Down_Y = false, scrollView_Up_Y = false;
     private Thread time_thread=null;
     public int view_id;
     public int Post_Index = 0;
@@ -87,6 +87,11 @@ public class View_Square extends View_Main{
                 scrollView_Down_Y = true;
             }else{
                 scrollView_Down_Y = false;
+            }
+            if(scrollY == 0){
+                scrollView_Up_Y = true;
+            }else{
+                scrollView_Up_Y = false;
             }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = (Post_View)linear.getChildAt(i);
@@ -168,7 +173,9 @@ public class View_Square extends View_Main{
         super.释放();
     }
     public void 初始化本地数据(){
-        scrollView.fullScroll(View.FOCUS_UP);
+        if(!scrollView_Up_Y){
+            scrollView.fullScroll(View.FOCUS_UP);
+        }
         linear.removeAllViews();
         Post_Index=0;
         var url = Fun.获取域名();

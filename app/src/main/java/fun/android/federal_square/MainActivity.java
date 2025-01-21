@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private final List<View> pager_view = new ArrayList<>();
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
-    private LinearLayout linear_create, linear_menu;
+    public LinearLayout linear_create, linear_menu;
     private View_Create view_create;
     public LinearLayout square_menu, menu_system;
     public TextView menu_text;
