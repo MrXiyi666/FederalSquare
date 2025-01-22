@@ -2,7 +2,6 @@ package fun.android.federal_square.view;
 
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
 import java.util.List;
@@ -20,21 +19,14 @@ public class View_Create extends View_Main{
         super(activity);
         this.activity = activity;
         activity.linear_menu.setVisibility(View.GONE);
-        activity.square_menu.setVisibility(View.GONE);
-        activity.menu_text.setVisibility(View.GONE);
+        activity.menu_system.setVisibility(View.GONE);
     }
     private ViewPager pager;
     private List<View> pager_view;
-    private LinearLayout linear_create, linear_di;
-    public void 传递参数(ViewPager pager, List<View> pager_view, LinearLayout linear_create, LinearLayout linear_di){
+    public void 传递参数(ViewPager pager, List<View> pager_view){
         this.pager = pager;
         this.pager_view = pager_view;
-        this.linear_create = linear_create;
-        this.linear_di = linear_di;
         if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            pager.setVisibility(View.VISIBLE);
-            linear_create.setVisibility(View.GONE);
-            linear_di.setVisibility(View.VISIBLE);
             able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
             able.PassWord = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1] + "";
             跳转到广场();
@@ -51,9 +43,11 @@ public class View_Create extends View_Main{
         var adapter = new Main_Pager_Adapter(pager_view);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
+        pager.setVisibility(View.VISIBLE);
+        activity.linear_create.setVisibility(View.GONE);
         activity.linear_menu.setVisibility(View.VISIBLE);
-        activity.square_menu.setVisibility(View.VISIBLE);
-        activity.menu_text.setVisibility(View.VISIBLE);
+        activity.menu_system.setVisibility(View.VISIBLE);
+        able.view_square.启动刷新();
     }
     @Override
     public void 初始化() {
@@ -79,11 +73,7 @@ public class View_Create extends View_Main{
                 able.PassWord = txt_password;
             }
             Fun_文件.写入文件(able.app_path + "System_Data/URL_Name.txt", txt_data);
-            pager.setVisibility(View.VISIBLE);
-            linear_create.setVisibility(View.GONE);
-            linear_di.setVisibility(View.VISIBLE);
             跳转到广场();
-            able.view_square.启动刷新();
         });
     }
 

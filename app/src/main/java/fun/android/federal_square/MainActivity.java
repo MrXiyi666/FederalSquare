@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         img_home = findViewById(R.id.img_home);
         menu_text = findViewById(R.id.menu_text);
         view_create = new View_Create(this);
-        view_create.传递参数(pager, pager_view, linear_create, linear_menu);
+        view_create.传递参数(pager, pager_view);
     }
 
     public void 事件(){
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         });
         menu_square.setOnClickListener(menu_square_v-> {
             if(pager.getCurrentItem() == 0){
-                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_square.scrollView.smoothScrollTo(0,0);
                 return;
             }
             pager.setCurrentItem(0);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         menu_home.setOnClickListener(menu_square_v-> pager.setCurrentItem(2));
         menu_square.setOnLongClickListener(v -> {
             if(pager.getCurrentItem() == 0){
-                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_square.scrollView.smoothScrollTo(0, 0);
                 return true;
             }
             pager.setCurrentItem(0);
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         });
         menu_hot.setOnLongClickListener(v -> {
             if(pager.getCurrentItem() == 1) {
-                able.view_hot.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_hot.scrollView.smoothScrollTo(0, 0);
                 return true;
             }
             pager.setCurrentItem(1);
@@ -155,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
         });
         button_top.setOnClickListener(V->{
             if(pager.getCurrentItem() == 0){
-                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_square.scrollView.smoothScrollTo(0,0);
             }else if(pager.getCurrentItem() == 1){
-                able.view_hot.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_hot.scrollView.smoothScrollTo(0,0);
             }
         });
         button_up.setOnClickListener(V->{

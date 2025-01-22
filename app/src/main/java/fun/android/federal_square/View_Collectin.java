@@ -28,7 +28,7 @@ public class View_Collectin extends AppCompatActivity {
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;
     public int Post_Index = 0;
-    private boolean scrollView_Up_Y = false;
+    private boolean scrollView_update = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +64,9 @@ public class View_Collectin extends AppCompatActivity {
             var scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
             if(scrollY == 0){
-                scrollView_Up_Y = true;
+                scrollView_update = true;
             }else {
-                scrollView_Up_Y = false;
+                scrollView_update = false;
             }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = (Post_View)linear.getChildAt(i);
@@ -100,16 +100,13 @@ public class View_Collectin extends AppCompatActivity {
         });
     }
     public void 初始化数据(){
-        if(!scrollView_Up_Y){
-            scrollView.fullScroll(View.FOCUS_UP);
-        }
         Post_Index=0;
         var list = Fun_文章.获取所有收藏集合();
         linear.removeAllViews();
         var index = Fun.获取我的收藏数量();
         for(var i=0; i<list.size(); i++){
             if(i >= index){
-                return;
+                break;
             }
             var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
@@ -125,9 +122,9 @@ public class View_Collectin extends AppCompatActivity {
             }
             linear.addView(view);
         }
+        Fun.回到顶部(scrollView);
     }
     public void 上一页(){
-        scrollView.fullScroll(View.FOCUS_UP);
         var list = Fun_文章.获取所有收藏集合();
         var index = Fun.获取我的收藏数量();
         for(var i=0;i<index;i++){
@@ -140,7 +137,7 @@ public class View_Collectin extends AppCompatActivity {
         var 遍历数量 = 0;
         for(var i=Post_Index; i<list.size(); i++){
             if(遍历数量 >= index){
-                return;
+                break;
             }
             var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
@@ -157,13 +154,13 @@ public class View_Collectin extends AppCompatActivity {
             linear.addView(view);
             遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
     public void 下一页(){
         if(linear.getChildCount() == 0){
             Fun.mess(this, "到底了");
             return;
         }
-        scrollView.fullScroll(View.FOCUS_UP);
         var list = Fun_文章.获取所有收藏集合();
         var index = Fun.获取我的收藏数量();
         for(var i=0;i<index;i++){
@@ -173,7 +170,7 @@ public class View_Collectin extends AppCompatActivity {
         var 遍历数量 = 0;
         for(var i=Post_Index; i<list.size(); i++){
             if(遍历数量 >= index){
-                return;
+                break;
             }
             var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
@@ -190,6 +187,7 @@ public class View_Collectin extends AppCompatActivity {
             linear.addView(view);
             遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
     @Override
     protected void onDestroy() {

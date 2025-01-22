@@ -66,6 +66,7 @@ public class NetWork_广场刷新 extends NetWork_Main {
         }
 
         if(able.view_square!=null){
+            able.view_square.scrollView_update = false;
             able.view_square.初始化本地数据();
         }
     }

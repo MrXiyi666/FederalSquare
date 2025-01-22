@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
+
+import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -68,7 +70,7 @@ public class NetWork_广场上传 extends NetWork_Main {
         }
         if(able.view_square.scrollView != null){
             able.view_square.scrollView.post(()->{
-                able.view_square.scrollView.fullScroll(View.FOCUS_UP);
+                able.view_square.scrollView.smoothScrollTo(0,0);
             });
         }
     }

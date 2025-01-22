@@ -400,4 +400,10 @@ public class Fun {
         }
         return Disk_Index;
     }
+
+    public static void 回到顶部(ScrollView scrollView){
+        scrollView.post(()->{
+           scrollView.smoothScrollTo(0,0);
+        });
+    }
 }

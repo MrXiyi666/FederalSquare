@@ -1,6 +1,7 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,10 +34,12 @@ public class View_Square extends View_Main{
     private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
     public TextView di_title;
-    private boolean scrollView_Down_Y = false, scrollView_Up_Y = false;
+    public boolean scrollView_Down_Y = false, scrollView_update = false;
     private Thread time_thread=null;
     public int view_id;
     public int Post_Index = 0;
+
+    public int scrollView_Y=0;
 
     public View_Square(MainActivity activity) {
         super(activity);
@@ -45,7 +48,6 @@ public class View_Square extends View_Main{
     @Override
     public void 初始化() {
         super.初始化();
-
         view = View.inflate(activity_main, R.layout.view_square, null);
         top_title = view.findViewById(R.id.top_title);
         new_icon = view.findViewById(R.id.new_icon);
@@ -55,9 +57,8 @@ public class View_Square extends View_Main{
         linear = view.findViewById(R.id.linear);
         scrollView = view.findViewById(R.id.scrollView);
         di_title = view.findViewById(R.id.di_title);
-        初始化本地数据();
         new_icon.setVisibility(View.GONE);
-
+        初始化本地数据();
     }
 
     @Override
@@ -77,21 +78,22 @@ public class View_Square extends View_Main{
             }
             swipe_layout.setRefreshing(false);
         });
-
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             var scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
             var childHeight = scrollView.getChildAt(0).getHeight();
             var scrollViewHeight = scrollView.getHeight();
+            scrollView_Y = scrollY;
+            Log.w("坐标", scrollY + "");
             if(scrollY + scrollViewHeight >= childHeight){
                 scrollView_Down_Y = true;
             }else{
                 scrollView_Down_Y = false;
             }
             if(scrollY == 0){
-                scrollView_Up_Y = true;
+                scrollView_update = true;
             }else{
-                scrollView_Up_Y = false;
+                scrollView_update = false;
             }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = (Post_View)linear.getChildAt(i);
@@ -115,6 +117,7 @@ public class View_Square extends View_Main{
         });
 
 
+
         button_add.setOnClickListener(V->{
             if(!Fun_账号.GetID().isEmpty()){
                 var _发表文章窗口 = new 发表文章窗口();
@@ -130,7 +133,6 @@ public class View_Square extends View_Main{
         button_url_setting.setOnClickListener(V->{
             new 重新设置域名窗口().启动(activity_main, button_url_setting);
         });
-
     }
     @Override
     public void onStart() {
@@ -173,26 +175,22 @@ public class View_Square extends View_Main{
         super.释放();
     }
     public void 初始化本地数据(){
-        if(!scrollView_Up_Y){
-            scrollView.fullScroll(View.FOCUS_UP);
-        }
         linear.removeAllViews();
         Post_Index=0;
         var url = Fun.获取域名();
         var 所有文章 = Fun_文章.获取广场所有集合();
         var index = Fun.获取广场文章数量();
-        var 遍历数量 = 0;
         if(url.isEmpty()){
             return;
         }
-        for(var i=0;i<所有文章.size();i++){
+        for(int i=0; i< 所有文章.size(); i++){
             if(Fun_账号.GetID().isEmpty()){
-                if(遍历数量 >= 10){
-                    return;
+                if(i >= 10){
+                    break;
                 }
             }
-            if(遍历数量 >= index){
-                return;
+            if(i >= index){
+                break;
             }
             //读取json判断json格式是否正确
             var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
@@ -201,7 +199,6 @@ public class View_Square extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            //获取文章内的域名
             var url_data="";
             for(Post_Data pd : post_data){
                 if(pd.getName().equals("url")){
@@ -210,6 +207,7 @@ public class View_Square extends View_Main{
             }
             if(url_data.isEmpty()){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                continue;
             }
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
             if(linear.getChildCount() >= 10){
@@ -218,8 +216,8 @@ public class View_Square extends View_Main{
                 view.setVisibility(View.VISIBLE);
             }
             linear.addView(view);
-            遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
 
     public void 上一页(){
@@ -227,7 +225,6 @@ public class View_Square extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法使用");
             return;
         }
-        scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         var url = Fun.获取域名();
         var 所有文章 = Fun_文章.获取广场所有集合();
@@ -241,16 +238,15 @@ public class View_Square extends View_Main{
         if(Post_Index < 0){
             Post_Index = 0;
         }
-
         var 遍历数量 = 0;
         for(var i=Post_Index; i<所有文章.size(); i++){
             if(Fun_账号.GetID().isEmpty()){
                 if(遍历数量>=10){
-                    return;
+                    break;
                 }
             }
             if(遍历数量 >= index){
-                return;
+                break;
             }
             var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
             if(!Fun.StrBoolJSON(txt)){
@@ -267,6 +263,7 @@ public class View_Square extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
 
     public void 下一页(){
@@ -278,7 +275,6 @@ public class View_Square extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法使用");
             return;
         }
-        scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         var url = Fun.获取域名();
         var 所有文章 = Fun_文章.获取广场所有集合();
@@ -293,11 +289,11 @@ public class View_Square extends View_Main{
         for(int i=Post_Index;i<所有文章.size();i++){
             if(Fun_账号.GetID().isEmpty()){
                 if(遍历数量 >= 10){
-                    return;
+                    break;
                 }
             }
             if(遍历数量 >= index){
-                return;
+                break;
             }
             //读取json判断json格式是否正确
             var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
@@ -315,7 +311,9 @@ public class View_Square extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
+
     public void 恢复界面(){
         var 遍历数量=0;
         var 当前编号 = 0;

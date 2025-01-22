@@ -26,7 +26,7 @@ public class View_Hot extends View_Main{
     public LinearLayout linear;
     public ScrollView scrollView;
     private int view_id=0;
-    private boolean scrollView_Di = false, scrollView_Up_Y = false;
+    private boolean scrollView_Di = false, scrollView_update = false;
     public int Post_Index = 0;
     public View_Hot(MainActivity activity) {
         super(activity);
@@ -69,9 +69,9 @@ public class View_Hot extends View_Main{
                 scrollView_Di = false;
             }
             if(scrollY == 0){
-                scrollView_Up_Y = true;
+                scrollView_update = true;
             }else{
-                scrollView_Up_Y = false;
+                scrollView_update = false;
             }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = linear.getChildAt(i);
@@ -108,9 +108,6 @@ public class View_Hot extends View_Main{
         super.释放();
     }
     public void 初始化数据(){
-        if(!scrollView_Up_Y){
-            scrollView.fullScroll(View.FOCUS_UP);
-        }
         linear.removeAllViews();
         if(Fun_账号.GetID().isEmpty()){
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -127,10 +124,9 @@ public class View_Hot extends View_Main{
         Post_Index=0;
         var list = Fun_文章.获取热门集合();
         var index = Fun.获取热门数量();
-        var 遍历数量 = 0;
         for(var i=0;i<list.size();i++){
-            if(遍历数量 >= index){
-                return;
+            if(i >= index){
+                break;
             }
             var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
             if(!Fun.StrBoolJSON(str)){
@@ -145,9 +141,8 @@ public class View_Hot extends View_Main{
                 view.setVisibility(View.VISIBLE);
             }
             linear.addView(view);
-            遍历数量++;
         }
-
+        Fun.回到顶部(scrollView);
     }
 
     public void 上一页(){
@@ -155,20 +150,19 @@ public class View_Hot extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
-        scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         var list = Fun_文章.获取热门集合();
         var index = Fun.获取热门数量();
-        var 遍历数量 = 0;
         for(var i=0;i<index;i++){
             Post_Index--;
         }
         if(Post_Index < 0){
             Post_Index = 0;
         }
+        var 遍历数量 = 0;
         for(var i=Post_Index;i<list.size();i++){
             if(遍历数量 >= index){
-                return;
+                break;
             }
             var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
             if(!Fun.StrBoolJSON(str)){
@@ -185,6 +179,7 @@ public class View_Hot extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
 
     public void 下一页(){
@@ -196,17 +191,16 @@ public class View_Hot extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
-        scrollView.fullScroll(View.FOCUS_UP);
         linear.removeAllViews();
         var list = Fun_文章.获取热门集合();
         var index = Fun.获取热门数量();
-        var 遍历数量 = 0;
         for(var i=0;i<index;i++){
             Post_Index++;
         }
+        var 遍历数量 = 0;
         for(var i=Post_Index;i<list.size();i++){
             if(遍历数量 >= index){
-                return;
+                break;
             }
             var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
             if(!Fun.StrBoolJSON(str)){
@@ -223,6 +217,7 @@ public class View_Hot extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
+        Fun.回到顶部(scrollView);
     }
 
     public void 恢复界面(){
