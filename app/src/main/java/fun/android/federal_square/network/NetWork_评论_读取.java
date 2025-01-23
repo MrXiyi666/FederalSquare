@@ -1,7 +1,6 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.view.View;
 import android.widget.LinearLayout;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
@@ -18,10 +17,9 @@ public class NetWork_评论_读取 extends NetWork_Main {
         super(activity);
     }
     private LinearLayout linear;
-    private List<View> list_view = new ArrayList<>();
+    private List<String> filename;
     public void 传递参数(String square_time, LinearLayout linear, String 网址 , String PassWord){
         this.linear = linear;
-        list_view.clear();
         formBody = new FormBody.Builder()
                 .add("PassWord", PassWord)
                 .add("path", "./Discuss_Data/" + square_time)
@@ -42,15 +40,9 @@ public class NetWork_评论_读取 extends NetWork_Main {
             return;
         }
         String[] dd = string.split("\n");
-        List<String> filename = new ArrayList<>(Arrays.asList(dd));
+        filename = new ArrayList<>(Arrays.asList(dd));
         if(filename.isEmpty()){
             return;
-        }
-        for(String data : filename) {
-            if(Fun.StrBoolJSON(data)){
-                List<Post_Data> post_data = able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType());
-                list_view.add(查看评论窗口.添加评论布局(activity, post_data));
-            }
         }
         this.b_update = true;
     }
@@ -59,16 +51,15 @@ public class NetWork_评论_读取 extends NetWork_Main {
     public void 刷新() {
         super.刷新();
         linear.removeAllViews();
-        if(list_view.isEmpty()){
-            return;
-        }
         new Thread(()->{
-            for(View view : list_view){
-                able.handler.post(()->{
-                    linear.addView(view);
-                });
+            for(String data : filename) {
+                if(Fun.StrBoolJSON(data)){
+                    able.handler.post(()->{
+                        List<Post_Data> post_data = able.gson.fromJson(data, new TypeToken<List<Post_Data>>(){}.getType());
+                        linear.addView(查看评论窗口.添加评论布局(activity, post_data));
+                    });
+                }
             }
         }).start();
-
     }
 }

@@ -33,7 +33,6 @@ import fun.android.federal_square.data.able;
 public class Fun {
 
     public static void mess(Activity activity, String name){
-
         able.handler.post(()->{
             AlertDialog dialog = new AlertDialog.Builder(activity,  R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
@@ -404,6 +403,14 @@ public class Fun {
     public static void 回到顶部(ScrollView scrollView){
         scrollView.post(()->{
            scrollView.smoothScrollTo(0,0);
+        });
+    }
+
+    public static void 回到底部(ScrollView scrollView){
+        scrollView.post(()->{
+            View contentView = scrollView.getChildAt(0);
+            int height = contentView.getMeasuredHeight();
+            scrollView.smoothScrollTo(0, height);
         });
     }
 }

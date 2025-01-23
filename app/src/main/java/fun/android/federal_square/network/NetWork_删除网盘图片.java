@@ -31,18 +31,18 @@ public class NetWork_删除网盘图片 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no_file")){
-            Fun.mess(activity, "文件不存在");
+            Fun.mess(activity, "文件不存在", 300);
             return;
         }
         if(string.equals("no_delete")){
-            Fun.mess(activity, "删除失败");
+            Fun.mess(activity, "删除失败", 300);
             return;
         }
         if(!string.equals("yes")){
             Fun.mess(activity, string);
             return;
         }
-        Fun.mess(activity, "删除成功");
+        Fun.mess(activity, "删除成功", 300);
         this.b_update = true;
         Fun_文件.删除文件(able.app_path + "Disk_Data/" + name);
     }

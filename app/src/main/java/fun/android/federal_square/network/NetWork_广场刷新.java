@@ -19,7 +19,6 @@ public class NetWork_广场刷新 extends NetWork_Main {
         url = able.URL;
         password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
-        b_mess = false;
     }
 
     public void 传递参数(String 网址, String PassWord){
@@ -52,7 +51,6 @@ public class NetWork_广场刷新 extends NetWork_Main {
             }
             down_list_data.add(name);
             b_update = true;
-            b_mess = true;
         }
     }
 
@@ -66,7 +64,6 @@ public class NetWork_广场刷新 extends NetWork_Main {
         }
 
         if(able.view_square!=null){
-            able.view_square.scrollView_update = false;
             able.view_square.初始化本地数据();
         }
     }

@@ -66,7 +66,6 @@ public class DiskActivity extends AppCompatActivity {
         return_icon = findViewById(R.id.return_icon);
         title_index = findViewById(R.id.title_index);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        netWork_网盘_上传图片 = new NetWork_网盘_上传图片(this);
         加载图片初始化(Fun_账号.GetID());
         初始化数据();
 
@@ -107,6 +106,7 @@ public class DiskActivity extends AppCompatActivity {
 
             if(Fun.图片格式判断(后缀)){
                 Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
+                netWork_网盘_上传图片 = new NetWork_网盘_上传图片(this);
                 netWork_网盘_上传图片.传递参数(后缀, account_id, DiskActivity.this, button_network_disk);
                 netWork_网盘_上传图片.start();
                 return;

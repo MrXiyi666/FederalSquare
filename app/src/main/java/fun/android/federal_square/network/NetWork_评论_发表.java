@@ -41,7 +41,7 @@ public class NetWork_评论_发表 extends NetWork_Main {
             return;
         }
         this.b_update = true;
-        Fun.mess(activity, "评价成功");
+        Fun.mess(activity, "评价成功", 300);
     }
 
 }

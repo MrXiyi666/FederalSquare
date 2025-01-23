@@ -78,7 +78,7 @@ public class 发表文章窗口 {
                 post_dataList.add(post_data);
                 linear.addView(textView);
                 edit_text.setText("");
-                滚动到底部();
+                Fun.回到底部(scrollView);
             }else{
                 Fun.mess(activity, "数据为空");
             }
@@ -202,7 +202,7 @@ public class 发表文章窗口 {
             post_dataList.add(post_data);
             linear.addView(imageView);
             选择图片窗口句柄.dismiss();
-            滚动到底部();
+            Fun.回到底部(scrollView);
         });
 
         选择图片窗口句柄.setView(view);
@@ -262,7 +262,7 @@ public class 发表文章窗口 {
             post_dataList.add(post_data);
             linear.addView(imageView);
             dialog.dismiss();
-            滚动到底部();
+            Fun.回到底部(scrollView);
         });
 
         dialog.setView(view);
@@ -273,12 +273,5 @@ public class 发表文章窗口 {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
-    }
-    private void 滚动到底部(){
-        scrollView.post(()->{
-           View contentView = scrollView.getChildAt(0);
-           int height = contentView.getMeasuredHeight();
-           scrollView.smoothScrollTo(0, height);
-        });
     }
 }

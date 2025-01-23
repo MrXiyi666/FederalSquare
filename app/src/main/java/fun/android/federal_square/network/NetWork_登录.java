@@ -45,11 +45,11 @@ public class NetWork_登录 extends NetWork_Main {
         for(Post_Data pd : post_dataList){
             if(pd.getName().equals("PassWord")){
                 if(pd.getText().equals(n_PassWord)){
-                    Fun.mess(activity, "登陆成功");
+                    Fun.mess(activity, "登陆成功", 300);
                     this.b_update = true;
                     Fun_账号.保存账号(post_dataList);
                 }else{
-                    Fun.mess(activity, "密码错误");
+                    Fun.mess(activity, "密码错误", 300);
                 }
             }
         }

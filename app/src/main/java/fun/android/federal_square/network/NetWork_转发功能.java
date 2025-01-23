@@ -45,7 +45,7 @@ public class NetWork_转发功能 extends NetWork_Main{
             Fun.mess(activity, string);
         }
         Fun_文件.写入文件(able.app_path + "Square_Data/" + time + ".json", able.gson.toJson(this.postData));
-        Fun.mess(activity, "转发成功");
+        Fun.mess(activity, "转发成功", 300);
         this.button_forward.post(()->{
             this.button_forward.setVisibility(View.GONE);
         });

@@ -21,7 +21,6 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
         url = able.URL;
         password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
-        b_mess = false;
     }
 
     @Override
@@ -50,7 +49,6 @@ public class NetWork_我的_文章_刷新 extends NetWork_Main {
             if(!Fun_文件.是否存在(able.app_path + "Account/Data/" + name)){
                 Fun_文件.写入文件(able.app_path + "Account/Data/" + name, "");
                 this.b_update = true;
-                b_mess = true;
             }
         }
     }

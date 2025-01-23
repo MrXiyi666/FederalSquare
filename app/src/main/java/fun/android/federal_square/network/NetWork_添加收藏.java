@@ -35,13 +35,13 @@ public class NetWork_添加收藏 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no")){
-            Fun.mess(activity, "收藏失败");
+            Fun.mess(activity, "收藏失败", 300);
             return;
         }
         if(!string.equals("ok")){
             Fun.mess(activity, string);
         }
-        Fun.mess(activity, "收藏成功");
+        Fun.mess(activity, "收藏成功", 300);
         Fun_文件.写入文件(able.app_path + "Account/Collection/" + post_time + ".json", able.gson.toJson(this.post_data));
     }
 

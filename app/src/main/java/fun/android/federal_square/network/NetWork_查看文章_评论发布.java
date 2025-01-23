@@ -43,6 +43,6 @@ public class NetWork_查看文章_评论发布 extends NetWork_Main{
             return;
         }
         this.b_update = true;
-        Fun.mess(activity, "评价成功");
+        Fun.mess(activity, "评价成功", 300);
     }
 }

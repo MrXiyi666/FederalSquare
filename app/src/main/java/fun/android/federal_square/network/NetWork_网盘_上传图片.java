@@ -15,7 +15,6 @@ import okhttp3.RequestBody;
 public class NetWork_网盘_上传图片 extends NetWork_Main_MultipartBody {
     public NetWork_网盘_上传图片(Activity activity) {
         super(activity);
-        this.账号检测 = true;
     }
     private String 后缀;
 
@@ -42,21 +41,19 @@ public class NetWork_网盘_上传图片 extends NetWork_Main_MultipartBody {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        if(this.body == null){
-            return;
-        }
         if(string.equals("no_up")){
-            Fun.mess(activity, "上传失败 数据出错");
+            Fun.mess(activity, "上传失败 数据出错", 300);
             return;
         }
         if(string.equals("no_file")){
-            Fun.mess(activity, "上传失败 存储失败");
+            Fun.mess(activity, "上传失败 存储失败", 300);
             return;
         }
         if(!string.equals("ok")){
             Fun.mess(activity, string);
+            return;
         }
-        Fun.mess(activity, "上传成功");
+        Fun.mess(activity, "上传成功", 300);
         this.b_update = true;
         Fun_文件.写入文件(able.app_path + "Disk_Data/" + file_name, "");
         Fun_文件.删除文件(able.app_path + "/cache/cache." + 后缀);

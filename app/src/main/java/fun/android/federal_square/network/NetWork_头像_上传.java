@@ -41,10 +41,10 @@ public class NetWork_头像_上传 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(!string.equals("ok")){
-            Fun.mess(activity, "保存失败");
+            Fun.mess(activity, "保存失败", 300);
             return;
         }
-        Fun.mess(activity, "保存成功");
+        Fun.mess(activity, "保存成功", 300);
         Fun_账号.保存账号(post_dataList);
         this.b_update = true;
 
@@ -54,14 +54,9 @@ public class NetWork_头像_上传 extends NetWork_Main {
     public void 刷新() {
         super.刷新();
         if(!tou_url.isEmpty()){
-            RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(R.drawable.glide_zhanwei)
-                    .circleCropTransform()
-                    .error(R.drawable.glide_shibai)
-                    .fallback(R.drawable.glide_duqushibai);
             Glide.with(activity)
                     .load(tou_url)
-                    .apply(requestOptions)
+                    .apply(able.requestOptions)
                     .into(avatar_img);
         }else {
             avatar_img.setImageResource(R.mipmap.ic_launcher_round);

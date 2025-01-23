@@ -40,7 +40,7 @@ public class NetWork_账号同步 extends NetWork_Main{
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no_file")){
-            Fun.mess(activity, "同步失败");
+            Fun.mess(activity, "同步失败", 300);
             return;
         }
         List<Post_Data> post_dataList = new ArrayList<>();
@@ -48,17 +48,17 @@ public class NetWork_账号同步 extends NetWork_Main{
             post_dataList = able.gson.fromJson(string, new TypeToken<List<Post_Data>>(){}.getType());
         }
         if(post_dataList==null){
-            Fun.mess(activity, "同步失败");
+            Fun.mess(activity, "同步失败", 300);
             return;
         }
         if(post_dataList.isEmpty()){
-            Fun.mess(activity, "同步失败");
+            Fun.mess(activity, "同步失败", 300);
             return;
         }
         Fun_账号.保存账号(string);
 
         this.b_update = true;
-        Fun.mess(activity, "同步成功");
+        Fun.mess(activity, "同步成功", 300);
     }
 
     @Override

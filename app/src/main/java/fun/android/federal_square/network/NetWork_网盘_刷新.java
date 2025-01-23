@@ -28,7 +28,7 @@ public class NetWork_网盘_刷新 extends NetWork_Main {
         Fun_文件.创建文件夹(able.app_path + "Disk_Data");
         if(string.equals("no_folder") || string.equals("no")){
             this.b_update = true;
-            Fun.mess(activity, "没有数据");
+            Fun.mess(activity, "没有数据", 300);
             return;
         }
         String[] dd = string.split("\n");

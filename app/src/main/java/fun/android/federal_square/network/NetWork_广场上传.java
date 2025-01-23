@@ -2,12 +2,8 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import android.view.View;
-
 import androidx.appcompat.app.AlertDialog;
-
 import java.util.List;
-
-import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -47,12 +43,12 @@ public class NetWork_广场上传 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(!string.equals("ok")){
-            Fun.mess(activity,  "发表失败");
+            Fun.mess(activity,  "发表失败", 300);
             return;
         }
         Fun_文件.写入文件(able.app_path + "Square_Data/" + time + ".json", able.gson.toJson(this.post_dataList));
         Fun_文件.写入文件(able.app_path + "Account/Data/" + time + ".json", "");
-        Fun.mess(activity, "发表成功");
+        Fun.mess(activity, "发表成功", 300);
         this.b_update = true;
     }
 

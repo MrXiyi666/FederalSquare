@@ -1,24 +1,14 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
+import fun.android.federal_square.window.加载等待窗口;
 import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -27,92 +17,19 @@ public class NetWork_Main {
     public Activity activity;
     public String class_name;
     public boolean b_update = false, b_account = false, b_mess = true;
-    private AlertDialog dialog=null;
+    private 加载等待窗口 dialog=null;
     public FormBody formBody=null;
     public String url, url_path, password;
     public boolean b_dialog = true;
     public List<String> down_list_data = new ArrayList<>();
     public List<String> down_list_collection_data = new ArrayList<>();
 
+
     public NetWork_Main(Activity activity){
         this.activity = activity;
         this.class_name = this.getClass().getSimpleName();
     }
 
-    private void 初始化等待窗口(){
-        able.handler.post(()->{
-            dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
-            View view = View.inflate(activity, R.layout.window_load_toast_view, null);
-            TextView text_id = view.findViewById(R.id.text_id);
-            ImageView return_icon = view.findViewById(R.id.return_icon);
-            return_icon.setVisibility(View.GONE);
-            view.setOnClickListener(V->{
-                dialog.dismiss();
-                dialog = null;
-            });
-            if(dialog == null){
-                return;
-            }
-            new Thread(()->{
-                int i=0;
-                 while (dialog != null && text_id!=null){
-                     switch(i){
-                         case 0:
-                             text_id.post(()->{
-                                 text_id.setText("  ✍  ");
-                             });
-                             break;
-                         case 1:
-                             text_id.post(()->{
-                                 text_id.setText("  .✍  ");
-                             });
-                             break;
-                         case 2:
-                             text_id.post(()->{
-                                 text_id.setText("  ..✍  ");
-                             });
-                             break;
-                         case 3:
-                             text_id.post(()->{
-                                 text_id.setText("  ...✍  ");
-                             });
-                             break;
-                         case 4:
-                             text_id.post(()->{
-                                 text_id.setText("  ....✍  ");
-                             });
-                             break;
-                         case 5:
-                             text_id.post(()->{
-                                 text_id.setText("  .....✍  ");
-                             });
-                             break;
-                         case 6:
-                             text_id.post(()->{
-                                 text_id.setText("  ......✍  ");
-                             });
-                             break;
-                     }
-                     try {
-                         Thread.sleep(300);
-                         i++;
-                         if(i > 6){
-                             i=0;
-                         }
-                     }catch (Exception e){
-
-                     }
-                 }
-            }).start();
-            dialog.setView(view);
-            dialog.setCancelable(false);
-            Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setGravity(Gravity.TOP);
-        });
-    }
     public void 事件(String string){
 
     }
@@ -123,6 +40,10 @@ public class NetWork_Main {
 
     public void start(){
         b_update = false;
+        if(b_dialog){
+            dialog = null;
+            dialog = new 加载等待窗口(activity);
+        }
         if(b_account){
             if(Fun_账号.GetID().isEmpty()){
                 Log.w(class_name, "null");
@@ -139,14 +60,7 @@ public class NetWork_Main {
         if(url.isEmpty()){
             return;
         }
-        if(b_dialog){
-            if(dialog == null){
-                初始化等待窗口();
-            }
-            able.handler.post(()-> dialog.show());
-        }
         new Thread(()->{
-
             try {
                 Request request = new Request.Builder()
                         .url(url + url_path)
@@ -156,32 +70,27 @@ public class NetWork_Main {
                 if(!response.isSuccessful()){
                     Log.w(class_name, url + " isSuccessfulnull");
                     Fun.mess(activity, url + "isSuccessfulnull");
-                    关闭等待窗口();
-                    return;
+                    throw new Exception("跳出");
                 }
                 if(response.body() == null){
                     Log.w(class_name, url + "response.body() null");
                     Fun.mess(activity, url + "response.body() null");
-                    关闭等待窗口();
-                    return;
+                    throw new Exception("跳出");
                 }
                 String string=response.body().string();
                 response.close();
                 if(string.isEmpty()){
                     Fun.mess(activity, url + "string null");
                     Log.w(class_name, url + "string null");
-                    关闭等待窗口();
-                    return;
+                    throw new Exception("跳出");
                 }
                 if(string.equals("Null_PassWord")){
                     Fun.mess(activity, url + "\n没有密码");
-                    关闭等待窗口();
-                    return;
+                    throw new Exception("跳出");
                 }
                 if(string.equals("Error_PassWord")){
                     Fun.mess(activity, url + "\n密码错误");
-                    关闭等待窗口();
-                    return;
+                    throw new Exception("跳出");
                 }
 
                 事件(string);
@@ -253,9 +162,6 @@ public class NetWork_Main {
                     able.handler.post(()->{
                         刷新();
                     });
-                    if(b_mess){
-                        Fun.mess(activity, "成功刷新");
-                    }
                 }
             }catch (Exception e){
                Log.w(class_name, e);
@@ -266,18 +172,20 @@ public class NetWork_Main {
 
     private void 关闭等待窗口(){
         if(b_dialog){
-            able.handler.post(()-> {
-                new Thread(()->{
-                    try{
-                        Thread.sleep(300);
-                    }catch(Exception ignored) {}
-                    if(dialog==null){
-                        return;
-                    }
-                    dialog.dismiss();
-                    dialog = null;
-                }).start();
-            });
+            new Thread(()->{
+                try{
+                    Thread.sleep(300);
+                }catch(Exception ignored) {}
+                if(dialog==null){
+                    return;
+                }
+                dialog.关闭();
+                dialog = null;
+                if(b_mess){
+                    Fun.mess(activity, "成功刷新");
+                }
+            }).start();
+
         }
     }
 

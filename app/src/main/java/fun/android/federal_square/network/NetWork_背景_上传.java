@@ -41,7 +41,7 @@ public class NetWork_背景_上传 extends NetWork_Main{
             Fun.mess(activity, string);
             return;
         }
-        Fun.mess(activity, "保存成功");
+        Fun.mess(activity, "保存成功", 300);
         Fun_账号.保存账号(post_dataList);
         this.b_update = true;
     }
@@ -51,6 +51,7 @@ public class NetWork_背景_上传 extends NetWork_Main{
         super.刷新();
         Glide.with(activity)
                 .load(back_url)
+                .apply(able.requestOptions)
                 .into(back_img);
         if(fun_dialog != null){
            fun_dialog.dismiss();

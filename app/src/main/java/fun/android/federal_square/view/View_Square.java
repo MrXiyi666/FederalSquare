@@ -34,7 +34,7 @@ public class View_Square extends View_Main{
     private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
     public TextView di_title;
-    public boolean scrollView_Down_Y = false, scrollView_update = false;
+    public boolean scrollView_Down_Y = false;
     private Thread time_thread=null;
     public int view_id;
     public int Post_Index = 0;
@@ -90,11 +90,6 @@ public class View_Square extends View_Main{
             }else{
                 scrollView_Down_Y = false;
             }
-            if(scrollY == 0){
-                scrollView_update = true;
-            }else{
-                scrollView_update = false;
-            }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = (Post_View)linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
@@ -105,7 +100,6 @@ public class View_Square extends View_Main{
                     // 子控件至少有一个像素在可视范围内
                     if (scrollBounds.bottom >= (view.getHeight() / 2)) {
                     // 子控件的可见区域是否超过了50%
-
                     }
                 } else {
                     if(view.getVisibility() == View.VISIBLE){

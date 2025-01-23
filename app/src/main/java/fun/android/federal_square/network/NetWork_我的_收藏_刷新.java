@@ -21,7 +21,6 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
         url = able.URL;
         password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
-        b_mess = false;
     }
     @Override
     public void 事件(String string) {
@@ -47,7 +46,6 @@ public class NetWork_我的_收藏_刷新 extends NetWork_Main {
             if(!Fun_文件.是否存在(able.app_path + "Account/Collection/" + name)){
                 this.b_update = true;
                 down_list_collection_data.add(name);
-                b_mess = true;
             }
         }
 

@@ -39,7 +39,7 @@ public class NetWork_注册 extends NetWork_Main {
             return;
         }
         this.b_update = true;
-        Fun.mess(activity, "注册成功");
+        Fun.mess(activity, "注册成功", 300);
     }
 
     @Override

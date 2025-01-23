@@ -38,12 +38,12 @@ public class NetWork_我的_个人信息 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(!string.equals("ok")){
-            Fun.mess(activity, "修改失败");
+            Fun.mess(activity, "修改失败", 300);
             return;
         }
         Fun_文件.写入文件(able.app_path + "Account/account.json", able.gson.toJson(post_dataList));
         this.b_update = true;
-        Fun.mess(activity, "修改成功");
+        Fun.mess(activity, "修改成功", 300);
         able.handler.post(()->{
             this.dialog.dismiss();
         });
