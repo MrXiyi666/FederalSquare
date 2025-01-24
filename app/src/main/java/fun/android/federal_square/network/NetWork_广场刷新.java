@@ -35,14 +35,17 @@ public class NetWork_广场刷新 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no")){
+            b_mess = false;
             return;
         }
         if(string.equals("no_folder")){
+            b_mess = false;
             return;
         }
         String[] dd = string.split("\n");
         List<String> filename = new ArrayList<>(Arrays.asList(dd));
         if(filename.isEmpty()){
+            b_mess = false;
             return;
         }
         for(String name : filename){

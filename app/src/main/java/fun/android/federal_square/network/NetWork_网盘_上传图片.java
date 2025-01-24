@@ -65,6 +65,7 @@ public class NetWork_网盘_上传图片 extends NetWork_Main_MultipartBody {
         if(button_network_disk!=null){
             button_network_disk.setEnabled(true);
         }
+        Fun.mess(activity, "上传失败", 300);
     }
 
     @Override
