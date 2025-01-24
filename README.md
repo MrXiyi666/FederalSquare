@@ -192,8 +192,8 @@
 #
 https://imgse.com/i/pEE1zmq
 
-![image](https://imgse.com/i/pEE1zmq)
-![image](https://imgse.com/i/pEE3S00)
+![image](https://s21.ax1x.com/2025/01/25/pEE1zmq.jpg)
+![image](https://s21.ax1x.com/2025/01/25/pEE3S00.png)
 # 我们使用XMPP来进行交流 你可以扫码加入官方群 进行交流
 # XMPP是开源的社交APP 和微信QQ比较相似 但是注重隐私安全 
 ![image](https://s21.ax1x.com/2025/01/25/pEE1vXn.png)
