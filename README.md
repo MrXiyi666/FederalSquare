@@ -190,5 +190,10 @@
 # 感谢赞助
 如果您喜欢这个项目 那么你可以少许赞助 我会更有动力 谢谢 我喜欢人民币
 #
-![image](https://img1.lookpic.cn/2025/01/06/zanzhu.png)
+https://imgse.com/i/pEE1zmq
 
+![image](https://imgse.com/i/pEE1zmq)
+![image](https://imgse.com/i/pEE3S00)
+# 我们使用XMPP来进行交流 你可以扫码加入官方群 进行交流
+# XMPP是开源的社交APP 和微信QQ比较相似 但是注重隐私安全 
+![image](https://s21.ax1x.com/2025/01/25/pEE1vXn.png)
