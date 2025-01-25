@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import okhttp3.FormBody;
 
@@ -21,8 +20,6 @@ public class NetWork_多少秒获取广场数据 extends NetWork_Main{
         password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
         b_dialog = false;
-        b_mess = false;
-        b_error = false;
     }
 
     @Override
