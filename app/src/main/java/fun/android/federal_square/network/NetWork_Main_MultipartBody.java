@@ -50,21 +50,37 @@ public class NetWork_Main_MultipartBody {
         if(multipartBody == null){
             return;
         }
+        dialog = null;
+        dialog = new 加载等待窗口(activity);
         new Thread(()->{
-            dialog = new 加载等待窗口(activity);
             try {
                 request = new Request.Builder()
                         .url(url)
                         .post(multipartBody)
                         .build();
                 Response response = able.okHttpClient.newCall(request).execute();
+                if(!response.isSuccessful()){
+                    Log.w(class_name, url + "isSuccessfulnull");
+                    Fun.mess(activity, url + "\nisSuccessfulnull");
+                    throw new Exception("跳出");
+                }
                 if(response.body() == null){
                     Log.w(class_name, "null");
+                    Fun.mess(activity, url + "\nisSuccessfulnull");
                     throw new Exception("跳出");
                 }
                 String string=response.body().string();
                 response.close();
                 if(string.isEmpty()){
+                    Fun.mess(activity, url + "\nstring null");
+                    throw new Exception("跳出");
+                }
+                if(string.equals("Null_PassWord")){
+                    Fun.mess(activity, url + "\n没有密码");
+                    throw new Exception("跳出");
+                }
+                if(string.equals("Error_PassWord")){
+                    Fun.mess(activity, url + "\n密码错误");
                     throw new Exception("跳出");
                 }
                 事件(string);
@@ -75,12 +91,26 @@ public class NetWork_Main_MultipartBody {
                 }
             }catch (Exception e){
                 Log.w(class_name, e);
-                Fun.mess(activity, class_name + e);
                 able.handler.post(()->{
                     失败();
                 });
             }
-            dialog.关闭();
+            关闭等待窗口();
         }).start();
     }
+
+    private void 关闭等待窗口(){
+        new Thread(()->{
+            try{
+                Thread.sleep(300);
+            }catch(Exception ignored) {}
+            if(dialog==null){
+                return;
+            }
+            dialog.关闭();
+            dialog = null;
+
+        }).start();
+    }
+
 }

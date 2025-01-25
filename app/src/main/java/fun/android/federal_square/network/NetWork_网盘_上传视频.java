@@ -34,6 +34,7 @@ public class NetWork_网盘_上传视频 extends NetWork_Main_MultipartBody{
         file_name = Fun.获取时间() + "." + 后缀;
         multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
+                .addFormDataPart("PassWord", able.PassWord)
                 .addFormDataPart("file", file_name, body)
                 .addFormDataPart("Account", account_id)
                 .build();

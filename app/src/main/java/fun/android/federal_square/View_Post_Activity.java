@@ -174,7 +174,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     String[] time_shuzu = post_data.getText().split("_");
                     StringBuffer time_data = new StringBuffer();
                     for(int i=0;i<time_shuzu.length; i++){
-                        if(i < 5){
+                        if(i < 6){
                             if(!time_data.toString().isEmpty()){
                                 time_data.append(":");
                             }

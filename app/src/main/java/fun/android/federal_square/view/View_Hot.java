@@ -134,7 +134,7 @@ public class View_Hot extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -170,7 +170,7 @@ public class View_Hot extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{
@@ -208,7 +208,7 @@ public class View_Hot extends View_Main{
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
+            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
             if(linear.getChildCount() >= 10){
                 view.setVisibility(View.INVISIBLE);
             }else{

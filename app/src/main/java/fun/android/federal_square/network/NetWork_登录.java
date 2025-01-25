@@ -1,8 +1,6 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.util.Log;
-
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
@@ -36,9 +34,11 @@ public class NetWork_登录 extends NetWork_Main {
     public void 事件(String string) {
         super.事件(string);
         if(string.equals("no_file")){
+            Fun.mess(activity, "登陆失败 账号不存在", 300);
             return;
         }
         if(!Fun.StrBoolJSON(string)){
+            Fun.mess(activity, "数据出错 请重试", 300);
             return;
         }
         List<Post_Data> post_dataList = able.gson.fromJson(string, new TypeToken<List<Post_Data>>(){}.getType());
@@ -61,9 +61,8 @@ public class NetWork_登录 extends NetWork_Main {
         super.刷新();
         if(able.view_home!=null){
             able.view_home.linear_main.removeAllViews();
-            if(able.view_home.view_home_page!=null){
-                able.view_home.linear_main.addView(able.view_home.view_home_page.getView());
-            }
+            able.view_home.view_home_page = new View_Home_Page((MainActivity) activity);
+            able.view_home.linear_main.addView(able.view_home.view_home_page.getView());
         }
     }
 

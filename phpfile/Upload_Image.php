@@ -1,4 +1,6 @@
 <?php
+
+    include 'PassWord_Data.php';
     $Account_name = $_POST['Account'];
    
     if($_FILES["file"]["error"] > 0){

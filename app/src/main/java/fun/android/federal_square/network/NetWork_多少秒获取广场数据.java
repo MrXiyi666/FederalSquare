@@ -20,6 +20,8 @@ public class NetWork_多少秒获取广场数据 extends NetWork_Main{
         password = able.PassWord;
         url_path = "federal-square/Read_Folder_List.php";
         b_dialog = false;
+        b_error = false;
+        b_mess = false;
     }
 
     @Override

@@ -16,7 +16,7 @@ import okhttp3.Response;
 public class NetWork_Main {
     public Activity activity;
     public String class_name;
-    public boolean b_update = false, b_account = false, b_mess = true, b_error = false;
+    public boolean b_update = false, b_account = false, b_mess = true, b_error = true;
     private 加载等待窗口 dialog=null;
     public FormBody formBody=null;
     public String url, url_path, password;
@@ -71,15 +71,11 @@ public class NetWork_Main {
                 if(!response.isSuccessful()){
                     Log.w(class_name, url + " isSuccessfulnull");
                     Fun.mess(activity, url + "isSuccessfulnull");
-                    b_mess = false;
-                    b_error = true;
                     throw new Exception("跳出");
                 }
                 if(response.body() == null){
                     Log.w(class_name, url + "response.body() null");
                     Fun.mess(activity, url + "response.body() null");
-                    b_mess = false;
-                    b_error = true;
                     throw new Exception("跳出");
                 }
                 String string=response.body().string();
@@ -87,20 +83,14 @@ public class NetWork_Main {
                 if(string.isEmpty()){
                     Fun.mess(activity, url + "string null");
                     Log.w(class_name, url + "string null");
-                    b_mess = false;
-                    b_error = true;
                     throw new Exception("跳出");
                 }
                 if(string.equals("Null_PassWord")){
                     Fun.mess(activity, url + "\n没有密码");
-                    b_mess = false;
-                    b_error = true;
                     throw new Exception("跳出");
                 }
                 if(string.equals("Error_PassWord")){
                     Fun.mess(activity, url + "\n密码错误");
-                    b_mess = false;
-                    b_error = true;
                     throw new Exception("跳出");
                 }
 
@@ -174,10 +164,14 @@ public class NetWork_Main {
                         刷新();
                     });
                 }
+                if(b_mess){
+                    Fun.mess(activity, "成功刷新");
+                }
             }catch (Exception e){
                Log.w(class_name, e);
-               b_mess = false;
-               b_error = true;
+               if(b_error){
+                    Fun.mess(activity, "失败\n" + e);
+               }
             }
             关闭等待窗口();
         }).start();
@@ -194,12 +188,7 @@ public class NetWork_Main {
                 }
                 dialog.关闭();
                 dialog = null;
-                if(b_mess){
-                    Fun.mess(activity, "成功刷新");
-                }
-                if(b_error){
-                    Fun.mess(activity, "失败");
-                }
+
             }).start();
 
         }

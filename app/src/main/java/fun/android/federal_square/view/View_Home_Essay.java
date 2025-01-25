@@ -100,6 +100,7 @@ public class View_Home_Essay extends View_Main{
     public void 初始化数据(){
         var list = Fun_文章.获取我的文章集合();
         linear.removeAllViews();
+        button_loading.setVisibility(View.GONE);
         if(list.isEmpty()){
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             var textView = new TextView(activity_main);
@@ -126,6 +127,9 @@ public class View_Home_Essay extends View_Main{
                 view.setVisibility(View.VISIBLE);
             }
             linear.addView(view);
+        }
+        if(linear.getChildCount() >= 10){
+            button_loading.setVisibility(View.VISIBLE);
         }
     }
 }

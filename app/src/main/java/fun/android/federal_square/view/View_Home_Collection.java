@@ -83,9 +83,8 @@ public class View_Home_Collection extends View_Main{
     public void 初始化收藏(){
         var list = Fun_文章.获取我的收藏集合();
         linear.removeAllViews();
-        button_loading.setVisibility(View.VISIBLE);
+        button_loading.setVisibility(View.GONE);
         if(list.isEmpty()){
-            button_loading.setVisibility(View.GONE);
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             var textView = new TextView(activity_main);
             textView.setTextColor(Color.rgb(128, 128, 128));
@@ -96,8 +95,6 @@ public class View_Home_Collection extends View_Main{
             textView.setLayoutParams(params);
             linear.addView(textView);
             return;
-        }else{
-            button_loading.setVisibility(View.VISIBLE);
         }
         for(var i=0; i<list.size(); i++){
             var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
@@ -113,6 +110,9 @@ public class View_Home_Collection extends View_Main{
                 view.setVisibility(View.VISIBLE);
             }
             linear.addView(view);
+        }
+        if(linear.getChildCount() >= 10){
+            button_loading.setVisibility(View.VISIBLE);
         }
     }
 
