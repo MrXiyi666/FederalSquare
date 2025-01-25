@@ -27,6 +27,7 @@ public class able {
     public static RequestOptions requestOptions = new RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .skipMemoryCache(true)
+            .encodeQuality(10)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
 
@@ -34,6 +35,7 @@ public class able {
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .placeholder(R.drawable.glide_zhanwei)
             .skipMemoryCache(true)
+            .encodeQuality(10)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
 

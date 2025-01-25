@@ -14,9 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import java.util.Objects;
 import fun.android.federal_square.R;
@@ -39,10 +41,14 @@ public class 查看图片窗口 {
         photoView.getLayoutParams().width = able.宽度;
         photoView.getLayoutParams().height = able.高度;
         photoView.setVisibility(View.VISIBLE);
-
+        RequestOptions requestOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .skipMemoryCache(true)
+                .error(R.drawable.glide_shibai)
+                .fallback(R.drawable.glide_duqushibai);
         Glide.with(activity)
                 .load(url)
-                .apply(able.requestOptions)
+                .apply(requestOptions)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .listener(new RequestListener<>() {
                     @Override
