@@ -190,10 +190,18 @@
 # 感谢赞助
 如果您喜欢这个项目 那么你可以少许赞助 我会更有动力 谢谢 我喜欢人民币
 #
-<img src="https://s21.ax1x.com/2025/01/25/pEE1zmq.jpg" alt="支付宝收款码" width="300" height="600">
+
+<img src="https://s21.ax1x.com/2025/01/25/pEE1zmq.jpg" alt="支付宝收款码" width="300" height="500">
+
 #
 
-![image](https://s21.ax1x.com/2025/01/25/pEE3S00.png)
+<img src="https://s21.ax1x.com/2025/01/25/pEE3S00.png" alt="支付宝收款码" width="300" height="500">
+
+#
+#
+#
+
 # 我们使用XMPP来进行交流 你可以扫码加入官方群 进行交流
 # XMPP是开源的社交APP 和微信QQ比较相似 但是注重隐私安全 
-![image](https://s21.ax1x.com/2025/01/25/pEE1vXn.png)
+
+<img src="https://s21.ax1x.com/2025/01/25/pEE1vXn.png" alt="支付宝收款码" width="300" height="500">
