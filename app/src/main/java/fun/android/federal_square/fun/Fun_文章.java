@@ -9,8 +9,6 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.View_Collectin;
@@ -21,7 +19,6 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.network.NetWork_转发功能;
 import fun.android.federal_square.view.Post_View;
-import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
