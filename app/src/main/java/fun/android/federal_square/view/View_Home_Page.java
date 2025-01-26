@@ -130,6 +130,12 @@ public class View_Home_Page extends View_Main{
     @Override
     public void 释放() {
         super.释放();
+        if(view_home_essay!=null){
+            view_home_essay.释放();
+        }
+        if(view_home_collection!=null){
+            view_home_collection.释放();
+        }
     }
 
 

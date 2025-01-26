@@ -26,7 +26,7 @@ public class View_Hot extends View_Main{
     public LinearLayout linear;
     public ScrollView scrollView;
     private int view_id=0;
-    private boolean scrollView_Di = false, scrollView_update = false;
+    private boolean scrollView_Di = false;
     public int Post_Index = 0;
     public View_Hot(MainActivity activity) {
         super(activity);
@@ -68,11 +68,6 @@ public class View_Hot extends View_Main{
             }else{
                 scrollView_Di = false;
             }
-            if(scrollY == 0){
-                scrollView_update = true;
-            }else{
-                scrollView_update = false;
-            }
             for(var i=0;i<linear.getChildCount();i++){
                 var view = linear.getChildAt(i);
                 if (view.getLocalVisibleRect(scrollBounds)) {
@@ -106,8 +101,10 @@ public class View_Hot extends View_Main{
     @Override
     public void 释放() {
         super.释放();
+        Fun_文章.释放所有文章内存(linear);
     }
     public void 初始化数据(){
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         if(Fun_账号.GetID().isEmpty()){
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -150,6 +147,7 @@ public class View_Hot extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var list = Fun_文章.获取热门集合();
         var index = Fun.获取热门数量();
@@ -191,6 +189,7 @@ public class View_Hot extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法查看");
             return;
         }
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var list = Fun_文章.获取热门集合();
         var index = Fun.获取热门数量();

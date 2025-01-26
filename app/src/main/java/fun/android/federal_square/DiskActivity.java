@@ -156,9 +156,12 @@ public class DiskActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        for(ImageView imageView : disk_grid_adapter.imageViewList){
-            imageView.setImageResource(0);
-            imageView.setImageBitmap(null);
+        if(gridView!=null){
+            gridView.setAdapter(null);
+        }
+        if(disk_grid_adapter != null){
+            disk_grid_adapter.notifyDataSetChanged();
+            disk_grid_adapter= null;
         }
     }
 }

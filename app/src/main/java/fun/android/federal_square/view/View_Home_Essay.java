@@ -96,9 +96,11 @@ public class View_Home_Essay extends View_Main{
     @Override
     public void 释放() {
         super.释放();
+        Fun_文章.释放所有文章内存(linear);
     }
     public void 初始化数据(){
         var list = Fun_文章.获取我的文章集合();
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         button_loading.setVisibility(View.GONE);
         if(list.isEmpty()){

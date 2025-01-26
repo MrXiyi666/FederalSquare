@@ -82,6 +82,7 @@ public class View_Home_Collection extends View_Main{
 
     public void 初始化收藏(){
         var list = Fun_文章.获取我的收藏集合();
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         button_loading.setVisibility(View.GONE);
         if(list.isEmpty()){
@@ -117,4 +118,9 @@ public class View_Home_Collection extends View_Main{
     }
 
 
+    @Override
+    public void 释放() {
+        super.释放();
+        Fun_文章.释放所有文章内存(linear);
+    }
 }

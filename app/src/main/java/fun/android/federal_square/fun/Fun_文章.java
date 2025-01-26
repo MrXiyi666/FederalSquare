@@ -20,6 +20,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.network.NetWork_添加收藏;
 import fun.android.federal_square.network.NetWork_转发功能;
 import fun.android.federal_square.view.Post_View;
+import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.删除窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
@@ -288,6 +289,15 @@ public class Fun_文章 {
             return list;
         }catch (Exception e){
             return new ArrayList<>();
+        }
+    }
+
+    public static void 释放所有文章内存(LinearLayout linear){
+        for(int i=0; i< linear.getChildCount(); i++){
+            if(linear.getChildAt(i) instanceof Post_View){
+                Post_View post_view = (Post_View) linear.getChildAt(i);
+                post_view.清除图片();
+            }
         }
     }
 }

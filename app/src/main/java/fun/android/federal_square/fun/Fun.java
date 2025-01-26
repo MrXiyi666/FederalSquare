@@ -3,6 +3,7 @@ package fun.android.federal_square.fun;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
@@ -190,6 +191,10 @@ public class Fun {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float density = metrics.density;
         return (int)(dp * density);
+    }
+    public static int DPToPX(Context context, int dp){
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (dp*density + 0.5f);
     }
 
     public static boolean StrBoolJSON(String str){

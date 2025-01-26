@@ -39,11 +39,9 @@ public final class MyAppGlideModule extends AppGlideModule{
         dispatcher.setMaxRequests(999999);
         dispatcher.setMaxRequestsPerHost(999999);
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .cookieJar(CookieJar.NO_COOKIES)
                 .connectTimeout(5, TimeUnit.MINUTES)
                 .writeTimeout(5, TimeUnit.MINUTES)
                 .readTimeout(5, TimeUnit.MINUTES)
-                .retryOnConnectionFailure(false)
                 .dispatcher(dispatcher)
                 .build();
         registry.replace(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory(okHttpClient));

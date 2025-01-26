@@ -3,9 +3,9 @@ package fun.android.federal_square.network;
 import android.app.Activity;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.fun.Fun_文章;
 import okhttp3.FormBody;
 
 public class NetWork_读取热门 extends NetWork_Main {
@@ -15,14 +15,14 @@ public class NetWork_读取热门 extends NetWork_Main {
         password = able.PassWord;
         url_path = "federal-square/Read_Hot_List.php";
         formBody = new FormBody.Builder().add("PassWord", able.PassWord).build();
-        b_update = true;
+
     }
 
 
     @Override
     public void 刷新() {
         super.刷新();
-        if(able.view_hot!=null){
+        if(able.view_hot != null){
             able.view_hot.初始化数据();
         }
     }
@@ -30,17 +30,22 @@ public class NetWork_读取热门 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        List<String> filename = new ArrayList<>(Arrays.asList(string.split("\n")));
-        if(filename.isEmpty()){
+        var network_list = new ArrayList<>(Arrays.asList(string.split("\n")));
+        if(network_list.isEmpty()){
             Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
             return;
         }
-        Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(filename));
-        for(String name : filename){
+        var list = Fun_文章.获取热门集合();
+        if(list.equals(network_list)){
+            return;
+        }
+        Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(network_list));
+        for(var name : network_list){
             if(Fun_文件.是否存在(able.app_path + "Square_Data/" + name + ".json")){
                 continue;
             }
             down_list_data.add(name + ".json");
         }
+        b_update = true;
     }
 }

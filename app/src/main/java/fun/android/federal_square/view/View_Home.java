@@ -50,5 +50,8 @@ public class View_Home extends View_Main{
     @Override
     public void 释放() {
         super.释放();
+        if(view_home_page!=null){
+            view_home_page.释放();
+        }
     }
 }

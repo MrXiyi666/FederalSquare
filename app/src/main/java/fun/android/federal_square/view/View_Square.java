@@ -84,7 +84,6 @@ public class View_Square extends View_Main{
             var childHeight = scrollView.getChildAt(0).getHeight();
             var scrollViewHeight = scrollView.getHeight();
             scrollView_Y = scrollY;
-            Log.w("坐标", scrollY + "");
             if(scrollY + scrollViewHeight >= childHeight){
                 scrollView_Down_Y = true;
             }else{
@@ -155,6 +154,8 @@ public class View_Square extends View_Main{
         });
         time_thread.start();
     }
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -167,8 +168,10 @@ public class View_Square extends View_Main{
     @Override
     public void 释放() {
         super.释放();
+        Fun_文章.释放所有文章内存(linear);
     }
     public void 初始化本地数据(){
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         Post_Index=0;
         var url = Fun.获取域名();
@@ -219,6 +222,7 @@ public class View_Square extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法使用");
             return;
         }
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var url = Fun.获取域名();
         var 所有文章 = Fun_文章.获取广场所有集合();
@@ -269,6 +273,7 @@ public class View_Square extends View_Main{
             Fun.mess(activity_main, "没有登陆 无法使用");
             return;
         }
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var url = Fun.获取域名();
         var 所有文章 = Fun_文章.获取广场所有集合();

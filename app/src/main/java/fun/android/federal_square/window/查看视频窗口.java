@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AlertDialog;
@@ -20,13 +19,14 @@ import androidx.media3.datasource.DefaultDataSource;
 import androidx.media3.datasource.DefaultHttpDataSource;
 import androidx.media3.datasource.cache.CacheDataSource;
 import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.exoplayer.source.LoopingMediaSource;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.exoplayer.source.ProgressiveMediaSource;
 import androidx.media3.ui.PlayerView;
-
 import java.util.Objects;
 import fun.android.federal_square.App;
 import fun.android.federal_square.R;
+import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_账号;
 
@@ -66,6 +66,18 @@ public class 查看视频窗口 {
                     window.setNavigationBarColor(Color.BLACK);
                     window.setStatusBarColor(Color.BLACK);
                     playerView.hideController();
+                }else if(state == Player.STATE_ENDED){
+                    new Thread(()->{
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        view.post(()->{
+                            player.seekTo(0);
+                            player.play();
+                        });
+                    }).start();
                 }
             }
 

@@ -37,11 +37,9 @@ public class App extends Application {
         dispatcher.setMaxRequests(999999);
         dispatcher.setMaxRequestsPerHost(999999);
         able.okHttpClient = new OkHttpClient().newBuilder()
-                .cookieJar(CookieJar.NO_COOKIES)
                 .connectTimeout(5, TimeUnit.MINUTES)
                 .writeTimeout(5, TimeUnit.MINUTES)
                 .readTimeout(5, TimeUnit.MINUTES)
-                .retryOnConnectionFailure(false)
                 .dispatcher(dispatcher)
                 .build();
         if(!Fun_文件.是否存在(able.app_path + "System_Data/Essay_index.txt")){

@@ -40,7 +40,8 @@ import fun.android.federal_square.window.查看评论窗口;
 public class View_Post_Activity extends AppCompatActivity {
     private TextView top_title;
     private String url_txt, PassWord_txt="";
-    private List<Video_ImageView> imageViews = new ArrayList<>();
+    private LinearLayout linear;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class View_Post_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_view_post);
         ImageView return_icon = findViewById(R.id.return_icon);
         top_title = findViewById(R.id.top_title);
-        LinearLayout linear = findViewById(R.id.linear);
+        linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);
         TextView sign_view = findViewById(R.id.sign);
@@ -167,7 +168,6 @@ public class View_Post_Activity extends AppCompatActivity {
                     textView.setBackgroundColor(Color.WHITE);
                     textView.setLayoutParams(params);
                     linear.addView(textView);
-                    imageViews.add(img);
                     break;
                 case "time":
                     time = post_data.getText();
@@ -254,10 +254,13 @@ public class View_Post_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        for(Video_ImageView imageView : imageViews){
-            imageView.setImageResource(0);
-            imageView.setImageBitmap(null);
+        for(int i=0; i<linear.getChildCount(); i++){
+            if(linear.getChildAt(i) instanceof Video_ImageView){
+                ((Video_ImageView) linear.getChildAt(i)).setImageBitmap(null);
+                ((Video_ImageView) linear.getChildAt(i)).setImageDrawable(null);
+            }
         }
+        linear.removeAllViews();
     }
 
 

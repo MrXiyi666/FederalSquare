@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatButton
                     android:stateListAnimator="@null"
-                    android:text="我的文章"
+                    android:text="文章"
                     android:textColor="@color/black"
                     android:layout_marginEnd="5dp"
                     android:id="@+id/button_essay"
@@ -107,7 +107,7 @@
                     android:layout_marginEnd="5dp"
                     android:textColor="@color/black"
                     android:background="@drawable/button_event_back_tran"
-                    android:text="我的收藏"
+                    android:text="收藏"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/button_event_back_tran"
-                    android:text="系统设置"
+                    android:text="设置"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -129,6 +129,5 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </LinearLayout>
 </LinearLayout>

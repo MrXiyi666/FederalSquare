@@ -1,26 +1,15 @@
 package fun.android.federal_square.adatper;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-
-import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -30,16 +19,16 @@ import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.view.Video_ImageView;
 
 public class Disk_Grid_Adapter extends BaseAdapter {
-    private final Activity activity;
+    private WeakReference<Context> contextRef;
     private final List<String> url;
     private int height;
-    public List<ImageView> imageViewList = new ArrayList<>();
-    public Disk_Grid_Adapter(Activity activity, List<String> url, int Disk_Index){
-        this.activity = activity;
+
+    public Disk_Grid_Adapter(Context context, List<String> url, int Disk_Index){
+        this.contextRef = new WeakReference<>(context);
         this.url = url;
         switch (Disk_Index){
             case 1:
-                height = ViewGroup.LayoutParams.MATCH_PARENT;
+                height = 300;
                 break;
             case 2:
                 height = 150;
@@ -87,41 +76,31 @@ public class Disk_Grid_Adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyGui gui;
+        Context context = contextRef.get();
+        if(context== null){
+            return convertView;
+        }
         if(convertView == null){
             gui = new MyGui();
-            convertView = LayoutInflater.from(activity).inflate(R.layout.disk_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.disk_item, null);
             gui.img = convertView.findViewById(R.id.img);
-            gui.linear = convertView.findViewById(R.id.linear);
             convertView.setTag(gui);
         }else{
             gui = (MyGui) convertView.getTag();
         }
         ViewGroup.LayoutParams params = gui.img.getLayoutParams();
-        params.height = Fun.DPToPX(activity, height);
+        params.height = Fun.DPToPX(context, height);
         gui.img.setLayoutParams(params);
         String 后缀 = Fun_文件.获取后缀(url.get(position));
         gui.img.后缀 = 后缀;
         String url_txt = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position);
-        Glide.with(activity).load(url_txt)
-                .override(Fun.DPToPX(activity, height))
+        Glide.with(context).load(url_txt)
+                .override(Fun.DPToPX(context, height))
                 .apply(able.requestOptions)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
-                        imageViewList.add(gui.img);
-                        return false;
-                    }
-                })
                 .into(gui.img);
         return convertView;
     }
-    class MyGui{
-        LinearLayout linear;
+    static class MyGui{
         Video_ImageView img;
     }
 }

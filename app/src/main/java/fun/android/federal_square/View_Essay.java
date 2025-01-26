@@ -105,6 +105,7 @@ public class View_Essay extends AppCompatActivity {
     public void 初始化数据(){
         Post_Index=0;
         var list = Fun_文章.获取所有文章集合();
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var index = Fun.获取我的文章数量();
         for(var i=0; i<list.size(); i++){
@@ -136,6 +137,7 @@ public class View_Essay extends AppCompatActivity {
         if(Post_Index < 0){
             Post_Index = 0;
         }
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var 遍历数量 = 0;
         for(var i=Post_Index; i<list.size(); i++){
@@ -169,6 +171,7 @@ public class View_Essay extends AppCompatActivity {
         for(var i=0;i<index;i++){
             Post_Index++;
         }
+        Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
         var 遍历数量 = 0;
         for(var i=Post_Index; i<list.size(); i++){
