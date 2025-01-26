@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import fun.android.federal_square.R;
@@ -199,8 +200,12 @@ public class Fun_文章 {
     public static List<String> 获取广场所有集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
-            Comparator<String> comparator = Comparator.reverseOrder();
-            list.sort(comparator);
+            list.sort((o1, o2) -> {
+                // 提取时间部分进行比较
+                String time1 = o1.substring(0, o1.lastIndexOf('_'));
+                String time2 = o2.substring(0, o2.lastIndexOf('_'));
+                return time2.compareTo(time1); // 降序排列
+            });
             if(list.isEmpty()){
                 return new ArrayList<>();
             }
@@ -213,8 +218,12 @@ public class Fun_文章 {
     public static List<String> 获取我的文章集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
-            Comparator<String> comparator = Comparator.reverseOrder();
-            list.sort(comparator);
+            list.sort((o1, o2) -> {
+                // 提取时间部分进行比较
+                String time1 = o1.substring(0, o1.lastIndexOf('_'));
+                String time2 = o2.substring(0, o2.lastIndexOf('_'));
+                return time2.compareTo(time1); // 降序排列
+            });
             int index = Fun.获取我的文章数量();
             List<String> return_list = new ArrayList<>();
             for(int i=0; i < index; i++){
@@ -234,8 +243,12 @@ public class Fun_文章 {
     public static List<String> 获取我的收藏集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
-            Comparator<String> comparator = Comparator.reverseOrder();
-            list.sort(comparator);
+            list.sort((o1, o2) -> {
+                // 提取时间部分进行比较
+                String time1 = o1.substring(0, o1.lastIndexOf('_'));
+                String time2 = o2.substring(0, o2.lastIndexOf('_'));
+                return time2.compareTo(time1); // 降序排列
+            });
             int index = Fun.获取我的收藏数量();
             List<String> return_list = new ArrayList<>();
             for(int i=0; i < index; i++){
@@ -267,8 +280,12 @@ public class Fun_文章 {
     public static List<String> 获取所有文章集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
-            Comparator<String> comparator = Comparator.reverseOrder();
-            list.sort(comparator);
+            list.sort((o1, o2) -> {
+                // 提取时间部分进行比较
+                String time1 = o1.substring(0, o1.lastIndexOf('_'));
+                String time2 = o2.substring(0, o2.lastIndexOf('_'));
+                return time2.compareTo(time1); // 降序排列
+            });
             if(list.isEmpty()){
                 return new ArrayList<>();
             }
@@ -281,8 +298,12 @@ public class Fun_文章 {
     public static List<String> 获取所有收藏集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
-            Comparator<String> comparator = Comparator.reverseOrder();
-            list.sort(comparator);
+            list.sort((o1, o2) -> {
+                // 提取时间部分进行比较
+                String time1 = o1.substring(0, o1.lastIndexOf('_'));
+                String time2 = o2.substring(0, o2.lastIndexOf('_'));
+                return time2.compareTo(time1); // 降序排列
+            });
             if(list.isEmpty()){
                 return new ArrayList<>();
             }
