@@ -1,7 +1,9 @@
 package fun.android.federal_square.view;
 
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -178,6 +180,18 @@ public class View_Square extends View_Main{
         var 所有文章 = Fun_文章.获取广场所有集合();
         var index = Fun.获取广场文章数量();
         if(url.isEmpty()){
+            return;
+        }
+        if(所有文章.isEmpty()){
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            var textView = new TextView(activity_main);
+            textView.setTextColor(Color.rgb(128, 128, 128));
+            textView.setTextSize(15);
+            textView.setText("广场为空");
+            textView.setTextIsSelectable(true);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(params);
+            linear.addView(textView);
             return;
         }
         for(int i=0; i< 所有文章.size(); i++){

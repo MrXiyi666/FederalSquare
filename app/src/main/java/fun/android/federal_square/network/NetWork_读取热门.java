@@ -1,11 +1,12 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
-import fun.android.federal_square.fun.Fun_文章;
 import okhttp3.FormBody;
 
 public class NetWork_读取热门 extends NetWork_Main {
@@ -30,13 +31,22 @@ public class NetWork_读取热门 extends NetWork_Main {
     @Override
     public void 事件(String string) {
         super.事件(string);
-        var network_list = new ArrayList<>(Arrays.asList(string.split("\n")));
-        if(network_list.isEmpty()){
+        b_update = true;
+        if(string.equals("no")){
             Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
             return;
         }
-        var list = Fun_文章.获取热门集合();
-        if(list.equals(network_list)){
+        if(string.equals("no_list")){
+            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
+            return;
+        }
+        if(string.equals("no_size")){
+            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
+            return;
+        }
+        var network_list = new ArrayList<>(Arrays.asList(string.split("\n")));
+        if(network_list.isEmpty()){
+            Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(new ArrayList<>()));
             return;
         }
         Fun_文件.写入文件(able.app_path + "Hot_Data/list.json", able.gson.toJson(network_list));
@@ -46,6 +56,5 @@ public class NetWork_读取热门 extends NetWork_Main {
             }
             down_list_data.add(name + ".json");
         }
-        b_update = true;
     }
 }

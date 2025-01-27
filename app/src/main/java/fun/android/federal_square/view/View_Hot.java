@@ -2,6 +2,7 @@ package fun.android.federal_square.view;
 
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,6 +10,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -106,6 +109,21 @@ public class View_Hot extends View_Main{
     public void 初始化数据(){
         Fun_文章.释放所有文章内存(linear);
         linear.removeAllViews();
+        Post_Index=0;
+        var list = Fun_文章.获取热门集合();
+        var index = Fun.获取热门数量();
+        if(list.isEmpty()){
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            var textView = new TextView(activity_main);
+            textView.setTextColor(Color.rgb(128, 128, 128));
+            textView.setTextSize(15);
+            textView.setText("头条为空");
+            textView.setTextIsSelectable(true);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(params);
+            linear.addView(textView);
+            return;
+        }
         if(Fun_账号.GetID().isEmpty()){
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             var textView = new TextView(activity_main);
@@ -118,9 +136,6 @@ public class View_Hot extends View_Main{
             linear.addView(textView);
             return;
         }
-        Post_Index=0;
-        var list = Fun_文章.获取热门集合();
-        var index = Fun.获取热门数量();
         for(var i=0;i<list.size();i++){
             if(i >= index){
                 break;
@@ -139,6 +154,7 @@ public class View_Hot extends View_Main{
             }
             linear.addView(view);
         }
+
         Fun.回到顶部(scrollView);
     }
 

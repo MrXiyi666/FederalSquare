@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -112,6 +112,7 @@ public class View_Home_Essay extends View_Main{
             textView.setTextIsSelectable(true);
             textView.setGravity(Gravity.CENTER);
             textView.setLayoutParams(params);
+            textView.setVisibility(View.VISIBLE);
             linear.addView(textView);
             return;
         }
@@ -119,6 +120,7 @@ public class View_Home_Essay extends View_Main{
             var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i));
             if(!Fun.StrBoolJSON(str)){
                 Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i));
+                Fun_文件.删除文件(able.app_path + "Account/Data/" + list.get(i));
                 continue;
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());

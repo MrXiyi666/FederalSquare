@@ -171,7 +171,7 @@ public class Fun_文章 {
         view.setOnLongClickListener(V->{
             switch (index){
                 case 0:
-                    删除窗口.删除本地文章窗户(activity, finalTime_txt + ".json", view);
+                    删除窗口.删除本地文章窗户(activity, finalTime_txt, view);
                     break;
                 case 1:
                     删除窗口.删除我的文章窗口(activity, finalTime_txt);
@@ -180,10 +180,10 @@ public class Fun_文章 {
                     删除窗口.删除收藏窗口(activity, finalTime_txt);
                     break;
                 case 3:
-                    删除窗口.删除所有文章窗口((View_Essay) activity, finalTime_txt);
+                    删除窗口.删除所有文章窗口(activity, finalTime_txt);
                     break;
                 case 4:
-                    删除窗口.删除所有收藏窗口((View_Collectin) activity, finalTime_txt);
+                    删除窗口.删除所有收藏窗口(activity, finalTime_txt);
                     break;
             }
             return true;

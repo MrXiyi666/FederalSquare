@@ -44,7 +44,7 @@ public class 删除窗口 {
 
         button_ok.setOnClickListener(V->{
             dialog.dismiss();
-            Fun_文件.删除文件(able.app_path + "Square_Data/" + name);
+            Fun_文件.删除文件(able.app_path + "Square_Data/" + name + ".json");
             able.view_square.linear.removeView(postView);
         });
 
@@ -126,7 +126,7 @@ public class 删除窗口 {
         dialog.show();
     }
 
-    public static void 删除所有收藏窗口(View_Collectin activity, String time){
+    public static void 删除所有收藏窗口(Activity activity, String time){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_delete_file, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
@@ -139,7 +139,7 @@ public class 删除窗口 {
 
         button_ok.setOnClickListener(V->{
             NetWork_我的所有收藏_删除 netWork_我的所有收藏_删除 = new NetWork_我的所有收藏_删除(activity);
-            netWork_我的所有收藏_删除.传递参数(Fun_账号.GetID(), time, activity);
+            netWork_我的所有收藏_删除.传递参数(Fun_账号.GetID(), time, (View_Collectin) activity);
             netWork_我的所有收藏_删除.start();
             dialog.dismiss();
         });
@@ -190,7 +190,7 @@ public class 删除窗口 {
         dialog.show();
     }
 
-    public static void 删除所有文章窗口(View_Essay activity, String time){
+    public static void 删除所有文章窗口(Activity activity, String time){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_delete_file, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
@@ -203,7 +203,7 @@ public class 删除窗口 {
 
         button_ok.setOnClickListener(V->{
             NetWork_我的所有文章_删除 netWork_我的所有文章_删除 = new NetWork_我的所有文章_删除(activity);
-            netWork_我的所有文章_删除.传递参数(Fun_账号.GetID(), time, activity);
+            netWork_我的所有文章_删除.传递参数(Fun_账号.GetID(), time, (View_Essay) activity);
             netWork_我的所有文章_删除.start();
             dialog.dismiss();
         });
