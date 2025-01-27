@@ -208,5 +208,5 @@
 
 <img src="http://federal-square.top/Image/qunliao.png" alt="群聊二维码" width="300" height="400">
 #
-# https://conversations.im/j/联邦广场官方群@conference.conversations.im
+https://conversations.im/j/联邦广场官方群@conference.conversations.im
 #
