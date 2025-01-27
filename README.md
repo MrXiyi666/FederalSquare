@@ -207,3 +207,6 @@
 # XMPP是开源的社交APP 和微信QQ比较相似 但是注重隐私安全 
 
 <img src="http://federal-square.top/Image/qunliao.png" alt="群聊二维码" width="300" height="400">
+#
+# https://conversations.im/j/联邦广场官方群@conference.conversations.im
+#
