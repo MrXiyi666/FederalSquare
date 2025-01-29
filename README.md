@@ -122,11 +122,15 @@
 # 更新说明
 #
 #
-# v5.8.2.7更新信息
-#
-主动释放内存 优化性能
+v5.8.2.8
 #
 修复了bug
+#
+引用实例 http://federal-square.top/
+#
+实例密码 federal-square
+#
+查看最新动态
 #
 #
 # 搭建教程
@@ -163,19 +167,6 @@
 #
 #
 ![image](https://img1.lookpic.cn/2025/01/06/jiaocheng.png)
-#
-#
-# 开发者域名
-#
-#
-#
-我的-引用列表 添加下面的实例地址
-#
-实例地址： http://federal-square.top/
-#
-实例密码： federal-square
-#
-可以获取开发者的更新信息 以及最新版本
 #
 #
 #
