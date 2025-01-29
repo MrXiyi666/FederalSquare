@@ -30,7 +30,7 @@
                     android:visibility="gone"
                     android:id="@+id/button_loading"
                     android:text="查看全部"
-                    android:background="@drawable/button_event_back_tran"
+                    android:background="@drawable/button_event_back"
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

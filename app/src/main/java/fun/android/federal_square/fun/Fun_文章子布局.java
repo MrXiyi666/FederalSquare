@@ -24,8 +24,6 @@ import fun.android.federal_square.window.查看视频窗口;
 
 public class Fun_文章子布局 {
     private String 后缀="";
-    private List<Boolean> 是否缓存 = new ArrayList<>();
-    private List<Boolean>是否正在加载 = new ArrayList<>();
     private View view;
     private Activity activity;
     private List<String> img_url;
@@ -79,8 +77,6 @@ public class Fun_文章子布局 {
         }
         for(int i=0;i<video_imageViews.size();i++){
             int finalI = i;
-            是否缓存.add(false);
-            是否正在加载.add(false);
             video_imageViews.get(i).setOnClickListener(V->{
                 后缀 = Fun_文件.获取后缀(img_url.get(finalI));
                 if(Fun.图片格式判断(后缀)){
@@ -124,33 +120,11 @@ public class Fun_文章子布局 {
     public void 加载图片(){
 
         for(int i=0;i<video_imageViews.size();i++){
-            if(是否缓存.get(i)){
-                continue;
-            }
-            if(是否正在加载.get(i)){
-               continue;
-            }
-            int finalI = i;
-            是否正在加载.set(i, true);
             if(Fun.图片格式判断(video_imageViews.get(i).后缀)){
                 Glide.with(activity)
                         .load(img_url.get(i))
                         .apply(able.requestOptions)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .listener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
-                                是否缓存.set(finalI, false);
-                                是否正在加载.set(finalI, false);
-                                return false;
-                            }
-
-                            @Override
-                            public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
-                                是否缓存.set(finalI, true);
-                                return false;
-                            }
-                        })
                         .into(video_imageViews.get(i));
                 continue;
             }
@@ -158,30 +132,12 @@ public class Fun_文章子布局 {
                     .asBitmap()
                     .load(img_url.get(i))
                     .apply(able.requestOptions)
-                    .listener(new RequestListener<>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Bitmap> target, boolean isFirstResource) {
-                            是否缓存.set(finalI, false);
-                            是否正在加载.set(finalI, false);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(@NonNull Bitmap resource, @NonNull Object model, Target<Bitmap> target, @NonNull DataSource dataSource, boolean isFirstResource) {
-                            是否缓存.set(finalI, true);
-                            return false;
-                        }
-                    })
                     .into(video_imageViews.get(i));
         }
-
-
     }
 
     public void 清除图片(){
         for(int i=0;i<video_imageViews.size();i++){
-            是否缓存.set(i, false);
-            是否正在加载.set(i, false);
             Glide.with(activity).clear(video_imageViews.get(i));
         }
     }

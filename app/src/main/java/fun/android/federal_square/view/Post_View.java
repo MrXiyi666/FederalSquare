@@ -48,7 +48,6 @@ public class Post_View extends LinearLayout {
             加载头像();
         }else if(visibility == View.INVISIBLE){
             fun_文章子布局.清除图片();
-            清除头像();
         }
     }
 
@@ -63,10 +62,6 @@ public class Post_View extends LinearLayout {
                     .override(Fun.DPToPX(activity, 40), Fun.DPToPX(activity, 40))
                     .into(avatar_img);
         }
-    }
-
-    private void 清除头像(){
-        Glide.with(activity).clear(avatar_img);
     }
 
     public void 清除图片(){

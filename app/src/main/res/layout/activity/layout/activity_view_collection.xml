@@ -61,7 +61,6 @@
     </ScrollView>
     <LinearLayout
         android:layout_alignParentBottom="true"
-
         android:id="@+id/square_menu"
         android:orientation="horizontal"
         android:layout_width="match_parent"

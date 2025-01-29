@@ -47,7 +47,7 @@
         android:stateListAnimator="@null"
         android:id="@+id/button_login"
         android:text="登录"
-        android:background="@drawable/button_event_back_tran"
+        android:background="@drawable/button_event_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.appcompat.widget.AppCompatButton
@@ -55,7 +55,7 @@
         android:layout_marginTop="10dp"
         android:id="@+id/button_enroll"
         android:text="注册"
-        android:background="@drawable/button_event_back_tran"
+        android:background="@drawable/button_event_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

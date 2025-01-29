@@ -9,7 +9,7 @@
         android:stateListAnimator="@null"
         android:id="@+id/button_network_disk"
         android:textColor="@color/black"
-        android:background="@drawable/button_event_back_tran"
+        android:background="@drawable/button_event_back"
         android:text="网盘资源"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -18,7 +18,7 @@
         android:stateListAnimator="@null"
         android:id="@+id/button_personal_information"
         android:textColor="@color/black"
-        android:background="@drawable/button_event_back_tran"
+        android:background="@drawable/button_event_back"
         android:text="个人信息"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -27,7 +27,7 @@
         android:stateListAnimator="@null"
         android:id="@+id/button_essay_system"
         android:textColor="@color/black"
-        android:background="@drawable/button_event_back_tran"
+        android:background="@drawable/button_event_back"
         android:text="文章设置"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -36,7 +36,7 @@
         android:stateListAnimator="@null"
         android:id="@+id/button_yinyong_list"
         android:textColor="@color/black"
-        android:background="@drawable/button_event_back_tran"
+        android:background="@drawable/button_event_back"
         android:text="引用列表"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

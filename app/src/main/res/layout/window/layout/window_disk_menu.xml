@@ -52,7 +52,7 @@
             android:id="@+id/button_edit_1"
             android:layout_marginStart="10dp"
             android:text="确认"
-            android:background="@drawable/button_event_back_tran"
+            android:background="@drawable/button_event_back"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     </LinearLayout>
