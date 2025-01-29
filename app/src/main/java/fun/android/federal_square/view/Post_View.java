@@ -61,6 +61,7 @@ public class Post_View extends LinearLayout {
                     .apply(able.requestOptions)
                     .override(Fun.DPToPX(activity, 40), Fun.DPToPX(activity, 40))
                     .into(avatar_img);
+
         }
     }
 

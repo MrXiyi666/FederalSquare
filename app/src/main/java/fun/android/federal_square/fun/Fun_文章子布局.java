@@ -1,18 +1,10 @@
 package fun.android.federal_square.fun;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.View;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.R;
@@ -118,7 +110,6 @@ public class Fun_文章子布局 {
     }
 
     public void 加载图片(){
-
         for(int i=0;i<video_imageViews.size();i++){
             if(Fun.图片格式判断(video_imageViews.get(i).后缀)){
                 Glide.with(activity)

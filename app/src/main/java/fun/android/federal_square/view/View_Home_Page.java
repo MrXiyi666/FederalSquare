@@ -65,14 +65,14 @@ public class View_Home_Page extends View_Main{
             Glide.with(activity_main)
                     .load(Fun_账号.GetAvatar_Url())
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .apply(able.requestOptions)
+                    .apply(able.原图_request)
                     .override(Fun.DPToPX(activity_main, 80))
                     .into(avatar_img);
         }
         if(!Fun_账号.GetBack_Url().isEmpty()){
             Glide.with(activity_main)
                     .load(Fun_账号.GetBack_Url())
-                    .apply(able.requestOptions)
+                    .apply(able.原图_request)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(back_img);
         }

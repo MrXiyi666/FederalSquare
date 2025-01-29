@@ -41,14 +41,9 @@ public class 查看图片窗口 {
         photoView.getLayoutParams().width = able.宽度;
         photoView.getLayoutParams().height = able.高度;
         photoView.setVisibility(View.VISIBLE);
-        RequestOptions requestOptions = new RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .skipMemoryCache(true)
-                .error(R.drawable.glide_shibai)
-                .fallback(R.drawable.glide_duqushibai);
         Glide.with(activity)
                 .load(url)
-                .apply(requestOptions)
+                .apply(able.原图_request)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .listener(new RequestListener<>() {
                     @Override
