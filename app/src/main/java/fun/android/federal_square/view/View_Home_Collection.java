@@ -115,9 +115,6 @@ public class View_Home_Collection extends View_Main{
             @Override
             public void onGlobalLayout() {
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                scrollView.post(()->{
-                    scrollView.scrollTo(0, 1);
-                });
                 Fun.回到顶部(scrollView);
             }
         });

@@ -124,9 +124,6 @@ public class View_Collectin extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                scrollView.post(()->{
-                    scrollView.scrollTo(0, 1);
-                });
                 Fun.回到顶部(scrollView);
             }
         });
@@ -166,9 +163,6 @@ public class View_Collectin extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                scrollView.post(()->{
-                    scrollView.scrollTo(0, 1);
-                });
                 Fun.回到顶部(scrollView);
             }
         });
@@ -209,9 +203,6 @@ public class View_Collectin extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                scrollView.post(()->{
-                    scrollView.scrollTo(0, 1);
-                });
                 Fun.回到顶部(scrollView);
             }
         });

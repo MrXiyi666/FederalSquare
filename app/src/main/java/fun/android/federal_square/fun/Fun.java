@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
@@ -408,8 +407,12 @@ public class Fun {
 
     public static void 回到顶部(ScrollView scrollView){
         scrollView.post(()->{
-           scrollView.smoothScrollTo(0,0);
+            scrollView.smoothScrollTo(0, 1);
+            scrollView.post(()->{
+                scrollView.scrollTo(0,0);
+            });
         });
+
     }
 
     public static void 回到底部(ScrollView scrollView){
