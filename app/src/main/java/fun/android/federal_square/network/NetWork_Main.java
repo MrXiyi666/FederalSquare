@@ -170,8 +170,9 @@ public class NetWork_Main {
                     Fun.mess(activity, "成功刷新");
                 }
             }catch (Exception e){
-               Log.w(class_name, e);
+               Log.w(class_name, "错误\n"+e);
                if(b_error){
+
                     Fun.mess(activity, "失败\n" + e);
                }
             }

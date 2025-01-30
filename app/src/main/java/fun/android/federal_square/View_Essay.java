@@ -28,7 +28,6 @@ public class View_Essay extends AppCompatActivity {
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;
     private int Post_Index = 0;
-    private boolean scrollView_update;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +63,6 @@ public class View_Essay extends AppCompatActivity {
 
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
             int screenHeight = scrollView.getHeight();
-            if(scrollY == 0){
-                scrollView_update = true;
-            }else{
-                scrollView_update = false;
-            }
             for (int i = 0; i < linear.getChildCount(); i++) {
                 Post_View view = (Post_View) linear.getChildAt(i);
                 int childTop = view.getTop();

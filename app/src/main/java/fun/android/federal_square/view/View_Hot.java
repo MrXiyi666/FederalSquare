@@ -25,9 +25,10 @@ public class View_Hot extends View_Main{
     private SwipeRefreshLayout swipe_layout;
     public LinearLayout linear;
     public ScrollView scrollView;
-    private int view_id=0;
     private boolean scrollView_Di = false;
     public int Post_Index = 0;
+
+    public int scrollView_Y=0;
     public View_Hot(MainActivity activity) {
         super(activity);
 
@@ -60,6 +61,7 @@ public class View_Hot extends View_Main{
         });
 
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            scrollView_Y = scrollY;
             var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){
@@ -75,7 +77,6 @@ public class View_Hot extends View_Main{
                     if(view.getVisibility() == View.INVISIBLE){
                         view.setVisibility(View.VISIBLE);
                     }
-                    view_id = i;
                 } else {
                     if(view.getVisibility() == View.VISIBLE){
                         view.setVisibility(View.INVISIBLE);
@@ -245,20 +246,9 @@ public class View_Hot extends View_Main{
     }
 
     public void 恢复界面(){
-        var 遍历数量=0;
-        var 当前编号 = 0;
-        if(view_id >= 10){
-            当前编号 = view_id - 10;
-        }
-        for(var i=0;i<linear.getChildCount();i++){
-            if(遍历数量>=10){
-                return;
-            }
-            var view = linear.getChildAt(当前编号);
-            view.setVisibility(View.VISIBLE);
-            遍历数量++;
-            当前编号++;
-        }
+        scrollView.post(()->{
+            scrollView.scrollTo(0, scrollView_Y);
+        });
     }
 
     public void 修改底部空间(){

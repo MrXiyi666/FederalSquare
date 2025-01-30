@@ -1,6 +1,7 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -37,8 +38,8 @@ public class View_Square extends View_Main{
     public TextView di_title;
     public boolean scrollView_Down_Y = false;
     private Thread time_thread=null;
-    public int view_id;
     public int Post_Index = 0;
+
 
     public int scrollView_Y=0;
 
@@ -80,6 +81,7 @@ public class View_Square extends View_Main{
             swipe_layout.setRefreshing(false);
         });
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            scrollView_Y = scrollY;
             int screenHeight = scrollView.getHeight(); // 获取 ScrollView 的高度
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){
@@ -95,7 +97,6 @@ public class View_Square extends View_Main{
                     if(view.getVisibility() == View.INVISIBLE){
                         view.setVisibility(View.VISIBLE);
                     }
-                    view_id = i;
                 } else {
                     if(view.getVisibility() == View.VISIBLE){
                         view.setVisibility(View.INVISIBLE);
@@ -324,20 +325,9 @@ public class View_Square extends View_Main{
     }
 
     public void 恢复界面(){
-        var 遍历数量=0;
-        var 当前编号 = 0;
-        if(view_id >= 10){
-            当前编号 = view_id - 10;
-        }
-        for(var i=0;i<linear.getChildCount();i++){
-            if(遍历数量>=10){
-                return;
-            }
-            var view = linear.getChildAt(当前编号);
-            view.setVisibility(View.VISIBLE);
-            遍历数量++;
-            当前编号++;
-        }
+        scrollView.post(()->{
+            scrollView.scrollTo(0, scrollView_Y);
+        });
     }
     public void 修改底部空间(){
         var params = di_title.getLayoutParams();

@@ -22,9 +22,7 @@ public final class MyAppGlideModule extends AppGlideModule{
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         super.applyOptions(context, builder);
-        int diskCacheSize = 1024 * 1024 * 10000;
-
-        builder.setDiskCache(new ExternalPreferredCacheDiskCacheFactory(context, "glide_cache", diskCacheSize));
+        builder.setDiskCache(new ExternalPreferredCacheDiskCacheFactory(context, "glide_cache", 10000L * 1024 * 1024));
     }
 
     @Override
