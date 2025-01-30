@@ -1,9 +1,9 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,34 +60,31 @@ public class View_Collectin extends AppCompatActivity {
         return_icon.setOnClickListener(V->{
             finish();
         });
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            var scrollBounds = new Rect();
-            scrollView.getHitRect(scrollBounds);
+
+        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            int screenHeight = scrollView.getHeight();
             if(scrollY == 0){
                 scrollView_update = true;
             }else {
                 scrollView_update = false;
             }
-            for(var i=0;i<linear.getChildCount();i++){
-                var view = (Post_View)linear.getChildAt(i);
-                if (view.getLocalVisibleRect(scrollBounds)) {
+            for (int i = 0; i < linear.getChildCount(); i++) {
+                Post_View view = (Post_View) linear.getChildAt(i);
+                int childTop = view.getTop();
+                int childBottom = view.getBottom();
+                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
                     if(view.getVisibility() == View.INVISIBLE){
                         view.setVisibility(View.VISIBLE);
-                    }
-                    // 子控件至少有一个像素在可视范围内
-                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
-                        // 子控件的可见区域是否超过了50%
                     }
                 } else {
                     if(view.getVisibility() == View.VISIBLE){
                         view.setVisibility(View.INVISIBLE);
                     }
-                    // 子控件完全不在可视范围内
                 }
             }
         });
         button_top.setOnClickListener(V->{
-            scrollView.fullScroll(View.FOCUS_UP);
+            scrollView.smoothScrollTo(0,0);
         });
         button_up.setOnClickListener(V->{
             上一页();
@@ -123,7 +120,16 @@ public class View_Collectin extends AppCompatActivity {
             }
             linear.addView(view);
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
     public void 上一页(){
         var list = Fun_文章.获取所有收藏集合();
@@ -156,7 +162,16 @@ public class View_Collectin extends AppCompatActivity {
             linear.addView(view);
             遍历数量++;
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
     public void 下一页(){
         if(linear.getChildCount() == 0){
@@ -190,7 +205,16 @@ public class View_Collectin extends AppCompatActivity {
             linear.addView(view);
             遍历数量++;
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
     @Override
     protected void onDestroy() {

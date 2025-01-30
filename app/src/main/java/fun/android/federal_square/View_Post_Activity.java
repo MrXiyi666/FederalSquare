@@ -1,7 +1,6 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +29,7 @@ import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_查看文章_评论发布;
+import fun.android.federal_square.view.Post_View;
 import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
@@ -232,20 +232,20 @@ public class View_Post_Activity extends AppCompatActivity {
                 edit_text.setText("");
             });
         }
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            Rect scrollBounds = new Rect();
-            scrollView.getHitRect(scrollBounds);
-            for(int i=0;i<linear.getChildCount();i++){
+        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            int screenHeight = scrollView.getHeight();
+            for (int i = 0; i < linear.getChildCount(); i++) {
                 View view = linear.getChildAt(i);
-                if (view.getLocalVisibleRect(scrollBounds)) {
-                    view.setVisibility(View.VISIBLE);
-                    // 子控件至少有一个像素在可视范围内
-                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
-                        // 子控件的可见区域是否超过了50%
+                int childTop = view.getTop();
+                int childBottom = view.getBottom();
+                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
+                    if(view.getVisibility() == View.INVISIBLE){
+                        view.setVisibility(View.VISIBLE);
                     }
                 } else {
-                    view.setVisibility(View.INVISIBLE);
-
+                    if(view.getVisibility() == View.VISIBLE){
+                        view.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });

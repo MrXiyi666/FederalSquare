@@ -1,10 +1,9 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -80,39 +79,30 @@ public class View_Square extends View_Main{
             }
             swipe_layout.setRefreshing(false);
         });
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            var scrollBounds = new Rect();
-            scrollView.getHitRect(scrollBounds);
+        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            int screenHeight = scrollView.getHeight(); // 获取 ScrollView 的高度
             var childHeight = scrollView.getChildAt(0).getHeight();
-            var scrollViewHeight = scrollView.getHeight();
-            scrollView_Y = scrollY;
-            if(scrollY + scrollViewHeight >= childHeight){
+            if(scrollY + screenHeight >= childHeight){
                 scrollView_Down_Y = true;
             }else{
                 scrollView_Down_Y = false;
             }
-            for(var i=0;i<linear.getChildCount();i++){
-                var view = (Post_View)linear.getChildAt(i);
-                if (view.getLocalVisibleRect(scrollBounds)) {
+            for (int i = 0; i < linear.getChildCount(); i++) {
+                Post_View view = (Post_View) linear.getChildAt(i); // 获取 LinearLayout 的子视图
+                int childTop = view.getTop(); // 获取子视图的顶部位置
+                int childBottom = view.getBottom(); // 获取子视图的底部位置
+                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
                     if(view.getVisibility() == View.INVISIBLE){
                         view.setVisibility(View.VISIBLE);
                     }
                     view_id = i;
-                    // 子控件至少有一个像素在可视范围内
-                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
-                    // 子控件的可见区域是否超过了50%
-                    }
                 } else {
                     if(view.getVisibility() == View.VISIBLE){
                         view.setVisibility(View.INVISIBLE);
                     }
-                    // 子控件完全不在可视范围内
                 }
             }
         });
-
-
-
         button_add.setOnClickListener(V->{
             if(!Fun_账号.GetID().isEmpty()){
                 var _发表文章窗口 = new 发表文章窗口();
@@ -221,14 +211,19 @@ public class View_Square extends View_Main{
                 continue;
             }
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            if(linear.getChildCount() >= 10){
-                view.setVisibility(View.INVISIBLE);
-            }else{
-                view.setVisibility(View.VISIBLE);
-            }
+            view.setVisibility(View.INVISIBLE);
             linear.addView(view);
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
     public void 上一页(){
@@ -267,15 +262,20 @@ public class View_Square extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            if(linear.getChildCount() >= 10){
-                view.setVisibility(View.INVISIBLE);
-            }else{
-                view.setVisibility(View.VISIBLE);
-            }
+            view.setVisibility(View.INVISIBLE);
             linear.addView(view);
             遍历数量++;
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
     public void 下一页(){
@@ -316,15 +316,20 @@ public class View_Square extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            if(linear.getChildCount() >= 10){
-                view.setVisibility(View.INVISIBLE);
-            }else{
-                view.setVisibility(View.VISIBLE);
-            }
+            view.setVisibility(View.INVISIBLE);
             linear.addView(view);
             遍历数量++;
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
     public void 恢复界面(){

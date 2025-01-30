@@ -51,6 +51,10 @@ public class Post_View extends LinearLayout {
         }
     }
 
+    public void 加载图片(){
+        fun_文章子布局.加载图片();
+        加载头像();
+    }
     private void 加载头像(){
         if(avatar_url.isEmpty()){
             avatar_img.setImageResource(R.mipmap.ic_launcher_round);

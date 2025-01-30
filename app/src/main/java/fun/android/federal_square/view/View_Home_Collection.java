@@ -3,10 +3,9 @@ package fun.android.federal_square.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -57,24 +56,21 @@ public class View_Home_Collection extends View_Main{
             var intent = new Intent(activity_main, View_Collectin.class);
             activity_main.startActivity(intent);
         });
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            var scrollBounds = new Rect();
-            scrollView.getHitRect(scrollBounds);
-            for(var i=0;i<linear.getChildCount();i++){
-                var view = linear.getChildAt(i);
-                if (view.getLocalVisibleRect(scrollBounds)) {
+
+        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            int screenHeight = scrollView.getHeight();
+            for (int i = 0; i < linear.getChildCount(); i++) {
+                Post_View view = (Post_View) linear.getChildAt(i);
+                int childTop = view.getTop();
+                int childBottom = view.getBottom();
+                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
                     if(view.getVisibility() == View.INVISIBLE){
                         view.setVisibility(View.VISIBLE);
-                    }
-                    // 子控件至少有一个像素在可视范围内
-                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
-                        // 子控件的可见区域是否超过了50%
                     }
                 } else {
                     if(view.getVisibility() == View.VISIBLE){
                         view.setVisibility(View.INVISIBLE);
                     }
-                    // 子控件完全不在可视范围内
                 }
             }
         });
@@ -115,6 +111,16 @@ public class View_Home_Collection extends View_Main{
         if(linear.getChildCount() >= 10){
             button_loading.setVisibility(View.VISIBLE);
         }
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
 

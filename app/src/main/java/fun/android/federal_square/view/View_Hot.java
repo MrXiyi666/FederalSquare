@@ -1,17 +1,14 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -61,33 +58,28 @@ public class View_Hot extends View_Main{
             var netWork_读取_热门 = new NetWork_读取热门(activity_main);
             netWork_读取_热门.start();
         });
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            var scrollBounds = new Rect();
-            scrollView.getHitRect(scrollBounds);
+
+        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();
-            var scrollViewHeight = scrollView.getHeight();
-            if(scrollY + scrollViewHeight >= childHeight){
+            if(scrollY + screenHeight >= childHeight){
                 scrollView_Di = true;
             }else{
                 scrollView_Di = false;
             }
-            for(var i=0;i<linear.getChildCount();i++){
-                var view = linear.getChildAt(i);
-                if (view.getLocalVisibleRect(scrollBounds)) {
+            for (int i = 0; i < linear.getChildCount(); i++) {
+                Post_View view = (Post_View) linear.getChildAt(i);
+                int childTop = view.getTop();
+                int childBottom = view.getBottom();
+                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
                     if(view.getVisibility() == View.INVISIBLE){
                         view.setVisibility(View.VISIBLE);
                     }
                     view_id = i;
-                    // 子控件至少有一个像素在可视范围内
-                    if (scrollBounds.bottom >= (view.getHeight() / 2)) {
-                        // 子控件的可见区域是否超过了50%
-
-                    }
                 } else {
                     if(view.getVisibility() == View.VISIBLE){
                         view.setVisibility(View.INVISIBLE);
                     }
-                    // 子控件完全不在可视范围内
                 }
             }
         });
@@ -154,8 +146,16 @@ public class View_Hot extends View_Main{
             }
             linear.addView(view);
         }
-
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
     public void 上一页(){
@@ -193,7 +193,16 @@ public class View_Hot extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
     public void 下一页(){
@@ -232,7 +241,16 @@ public class View_Hot extends View_Main{
             linear.addView(view);
             遍历数量++;
         }
-        Fun.回到顶部(scrollView);
+        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                scrollView.post(()->{
+                    scrollView.scrollTo(0, 1);
+                });
+                Fun.回到顶部(scrollView);
+            }
+        });
     }
 
     public void 恢复界面(){
