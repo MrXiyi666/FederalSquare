@@ -2,6 +2,8 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import android.util.Log;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.able;
@@ -68,22 +70,26 @@ public class NetWork_Main {
                         .post(formBody)
                         .build();
                 Response response = able.okHttpClient.newCall(request).execute();
-                if(!response.isSuccessful()){
-                    Log.w(class_name, url + " isSuccessfulnull");
-                    Fun.mess(activity, url + "isSuccessfulnull");
-                    throw new Exception("跳出");
+                // 检查响应是否成功
+                if (!response.isSuccessful()) {
+                    Log.w(class_name, url + "请求失败");
+                    Fun.mess(activity, url + "请求失败");
+                    throw new Exception("请求失败");
                 }
-                if(response.body() == null){
-                    Log.w(class_name, url + "response.body() null");
-                    Fun.mess(activity, url + "response.body() null");
-                    throw new Exception("跳出");
+
+                // 检查响应内容是否为空
+                if (response.body() == null) {
+                    Log.w(class_name, url + "响应体为空");
+                    Fun.mess(activity, url + "响应体为空");
+                    throw new Exception("响应体为空");
                 }
                 String string=response.body().string();
                 response.close();
-                if(string.isEmpty()){
-                    Fun.mess(activity, url + "string null");
-                    Log.w(class_name, url + "string null");
-                    throw new Exception("跳出");
+                // 检查响应内容是否为空
+                if (string.isEmpty()) {
+                    Fun.mess(activity, url + "响应内容为空");
+                    Log.w(class_name, url + "响应内容为空");
+                    throw new Exception("响应内容为空");
                 }
                 if(string.equals("Null_PassWord")){
                     Fun.mess(activity, url + "\n没有密码");
@@ -95,71 +101,11 @@ public class NetWork_Main {
                 }
 
                 事件(string);
-                for(String name : down_list_data){
-                    FormBody d_formBody = new FormBody.Builder()
-                            .add("PassWord", password)
-                            .add("path", "./Square_Data/" + name)
-                            .build();
-                    Request d_request = new Request.Builder()
-                            .url(this.url + "federal-square/Read_Txt.php")
-                            .post(d_formBody)
-                            .build();
-                    Response d_response = able.okHttpClient.newCall(d_request).execute();
-                    if(!d_response.isSuccessful()){
-                        Log.w(class_name + "下载", this.url + "isSuccessful null");
-                        continue;
-                    }
-                    if(d_response.body() == null){
-                        Log.w(class_name + "下载", this.url + "response.body() null");
-                        continue;
-                    }
-                    String d_string=d_response.body().string();
-                    d_response.close();
-                    if(d_string.isEmpty()){
-                        Log.w(class_name + "下载", "string null");
-                        continue;
-                    }
-                    if(d_string.equals("no_file")){
-                        Log.w(class_name + "下载", "no_file");
-                        continue;
-                    }
-                    if(!Fun.StrBoolJSON(d_string)){
-                        continue;
-                    }
-                    Fun_文件.写入文件(able.app_path + "Square_Data/" + name, d_string);
+                if(!down_list_data.isEmpty()){
+                    下载广场内容();
                 }
-                for(String name : down_list_collection_data){
-                    FormBody d_formBody = new FormBody.Builder()
-                            .add("PassWord", password)
-                            .add("path", "./Account/" + Fun_账号.GetID() + "/Collection/" + name)
-                            .build();
-                    Request d_request = new Request.Builder()
-                            .url(this.url + "federal-square/Read_Txt.php")
-                            .post(d_formBody)
-                            .build();
-                    Response d_response = able.okHttpClient.newCall(d_request).execute();
-                    if(!d_response.isSuccessful()){
-                        Log.w(class_name + "下载", "null");
-                        continue;
-                    }
-                    if(d_response.body() == null){
-                        Log.w(class_name + "下载", "null");
-                        continue;
-                    }
-                    String d_string=d_response.body().string();
-                    d_response.close();
-                    if(d_string.isEmpty()){
-                        Log.w(class_name + "下载", "null");
-                        continue;
-                    }
-                    if(d_string.equals("no_file")){
-                        Log.w(class_name + "下载", "no_file");
-                        continue;
-                    }
-                    if(!Fun.StrBoolJSON(d_string)){
-                        continue;
-                    }
-                    Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
+                if(!down_list_collection_data.isEmpty()){
+                    下载收藏内容();
                 }
                 if(b_update){
                     able.handler.post(()->{
@@ -172,12 +118,84 @@ public class NetWork_Main {
             }catch (Exception e){
                Log.w(class_name, "错误\n"+e);
                if(b_error){
-
                     Fun.mess(activity, "失败\n" + e);
                }
+            }finally {
+                关闭等待窗口();
             }
-            关闭等待窗口();
         }).start();
+    }
+
+    public void 下载广场内容() throws IOException {
+        for(String name : down_list_data){
+            FormBody d_formBody = new FormBody.Builder()
+                    .add("PassWord", password)
+                    .add("path", "./Square_Data/" + name)
+                    .build();
+            Request d_request = new Request.Builder()
+                    .url(this.url + "federal-square/Read_Txt.php")
+                    .post(d_formBody)
+                    .build();
+            Response d_response = able.okHttpClient.newCall(d_request).execute();
+            if(!d_response.isSuccessful()){
+                Log.w(class_name + "下载", this.url + "isSuccessful null");
+                continue;
+            }
+            if(d_response.body() == null){
+                Log.w(class_name + "下载", this.url + "response.body() null");
+                continue;
+            }
+            String d_string=d_response.body().string();
+            d_response.close();
+            if(d_string.isEmpty()){
+                Log.w(class_name + "下载", "string null");
+                continue;
+            }
+            if(d_string.equals("no_file")){
+                Log.w(class_name + "下载", "no_file");
+                continue;
+            }
+            if(!Fun.StrBoolJSON(d_string)){
+                continue;
+            }
+            Fun_文件.写入文件(able.app_path + "Square_Data/" + name, d_string);
+        }
+    }
+
+    public void 下载收藏内容() throws IOException {
+        for(String name : down_list_collection_data){
+            FormBody d_formBody = new FormBody.Builder()
+                    .add("PassWord", password)
+                    .add("path", "./Account/" + Fun_账号.GetID() + "/Collection/" + name)
+                    .build();
+            Request d_request = new Request.Builder()
+                    .url(this.url + "federal-square/Read_Txt.php")
+                    .post(d_formBody)
+                    .build();
+            Response d_response = able.okHttpClient.newCall(d_request).execute();
+            if(!d_response.isSuccessful()){
+                Log.w(class_name + "下载", "null");
+                continue;
+            }
+            if(d_response.body() == null){
+                Log.w(class_name + "下载", "null");
+                continue;
+            }
+            String d_string=d_response.body().string();
+            d_response.close();
+            if(d_string.isEmpty()){
+                Log.w(class_name + "下载", "null");
+                continue;
+            }
+            if(d_string.equals("no_file")){
+                Log.w(class_name + "下载", "no_file");
+                continue;
+            }
+            if(!Fun.StrBoolJSON(d_string)){
+                continue;
+            }
+            Fun_文件.写入文件(able.app_path + "Account/Collection/" + name, d_string);
+        }
     }
 
     private void 关闭等待窗口(){

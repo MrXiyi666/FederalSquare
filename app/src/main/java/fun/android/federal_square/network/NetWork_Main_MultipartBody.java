@@ -94,8 +94,9 @@ public class NetWork_Main_MultipartBody {
                 able.handler.post(()->{
                     失败();
                 });
+            }finally {
+                关闭等待窗口();
             }
-            关闭等待窗口();
         }).start();
     }
 
