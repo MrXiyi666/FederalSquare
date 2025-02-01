@@ -409,17 +409,11 @@ public class Fun {
         return Disk_Index;
     }
 
-    public static void 回到顶部(ScrollView scrollView) {
-        scrollView.post(()->{
-            scrollView.smoothScrollTo(0, 1);
-            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                if(scrollView.getScrollY() == 1){
-                    scrollView.scrollTo(0, 0);
-                }
-            });
-        });
-    }
+    private static boolean isScrollingToTop = false;
 
+    public static void 回到顶部(ScrollView scrollView) {
+        scrollView.post(() -> scrollView.smoothScrollTo(0, 1));
+    }
     public static void 回到底部(ScrollView scrollView){
         scrollView.post(()->{
             View contentView = scrollView.getChildAt(0);

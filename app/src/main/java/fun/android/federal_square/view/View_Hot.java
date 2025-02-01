@@ -61,6 +61,9 @@ public class View_Hot extends View_Main{
         });
 
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            if(scrollY == 1){
+                scrollView.scrollTo(0, 0);
+            }
             scrollView_Y = scrollY;
             var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();

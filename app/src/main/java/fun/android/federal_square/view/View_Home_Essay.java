@@ -61,6 +61,9 @@ public class View_Home_Essay extends View_Main{
 
 
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+            if(scrollY == 1){
+                scrollView.scrollTo(0, 0);
+            }
             int screenHeight = scrollView.getHeight();
             for (int i = 0; i < linear.getChildCount(); i++) {
                 Post_View view = (Post_View) linear.getChildAt(i);
