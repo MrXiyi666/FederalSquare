@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -410,31 +411,13 @@ public class Fun {
 
     public static void 回到顶部(ScrollView scrollView) {
         scrollView.post(()->{
-            Handler handler = new Handler();
             scrollView.smoothScrollTo(0, 1);
-            Runnable scrollCheckRunnable = new Runnable() {
-                private int lastScrollY = -1;
-                @Override
-                public void run() {
-                    int currentScrollY = scrollView.getScrollY();
-                    if (lastScrollY == currentScrollY) {
-                        // 滚动停止
-                        scrollView.scrollTo(0,0);
-                    } else {
-                        lastScrollY = currentScrollY;
-                        // 继续检查，间隔 100ms
-                        handler.postDelayed(this, 10);
-                    }
-                }
-            };
-
-// 监听滚动变化
             scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                handler.removeCallbacks(scrollCheckRunnable);
-                handler.postDelayed(scrollCheckRunnable, 10);
+                if(scrollView.getScrollY() == 1){
+                    scrollView.scrollTo(0, 0);
+                }
             });
         });
-
     }
 
     public static void 回到底部(ScrollView scrollView){
