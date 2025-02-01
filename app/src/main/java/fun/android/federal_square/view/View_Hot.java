@@ -1,6 +1,7 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -143,12 +144,19 @@ public class View_Hot extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
-            view.setVisibility(View.VISIBLE);
+            view.setVisibility(View.INVISIBLE);
             linear.addView(view);
         }
         linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                for(int i=0; i<linear.getChildCount(); i++){
+                    Rect rect = new Rect();
+                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
+                        // View 全局可见区域为 rect
+                        linear.getChildAt(i).setVisibility(View.VISIBLE);
+                    }
+                }
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 Fun.回到顶部(scrollView);
             }
@@ -182,13 +190,20 @@ public class View_Hot extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
-            view.setVisibility(View.VISIBLE);
+            view.setVisibility(View.INVISIBLE);
             linear.addView(view);
             遍历数量++;
         }
         linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                for(int i=0; i<linear.getChildCount(); i++){
+                    Rect rect = new Rect();
+                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
+                        // View 全局可见区域为 rect
+                        linear.getChildAt(i).setVisibility(View.VISIBLE);
+                    }
+                }
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 Fun.回到顶部(scrollView);
             }
@@ -223,13 +238,19 @@ public class View_Hot extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
-            view.setVisibility(View.VISIBLE);
+            view.setVisibility(View.INVISIBLE);
             linear.addView(view);
             遍历数量++;
         }
         linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                for(int i=0; i<linear.getChildCount(); i++){
+                    Rect rect = new Rect();
+                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
+                        linear.getChildAt(i).setVisibility(View.VISIBLE);
+                    }
+                }
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 Fun.回到顶部(scrollView);
             }

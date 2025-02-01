@@ -409,8 +409,6 @@ public class Fun {
         return Disk_Index;
     }
 
-    private static boolean isScrollingToTop = false;
-
     public static void 回到顶部(ScrollView scrollView) {
         scrollView.post(() -> scrollView.smoothScrollTo(0, 1));
     }
