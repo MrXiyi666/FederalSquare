@@ -111,7 +111,7 @@ public class View_Essay extends AppCompatActivity {
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(this, post_data, 3);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
         }
         linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -145,7 +145,7 @@ public class View_Essay extends AppCompatActivity {
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(this, post_data, 4);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
             遍历数量++;
         }
@@ -181,7 +181,7 @@ public class View_Essay extends AppCompatActivity {
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(this, post_data, 4);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
             遍历数量++;
         }

@@ -172,6 +172,7 @@ public class View_Square extends View_Main{
         Post_Index=0;
         var url = Fun.获取域名();
         var 所有文章 = Fun_文章.获取广场所有集合();
+
         var index = Fun.获取广场文章数量();
         if(url.isEmpty()){
             return;
@@ -215,7 +216,7 @@ public class View_Square extends View_Main{
                 continue;
             }
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
         }
         linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -263,7 +264,7 @@ public class View_Square extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
             遍历数量++;
         }
@@ -314,7 +315,7 @@ public class View_Square extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
             遍历数量++;
         }

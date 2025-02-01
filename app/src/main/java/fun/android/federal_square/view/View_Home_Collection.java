@@ -104,7 +104,7 @@ public class View_Home_Collection extends View_Main{
             }
             List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
             var view = Fun_文章.Create_Post_View(activity_main, post_data, 2);
-            view.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
             linear.addView(view);
         }
         if(linear.getChildCount() >= 10){
