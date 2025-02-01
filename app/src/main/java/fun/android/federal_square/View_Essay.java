@@ -187,6 +187,7 @@ public class View_Essay extends AppCompatActivity {
             public void onGlobalLayout() {
                 linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 Fun.回到顶部(scrollView);
+
             }
         });
     }

@@ -8,7 +8,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -405,11 +408,30 @@ public class Fun {
         return Disk_Index;
     }
 
-    public static void 回到顶部(ScrollView scrollView){
+    public static void 回到顶部(ScrollView scrollView) {
         scrollView.post(()->{
+            Handler handler = new Handler();
             scrollView.smoothScrollTo(0, 1);
-            scrollView.post(()->{
-                scrollView.scrollTo(0,0);
+            Runnable scrollCheckRunnable = new Runnable() {
+                private int lastScrollY = -1;
+                @Override
+                public void run() {
+                    int currentScrollY = scrollView.getScrollY();
+                    if (lastScrollY == currentScrollY) {
+                        // 滚动停止
+                        scrollView.scrollTo(0,0);
+                    } else {
+                        lastScrollY = currentScrollY;
+                        // 继续检查，间隔 100ms
+                        handler.postDelayed(this, 10);
+                    }
+                }
+            };
+
+// 监听滚动变化
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                handler.removeCallbacks(scrollCheckRunnable);
+                handler.postDelayed(scrollCheckRunnable, 10);
             });
         });
 
