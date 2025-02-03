@@ -143,6 +143,7 @@
         </LinearLayout>
     </LinearLayout>
     <TextView
+        android:id="@+id/di_xian"
         android:layout_marginTop="10dp"
         android:background="#f2f3f7"
         android:layout_width="match_parent"

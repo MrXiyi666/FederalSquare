@@ -8,26 +8,43 @@ import java.util.List;
 
 public class Main_Pager_Adapter extends PagerAdapter {
 
-    private final List<View> pager_view;
-    public Main_Pager_Adapter(List<View> p){
-        pager_view = p;
+    private final List<View> mViews;
+
+    public Main_Pager_Adapter(@NonNull List<View> views) {
+        mViews = views;
     }
+
     @Override
     public int getCount() {
-        return pager_view.size();
+        return mViews.size();
     }
+
     @Override
-    public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
-        container.removeView(pager_view.get(position));
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((View) object);
     }
+
     @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        container.addView(pager_view.get(position));
-        return pager_view.get(position);
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        final View view = mViews.get(position);
+        // 防止重复添加已有父视图的View
+        final ViewGroup parent = (ViewGroup) view.getParent();
+        if (parent != null) {
+            parent.removeView(view);
+        }
+        container.addView(view);
+        return view;
     }
+
     @Override
-    public boolean isViewFromObject(@NonNull View arg0, @NonNull Object arg1) {
-        return arg0 == arg1;
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view == object;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        // 当数据变化时自动更新位置信息
+        return mViews.contains(object) ? mViews.indexOf(object) : POSITION_NONE;
     }
 }

@@ -1,17 +1,15 @@
 package fun.android.federal_square;
 
 import android.app.Application;
-
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.database.ExoDatabaseProvider;
 import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor;
 import androidx.media3.datasource.cache.SimpleCache;
-
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
-import okhttp3.CookieJar;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
@@ -21,7 +19,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        able.app_path = this.getExternalFilesDir("").getPath() + "/";
+        able.app_path = Objects.requireNonNull(this.getExternalFilesDir("")).getPath() + "/";
         //able.app_path = Objects.requireNonNull(this.getFilesDir()).getPath() + "/";
         Fun_文件.创建文件夹(able.app_path + "image_cache");
         Fun_文件.创建文件夹(able.app_path + "cache");

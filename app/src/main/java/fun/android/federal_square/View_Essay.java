@@ -1,11 +1,8 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
@@ -23,7 +19,6 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
-import fun.android.federal_square.view.Post_View;
 
 public class View_Essay extends AppCompatActivity {
     private ImageView return_icon;

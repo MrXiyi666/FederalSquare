@@ -156,12 +156,20 @@ public class DiskActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(gridView!=null){
+        // 释放GridView资源
+        if(gridView != null){
+            // 先清除Adapter引用
             gridView.setAdapter(null);
+            // 可选：移除所有子视图
+            gridView.removeAllViewsInLayout();
+            gridView = null;
         }
+
+        // 释放Adapter资源
         if(disk_grid_adapter != null){
-            disk_grid_adapter.notifyDataSetChanged();
-            disk_grid_adapter= null;
+            // 执行自定义清理方法
+            disk_grid_adapter.clearResources();
+            disk_grid_adapter = null;
         }
     }
 }

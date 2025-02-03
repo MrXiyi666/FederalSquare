@@ -233,18 +233,26 @@ public class View_Post_Activity extends AppCompatActivity {
             });
         }
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
-            int screenHeight = scrollView.getHeight();
-            for (int i = 0; i < linear.getChildCount(); i++) {
-                View view = linear.getChildAt(i);
-                int childTop = view.getTop();
-                int childBottom = view.getBottom();
-                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
-                    if(view.getVisibility() == View.INVISIBLE){
-                        view.setVisibility(View.VISIBLE);
+            int scrollViewHeight = scrollView.getHeight();
+            int linearCount = linear.getChildCount();
+
+            for (int i = 0; i < linearCount; i++) {
+                View childView = linear.getChildAt(i);
+                // 计算子视图是否在屏幕范围内
+                int childY = (int) childView.getY();
+                int childHeight = childView.getHeight();
+
+                boolean isVisible = (childY + childHeight > scrollY) && (childY < scrollY + scrollViewHeight);
+                int currentVisibility = childView.getVisibility();
+
+                // 根据计算结果更新可见性
+                if (isVisible) {
+                    if (currentVisibility != View.VISIBLE) {
+                        childView.setVisibility(View.VISIBLE);
                     }
                 } else {
-                    if(view.getVisibility() == View.VISIBLE){
-                        view.setVisibility(View.INVISIBLE);
+                    if (currentVisibility != View.INVISIBLE) {
+                        childView.setVisibility(View.INVISIBLE);
                     }
                 }
             }
@@ -255,9 +263,8 @@ public class View_Post_Activity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         for(int i=0; i<linear.getChildCount(); i++){
-            if(linear.getChildAt(i) instanceof Video_ImageView){
-                ((Video_ImageView) linear.getChildAt(i)).setImageBitmap(null);
-                ((Video_ImageView) linear.getChildAt(i)).setImageDrawable(null);
+            if(linear.getChildAt(i) instanceof Video_ImageView imageView){
+                imageView.setImageBitmap(null);
             }
         }
         linear.removeAllViews();

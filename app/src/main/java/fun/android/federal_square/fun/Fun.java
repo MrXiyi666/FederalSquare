@@ -317,7 +317,6 @@ public class Fun {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.TOP);
-
         return dialog;
     }
 
@@ -414,10 +413,13 @@ public class Fun {
 
     public static void 回到顶部(ScrollView scrollView, LinearLayout linear, Activity activity) {
         activity.runOnUiThread(() -> {
-            scrollView.smoothScrollTo(0, 0);
+            scrollView.post(()->{
+                scrollView.smoothScrollTo(0, 0);
+            });
         });
         刷新当前文章(activity, linear, scrollView);
     }
+
     public static void 回到底部(ScrollView scrollView){
         scrollView.post(()->{
             View contentView = scrollView.getChildAt(0);
@@ -426,23 +428,35 @@ public class Fun {
         });
     }
 
-    public static void 刷新当前文章(Activity activity, LinearLayout linear, ScrollView scrollView){
-        activity.runOnUiThread(()->{
+    public static void 刷新当前文章(Activity activity, LinearLayout linear, ScrollView scrollView) {
+        activity.runOnUiThread(() -> {
             scrollView.post(() -> {
-                int scrollY = scrollView.getScrollY(); // 获取当前滚动位置
-                for (int i = 0; i < linear.getChildCount(); i++) {
+                int scrollY = scrollView.getScrollY();
+                int scrollViewHeight = scrollView.getHeight();
+                int linearCount = linear.getChildCount();
+
+                for (int i = 0; i < linearCount; i++) {
                     View childView = linear.getChildAt(i);
                     if (childView instanceof Post_View postView) {
-                        int childY = (int) postView.getY(); // 获取子视图的 y 坐标
+                        // 特殊处理最后一个子视图（去掉下划线）
+                        if (i == linearCount - 1) {
+                            postView.底线消失();
+                        }
+
+                        // 计算子视图是否在屏幕范围内
+                        int childY = (int) postView.getY();
                         int childHeight = postView.getHeight();
 
-                        // 判断子视图是否在屏幕范围内
-                        if (childY + childHeight > scrollY && childY < scrollY + scrollView.getHeight()) {
-                            if (postView.getVisibility() != View.VISIBLE) {
+                        boolean isVisible = (childY + childHeight > scrollY) && (childY < scrollY + scrollViewHeight);
+                        int currentVisibility = postView.getVisibility();
+
+                        // 根据计算结果更新可见性
+                        if (isVisible) {
+                            if (currentVisibility != View.VISIBLE) {
                                 postView.setVisibility(View.VISIBLE);
                             }
                         } else {
-                            if (postView.getVisibility() != View.INVISIBLE) {
+                            if (currentVisibility != View.INVISIBLE) {
                                 postView.setVisibility(View.INVISIBLE);
                             }
                         }
@@ -450,6 +464,5 @@ public class Fun {
                 }
             });
         });
-
     }
 }

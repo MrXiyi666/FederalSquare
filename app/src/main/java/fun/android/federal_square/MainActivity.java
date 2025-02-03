@@ -3,16 +3,12 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
@@ -109,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.home_checked_true_icon);
+                        able.view_home.恢复界面();
                         break;
                 }
             }
@@ -186,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             if(square_menu.getVisibility() == View.VISIBLE){
                 square_menu.setVisibility(View.GONE);
                 menu_text.setText("▲");
-                menu_text.setTextColor(Color.rgb(0,0,0));
+                menu_text.setTextColor(Color.rgb(242,243,247));
                 able.view_square.修改底部空间();
                 able.view_hot.修改底部空间();
             }else{

@@ -34,6 +34,8 @@ public class Fun_文章 {
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         TextView url_txt_id = view.findViewById(R.id.url_txt_id);
         LinearLayout linear = view.findViewById(R.id.linear);
+        TextView di_xian = view.findViewById(R.id.di_xian);
+        view.传递底线(di_xian);
         StringBuffer sb = new StringBuffer();
         List<String> img_url = new ArrayList<>();
         String avatar_url = "";

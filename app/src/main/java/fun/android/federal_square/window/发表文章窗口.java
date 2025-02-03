@@ -1,5 +1,6 @@
 package fun.android.federal_square.window;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -37,6 +38,9 @@ public class 发表文章窗口 {
     private LinearLayout linear;
     private List<Post_Data> post_dataList;
     private ScrollView scrollView;
+    @SuppressLint("StaticFieldLeak")
+    private GridView gridview;
+    private Disk_Grid_Adapter disk_grid_adapter;
     public void 创建发表文章窗口(Activity activity ){
         var dialog = new AlertDialog.Builder(activity).create();
         var view = View.inflate(activity, R.layout.window_post_view, null);
@@ -156,7 +160,7 @@ public class 发表文章窗口 {
         var 选择图片窗口句柄 = new AlertDialog.Builder(activity).create();
         var view = View.inflate(activity, R.layout.window_select_image_view, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
-        GridView gridview = view.findViewById(R.id.gridview);
+        gridview = view.findViewById(R.id.gridview);
         return_icon.setOnClickListener(V->{
             选择图片窗口句柄.dismiss();
         });
@@ -167,7 +171,8 @@ public class 发表文章窗口 {
         }
         var Disk_Index = Fun.获取网盘数量();
         gridview.setNumColumns(Disk_Index);
-        gridview.setAdapter(new Disk_Grid_Adapter(activity, list, Disk_Index));
+        disk_grid_adapter = new Disk_Grid_Adapter(activity, list, Disk_Index);
+        gridview.setAdapter(disk_grid_adapter);
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             var post_data = new Post_Data();
             post_data.setName("img");
@@ -204,7 +209,22 @@ public class 发表文章窗口 {
             选择图片窗口句柄.dismiss();
             Fun.回到底部(scrollView);
         });
-
+        选择图片窗口句柄.setOnDismissListener(_ -> {
+            // 释放GridView资源
+            if(gridview != null){
+                // 先清除Adapter引用
+                gridview.setAdapter(null);
+                // 可选：移除所有子视图
+                gridview.removeAllViewsInLayout();
+                gridview = null;
+            }
+            // 释放Adapter资源
+            if(disk_grid_adapter != null){
+                // 执行自定义清理方法
+                disk_grid_adapter.clearResources();
+                disk_grid_adapter = null;
+            }
+        });
         选择图片窗口句柄.setView(view);
         选择图片窗口句柄.setCancelable(true);
         Objects.requireNonNull(选择图片窗口句柄.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);

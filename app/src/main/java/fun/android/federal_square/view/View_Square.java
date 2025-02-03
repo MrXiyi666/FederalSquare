@@ -1,12 +1,8 @@
 package fun.android.federal_square.view;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,7 +10,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
@@ -132,7 +127,6 @@ public class View_Square extends View_Main{
                 }catch (Exception ignored){
                 }
             }
-
         });
         time_thread.start();
     }
@@ -314,14 +308,6 @@ public class View_Square extends View_Main{
     }
 
     public void 修改底部空间(){
-        var params = di_title.getLayoutParams();
-        if(activity_main.square_menu.getVisibility() == View.VISIBLE){
-            params.height = Fun.DPToPX(activity_main, 95);
-            di_title.setLayoutParams(params);
-        }else{
-            params.height = Fun.DPToPX(activity_main, 35);
-            di_title.setLayoutParams(params);
-        }
         if(scrollView_Down_Y){
             scrollView.post(()->{
                int childHeight = scrollView.getChildAt(0).getHeight();

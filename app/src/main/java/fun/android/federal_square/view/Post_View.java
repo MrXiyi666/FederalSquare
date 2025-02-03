@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -50,11 +52,6 @@ public class Post_View extends LinearLayout {
             fun_文章子布局.清除图片();
         }
     }
-
-    public void 加载图片(){
-        fun_文章子布局.加载图片();
-        加载头像();
-    }
     private void 加载头像(){
         if(avatar_url.isEmpty()){
             avatar_img.setImageResource(R.mipmap.ic_launcher_round);
@@ -72,5 +69,15 @@ public class Post_View extends LinearLayout {
     public void 清除图片(){
         fun_文章子布局.清除图片();
         Glide.with(activity).clear(avatar_img);
+    }
+    private TextView di_xian;
+    public void 传递底线(TextView di_xian){
+        this.di_xian = di_xian;
+    }
+
+    public void 底线消失(){
+        if(di_xian!=null){
+            di_xian.setVisibility(View.INVISIBLE);
+        }
     }
 }

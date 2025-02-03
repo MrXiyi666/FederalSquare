@@ -111,18 +111,10 @@ public class Fun_文章子布局 {
 
     public void 加载图片(){
         for(int i=0;i<video_imageViews.size();i++){
-            if(Fun.图片格式判断(video_imageViews.get(i).后缀)){
-                Glide.with(activity)
-                        .load(img_url.get(i))
-                        .apply(able.requestOptions)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(video_imageViews.get(i));
-                continue;
-            }
             Glide.with(activity)
-                    .asBitmap()
                     .load(img_url.get(i))
                     .apply(able.requestOptions)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .into(video_imageViews.get(i));
         }
     }
