@@ -10,6 +10,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -29,7 +31,6 @@ public class View_Hot extends View_Main{
     private boolean scrollView_Di = false;
     public int Post_Index = 0;
 
-    public int scrollView_Y=0;
     public View_Hot(MainActivity activity) {
         super(activity);
 
@@ -62,10 +63,6 @@ public class View_Hot extends View_Main{
         });
 
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
-            if(scrollY == 1){
-                scrollView.scrollTo(0, 0);
-            }
-            scrollView_Y = scrollY;
             var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){
@@ -73,20 +70,7 @@ public class View_Hot extends View_Main{
             }else{
                 scrollView_Di = false;
             }
-            for (int i = 0; i < linear.getChildCount(); i++) {
-                Post_View view = (Post_View) linear.getChildAt(i);
-                int childTop = view.getTop();
-                int childBottom = view.getBottom();
-                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
-                    if(view.getVisibility() == View.INVISIBLE){
-                        view.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    if(view.getVisibility() == View.VISIBLE){
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
+            Fun.刷新当前文章(activity_main, linear, scrollView);
         });
     }
     @Override
@@ -101,168 +85,146 @@ public class View_Hot extends View_Main{
     @Override
     public void 释放() {
         super.释放();
-        Fun_文章.释放所有文章内存(linear);
+        Fun_文章.释放所有文章内存(linear, activity_main);
     }
     public void 初始化数据(){
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        Post_Index=0;
-        var list = Fun_文章.获取热门集合();
-        var index = Fun.获取热门数量();
-        if(list.isEmpty()){
-            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            var textView = new TextView(activity_main);
-            textView.setTextColor(Color.rgb(128, 128, 128));
-            textView.setTextSize(15);
-            textView.setText("头条为空");
-            textView.setTextIsSelectable(true);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(params);
-            linear.addView(textView);
-            return;
-        }
-        if(Fun_账号.GetID().isEmpty()){
-            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            var textView = new TextView(activity_main);
-            textView.setTextColor(Color.rgb(128, 128, 128));
-            textView.setTextSize(15);
-            textView.setText("没有登录 无法查看");
-            textView.setTextIsSelectable(true);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(params);
-            linear.addView(textView);
-            return;
-        }
-        for(var i=0;i<list.size();i++){
-            if(i >= index){
-                break;
+        new Thread(()->{
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            Post_Index=0;
+            var list = Fun_文章.获取热门集合();
+            var index = Fun.获取热门数量();
+            if(list.isEmpty()){
+                activity_main.runOnUiThread(()->{
+                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    var textView = new TextView(activity_main);
+                    textView.setTextColor(Color.rgb(128, 128, 128));
+                    textView.setTextSize(15);
+                    textView.setText("头条为空");
+                    textView.setTextIsSelectable(true);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setLayoutParams(params);
+                    linear.addView(textView);
+                });
+                return;
             }
-            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-                continue;
+            if(Fun_账号.GetID().isEmpty()){
+                activity_main.runOnUiThread(()->{
+                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    var textView = new TextView(activity_main);
+                    textView.setTextColor(Color.rgb(128, 128, 128));
+                    textView.setTextSize(15);
+                    textView.setText("没有登录 无法查看");
+                    textView.setTextIsSelectable(true);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setLayoutParams(params);
+                    linear.addView(textView);
+                });
+                return;
             }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+            for(var i=0;i<list.size();i++){
+                if(i >= index){
+                    break;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                activity_main.runOnUiThread(() -> {
+                    // 将数据传递到主线程创建视图
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 111);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                });
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+        }).start();
     }
 
     public void 上一页(){
-        if(Fun_账号.GetID().isEmpty()){
-            Fun.mess(activity_main, "没有登陆 无法查看");
-            return;
-        }
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var list = Fun_文章.获取热门集合();
-        var index = Fun.获取热门数量();
-        for(var i=0;i<index;i++){
-            Post_Index--;
-        }
-        if(Post_Index < 0){
-            Post_Index = 0;
-        }
-        var 遍历数量 = 0;
-        for(var i=Post_Index;i<list.size();i++){
-            if(遍历数量 >= index){
-                break;
+        new Thread(()->{
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity_main, "没有登陆 无法查看");
+                return;
             }
-            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-                continue;
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            var list = Fun_文章.获取热门集合();
+            var index = Fun.获取热门数量();
+            for(var i=0;i<index;i++){
+                Post_Index--;
             }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-            遍历数量++;
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+            if(Post_Index < 0){
+                Post_Index = 0;
+            }
+            var 遍历数量 = 0;
+            for(var i=Post_Index;i<list.size();i++){
+                if(遍历数量 >= index){
+                    break;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                activity_main.runOnUiThread(() -> {
+                    // 将数据传递到主线程创建视图
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 111);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                });
+                遍历数量++;
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+        }).start();
     }
 
     public void 下一页(){
-        if(linear.getChildCount() == 0){
-            Fun.mess(activity_main, "到底了");
-            return;
-        }
-        if(Fun_账号.GetID().isEmpty()){
-            Fun.mess(activity_main, "没有登陆 无法查看");
-            return;
-        }
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var list = Fun_文章.获取热门集合();
-        var index = Fun.获取热门数量();
-        for(var i=0;i<index;i++){
-            Post_Index++;
-        }
-        var 遍历数量 = 0;
-        for(var i=Post_Index;i<list.size();i++){
-            if(遍历数量 >= index){
-                break;
+        new Thread(()->{
+            if(linear.getChildCount() == 0){
+                Fun.mess(activity_main, "到底了");
+                return;
             }
-            var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
-                continue;
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity_main, "没有登陆 无法查看");
+                return;
             }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 1111);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-            遍历数量++;
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            var list = Fun_文章.获取热门集合();
+            var index = Fun.获取热门数量();
+            for(var i=0;i<index;i++){
+                Post_Index++;
+            }
+            var 遍历数量 = 0;
+            for(var i=Post_Index;i<list.size();i++){
+                if(遍历数量 >= index){
+                    break;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                var str = Fun_文件.读取文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + list.get(i) + ".json");
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                activity_main.runOnUiThread(() -> {
+                    // 将数据传递到主线程创建视图
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 111);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                });
+                遍历数量++;
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+        }).start();
     }
 
     public void 恢复界面(){
-        scrollView.post(()->{
-            scrollView.scrollTo(0, scrollView_Y);
-        });
+        Fun.刷新当前文章(activity_main, linear, scrollView);
     }
-
     public void 修改底部空间(){
         var params = di_title.getLayoutParams();
         if(activity_main.square_menu.getVisibility() == View.VISIBLE){

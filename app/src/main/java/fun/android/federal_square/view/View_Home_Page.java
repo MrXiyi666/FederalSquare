@@ -93,6 +93,7 @@ public class View_Home_Page extends View_Main{
         button_collection.setTextColor(Color.rgb(128,128,128));
         button_system.setTextColor(Color.rgb(128,128,128));
         button_essay.setOnClickListener(V->{
+            view_home_collection = null;
             linear.removeAllViews();
             view_home_essay = new View_Home_Essay(activity_main);
             linear.addView(view_home_essay.getView());
@@ -101,6 +102,7 @@ public class View_Home_Page extends View_Main{
             button_system.setTextColor(Color.rgb(128,128,128));
         });
         button_collection.setOnClickListener(V->{
+            view_home_essay = null;
             linear.removeAllViews();
             view_home_collection = new View_Home_Collection(activity_main);
             linear.addView(view_home_collection.getView());
@@ -109,6 +111,8 @@ public class View_Home_Page extends View_Main{
             button_system.setTextColor(Color.rgb(128,128,128));
         });
         button_system.setOnClickListener(V->{
+            view_home_essay = null;
+            view_home_collection = null;
             linear.removeAllViews();
             linear.addView(new View_Home_System(activity_main).getView());
             button_essay.setTextColor(Color.rgb(128,128,128));
@@ -138,5 +142,13 @@ public class View_Home_Page extends View_Main{
         }
     }
 
+    public void 恢复界面(){
+        if(view_home_essay!=null){
+            view_home_essay.恢复界面();
+        }
+        if(view_home_collection!=null){
+            view_home_collection.恢复界面();
+        }
+    }
 
 }

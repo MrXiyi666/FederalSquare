@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -46,7 +48,7 @@ public class View_Home_Collection extends View_Main{
     @Override
     public void 事件() {
         super.事件();
-
+        button_loading.setVisibility(View.GONE);
         swiperefee.setOnRefreshListener(()->{
             var netWork_我的_收藏刷新 = new NetWork_我的_收藏_刷新(activity_main);
             netWork_我的_收藏刷新.start();
@@ -58,79 +60,60 @@ public class View_Home_Collection extends View_Main{
             activity_main.startActivity(intent);
         });
 
-        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
-            if(scrollY == 1){
-                scrollView.scrollTo(0, 0);
-            }
-            int screenHeight = scrollView.getHeight();
-            for (int i = 0; i < linear.getChildCount(); i++) {
-                Post_View view = (Post_View) linear.getChildAt(i);
-                int childTop = view.getTop();
-                int childBottom = view.getBottom();
-                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
-                    if(view.getVisibility() == View.INVISIBLE){
-                        view.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    if(view.getVisibility() == View.VISIBLE){
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
+        scrollView.setOnScrollChangeListener((_, _, _, _, _) -> {
+            Fun.刷新当前文章(activity_main, linear, scrollView);
         });
     }
 
     public void 初始化收藏(){
-        var list = Fun_文章.获取我的收藏集合();
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        button_loading.setVisibility(View.GONE);
-        if(list.isEmpty()){
-            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            var textView = new TextView(activity_main);
-            textView.setTextColor(Color.rgb(128, 128, 128));
-            textView.setTextSize(15);
-            textView.setText("收藏为空");
-            textView.setTextIsSelectable(true);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(params);
-            linear.addView(textView);
-            return;
-        }
-        for(var i=0; i<list.size(); i++){
-            var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
-                continue;
+        new Thread(()->{
+            var list = Fun_文章.获取我的收藏集合();
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            if(list.isEmpty()){
+                activity_main.runOnUiThread(()->{
+                    button_loading.setVisibility(View.GONE);
+                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    var textView = new TextView(activity_main);
+                    textView.setTextColor(Color.rgb(128, 128, 128));
+                    textView.setTextSize(15);
+                    textView.setText("收藏为空");
+                    textView.setTextIsSelectable(true);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setLayoutParams(params);
+                    linear.addView(textView);
+                });
+                return;
             }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 2);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-        }
-        if(linear.getChildCount() >= 10){
-            button_loading.setVisibility(View.VISIBLE);
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+            for(var i=0; i<list.size(); i++){
+                var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                    continue;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                activity_main.runOnUiThread(() -> {
+                    // 将数据传递到主线程创建视图
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 2);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                    if(linear.getChildCount() >= 10){
+                        button_loading.setVisibility(View.VISIBLE);
+                    }
+                });
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+        }).start();
     }
 
 
     @Override
     public void 释放() {
         super.释放();
-        Fun_文章.释放所有文章内存(linear);
+        Fun_文章.释放所有文章内存(linear, activity_main);
+    }
+
+    public void 恢复界面(){
+        Fun.刷新当前文章(activity_main, linear, scrollView);
     }
 }

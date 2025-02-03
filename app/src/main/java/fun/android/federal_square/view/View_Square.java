@@ -1,5 +1,6 @@
 package fun.android.federal_square.view;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
@@ -13,6 +14,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
@@ -42,7 +45,6 @@ public class View_Square extends View_Main{
     public int Post_Index = 0;
 
 
-    public int scrollView_Y=0;
 
     public View_Square(MainActivity activity) {
         super(activity);
@@ -82,10 +84,6 @@ public class View_Square extends View_Main{
             swipe_layout.setRefreshing(false);
         });
         scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
-            if(scrollY == 1){
-                scrollView.scrollTo(0, 0);
-            }
-            scrollView_Y = scrollY;
             int screenHeight = scrollView.getHeight(); // 获取 ScrollView 的高度
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){
@@ -93,20 +91,7 @@ public class View_Square extends View_Main{
             }else{
                 scrollView_Down_Y = false;
             }
-            for (int i = 0; i < linear.getChildCount(); i++) {
-                Post_View view = (Post_View) linear.getChildAt(i); // 获取 LinearLayout 的子视图
-                int childTop = view.getTop(); // 获取子视图的顶部位置
-                int childBottom = view.getBottom(); // 获取子视图的底部位置
-                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
-                    if(view.getVisibility() == View.INVISIBLE){
-                        view.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    if(view.getVisibility() == View.VISIBLE){
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
+            Fun.刷新当前文章(activity_main, linear, scrollView);
         });
         button_add.setOnClickListener(V->{
             if(!Fun_账号.GetID().isEmpty()){
@@ -165,197 +150,169 @@ public class View_Square extends View_Main{
     @Override
     public void 释放() {
         super.释放();
-        Fun_文章.释放所有文章内存(linear);
+        Fun_文章.释放所有文章内存(linear,activity_main);
     }
     public void 初始化本地数据(){
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        Post_Index=0;
-        var url = Fun.获取域名();
-        var 所有文章 = Fun_文章.获取广场所有集合();
-
-        var index = Fun.获取广场文章数量();
-        if(url.isEmpty()){
-            return;
-        }
-        if(所有文章.isEmpty()){
-            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            var textView = new TextView(activity_main);
-            textView.setTextColor(Color.rgb(128, 128, 128));
-            textView.setTextSize(15);
-            textView.setText("广场为空");
-            textView.setTextIsSelectable(true);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(params);
-            linear.addView(textView);
-            return;
-        }
-        for(int i=0; i< 所有文章.size(); i++){
-            if(Fun_账号.GetID().isEmpty()){
-                if(i >= 10){
-                    break;
-                }
+        new Thread(()->{
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            Post_Index=0;
+            var url = Fun.获取域名();
+            var 所有文章 = Fun_文章.获取广场所有集合();
+            var index = Fun.获取广场文章数量();
+            if(url.isEmpty()){
+                return;
             }
-            if(i >= index){
-                break;
+            if(所有文章.isEmpty()){
+                activity_main.runOnUiThread(()->{
+                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    var textView = new TextView(activity_main);
+                    textView.setTextColor(Color.rgb(128, 128, 128));
+                    textView.setTextSize(15);
+                    textView.setText("广场为空");
+                    textView.setTextIsSelectable(true);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setLayoutParams(params);
+                    linear.addView(textView);
+                });
+                return;
             }
-            //读取json判断json格式是否正确
-            var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-            if(!Fun.StrBoolJSON(txt)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-                continue;
-            }
-            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            var url_data="";
-            for(Post_Data pd : post_data){
-                if(pd.getName().equals("url")){
-                    url_data = pd.getText();
-                }
-            }
-            if(url_data.isEmpty()){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-                continue;
-            }
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            view.setVisibility(View.INVISIBLE);
-
-            linear.addView(view);
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
+            for(int i=0; i< 所有文章.size(); i++){
+                if(Fun_账号.GetID().isEmpty()){
+                    if(i >= 10){
+                        break;
                     }
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                if(i >= index){
+                    break;
+                }
+                //读取json判断json格式是否正确
+                var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                if(!Fun.StrBoolJSON(txt)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+                var url_data="";
+                for(Post_Data pd : post_data){
+                    if(pd.getName().equals("url")){
+                        url_data = pd.getText();
+                    }
+                }
+                if(url_data.isEmpty()){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                    continue;
+                }
+                activity_main.runOnUiThread(() -> {
+                    List<Post_Data> finalData = new ArrayList<>(post_data);
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 0);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                });
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+
+        }).start();
     }
 
     public void 上一页(){
-        if(Fun_账号.GetID().isEmpty()){
-            Fun.mess(activity_main, "没有登陆 无法使用");
-            return;
-        }
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var url = Fun.获取域名();
-        var 所有文章 = Fun_文章.获取广场所有集合();
-        var index = Fun.获取广场文章数量();
-        if(url.isEmpty()){
-            return;
-        }
-        for(int i=0;i<index;i++){
-            Post_Index--;
-        }
-        if(Post_Index < 0){
-            Post_Index = 0;
-        }
-        var 遍历数量 = 0;
-        for(var i=Post_Index; i<所有文章.size(); i++){
+        new Thread(()->{
             if(Fun_账号.GetID().isEmpty()){
-                if(遍历数量>=10){
-                    break;
-                }
+                Fun.mess(activity_main, "没有登陆 无法使用");
+                return;
             }
-            if(遍历数量 >= index){
-                break;
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            var url = Fun.获取域名();
+            var 所有文章 = Fun_文章.获取广场所有集合();
+            var index = Fun.获取广场文章数量();
+            if(url.isEmpty()){
+                return;
             }
-            var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-            if(!Fun.StrBoolJSON(txt)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-                continue;
+            for(int i=0;i<index;i++){
+                Post_Index--;
             }
-            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-            遍历数量++;
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
+            if(Post_Index < 0){
+                Post_Index = 0;
+            }
+            var 遍历数量 = 0;
+            for(var i=Post_Index; i<所有文章.size(); i++){
+                if(Fun_账号.GetID().isEmpty()){
+                    if(遍历数量>=10){
+                        break;
                     }
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                if(遍历数量 >= index){
+                    break;
+                }
+                var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                if(!Fun.StrBoolJSON(txt)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+                activity_main.runOnUiThread(() -> {
+                    List<Post_Data> finalData = new ArrayList<>(post_data);
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 0);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                });
+                遍历数量++;
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+        }).start();
     }
 
     public void 下一页(){
-        if(linear.getChildCount() == 0){
-            Fun.mess(activity_main, "到底了");
-            return;
-        }
-        if(Fun_账号.GetID().isEmpty()){
-            Fun.mess(activity_main, "没有登陆 无法使用");
-            return;
-        }
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var url = Fun.获取域名();
-        var 所有文章 = Fun_文章.获取广场所有集合();
-        var index = Fun.获取广场文章数量();
-        if(url.isEmpty()){
-            return;
-        }
-        for(int i=0;i<index;i++){
-            Post_Index++;
-        }
-        var 遍历数量=0;
-        for(int i=Post_Index;i<所有文章.size();i++){
+        new Thread(()->{
+            if(linear.getChildCount() == 0){
+                Fun.mess(activity_main, "到底了");
+                return;
+            }
             if(Fun_账号.GetID().isEmpty()){
-                if(遍历数量 >= 10){
-                    break;
-                }
+                Fun.mess(activity_main, "没有登陆 无法使用");
+                return;
             }
-            if(遍历数量 >= index){
-                break;
+            Fun_文章.释放所有文章内存(linear, activity_main);
+            var url = Fun.获取域名();
+            var 所有文章 = Fun_文章.获取广场所有集合();
+            var index = Fun.获取广场文章数量();
+            if(url.isEmpty()){
+                return;
             }
-            //读取json判断json格式是否正确
-            var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-            if(!Fun.StrBoolJSON(txt)){
-                Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
-                continue;
+            for(int i=0;i<index;i++){
+                Post_Index++;
             }
-            List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(activity_main, post_data, 0);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-            遍历数量++;
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
+            var 遍历数量=0;
+            for(int i=Post_Index;i<所有文章.size();i++){
+                if(Fun_账号.GetID().isEmpty()){
+                    if(遍历数量 >= 10){
+                        break;
                     }
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                if(遍历数量 >= index){
+                    break;
+                }
+                //读取json判断json格式是否正确
+                var txt = Fun_文件.读取文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                if(!Fun.StrBoolJSON(txt)){
+                    Fun_文件.删除文件(able.app_path + "Square_Data/" + 所有文章.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(txt, new TypeToken<List<Post_Data>>(){}.getType());
+                activity_main.runOnUiThread(() -> {
+                    List<Post_Data> finalData = new ArrayList<>(post_data);
+                    View 动态视图 = Fun_文章.Create_Post_View(activity_main, finalData, 0);
+                    动态视图.setVisibility(View.INVISIBLE);
+                    linear.addView(动态视图);
+                });
+                遍历数量++;
             }
-        });
+            Fun.回到顶部(scrollView, linear, activity_main);
+        }).start();
+    }
+    public void 恢复界面(){
+        Fun.刷新当前文章(activity_main, linear, scrollView);
     }
 
-    public void 恢复界面(){
-        scrollView.post(()->{
-            scrollView.scrollTo(0, scrollView_Y);
-        });
-    }
     public void 修改底部空间(){
         var params = di_title.getLayoutParams();
         if(activity_main.square_menu.getVisibility() == View.VISIBLE){

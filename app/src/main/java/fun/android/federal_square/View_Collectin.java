@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -61,25 +63,8 @@ public class View_Collectin extends AppCompatActivity {
             finish();
         });
 
-        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
-            if(scrollY == 1){
-                scrollView.scrollTo(0, 0);
-            }
-            int screenHeight = scrollView.getHeight();
-            for (int i = 0; i < linear.getChildCount(); i++) {
-                Post_View view = (Post_View) linear.getChildAt(i);
-                int childTop = view.getTop();
-                int childBottom = view.getBottom();
-                if (childTop < scrollY + screenHeight && childBottom > scrollY) {
-                    if(view.getVisibility() == View.INVISIBLE){
-                        view.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    if(view.getVisibility() == View.VISIBLE){
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
+        scrollView.setOnScrollChangeListener((_, _, _, _, _) -> {
+            Fun.刷新当前文章(View_Collectin.this, linear, scrollView);
         });
         button_top.setOnClickListener(V->{
             scrollView.smoothScrollTo(0,0);
@@ -95,124 +80,101 @@ public class View_Collectin extends AppCompatActivity {
         });
     }
     public void 初始化数据(){
-        Post_Index=0;
-        var list = Fun_文章.获取所有收藏集合();
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var index = Fun.获取我的收藏数量();
-        for(var i=0; i<list.size(); i++){
-            if(i >= index){
-                break;
-            }
-            var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
-                continue;
-            }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(this, post_data, 4);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+        new Thread(()->{
+            Post_Index=0;
+            var list = Fun_文章.获取所有收藏集合();
+            Fun_文章.释放所有文章内存(linear, this);
+            var index = Fun.获取我的收藏数量();
+            for(var i=0; i<list.size(); i++){
+                if(i >= index){
+                    break;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                this.runOnUiThread(()->{
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    var view = Fun_文章.Create_Post_View(this, finalData, 4);
+                    view.setVisibility(View.INVISIBLE);
+                    linear.addView(view);
+                });
             }
-        });
+            Fun.回到顶部(scrollView, linear, this);
+        }).start();
+
+
     }
     public void 上一页(){
-        var list = Fun_文章.获取所有收藏集合();
-        var index = Fun.获取我的收藏数量();
-        for(var i=0;i<index;i++){
-            Post_Index--;
-        }
-        if(Post_Index < 0){
-            Post_Index = 0;
-        }
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var 遍历数量 = 0;
-        for(var i=Post_Index; i<list.size(); i++){
-            if(遍历数量 >= index){
-                break;
+        new Thread(()->{
+            var list = Fun_文章.获取所有收藏集合();
+            var index = Fun.获取我的收藏数量();
+            for(var i=0;i<index;i++){
+                Post_Index--;
             }
-            var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
-                continue;
+            if(Post_Index < 0){
+                Post_Index = 0;
             }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(this, post_data, 4);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-            遍历数量++;
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+            Fun_文章.释放所有文章内存(linear, this);
+            var 遍历数量 = 0;
+            for(var i=Post_Index; i<list.size(); i++){
+                if(遍历数量 >= index){
+                    break;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                this.runOnUiThread(()->{
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    var view = Fun_文章.Create_Post_View(this, finalData, 4);
+                    view.setVisibility(View.INVISIBLE);
+                    linear.addView(view);
+                });
+                遍历数量++;
             }
-        });
+            Fun.回到顶部(scrollView, linear, this);
+        }).start();
+
+
     }
     public void 下一页(){
-        if(linear.getChildCount() == 0){
-            Fun.mess(this, "到底了");
-            return;
-        }
-        var list = Fun_文章.获取所有收藏集合();
-        var index = Fun.获取我的收藏数量();
-        for(var i=0;i<index;i++){
-            Post_Index++;
-        }
-        Fun_文章.释放所有文章内存(linear);
-        linear.removeAllViews();
-        var 遍历数量 = 0;
-        for(var i=Post_Index; i<list.size(); i++){
-            if(遍历数量 >= index){
-                break;
+        new Thread(()->{
+            if(linear.getChildCount() == 0){
+                Fun.mess(this, "到底了");
+                return;
             }
-            var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
-            if(!Fun.StrBoolJSON(str)){
-                Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
-                continue;
+            var list = Fun_文章.获取所有收藏集合();
+            var index = Fun.获取我的收藏数量();
+            for(var i=0;i<index;i++){
+                Post_Index++;
             }
-            List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
-            var view = Fun_文章.Create_Post_View(this, post_data, 4);
-            view.setVisibility(View.INVISIBLE);
-            linear.addView(view);
-            遍历数量++;
-        }
-        linear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i=0; i<linear.getChildCount(); i++){
-                    Rect rect = new Rect();
-                    if (linear.getChildAt(i).getGlobalVisibleRect(rect)) {
-                        // View 全局可见区域为 rect
-                        linear.getChildAt(i).setVisibility(View.VISIBLE);
-                    }
+            Fun_文章.释放所有文章内存(linear);
+            var 遍历数量 = 0;
+            for(var i=Post_Index; i<list.size(); i++){
+                if(遍历数量 >= index){
+                    break;
                 }
-                linear.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Fun.回到顶部(scrollView);
+                var str = Fun_文件.读取文件(able.app_path + "Account/Collection/" + list.get(i));
+                if(!Fun.StrBoolJSON(str)){
+                    Fun_文件.删除文件(able.app_path + "Account/Collection/" + list.get(i));
+                    continue;
+                }
+                List<Post_Data> post_data = able.gson.fromJson(str, new TypeToken<List<Post_Data>>(){}.getType());
+                this.runOnUiThread(()->{
+                    List<Post_Data> finalData = new ArrayList<>(post_data); // 复制数据确保隔离性
+                    var view = Fun_文章.Create_Post_View(this, finalData, 4);
+                    view.setVisibility(View.INVISIBLE);
+                    linear.addView(view);
+                });
+                遍历数量++;
             }
-        });
+            Fun.回到顶部(scrollView, linear, this);
+        }).start();
     }
     @Override
     protected void onDestroy() {

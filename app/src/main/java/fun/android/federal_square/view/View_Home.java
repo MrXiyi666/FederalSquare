@@ -5,6 +5,7 @@ import android.widget.LinearLayout;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 
 public class View_Home extends View_Main{
@@ -37,6 +38,12 @@ public class View_Home extends View_Main{
 
 
     }
+    public void 恢复界面(){
+        if(view_home_page!=null){
+            view_home_page.恢复界面();
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();

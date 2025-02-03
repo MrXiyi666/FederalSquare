@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_square.恢复界面();
                         able.view_square.修改底部空间();
-                        able.view_hot.修改底部空间();
                         break;
                     case 1:
                         menu_system.setVisibility(View.VISIBLE);
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_hot.恢复界面();
-                        able.view_square.修改底部空间();
                         able.view_hot.修改底部空间();
                         break;
                     case 2:

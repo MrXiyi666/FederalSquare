@@ -311,11 +311,27 @@ public class Fun_文章 {
     }
 
     public static void 释放所有文章内存(LinearLayout linear){
-        for(int i=0; i< linear.getChildCount(); i++){
-            if(linear.getChildAt(i) instanceof Post_View){
-                Post_View post_view = (Post_View) linear.getChildAt(i);
-                post_view.清除图片();
+        able.handler.post(()->{
+            for(int i=0; i< linear.getChildCount(); i++){
+                if(linear.getChildAt(i) instanceof Post_View){
+                    int finalI = i;
+                    Post_View post_view = (Post_View) linear.getChildAt(finalI);
+                    post_view.清除图片();
+                }
             }
-        }
+            linear.removeAllViews();
+        });
+    }
+
+    public static void 释放所有文章内存(LinearLayout linear, Activity activity){
+        activity.runOnUiThread(() -> {
+            for(int i=0; i< linear.getChildCount(); i++){
+                if(linear.getChildAt(i) instanceof Post_View post_view){
+                    post_view.清除图片();
+                }
+            }
+            linear.removeAllViews();
+        });
+
     }
 }

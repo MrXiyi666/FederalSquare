@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
@@ -34,6 +36,7 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.view.Post_View;
 
 public class Fun {
 
@@ -409,8 +412,11 @@ public class Fun {
         return Disk_Index;
     }
 
-    public static void 回到顶部(ScrollView scrollView) {
-        scrollView.post(() -> scrollView.smoothScrollTo(0, 1));
+    public static void 回到顶部(ScrollView scrollView, LinearLayout linear, Activity activity) {
+        activity.runOnUiThread(() -> {
+            scrollView.smoothScrollTo(0, 0);
+        });
+        刷新当前文章(activity, linear, scrollView);
     }
     public static void 回到底部(ScrollView scrollView){
         scrollView.post(()->{
@@ -418,5 +424,32 @@ public class Fun {
             int height = contentView.getMeasuredHeight();
             scrollView.smoothScrollTo(0, height);
         });
+    }
+
+    public static void 刷新当前文章(Activity activity, LinearLayout linear, ScrollView scrollView){
+        activity.runOnUiThread(()->{
+            scrollView.post(() -> {
+                int scrollY = scrollView.getScrollY(); // 获取当前滚动位置
+                for (int i = 0; i < linear.getChildCount(); i++) {
+                    View childView = linear.getChildAt(i);
+                    if (childView instanceof Post_View postView) {
+                        int childY = (int) postView.getY(); // 获取子视图的 y 坐标
+                        int childHeight = postView.getHeight();
+
+                        // 判断子视图是否在屏幕范围内
+                        if (childY + childHeight > scrollY && childY < scrollY + scrollView.getHeight()) {
+                            if (postView.getVisibility() != View.VISIBLE) {
+                                postView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
+                            if (postView.getVisibility() != View.INVISIBLE) {
+                                postView.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
     }
 }
