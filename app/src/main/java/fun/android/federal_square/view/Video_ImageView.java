@@ -11,13 +11,16 @@ import fun.android.federal_square.fun.Fun;
 
 public class Video_ImageView extends net.csdn.roundview.RoundImageView {
     private Paint paint_fill, paint_stroke;
-    private void init(Context context){
+    public String 后缀 = "";
+
+    private void init(Context context) {
         paint_fill = new Paint();
         paint_fill.setColor(Color.WHITE);
         paint_fill.setAntiAlias(true);
         paint_fill.setStyle(Paint.Style.FILL);
         paint_fill.setStrokeWidth(Fun.DPToPX((Activity) context, 4));
         paint_fill.setTextSize(Fun.DPToPX((Activity) context, 15));
+
         paint_stroke = new Paint();
         paint_stroke.setColor(Color.BLACK);
         paint_stroke.setAntiAlias(true);
@@ -40,20 +43,20 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
         super(context, attrs, defStyleAttr);
         init(context);
     }
-    public String 后缀="";
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(Fun.视频格式判断(后缀)){
-            var x_width = this.getWidth() / 2;
-            var p_width = (int) ((paint_stroke.getTextSize() / 2) * 后缀.length());
-            var x = x_width - p_width;
-            var y=0;
-            if(this.getHeight() > paint_stroke.getTextSize()){
-                y= (int) (this.getHeight() - paint_stroke.getTextSize());
-            }else{
-                y = (int) paint_stroke.getTextSize();
-            }
+        if (Fun.视频格式判断(后缀)) {
+            // 计算文本的宽度和高度
+            float textWidth = paint_stroke.measureText(后缀);
+            float textHeight = paint_stroke.getTextSize();
+
+            // 计算文本的起始位置（居中底部对齐）
+            float x = (getWidth() - textWidth) / 2;
+            float y = getHeight() - textHeight / 2; // 底部对齐
+
+            // 绘制文本
             canvas.drawText(后缀, x, y, paint_stroke);
             canvas.drawText(后缀, x, y, paint_fill);
         }

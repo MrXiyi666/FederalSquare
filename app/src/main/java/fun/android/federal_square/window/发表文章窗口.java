@@ -33,6 +33,7 @@ import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_广场上传;
+import fun.android.federal_square.view.Video_ImageView;
 
 public class 发表文章窗口 {
     private LinearLayout linear;
@@ -82,7 +83,7 @@ public class 发表文章窗口 {
                 post_dataList.add(post_data);
                 linear.addView(textView);
                 edit_text.setText("");
-                Fun.回到底部(scrollView);
+                Fun.回到底部(activity, scrollView);
             }else{
                 Fun.mess(activity, "数据为空");
             }
@@ -127,26 +128,39 @@ public class 发表文章窗口 {
             }
         });
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            var scrollBounds = new Rect();
-            scrollView.getHitRect(scrollBounds);
-            for(var i=0;i<linear.getChildCount();i++){
-                var zi_view = linear.getChildAt(i);
-                if (zi_view.getLocalVisibleRect(scrollBounds)) {
-                    if(zi_view.getVisibility() == View.INVISIBLE){
+            int scrollViewHeight = scrollView.getHeight();
+            int linearCount = linear.getChildCount();
+            for (int i = 0; i < linearCount; i++) {
+                View zi_view = linear.getChildAt(i);
+                // 计算子视图是否在屏幕范围内
+                int childY = (int) zi_view.getY();
+                int childHeight = zi_view.getHeight();
+                boolean isVisible = (childY + childHeight > scrollY) && (childY < scrollY + scrollViewHeight);
+                int currentVisibility = zi_view.getVisibility();
+                // 根据计算结果更新可见性
+                if (isVisible) {
+                    if (currentVisibility != View.VISIBLE) {
                         zi_view.setVisibility(View.VISIBLE);
                     }
-                    // 子控件至少有一个像素在可视范围内
-                    if (scrollBounds.bottom >= (zi_view.getHeight() / 2)) {
-                        // 子控件的可见区域是否超过了50%
-                    }
                 } else {
-                    if(zi_view.getVisibility() == View.VISIBLE){
+                    if (currentVisibility != View.INVISIBLE) {
                         zi_view.setVisibility(View.INVISIBLE);
                     }
-                    // 子控件完全不在可视范围内
                 }
             }
         });
+
+
+        dialog.setOnDismissListener(_ -> {
+            for(int i=0; i<linear.getChildCount(); i++){
+                if(linear.getChildAt(i) instanceof ImageView imageView){
+                    imageView.setImageBitmap(null);
+                }
+            }
+            linear.removeAllViews();
+        });
+
+
         dialog.setView(view);
         dialog.setCancelable(false);
         Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -189,6 +203,7 @@ public class 发表文章窗口 {
             imageView.setOnLongClickListener(V->{
                 var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(10);
+                imageView.setImageBitmap(null);
                 linear.removeView(imageView);
                 post_dataList.remove(post_data);
                 return true;
@@ -207,7 +222,7 @@ public class 发表文章窗口 {
             post_dataList.add(post_data);
             linear.addView(imageView);
             选择图片窗口句柄.dismiss();
-            Fun.回到底部(scrollView);
+            Fun.回到底部(activity, scrollView);
         });
         选择图片窗口句柄.setOnDismissListener(_ -> {
             // 释放GridView资源
@@ -265,6 +280,7 @@ public class 发表文章窗口 {
             imageView.setOnLongClickListener(V1->{
                 var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(10);
+                imageView.setImageBitmap(null);
                 linear.removeView(imageView);
                 post_dataList.remove(post_data);
                 return true;
@@ -282,7 +298,7 @@ public class 发表文章窗口 {
             post_dataList.add(post_data);
             linear.addView(imageView);
             dialog.dismiss();
-            Fun.回到底部(scrollView);
+            Fun.回到底部(activity, scrollView);
         });
 
         dialog.setView(view);

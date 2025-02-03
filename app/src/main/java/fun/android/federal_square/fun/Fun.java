@@ -420,11 +420,13 @@ public class Fun {
         刷新当前文章(activity, linear, scrollView);
     }
 
-    public static void 回到底部(ScrollView scrollView){
-        scrollView.post(()->{
-            View contentView = scrollView.getChildAt(0);
-            int height = contentView.getMeasuredHeight();
-            scrollView.smoothScrollTo(0, height);
+    public static void 回到底部(Activity activity, ScrollView scrollView){
+        activity.runOnUiThread(()->{
+            scrollView.post(()->{
+                View contentView = scrollView.getChildAt(0);
+                int height = contentView.getMeasuredHeight();
+                scrollView.smoothScrollTo(0, height);
+            });
         });
     }
 

@@ -25,7 +25,7 @@ public class View_Hot extends View_Main{
     private SwipeRefreshLayout swipe_layout;
     public LinearLayout linear;
     public ScrollView scrollView;
-    private boolean scrollView_Di = false;
+    private boolean scrollView_Down = false;
     public int Post_Index = 0;
 
     public View_Hot(MainActivity activity) {
@@ -63,9 +63,9 @@ public class View_Hot extends View_Main{
             var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){
-                scrollView_Di = true;
+                scrollView_Down = true;
             }else{
-                scrollView_Di = false;
+                scrollView_Down = false;
             }
             Fun.刷新当前文章(activity_main, linear, scrollView);
         });
@@ -223,11 +223,13 @@ public class View_Hot extends View_Main{
         Fun.刷新当前文章(activity_main, linear, scrollView);
     }
     public void 修改底部空间(){
-        if(scrollView_Di){
-            scrollView.post(()->{
-                var childHeight = scrollView.getChildAt(0).getHeight();
-                var scrollViewHeight = scrollView.getHeight();
-                scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+        if(scrollView_Down){
+            activity_main.runOnUiThread(()->{
+                scrollView.post(()->{
+                    int childHeight = scrollView.getChildAt(0).getHeight();
+                    int scrollViewHeight = scrollView.getHeight();
+                    scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+                });
             });
         }
     }

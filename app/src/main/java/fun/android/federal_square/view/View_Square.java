@@ -35,7 +35,7 @@ public class View_Square extends View_Main{
     private RelativeLayout button_add, button_url_setting;
     public LinearLayout linear;
     public TextView di_title;
-    public boolean scrollView_Down_Y = false;
+    public boolean scrollView_Down = false;
     private Thread time_thread=null;
     public int Post_Index = 0;
 
@@ -82,9 +82,9 @@ public class View_Square extends View_Main{
             int screenHeight = scrollView.getHeight(); // 获取 ScrollView 的高度
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){
-                scrollView_Down_Y = true;
+                scrollView_Down = true;
             }else{
-                scrollView_Down_Y = false;
+                scrollView_Down = false;
             }
             Fun.刷新当前文章(activity_main, linear, scrollView);
         });
@@ -308,11 +308,13 @@ public class View_Square extends View_Main{
     }
 
     public void 修改底部空间(){
-        if(scrollView_Down_Y){
-            scrollView.post(()->{
-               int childHeight = scrollView.getChildAt(0).getHeight();
-               int scrollViewHeight = scrollView.getHeight();
-               scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+        if(scrollView_Down){
+            activity_main.runOnUiThread(()->{
+                scrollView.post(()->{
+                    int childHeight = scrollView.getChildAt(0).getHeight();
+                    int scrollViewHeight = scrollView.getHeight();
+                    scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+                });
             });
         }
     }
