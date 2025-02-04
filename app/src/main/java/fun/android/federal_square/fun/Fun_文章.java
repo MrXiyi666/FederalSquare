@@ -198,15 +198,7 @@ public class Fun_文章 {
     public static List<String> 获取广场所有集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
-            for(String name: list){
-                Log.w("文件名", name);
-            }
-            list.sort((o1, o2) -> {
-                // 提取时间部分进行比较
-                String time1 = o1.substring(0, o1.lastIndexOf('_'));
-                String time2 = o2.substring(0, o2.lastIndexOf('_'));
-                return time2.compareTo(time1); // 降序排列
-            });
+            FileNameSort.sortByDateTime(list);
             if(list.isEmpty()){
                 return new ArrayList<>();
             }
@@ -219,12 +211,7 @@ public class Fun_文章 {
     public static List<String> 获取我的文章集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
-            list.sort((o1, o2) -> {
-                // 提取时间部分进行比较
-                String time1 = o1.substring(0, o1.lastIndexOf('_'));
-                String time2 = o2.substring(0, o2.lastIndexOf('_'));
-                return time2.compareTo(time1); // 降序排列
-            });
+            FileNameSort.sortByDateTime(list);
             int index = Fun.获取我的文章数量();
             List<String> return_list = new ArrayList<>();
             for(int i=0; i < index; i++){
@@ -244,12 +231,7 @@ public class Fun_文章 {
     public static List<String> 获取我的收藏集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
-            list.sort((o1, o2) -> {
-                // 提取时间部分进行比较
-                String time1 = o1.substring(0, o1.lastIndexOf('_'));
-                String time2 = o2.substring(0, o2.lastIndexOf('_'));
-                return time2.compareTo(time1); // 降序排列
-            });
+            FileNameSort.sortByDateTime(list);
             int index = Fun.获取我的收藏数量();
             List<String> return_list = new ArrayList<>();
             for(int i=0; i < index; i++){
@@ -281,12 +263,7 @@ public class Fun_文章 {
     public static List<String> 获取所有文章集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Data");
-            list.sort((o1, o2) -> {
-                // 提取时间部分进行比较
-                String time1 = o1.substring(0, o1.lastIndexOf('_'));
-                String time2 = o2.substring(0, o2.lastIndexOf('_'));
-                return time2.compareTo(time1); // 降序排列
-            });
+            FileNameSort.sortByDateTime(list);
             if(list.isEmpty()){
                 return new ArrayList<>();
             }
@@ -299,12 +276,7 @@ public class Fun_文章 {
     public static List<String> 获取所有收藏集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Account/Collection");
-            list.sort((o1, o2) -> {
-                // 提取时间部分进行比较
-                String time1 = o1.substring(0, o1.lastIndexOf('_'));
-                String time2 = o2.substring(0, o2.lastIndexOf('_'));
-                return time2.compareTo(time1); // 降序排列
-            });
+            FileNameSort.sortByDateTime(list);
             if(list.isEmpty()){
                 return new ArrayList<>();
             }

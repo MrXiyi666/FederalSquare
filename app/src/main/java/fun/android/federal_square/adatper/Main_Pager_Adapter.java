@@ -41,11 +41,4 @@ public class Main_Pager_Adapter extends PagerAdapter {
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
-
-    @Override
-    public int getItemPosition(@NonNull Object object) {
-        // 使用 List.indexOf() 的返回值直接判断对象是否存在
-        int index = mViews.indexOf(object);
-        return index >= 0 ? index : POSITION_NONE;
-    }
 }
