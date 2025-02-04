@@ -24,7 +24,7 @@
         android:layout_above="@id/linear_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
+        <View
             android:background="#f2f3f7"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>

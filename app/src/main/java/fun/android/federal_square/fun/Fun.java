@@ -5,18 +5,13 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,9 +51,7 @@ public class Fun {
             });
             text_id.setText(name);
 
-            return_icon.setOnClickListener(V->{
-                dialog.dismiss();
-            });
+            return_icon.setOnClickListener(_ -> dialog.dismiss());
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -96,9 +89,7 @@ public class Fun {
             });
             text_id.setText(name);
 
-            return_icon.setOnClickListener(V->{
-                dialog.dismiss();
-            });
+            return_icon.setOnClickListener(_ -> dialog.dismiss());
             dialog.setView(view);
             dialog.setCancelable(false);
             Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -178,7 +169,7 @@ public class Fun {
 
     public static int 获取状态栏高度(Activity activity){
         int result=0;
-        @SuppressLint("InternalInsetResource") 
+        @SuppressLint({"InternalInsetResource", "DiscouragedApi"})
         int resourceld = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if(resourceld > 0){
             result = activity.getResources().getDimensionPixelSize(resourceld);
@@ -237,17 +228,11 @@ public class Fun {
     }
 
     public static boolean 视频格式判断(String name){
-        if(name.equals("mp4") || name.equals("3gp") || name.equals("mov") || name.equals("avi") || name.equals("mkv") || name.equals("flv") || name.equals("webm")){
-            return true;
-        }
-        return false;
+        return name.equals("mp4") || name.equals("3gp") || name.equals("mov") || name.equals("avi") || name.equals("mkv") || name.equals("flv") || name.equals("webm");
     }
 
     public static boolean 图片格式判断(String name){
-        if(name.equals("jpg") || name.equals("jpeg") || name.equals("png") || name.equals("webp") || name.equals("gif")){
-            return true;
-        }
-        return false;
+        return name.equals("jpg") || name.equals("jpeg") || name.equals("png") || name.equals("webp") || name.equals("gif");
     }
 
     public static AlertDialog 初始化等待窗口(Activity activity){
@@ -256,47 +241,31 @@ public class Fun {
         TextView text_id = view.findViewById(R.id.text_id);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         return_icon.setVisibility(View.GONE);
-        view.setOnClickListener(V->{
-            dialog.dismiss();
-        });
+        view.setOnClickListener(_ -> dialog.dismiss());
         new Thread(()->{
             int i=0;
             while (text_id != null){
                 switch(i){
                     case 0:
-                        text_id.post(()->{
-                            text_id.setText("  ✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  ✍  "));
                         break;
                     case 1:
-                        text_id.post(()->{
-                            text_id.setText("  .✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  .✍  "));
                         break;
                     case 2:
-                        text_id.post(()->{
-                            text_id.setText("  ..✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  ..✍  "));
                         break;
                     case 3:
-                        text_id.post(()->{
-                            text_id.setText("  ...✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  ...✍  "));
                         break;
                     case 4:
-                        text_id.post(()->{
-                            text_id.setText("  ....✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  ....✍  "));
                         break;
                     case 5:
-                        text_id.post(()->{
-                            text_id.setText("  .....✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  .....✍  "));
                         break;
                     case 6:
-                        text_id.post(()->{
-                            text_id.setText("  ......✍  ");
-                        });
+                        text_id.post(()-> text_id.setText("  ......✍  "));
                         break;
                 }
                 try {
@@ -305,7 +274,7 @@ public class Fun {
                     if(i > 6){
                         i=0;
                     }
-                }catch (Exception e){
+                }catch (Exception _){
 
                 }
             }
@@ -336,7 +305,7 @@ public class Fun {
     public static String 获取域名(){
         String url="";
         if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
+            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0];
         }
         return url;
     }
@@ -344,7 +313,7 @@ public class Fun {
     public static String 获取密码(){
         String url="";
         if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1]+"";
+            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1];
         }
         return url;
     }
@@ -412,59 +381,51 @@ public class Fun {
     }
 
     public static void 回到顶部(ScrollView scrollView, LinearLayout linear, Activity activity) {
-        activity.runOnUiThread(() -> {
-            scrollView.post(()->{
-                scrollView.smoothScrollTo(0, 0);
-            });
-        });
+        activity.runOnUiThread(() -> scrollView.post(()-> scrollView.smoothScrollTo(0, 0)));
         刷新当前文章(activity, linear, scrollView);
     }
 
     public static void 回到底部(Activity activity, ScrollView scrollView){
-        activity.runOnUiThread(()->{
-            scrollView.post(()->{
-                View contentView = scrollView.getChildAt(0);
-                int height = contentView.getMeasuredHeight();
-                scrollView.smoothScrollTo(0, height);
-            });
-        });
+        activity.runOnUiThread(()-> scrollView.post(()->{
+            View contentView = scrollView.getChildAt(0);
+            int height = contentView.getMeasuredHeight();
+            scrollView.smoothScrollTo(0, height);
+        }));
     }
 
     public static void 刷新当前文章(Activity activity, LinearLayout linear, ScrollView scrollView) {
-        activity.runOnUiThread(() -> {
-            scrollView.post(() -> {
-                int scrollY = scrollView.getScrollY();
-                int scrollViewHeight = scrollView.getHeight();
-                int linearCount = linear.getChildCount();
+        activity.runOnUiThread(() -> scrollView.post(() -> {
+            int scrollY = scrollView.getScrollY();
+            int scrollViewHeight = scrollView.getHeight();
+            int linearCount = linear.getChildCount();
 
-                for (int i = 0; i < linearCount; i++) {
-                    View childView = linear.getChildAt(i);
-                    if (childView instanceof Post_View postView) {
-                        // 特殊处理最后一个子视图（去掉下划线）
-                        if (i == linearCount - 1) {
-                            postView.底线消失();
+            for (int i = 0; i < linearCount; i++) {
+                View childView = linear.getChildAt(i);
+                if (childView instanceof Post_View postView) {
+                    // 特殊处理最后一个子视图（去掉下划线）
+                    if (i == linearCount - 1) {
+                        postView.底线消失();
+                    }
+
+                    // 计算子视图是否在屏幕范围内
+                    int childY = (int) postView.getY();
+                    int childHeight = postView.getHeight();
+
+                    boolean isVisible = (childY + childHeight > scrollY) && (childY < scrollY + scrollViewHeight);
+                    int currentVisibility = postView.getVisibility();
+
+                    // 根据计算结果更新可见性
+                    if (isVisible) {
+                        if (currentVisibility != View.VISIBLE) {
+                            postView.setVisibility(View.VISIBLE);
                         }
-
-                        // 计算子视图是否在屏幕范围内
-                        int childY = (int) postView.getY();
-                        int childHeight = postView.getHeight();
-
-                        boolean isVisible = (childY + childHeight > scrollY) && (childY < scrollY + scrollViewHeight);
-                        int currentVisibility = postView.getVisibility();
-
-                        // 根据计算结果更新可见性
-                        if (isVisible) {
-                            if (currentVisibility != View.VISIBLE) {
-                                postView.setVisibility(View.VISIBLE);
-                            }
-                        } else {
-                            if (currentVisibility != View.INVISIBLE) {
-                                postView.setVisibility(View.INVISIBLE);
-                            }
+                    } else {
+                        if (currentVisibility != View.INVISIBLE) {
+                            postView.setVisibility(View.INVISIBLE);
                         }
                     }
                 }
-            });
-        });
+            }
+        }));
     }
 }

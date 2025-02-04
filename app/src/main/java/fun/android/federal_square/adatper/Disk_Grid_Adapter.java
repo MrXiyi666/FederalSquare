@@ -53,7 +53,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         return position;
     }
 
-    @SuppressLint("ViewHolder")
+    @SuppressLint({"ViewHolder", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyGui gui;

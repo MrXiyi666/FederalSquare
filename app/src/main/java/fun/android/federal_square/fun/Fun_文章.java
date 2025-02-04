@@ -3,6 +3,7 @@ package fun.android.federal_square.fun;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,8 +12,6 @@ import net.csdn.roundview.RoundImageView;
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.R;
-import fun.android.federal_square.View_Collectin;
-import fun.android.federal_square.View_Essay;
 import fun.android.federal_square.View_Post_Activity;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
@@ -34,9 +33,9 @@ public class Fun_文章 {
         RoundImageView avatar_img = view.findViewById(R.id.avatar_img);
         TextView url_txt_id = view.findViewById(R.id.url_txt_id);
         LinearLayout linear = view.findViewById(R.id.linear);
-        TextView di_xian = view.findViewById(R.id.di_xian);
+        View di_xian = view.findViewById(R.id.di_xian);
         view.传递底线(di_xian);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         List<String> img_url = new ArrayList<>();
         String avatar_url = "";
         String url_txt="";
@@ -124,7 +123,7 @@ public class Fun_文章 {
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
         String finalForward = forward;
-        button_forward.setOnClickListener(V->{
+        button_forward.setOnClickListener(_ ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法转发");
                 return;
@@ -144,14 +143,14 @@ public class Fun_文章 {
 
         });
 
-        button_message.setOnClickListener(V->{
+        button_message.setOnClickListener(_ ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法查看");
                 return;
             }
             查看评论窗口.查看评论窗口(activity, finalTime_txt, finalUrl_txt, finalPassWord_txt);
         });
-        button_collection.setOnClickListener(V->{
+        button_collection.setOnClickListener(_ ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法收藏");
                 return;
@@ -160,7 +159,7 @@ public class Fun_文章 {
             netWork_添加_收藏.传递参数(finalTime_txt, post_data);
             netWork_添加_收藏.start();
         });
-        view.setOnClickListener(V->{
+        view.setOnClickListener(_ ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法查看");
                 return;
@@ -170,7 +169,7 @@ public class Fun_文章 {
             intent.setClass(activity, View_Post_Activity.class);
             activity.startActivity(intent);
         });
-        view.setOnLongClickListener(V->{
+        view.setOnLongClickListener(_ ->{
             switch (index){
                 case 0:
                     删除窗口.删除本地文章窗户(activity, finalTime_txt, view);
@@ -199,6 +198,9 @@ public class Fun_文章 {
     public static List<String> 获取广场所有集合(){
         try {
             List<String> list = Fun_文件.遍历文件夹(able.app_path + "Square_Data");
+            for(String name: list){
+                Log.w("文件名", name);
+            }
             list.sort((o1, o2) -> {
                 // 提取时间部分进行比较
                 String time1 = o1.substring(0, o1.lastIndexOf('_'));
@@ -315,9 +317,7 @@ public class Fun_文章 {
     public static void 释放所有文章内存(LinearLayout linear){
         able.handler.post(()->{
             for(int i=0; i< linear.getChildCount(); i++){
-                if(linear.getChildAt(i) instanceof Post_View){
-                    int finalI = i;
-                    Post_View post_view = (Post_View) linear.getChildAt(finalI);
+                if(linear.getChildAt(i) instanceof Post_View post_view){
                     post_view.清除图片();
                 }
             }

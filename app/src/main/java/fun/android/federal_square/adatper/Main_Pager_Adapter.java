@@ -44,7 +44,8 @@ public class Main_Pager_Adapter extends PagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-        // 当数据变化时自动更新位置信息
-        return mViews.contains(object) ? mViews.indexOf(object) : POSITION_NONE;
+        // 使用 List.indexOf() 的返回值直接判断对象是否存在
+        int index = mViews.indexOf(object);
+        return index >= 0 ? index : POSITION_NONE;
     }
 }

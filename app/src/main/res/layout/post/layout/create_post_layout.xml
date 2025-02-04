@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
-    <TextView
+    <View
         android:id="@+id/di_xian"
         android:layout_marginTop="10dp"
         android:background="#f2f3f7"

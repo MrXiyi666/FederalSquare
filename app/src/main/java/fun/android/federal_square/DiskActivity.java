@@ -1,13 +1,9 @@
 package fun.android.federal_square;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
@@ -19,8 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.bumptech.glide.Glide;
-import java.io.FileNotFoundException;
 import java.util.List;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
 import fun.android.federal_square.data.able;
@@ -81,11 +75,11 @@ public class DiskActivity extends AppCompatActivity {
             button_network_disk.setEnabled(false);
             上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE).build());
         });
-        button_menu.setOnClickListener(V->{
+        button_menu.setOnClickListener(_ ->{
             网盘设置窗口.启动(this);
         });
 
-        return_icon.setOnClickListener(V->{
+        return_icon.setOnClickListener(_ ->{
             finish();
         });
     }
@@ -124,6 +118,7 @@ public class DiskActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void 初始化数据(){
         int Disk_Index = 3;
         String Str_index = Fun_文件.读取文件(able.app_path + "System_Data/Disk_index.txt");
@@ -136,7 +131,7 @@ public class DiskActivity extends AppCompatActivity {
         title_index.setText("统计数量： " + file_list.size());
         disk_grid_adapter = new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index);
         gridView.setAdapter(disk_grid_adapter);
-        gridView.setOnItemClickListener((parent, view, position, id) -> {
+        gridView.setOnItemClickListener((_, _, position, _) -> {
             String 后缀 = Fun_文件.获取后缀(file_list.get(position));
             String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position);
             if(Fun.图片格式判断(后缀)){
@@ -147,7 +142,7 @@ public class DiskActivity extends AppCompatActivity {
                 打开方式窗口.启动(this, url);
             }
         });
-        gridView.setOnItemLongClickListener((parent, view, position, id) -> {
+        gridView.setOnItemLongClickListener((_, _, position, _) -> {
             删除窗口.删除网盘图片窗口(DiskActivity.this, file_list.get(position));
             return true;
         });

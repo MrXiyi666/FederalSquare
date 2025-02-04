@@ -5,11 +5,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.common.io.Files;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,25 +68,26 @@ public class Fun_文件 {
         return new File(path).delete();
     }
 
-    public static boolean 删除文件夹(File file) {
-        if (file == null || !file.exists()) {
+    public static boolean 删除文件夹(File folder) {
+        if (folder == null || !folder.exists()) {
             return false;
         }
-        File[] files = file.listFiles();
-        if(files !=null){
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    删除文件夹(f);
+        if (folder.isDirectory()) {
+            File[] files = folder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    // 递归删除子文件夹中的内容
+                    if (file.isDirectory()) {
+                        删除文件夹(file);
+                    } else {
+                        file.delete();
+                    }
                 }
-                f.delete();
             }
-            file.delete();
         }
-        if (file.exists()) {
-            return false;
-        }else{
-            return true;
-        }
+
+        // 删除当前文件夹
+        return folder.delete();
     }
 
 
@@ -99,41 +103,57 @@ public class Fun_文件 {
         if(fs == null){
             return list;
         }
-        for(File f : fs){
-            list.add(f.getName());
+        int index=0;
+        for(int i=fs.length-1; i>=0; i--){
+            if(index >= 100000){
+                break;
+            }
+            list.add(fs[i].getName());
+            index++;
         }
-
         return list;
     }
 
     /**
-     * 复制文件
+     * 复制文件（优化版）
      *
      * @param context     上下文
      * @param fromUri     源文件Uri
      * @param toFilePath  目标文件路径
      */
-    public static void copy_Uri_File(Context context, Uri fromUri, String toFilePath) {
+    public static void copy_Uri_File(@NonNull Context context, @NonNull Uri fromUri, @NonNull String toFilePath) {
+        final int BUFFER_SIZE = 8 * 1024; // 8KB缓冲区
         ContentResolver contentResolver = context.getContentResolver();
-        try {
-            InputStream inputStream = contentResolver.openInputStream(fromUri);
-            OutputStream outputStream = new FileOutputStream(toFilePath);
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, read);
+
+        File targetFile = new File(toFilePath);
+        // 确保目标目录存在
+        File parentDir = targetFile.getParentFile();
+        if (parentDir != null && !parentDir.exists() && !parentDir.mkdirs()) {
+           return;
+        }
+
+        try (InputStream input = contentResolver.openInputStream(fromUri);
+             OutputStream output = new FileOutputStream(targetFile)) {
+            if (input == null) {
+                throw new FileNotFoundException("未找到源文件: " + fromUri);
             }
-            outputStream.flush();
-            inputStream.close();
-            outputStream.close();
+
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int bytesRead;
+            while ((bytesRead = input.read(buffer)) != -1) {
+                output.write(buffer, 0, bytesRead);
+            }
+            output.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            // 删除不完整的文件
+            if (targetFile.exists() && !targetFile.delete()) {
+                Log.w("文件复制", "无法删除未完成的文件: " + targetFile);
+            }
         }
     }
     /**
      * 复制文件
      *
-     * @param context     上下文
      * @param fromUri     源文件Uri
      * @param toFilePath  目标文件路径
      */

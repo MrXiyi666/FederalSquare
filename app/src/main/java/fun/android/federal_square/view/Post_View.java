@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -70,8 +68,8 @@ public class Post_View extends LinearLayout {
         fun_文章子布局.清除图片();
         Glide.with(activity).clear(avatar_img);
     }
-    private TextView di_xian;
-    public void 传递底线(TextView di_xian){
+    private View di_xian;
+    public void 传递底线(View di_xian){
         this.di_xian = di_xian;
     }
 

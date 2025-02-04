@@ -1,5 +1,6 @@
 package fun.android.federal_square.data;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,8 +21,11 @@ public class able {
     public static String PassWord ="";
     public static Gson gson = new Gson();
     public static OkHttpClient okHttpClient;
+    @SuppressLint("StaticFieldLeak")
     public static View_Square view_square;
+    @SuppressLint("StaticFieldLeak")
     public static View_Hot view_hot;
+    @SuppressLint("StaticFieldLeak")
     public static View_Home view_home;
     public static List<Post_Data> 传递数据;
     public static RequestOptions requestOptions = new RequestOptions()
