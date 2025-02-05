@@ -25,9 +25,25 @@
     if(!$file){
         die("no_data");
     }
-    echo "ok";
-    fwrite($file, $data);
+    
+    $writ = fwrite($file, $data);
     fclose($file);
-    mkdir($path . '/Data', 0777, true);
-    mkdir($path . "/Collection", 0777, true);
-    mkdir($path . "/Image_Resources", 0777, true);
+    if ($writ === false) {
+        die("no_data");
+    }
+    $mkk = mkdir($path . '/Data', 0777, true);
+    if ($mkk === false) {
+		unlink($path . '/' . $account . '.txt');
+        die("no_data");
+    }
+    $mkk = mkdir($path . "/Collection", 0777, true);
+	if ($mkk === false) {
+		unlink($path . '/' . $account . '.txt');
+        die("no_data");
+    }
+    $mkk = mkdir($path . "/Image_Resources", 0777, true);
+	if ($mkk === false) {
+		unlink($path . '/' . $account . '.txt');
+        die("no_data");
+    }
+	echo "ok";
