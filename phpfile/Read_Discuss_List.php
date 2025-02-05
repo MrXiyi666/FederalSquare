@@ -1,7 +1,6 @@
 <?php
-     include 'PassWord_Data.php';
-     $path = $_POST['path'];
-
+    include 'PassWord_Data.php';
+    $path = $_POST['path'] ?? '';
     if(!isset($path) and strlen($path) == 0){
         die("no_folder");
     }

@@ -1,8 +1,10 @@
 <?php
 
     include 'PassWord_Data.php';
-    $Account_name = $_POST['Account'];
-   
+    $Account_name = $_POST['Account'] ?? '';
+    if(empty($Account_name) || strlen($Account_name) === 0){
+	    die("no_up");
+    }
     if($_FILES["file"]["error"] > 0){
         die("no_up");
     }

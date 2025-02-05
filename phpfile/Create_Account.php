@@ -2,9 +2,9 @@
 
     include 'PassWord_Data.php';
     //创建账号功能
-	$account = $_POST['account'];
-	$path = $_POST['path'];
-	$data = $_POST['data'];
+	$account = $_POST['account'] ?? '';
+	$path = $_POST['path'] ?? '';
+	$data = $_POST['data'] ?? '';
     if( (!isset($account) and strlen($account) == 0) and
         (!isset($path) and strlen($path) == 0) and
         (!isset($data) and strlen($data) == 0)

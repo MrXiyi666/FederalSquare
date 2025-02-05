@@ -1,11 +1,12 @@
 <?php
   include 'PassWord_Data.php';
-  $path = $_POST['path'];
-
+  $path = $_POST['path'] ?? '';
+  if(empty($path) || strlen($path) === 0){
+	    die("no_folder");
+  }
   if(!is_dir($path)){
       die("no_folder");
   }
-
   $_array = scandir($path);
   $_return = array();
   foreach ($_array as $value){
@@ -24,4 +25,3 @@
       die("no");
   }
   echo implode("\n", $_return);
-
