@@ -31,18 +31,15 @@
     if ($writ === false) {
         die("no_data");
     }
-    $mkk = mkdir($path . '/Data', 0777, true);
-    if ($mkk === false) {
+    if (!mkdir($path . '/Data', 0777, true)) {
 		unlink($path . '/' . $account . '.txt');
         die("no_data");
     }
-    $mkk = mkdir($path . "/Collection", 0777, true);
-	if ($mkk === false) {
+	if (!mkdir($path . "/Collection", 0777, true)) {
 		unlink($path . '/' . $account . '.txt');
         die("no_data");
     }
-    $mkk = mkdir($path . "/Image_Resources", 0777, true);
-	if ($mkk === false) {
+	if (!mkdir($path . "/Image_Resources", 0777, true)) {
 		unlink($path . '/' . $account . '.txt');
         die("no_data");
     }
