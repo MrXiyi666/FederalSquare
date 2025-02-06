@@ -26,7 +26,6 @@ import androidx.media3.ui.PlayerView;
 import java.util.Objects;
 import fun.android.federal_square.App;
 import fun.android.federal_square.R;
-import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_账号;
 
@@ -40,7 +39,7 @@ public class 查看视频窗口 {
         }
         Window window = activity.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
+        AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_video_view, null);
         final ExoPlayer player = new ExoPlayer.Builder(activity).build();
         PlayerView playerView = view.findViewById(R.id.video_view);
@@ -102,9 +101,7 @@ public class 查看视频窗口 {
         });
         dialog.setView(view);
         dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.TOP);

@@ -36,7 +36,7 @@ import fun.android.federal_square.view.Post_View;
 public class Fun {
 
     public static void mess(Activity activity, String name){
-        able.handler.post(()->{
+        activity.runOnUiThread(()->{
             AlertDialog dialog = new AlertDialog.Builder(activity,  R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
@@ -50,31 +50,26 @@ public class Fun {
                 }
             });
             text_id.setText(name);
-
-            return_icon.setOnClickListener(_ -> dialog.dismiss());
             dialog.setView(view);
-            dialog.setCancelable(false);
-            Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.setCancelable(true);
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().setGravity(Gravity.TOP);
             dialog.show();
             new Thread(()->{
                 try {
                     Thread.sleep(500);
-                    dialog.dismiss();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                dialog.dismiss();
             }).start();
-
         });
     }
 
     public static void mess(Activity activity, String name, int time){
-
-        able.handler.post(()->{
+        activity.runOnUiThread(()->{
             AlertDialog dialog = new AlertDialog.Builder(activity,  R.style.AlertDialog_Loading).create();
             View view = View.inflate(activity, R.layout.window_toast_view, null);
             TextView text_id = view.findViewById(R.id.text_id);
@@ -88,23 +83,20 @@ public class Fun {
                 }
             });
             text_id.setText(name);
-
-            return_icon.setOnClickListener(_ -> dialog.dismiss());
             dialog.setView(view);
-            dialog.setCancelable(false);
-            Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.setCancelable(true);
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().setGravity(Gravity.TOP);
             dialog.show();
             new Thread(()->{
                 try {
                     Thread.sleep(time);
-                    dialog.dismiss();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                dialog.dismiss();
             }).start();
 
         });
@@ -233,60 +225,6 @@ public class Fun {
 
     public static boolean 图片格式判断(String name){
         return name.equals("jpg") || name.equals("jpeg") || name.equals("png") || name.equals("webp") || name.equals("gif");
-    }
-
-    public static AlertDialog 初始化等待窗口(Activity activity){
-        final AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Loading).create();
-        View view = View.inflate(activity, R.layout.window_load_toast_view, null);
-        TextView text_id = view.findViewById(R.id.text_id);
-        ImageView return_icon = view.findViewById(R.id.return_icon);
-        return_icon.setVisibility(View.GONE);
-        view.setOnClickListener(_ -> dialog.dismiss());
-        new Thread(()->{
-            int i=0;
-            while (text_id != null){
-                switch(i){
-                    case 0:
-                        text_id.post(()-> text_id.setText("  ✍  "));
-                        break;
-                    case 1:
-                        text_id.post(()-> text_id.setText("  .✍  "));
-                        break;
-                    case 2:
-                        text_id.post(()-> text_id.setText("  ..✍  "));
-                        break;
-                    case 3:
-                        text_id.post(()-> text_id.setText("  ...✍  "));
-                        break;
-                    case 4:
-                        text_id.post(()-> text_id.setText("  ....✍  "));
-                        break;
-                    case 5:
-                        text_id.post(()-> text_id.setText("  .....✍  "));
-                        break;
-                    case 6:
-                        text_id.post(()-> text_id.setText("  ......✍  "));
-                        break;
-                }
-                try {
-                    Thread.sleep(300);
-                    i++;
-                    if(i > 6){
-                        i=0;
-                    }
-                }catch (Exception _){
-
-                }
-            }
-        }).start();
-        dialog.setView(view);
-        dialog.setCancelable(false);
-        Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setGravity(Gravity.TOP);
-        return dialog;
     }
 
     public static String 网址获取文件名(String txt){

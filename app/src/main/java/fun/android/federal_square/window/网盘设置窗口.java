@@ -1,21 +1,15 @@
 package fun.android.federal_square.window;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
-
 import java.util.Objects;
-
 import fun.android.federal_square.DiskActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -23,7 +17,7 @@ import fun.android.federal_square.fun.Fun_文件;
 
 public class 网盘设置窗口 {
     public static void 启动(DiskActivity activity){
-        AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
+        AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_disk_menu, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         EditText edit_text_1 = view.findViewById(R.id.edit_text_1);
@@ -45,9 +39,7 @@ public class 网盘设置窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();

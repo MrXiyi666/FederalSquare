@@ -31,14 +31,16 @@ public class 查看图片窗口 {
             Fun.mess(activity, "没有登陆 无法查看");
             return;
         }
-        AlertDialog load_dialog = Fun.初始化等待窗口(activity);
-        load_dialog.show();
-        AlertDialog dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
+
+        AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_view_img, null);
         com.github.chrisbanes.photoview.PhotoView photoView = view.findViewById(R.id.photoView);
         photoView.getLayoutParams().width = able.宽度;
         photoView.getLayoutParams().height = able.高度;
         photoView.setVisibility(View.VISIBLE);
+        photoView.setOnClickListener(V->{
+            dialog.dismiss();
+        });
         Glide.with(activity)
                 .load(url)
                 .apply(able.原图_request)
@@ -52,7 +54,6 @@ public class 查看图片窗口 {
                             } catch (InterruptedException e1) {
                                 throw new RuntimeException(e1);
                             }
-                            load_dialog.dismiss();
                             dialog.dismiss();
                         }).start();
                         Fun.mess(activity, "加载失败");
@@ -67,30 +68,21 @@ public class 查看图片窗口 {
                             } catch (InterruptedException e) {
                                 throw new RuntimeException(e);
                             }
-                            load_dialog.dismiss();
                         }).start();
                         return false;
                     }
                 })
                 .into(photoView);
-
-        photoView.setOnClickListener(V->{
-            dialog.dismiss();
-        });
         view.setOnLongClickListener(V->{
             dialog.dismiss();
-            load_dialog.dismiss();
-
             return true;
         });
         dialog.setView(view);
         dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+
     }
 }

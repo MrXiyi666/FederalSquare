@@ -66,8 +66,8 @@ public class View_Square extends View_Main{
         super.事件();
         top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         swipe_layout.setOnRefreshListener(()->{
-            if(able.view_square.new_icon.getVisibility() == View.VISIBLE){
-                able.view_square.new_icon.setVisibility(View.GONE);
+            if(new_icon.getVisibility() == View.VISIBLE){
+                new_icon.setVisibility(View.GONE);
             }
             var netWork_广场刷新 = new NetWork_广场刷新(activity_main);
             netWork_广场刷新.start();

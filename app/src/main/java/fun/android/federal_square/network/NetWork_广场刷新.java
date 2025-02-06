@@ -65,7 +65,6 @@ public class NetWork_广场刷新 extends NetWork_Main {
                 able.view_square.new_icon.setVisibility(View.GONE);
             }
         }
-
         if(able.view_square!=null){
             able.view_square.初始化本地数据();
         }

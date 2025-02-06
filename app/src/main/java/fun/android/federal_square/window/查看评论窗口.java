@@ -63,7 +63,6 @@ public class 查看评论窗口 {
         }
         NetWork_评论_读取 netWork_讨论_读取 = new NetWork_评论_读取(activity);
         netWork_讨论_读取.传递参数(time_name, linear, 网址, PassWord);
-        netWork_讨论_读取.start();
         swiperefee.setOnRefreshListener(()->{
             netWork_讨论_读取.传递参数(time_name, linear, 网址, PassWord);
             netWork_讨论_读取.start();
@@ -72,12 +71,11 @@ public class 查看评论窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+        netWork_讨论_读取.start();
     }
     public static void 发布新的评论(Activity activity, LinearLayout linear, List<Post_Data> post_dataList, String time_name, String 网址, String PassWord){
         View view = 添加评论布局(activity, post_dataList);

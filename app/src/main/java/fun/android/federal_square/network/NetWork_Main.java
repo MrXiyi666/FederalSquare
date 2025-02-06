@@ -37,7 +37,6 @@ public class NetWork_Main {
     }
 
     public void 刷新(){
-        关闭等待窗口();
     }
 
     public void start(){
@@ -108,7 +107,7 @@ public class NetWork_Main {
                     下载收藏内容();
                 }
                 if(b_update){
-                    able.handler.post(()->{
+                    activity.runOnUiThread(()->{
                         刷新();
                     });
                 }
