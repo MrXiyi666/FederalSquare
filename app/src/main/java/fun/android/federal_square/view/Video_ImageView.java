@@ -12,8 +12,6 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.fun.Fun;
 
 public class Video_ImageView extends net.csdn.roundview.RoundImageView {
-    private Bitmap originalBitmap=null;
-    private Bitmap scaledBitmap=null;
     public String 后缀;
 
     public Video_ImageView(Context context) {
@@ -33,29 +31,13 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (Fun.视频格式判断(后缀)) {
-            if(originalBitmap==null && originalBitmap.isRecycled()){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.video_icon);
-            }
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.video_icon);
             int squareSize = Math.min(getWidth(), getHeight()) / 4;
-            if(scaledBitmap==null && scaledBitmap.isRecycled()){
-                scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, squareSize, squareSize, true);
-            }
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, squareSize, squareSize, true);
             squareSize = Math.min(getWidth(), getHeight()) / 4;
             float left = (getWidth() - squareSize) / 2f;
             float top = (getHeight() - squareSize) / 2f;
             canvas.drawBitmap(scaledBitmap, left, top, new Paint());
-        }
-    }
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (originalBitmap != null) {
-            originalBitmap.recycle();
-            originalBitmap = null;
-        }
-        if (scaledBitmap != null) {
-            scaledBitmap.recycle();
-            scaledBitmap = null;
         }
     }
 }
