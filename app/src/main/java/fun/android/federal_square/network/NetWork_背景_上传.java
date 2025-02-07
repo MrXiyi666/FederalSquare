@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import com.bumptech.glide.Glide;
 import java.util.List;
+import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -53,6 +54,7 @@ public class NetWork_背景_上传 extends NetWork_Main{
                 .load(back_url)
                 .apply(able.requestOptions)
                 .into(back_img);
+        back_img.setBackgroundResource(R.drawable.gradient_white_to_transparent);
         if(fun_dialog != null){
            fun_dialog.dismiss();
         }

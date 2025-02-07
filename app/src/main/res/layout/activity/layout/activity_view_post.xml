@@ -8,42 +8,11 @@
         android:id="@+id/top_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <RelativeLayout
-        android:id="@+id/relati"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/top_title">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:text="查看文章"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="10dp"
-            android:id="@+id/return_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/return_icon" />
-    </RelativeLayout>
-    <TextView
-        android:layout_below="@id/relati"
-        android:id="@+id/xian1"
-        android:background="#808080"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_below="@id/xian1"
+        android:layout_below="@id/top_title"
         android:scrollbars="none"
         android:overScrollMode="never"
         android:layout_width="match_parent"

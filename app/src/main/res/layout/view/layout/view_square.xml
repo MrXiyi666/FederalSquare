@@ -13,56 +13,40 @@
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
+        <ImageView
+            android:layout_marginStart="10dp"
             android:id="@+id/button_url_setting"
-            android:layout_centerInParent="true"
-            android:layout_alignParentStart="true"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:scaleType="centerCrop"
-                android:layout_centerInParent="true"
-                android:src="@drawable/url_setting_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_centerInParent="true"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_toStartOf="@id/title"
-                android:layout_centerVertical="true"
-                android:id="@+id/new_icon"
-                android:visibility="visible"
-                android:src="@drawable/square_new_icon"
-                android:layout_width="40dp"
-                android:layout_height="30dp"/>
-            <TextView
-                android:layout_centerInParent="true"
-                android:textColor="@color/black"
-                android:text="时间线"
-                android:id="@+id/title"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
-        </RelativeLayout>
+            android:scaleType="centerCrop"
+            android:src="@drawable/url_setting_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+        <ImageView
+            android:layout_toStartOf="@id/title"
+            android:id="@+id/new_icon"
+            android:src="@drawable/square_new_icon"
+            android:layout_width="40dp"
+            android:layout_height="23dp"/>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:text="时间线"
+            android:id="@+id/title"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <RelativeLayout
             android:id="@+id/button_add"
-            android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_centerInParent="true"
-                android:scaleType="centerCrop"
                 android:src="@drawable/add_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
         </RelativeLayout>
     </RelativeLayout>
-    <TextView
+    <View
         android:id="@+id/xian1"
         android:background="#808080"
         android:layout_width="match_parent"

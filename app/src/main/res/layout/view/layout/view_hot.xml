@@ -11,17 +11,17 @@
     <RelativeLayout
         android:id="@+id/relati"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="30dp">
         <TextView
             android:id="@+id/title_txt"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:text="头条热榜"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
-    <TextView
+    <View
         android:id="@+id/xian1"
         android:background="#808080"
         android:layout_width="match_parent"

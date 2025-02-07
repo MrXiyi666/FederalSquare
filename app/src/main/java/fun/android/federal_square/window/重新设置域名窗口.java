@@ -18,7 +18,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun_文件;
 
 public class 重新设置域名窗口 {
-    public void 启动(Activity activity, RelativeLayout button_url_setting){
+    public void 启动(Activity activity, ImageView button_url_setting){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_url_setting_view, null);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);

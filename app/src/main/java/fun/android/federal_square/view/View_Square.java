@@ -32,7 +32,8 @@ public class View_Square extends View_Main{
     public ImageView new_icon;
     private SwipeRefreshLayout swipe_layout;
     public ScrollView scrollView;
-    private RelativeLayout button_add, button_url_setting;
+    private RelativeLayout button_add;
+    private ImageView button_url_setting;
     public LinearLayout linear;
     public TextView di_title;
     public boolean scrollView_Down = false;

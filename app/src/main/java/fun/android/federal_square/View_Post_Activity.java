@@ -50,7 +50,6 @@ public class View_Post_Activity extends AppCompatActivity {
         window.setNavigationBarColor(Color.WHITE);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_view_post);
-        ImageView return_icon = findViewById(R.id.return_icon);
         top_title = findViewById(R.id.top_title);
         linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
@@ -64,9 +63,6 @@ public class View_Post_Activity extends AppCompatActivity {
         ScrollView scrollView = findViewById(R.id.scrollView);
         top_title.post(()->{
             top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
-        });
-        return_icon.setOnClickListener(V->{
-            finish();
         });
         if(able.传递数据 == null){
             finish();

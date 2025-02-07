@@ -6,30 +6,16 @@
     android:background="#ffffff"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DiskActivity">
-    <RelativeLayout
-        android:id="@+id/relati"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:id="@+id/title_txt"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
-            android:text="网盘资源"
-            android:textSize="18sp"
-            android:gravity="bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <ImageView
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/return_icon"
-            android:id="@+id/return_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
-    </RelativeLayout>
-    <TextView
-        android:layout_below="@id/relati"
+    <ImageView
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/return_icon"
+        android:id="@+id/return_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+    <View
+        android:layout_below="@id/return_icon"
         android:id="@id/xian1"
         android:background="#808080"
         android:layout_width="match_parent"
