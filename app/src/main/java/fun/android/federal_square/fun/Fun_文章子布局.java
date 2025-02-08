@@ -111,8 +111,10 @@ public class Fun_文章子布局 {
 
     public void 加载图片(){
         for(int i=0;i<video_imageViews.size();i++){
+            video_imageViews.get(i).clearAnimation();
             Glide.with(activity)
                     .load(img_url.get(i))
+                    .thumbnail(0.25f)
                     .apply(able.requestOptions)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(video_imageViews.get(i));

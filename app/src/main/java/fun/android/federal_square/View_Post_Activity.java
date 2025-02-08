@@ -85,6 +85,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .load(post_data.getText())
                             .apply(able.requestOptions)
+                            .thumbnail(0.25f)
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .into(avatar_img);
                     break;
@@ -105,6 +106,7 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .load(post_data.getText())
                             .apply(able.requestOptions)
+                            .thumbnail(0.25f)
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .listener(new RequestListener<>() {
                                 @Override
@@ -138,6 +140,7 @@ public class View_Post_Activity extends AppCompatActivity {
                         Glide.with(this)
                                 .load(post_data.getText())
                                 .apply(able.requestOptions)
+                                .thumbnail(0.25f)
                                 .transition(DrawableTransitionOptions.withCrossFade())
                                 .listener(new RequestListener<Drawable>() {
                                     @Override
@@ -265,6 +268,5 @@ public class View_Post_Activity extends AppCompatActivity {
         }
         linear.removeAllViews();
     }
-
 
 }

@@ -91,8 +91,8 @@ public class DiskActivity extends AppCompatActivity {
                 button_network_disk.setEnabled(true);
                 return;
             }
-            if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 5242880){
-                Fun.mess(DiskActivity.this, "文件大于 5 MB 请压缩后上传");
+            if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 52428800){
+                Fun.mess(DiskActivity.this, "文件大于 50 MB 请压缩后上传");
                 button_network_disk.setEnabled(true);
                 return;
             }

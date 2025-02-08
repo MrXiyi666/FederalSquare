@@ -75,6 +75,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         String url_txt = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position);
         Glide.with(context).load(url_txt)
                 .override(height)
+                .thumbnail(0.25f)
                 .apply(able.requestOptions)
                 .into(gui.img);
         return convertView;

@@ -5,6 +5,7 @@ import android.util.Log;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_账号;
+import fun.android.federal_square.window.上传进度窗口;
 import fun.android.federal_square.window.加载等待窗口;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
@@ -16,9 +17,10 @@ public class NetWork_Main_MultipartBody {
     public Activity activity;
     public String class_name;
     public RequestBody body;
-    private 加载等待窗口 dialog;
     public Request request;
     public boolean 账号检测 = true;
+    public 上传进度窗口 _上传进度窗口;
+    public RequestBody requestBody;
     public MultipartBody multipartBody;
     public String url;
     public NetWork_Main_MultipartBody(Activity activity){
@@ -47,16 +49,17 @@ public class NetWork_Main_MultipartBody {
                 return;
             }
         }
+        if(requestBody == null){
+            return;
+        }
         if(multipartBody == null){
             return;
         }
-        dialog = null;
-        dialog = new 加载等待窗口(activity);
-        new Thread(()->{
+        Thread 线程 = new Thread(()->{
             try {
                 request = new Request.Builder()
                         .url(url)
-                        .post(multipartBody)
+                        .post(requestBody)
                         .build();
                 Response response = able.okHttpClient.newCall(request).execute();
                 if(!response.isSuccessful()){
@@ -95,23 +98,10 @@ public class NetWork_Main_MultipartBody {
                     失败();
                 });
             }finally {
-                关闭等待窗口();
+                _上传进度窗口.关闭();
             }
-        }).start();
-    }
-
-    private void 关闭等待窗口(){
-        new Thread(()->{
-            try{
-                Thread.sleep(300);
-            }catch(Exception ignored) {}
-            if(dialog==null){
-                return;
-            }
-            dialog.关闭();
-            dialog = null;
-
-        }).start();
+        });
+        _上传进度窗口 = new 上传进度窗口(activity, 线程);
     }
 
 }

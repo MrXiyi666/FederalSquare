@@ -11,8 +11,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import java.util.Objects;
 import fun.android.federal_square.R;
-import fun.android.federal_square.data.able;
-import fun.android.federal_square.fun.Fun;
 
 public class 加载等待窗口 {
     private AlertDialog dialog;

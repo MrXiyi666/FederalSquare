@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import java.io.File;
 
 import fun.android.federal_square.DiskActivity;
+import fun.android.federal_square.data.ProgressRequestBody;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
@@ -38,7 +39,16 @@ public class NetWork_网盘_上传视频 extends NetWork_Main_MultipartBody{
                 .addFormDataPart("file", file_name, body)
                 .addFormDataPart("Account", account_id)
                 .build();
-
+        requestBody = new ProgressRequestBody(
+                multipartBody,
+                new ProgressRequestBody.ProgressListener() {
+                    @Override
+                    public void onProgress(long bytesWritten, long contentLength, boolean done) {
+                        // 更新进度条
+                        int progress = (int) ((bytesWritten * 100) / contentLength);
+                        _上传进度窗口.提交进度(progress, done);
+                    }
+                });
     }
     @Override
     public void 事件(String string) {
@@ -55,7 +65,7 @@ public class NetWork_网盘_上传视频 extends NetWork_Main_MultipartBody{
             Fun.mess(activity, string);
             return;
         }
-        Fun.mess(activity, "上传成功", 300);
+        Fun.mess(activity, "上传成功", 2000);
         this.b_update = true;
         Fun_文件.写入文件(able.app_path + "Disk_Data/" + file_name, "");
         Fun_文件.删除文件(able.app_path + "/cache/cache." + 后缀);

@@ -1,6 +1,8 @@
 package fun.android.federal_square;
 
 import android.app.Application;
+import android.graphics.BitmapFactory;
+
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.database.ExoDatabaseProvider;
 import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor;
