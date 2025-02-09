@@ -1,7 +1,6 @@
 package fun.android.federal_square.data;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -30,11 +29,11 @@ public class able {
     public static View_Home view_home;
     public static List<Post_Data> 传递数据;
     public static RequestOptions requestOptions = new RequestOptions()
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
     public static RequestOptions 占位_request = new RequestOptions()
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .placeholder(R.drawable.glide_zhanwei)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);

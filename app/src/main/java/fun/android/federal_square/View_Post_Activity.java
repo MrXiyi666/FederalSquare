@@ -29,7 +29,6 @@ import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_查看文章_评论发布;
-import fun.android.federal_square.view.Post_View;
 import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
@@ -85,7 +84,6 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .load(post_data.getText())
                             .apply(able.requestOptions)
-                            .thumbnail(0.25f)
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .into(avatar_img);
                     break;
@@ -106,7 +104,6 @@ public class View_Post_Activity extends AppCompatActivity {
                     Glide.with(this)
                             .load(post_data.getText())
                             .apply(able.requestOptions)
-                            .thumbnail(0.25f)
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .listener(new RequestListener<>() {
                                 @Override
@@ -140,7 +137,6 @@ public class View_Post_Activity extends AppCompatActivity {
                         Glide.with(this)
                                 .load(post_data.getText())
                                 .apply(able.requestOptions)
-                                .thumbnail(0.25f)
                                 .transition(DrawableTransitionOptions.withCrossFade())
                                 .listener(new RequestListener<Drawable>() {
                                     @Override

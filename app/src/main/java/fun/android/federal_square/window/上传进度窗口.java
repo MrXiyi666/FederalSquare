@@ -1,5 +1,6 @@
 package fun.android.federal_square.window;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -42,13 +43,14 @@ public class 上传进度窗口 {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     public void 提交进度(int index, boolean done){
         activity.runOnUiThread(()->{
             if(dialog!=null && text_id!=null){
                 if(!done){
                     text_id.setText("上传进度 " + index + " / 100" );
                 }else{
-                    String txt = "上传成功 等待返回结果\n";
+                    String txt = "飞速奔跑中\n\n";
                     new Thread(()->{
                         int i=0;
                         while (dialog != null && text_id!=null){
@@ -60,37 +62,37 @@ public class 上传进度窗口 {
                                     break;
                                 case 1:
                                     text_id.post(()->{
-                                        text_id.setText(txt + "  .✍  ");
+                                        text_id.setText(txt + "  等.✍  ");
                                     });
                                     break;
                                 case 2:
                                     text_id.post(()->{
-                                        text_id.setText(txt + "  ..✍  ");
+                                        text_id.setText(txt + "  等待.✍  ");
                                     });
                                     break;
                                 case 3:
                                     text_id.post(()->{
-                                        text_id.setText(txt + "  ...✍  ");
+                                        text_id.setText(txt + "  等待返.✍  ");
                                     });
                                     break;
                                 case 4:
                                     text_id.post(()->{
-                                        text_id.setText(txt + "  ....✍  ");
+                                        text_id.setText(txt + "  等待返回.✍  ");
                                     });
                                     break;
                                 case 5:
                                     text_id.post(()->{
-                                        text_id.setText(txt + "  .....✍  ");
+                                        text_id.setText(txt + "  等待返回结.✍  ");
                                     });
                                     break;
                                 case 6:
                                     text_id.post(()->{
-                                        text_id.setText(txt + "  ......✍  ");
+                                        text_id.setText(txt + "  等待返回结果.✍  ");
                                     });
                                     break;
                             }
                             try {
-                                Thread.sleep(200);
+                                Thread.sleep(300);
                             }catch (Exception e){
 
                             }

@@ -17,9 +17,9 @@ import fun.android.federal_square.window.查看视频窗口;
 public class Fun_文章子布局 {
     private String 后缀="";
     private View view;
-    private Activity activity;
-    private List<String> img_url;
-    private List<Video_ImageView> video_imageViews = new ArrayList<>();
+    private final Activity activity;
+    private final List<String> img_url;
+    private final List<Video_ImageView> video_imageViews = new ArrayList<>();
 
     public Fun_文章子布局(Activity activity, List<String> img_url){
         this.activity = activity;
@@ -114,7 +114,6 @@ public class Fun_文章子布局 {
             video_imageViews.get(i).clearAnimation();
             Glide.with(activity)
                     .load(img_url.get(i))
-                    .thumbnail(0.25f)
                     .apply(able.requestOptions)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(video_imageViews.get(i));

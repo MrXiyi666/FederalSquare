@@ -12,7 +12,6 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
-import okhttp3.CookieJar;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 

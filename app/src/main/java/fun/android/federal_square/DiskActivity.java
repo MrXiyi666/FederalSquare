@@ -111,8 +111,6 @@ public class DiskActivity extends AppCompatActivity {
                 netWork_网盘_上传视频.start();
                 return;
             }
-
-
             Fun.mess(this, "不支持的格式 " + 后缀);
         });
 

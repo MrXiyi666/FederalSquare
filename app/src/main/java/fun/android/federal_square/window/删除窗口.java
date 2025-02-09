@@ -63,7 +63,6 @@ public class 删除窗口 {
         ImageView return_icon = view.findViewById(R.id.return_icon);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         AppCompatButton button_no = view.findViewById(R.id.button_no);
-
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });

@@ -71,11 +71,11 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         }else{
             gui = (MyGui) convertView.getTag();
         }
+        Glide.with(context).clear(gui.img);
         gui.img.后缀 = 后缀;
         String url_txt = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position);
         Glide.with(context).load(url_txt)
                 .override(height)
-                .thumbnail(0.25f)
                 .apply(able.requestOptions)
                 .into(gui.img);
         return convertView;
@@ -84,18 +84,13 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         Video_ImageView img;
     }
     public void clearResources() {
-        // 1. 清空数据源
         if (url != null) {
             url.clear();
         }
-
-        // 2. 释放Glide资源
         Context context = contextRef.get();
         if (context != null) {
             Glide.get(context).clearMemory();
         }
-
-        // 3. 解除上下文引用
         contextRef.clear();
     }
 }
