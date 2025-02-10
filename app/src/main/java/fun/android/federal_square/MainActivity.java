@@ -3,6 +3,7 @@ package fun.android.federal_square;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -24,9 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private final List<View> pager_view = new ArrayList<>();
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
-    public LinearLayout linear_create, linear_menu;
+    public LinearLayout linear_create, linear_menu, menu_list_view, linear_menu_list_view;
     private View_Create view_create;
-    public LinearLayout square_menu, menu_system;
     public TextView menu_text;
 
     public AppCompatButton button_top, button_up, button_down, button_update;
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         able.宽度 = displayMetrics.widthPixels;
         able.高度 = displayMetrics.heightPixels;
-        menu_system = findViewById(R.id.menu_system);
-        square_menu = findViewById(R.id.square_menu);
+        linear_menu_list_view = findViewById(R.id.linear_menu_list_view);
+        menu_list_view = findViewById(R.id.menu_list_view);
         linear_create = findViewById(R.id.linear_create);
         linear_menu = findViewById(R.id.linear_menu);
         button_top = findViewById(R.id.button_top);
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 able.pager_id = position;
                 switch (position){
                     case 0:
-                        menu_system.setVisibility(View.VISIBLE);
+                        linear_menu_list_view.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_true_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         able.view_square.修改底部空间();
                         break;
                     case 1:
-                        menu_system.setVisibility(View.VISIBLE);
+                        linear_menu_list_view.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         able.view_hot.修改底部空间();
                         break;
                     case 2:
-                        menu_system.setVisibility(View.GONE);
+                        linear_menu_list_view.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.home_checked_true_icon);
@@ -121,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
             }
             pager.setCurrentItem(0);
         });
-        menu_hot.setOnClickListener(menu_square_v-> pager.setCurrentItem(1));
-        menu_home.setOnClickListener(menu_square_v-> pager.setCurrentItem(2));
+        menu_hot.setOnClickListener(_ -> pager.setCurrentItem(1));
+        menu_home.setOnClickListener(_ -> pager.setCurrentItem(2));
         menu_square.setOnLongClickListener(v -> {
             if(pager.getCurrentItem() == 0){
                 able.view_square.scrollView.smoothScrollTo(0, 0);
@@ -180,14 +180,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         menu_text.setOnClickListener(V->{
-            if(square_menu.getVisibility() == View.VISIBLE){
-                square_menu.setVisibility(View.GONE);
+            if(menu_list_view.getVisibility() == View.VISIBLE){
+                menu_list_view.setVisibility(View.GONE);
                 menu_text.setText("▲");
                 menu_text.setTextColor(Color.rgb(242,243,247));
                 able.view_square.修改底部空间();
                 able.view_hot.修改底部空间();
             }else{
-                square_menu.setVisibility(View.VISIBLE);
+                menu_list_view.setVisibility(View.VISIBLE);
                 menu_text.setText("▼");
                 menu_text.setTextColor(Color.rgb(128,128,128));
                 able.view_square.修改底部空间();

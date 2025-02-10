@@ -2,10 +2,12 @@ package fun.android.federal_square.window;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
@@ -42,7 +44,7 @@ public class 查看图片窗口 {
         });
         Glide.with(activity)
                 .load(url)
-                .apply(able.原图_request)
+                .apply(able.requestOptions)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .listener(new RequestListener<>() {
                     @Override
@@ -77,7 +79,14 @@ public class 查看图片窗口 {
             return true;
         });
         dialog.setView(view);
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
+        dialog.setOnKeyListener((_, keyCode, _) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog.dismiss();
+                return true;
+            }
+            return false;
+        });
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);

@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:text="系统提示"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
         <ImageView
-            android:layout_marginEnd="10dp"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"

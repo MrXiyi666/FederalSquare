@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
-            android:layout_centerInParent="true"
-            android:text="发表文章"
-            android:textSize="18sp"
-            android:gravity="bottom"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <ImageView
-            android:layout_marginEnd="10dp"
             android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="编辑器"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/return_icon"
             android:id="@+id/return_icon"
@@ -112,7 +112,7 @@
         android:id="@+id/button_ok"
         android:layout_above="@id/di"
         android:background="@drawable/button_event_back_tran"
-        android:text="发表"
+        android:text="发表文章"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>

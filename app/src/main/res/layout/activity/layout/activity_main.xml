@@ -14,12 +14,12 @@
     <androidx.viewpager.widget.ViewPager
         android:visibility="gone"
         android:id="@+id/pager"
-        android:layout_above="@id/menu_system"
+        android:layout_above="@id/linear_menu_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
         android:background="#ffffff"
-        android:id="@+id/menu_system"
+        android:id="@+id/linear_menu_list_view"
         android:orientation="vertical"
         android:layout_above="@id/linear_menu"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"/>
         <LinearLayout
-            android:id="@+id/square_menu"
+            android:id="@+id/menu_list_view"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp">

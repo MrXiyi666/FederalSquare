@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -58,8 +59,15 @@ public class 引用列表窗口 {
         });
 
         dialog.setView(view);
-        dialog.setCancelable(true);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+        dialog.setOnKeyListener((_, keyCode, _) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog.dismiss();
+                return true;
+            }
+            return false;
+        });
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
@@ -81,7 +89,7 @@ public class 引用列表窗口 {
         View view = View.inflate(activity, R.layout.view_yinyong_list_item_view, null);
         TextView text = view.findViewById(R.id.text);
 
-        String str = "地址：" + url_passWord_data.getURL();
+        String str = "实例：" + url_passWord_data.getURL();
         if(!url_passWord_data.getPassWord().isEmpty()){
             str = str + "\n密码：" + url_passWord_data.getPassWord();
         }

@@ -8,19 +8,14 @@
         android:id="@+id/top_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <RelativeLayout
-        android:id="@+id/relati"
+    <TextView
+        android:id="@+id/title_txt"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="头条热榜"
         android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <TextView
-            android:id="@+id/title_txt"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:text="头条热榜"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+        android:layout_height="30dp"/>
     <View
         android:id="@+id/xian1"
         android:background="#808080"

@@ -19,7 +19,7 @@ public class View_Create extends View_Main{
         super(activity);
         this.activity = activity;
         activity.linear_menu.setVisibility(View.GONE);
-        activity.menu_system.setVisibility(View.GONE);
+        activity.linear_menu_list_view.setVisibility(View.GONE);
     }
     private ViewPager pager;
     private List<View> pager_view;
@@ -46,7 +46,7 @@ public class View_Create extends View_Main{
         pager.setVisibility(View.VISIBLE);
         activity.linear_create.setVisibility(View.GONE);
         activity.linear_menu.setVisibility(View.VISIBLE);
-        activity.menu_system.setVisibility(View.VISIBLE);
+        activity.linear_menu_list_view.setVisibility(View.VISIBLE);
         able.view_square.启动刷新();
     }
     @Override

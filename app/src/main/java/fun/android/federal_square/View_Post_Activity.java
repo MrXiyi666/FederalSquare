@@ -37,7 +37,6 @@ import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
 public class View_Post_Activity extends AppCompatActivity {
-    private TextView top_title;
     private String url_txt, PassWord_txt="";
     private LinearLayout linear;
 
@@ -47,9 +46,8 @@ public class View_Post_Activity extends AppCompatActivity {
         Window window = this.getWindow();
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_view_post);
-        top_title = findViewById(R.id.top_title);
         linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);
@@ -60,9 +58,6 @@ public class View_Post_Activity extends AppCompatActivity {
         AppCompatButton button_ok = findViewById(R.id.button_ok);
         EditText edit_text = findViewById(R.id.edit_text);
         ScrollView scrollView = findViewById(R.id.scrollView);
-        top_title.post(()->{
-            top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
-        });
         if(able.传递数据 == null){
             finish();
         }

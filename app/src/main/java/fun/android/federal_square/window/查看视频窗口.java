@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -100,8 +101,15 @@ public class 查看视频窗口 {
             window.setStatusBarColor(Color.TRANSPARENT);
         });
         dialog.setView(view);
-        dialog.setCancelable(true);
-        dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
+        dialog.setCancelable(false);
+        dialog.setOnKeyListener((_, keyCode, _) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog.dismiss();
+                return true;
+            }
+            return false;
+        });
+        Objects.requireNonNull(dialog.getWindow()).getDecorView().setPadding(0, 0, 0, 0);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.TOP);

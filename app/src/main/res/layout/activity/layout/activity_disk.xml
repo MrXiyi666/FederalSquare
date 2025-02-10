@@ -7,8 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DiskActivity">
     <ImageView
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/return_icon"
         android:id="@+id/return_icon"

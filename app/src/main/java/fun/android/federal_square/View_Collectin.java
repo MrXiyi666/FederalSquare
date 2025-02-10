@@ -1,20 +1,19 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.data.Post_Data;
@@ -22,11 +21,9 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
-import fun.android.federal_square.view.Post_View;
 
 public class View_Collectin extends AppCompatActivity {
-    private ImageView return_icon;
-    private TextView top_title;
+    private RelativeLayout return_icon;
     private LinearLayout linear;
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;
@@ -35,18 +32,15 @@ public class View_Collectin extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window window = this.getWindow();
-        window.setStatusBarColor(Color.TRANSPARENT);
+        window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
-        //window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_view_collection);
         初始化();
         事件();
     }
 
     public void 初始化(){
-        top_title = findViewById(R.id.top_title);
         return_icon = findViewById(R.id.return_icon);
         linear = findViewById(R.id.linear);
         scrollView = findViewById(R.id.scrollView);
@@ -58,7 +52,6 @@ public class View_Collectin extends AppCompatActivity {
     }
 
     public void 事件(){
-        top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
         return_icon.setOnClickListener(V->{
             finish();
         });

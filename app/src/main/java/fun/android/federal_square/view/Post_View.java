@@ -38,6 +38,15 @@ public class Post_View extends LinearLayout {
         this.activity = activity;
         this.avatar_img = avatar_img;
         this.avatar_url = avatar_url;
+        this.avatar_img.setOnLongClickListener(V->{
+            Glide.with(activity)
+                    .load(avatar_url)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .apply(able.requestOptions)
+                    .override(Fun.DPToPX(activity, 40), Fun.DPToPX(activity, 40))
+                    .into(avatar_img);
+            return true;
+        });
     }
 
     @Override

@@ -3,6 +3,7 @@ package fun.android.federal_square.view;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -65,7 +66,9 @@ public class View_Square extends View_Main{
     @Override
     public void 事件() {
         super.事件();
-        top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+        ViewGroup.LayoutParams layoutParams = top_title.getLayoutParams();
+        layoutParams.height = able.状态栏高度;
+        top_title.setLayoutParams(layoutParams);
         swipe_layout.setOnRefreshListener(()->{
             if(new_icon.getVisibility() == View.VISIBLE){
                 new_icon.setVisibility(View.GONE);
