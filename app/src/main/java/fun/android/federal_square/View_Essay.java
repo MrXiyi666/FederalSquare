@@ -4,8 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,7 @@ import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
 
 public class View_Essay extends AppCompatActivity {
-    private RelativeLayout return_icon;
+    private ImageView return_icon;
     private LinearLayout linear;
     private ScrollView scrollView;
     public AppCompatButton button_top, button_up, button_down, button_update;

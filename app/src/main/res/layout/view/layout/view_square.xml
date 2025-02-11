@@ -12,8 +12,9 @@
         android:id="@+id/relati"
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:id="@+id/button_url_setting"
             android:scaleType="centerCrop"
@@ -28,6 +29,7 @@
             android:layout_width="40dp"
             android:layout_height="23dp"/>
         <TextView
+            android:textStyle="bold"
             android:layout_centerInParent="true"
             android:textColor="@color/black"
             android:text="时间线"
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"/>
         <RelativeLayout
             android:id="@+id/button_add"
+            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_width="40dp"
             android:layout_height="wrap_content">
