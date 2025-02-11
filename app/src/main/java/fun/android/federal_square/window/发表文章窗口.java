@@ -4,13 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -33,7 +31,6 @@ import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_广场上传;
-import fun.android.federal_square.view.Video_ImageView;
 
 public class 发表文章窗口 {
     private LinearLayout linear;
@@ -55,6 +52,13 @@ public class 发表文章窗口 {
         linear = view.findViewById(R.id.linear);
         post_dataList = new ArrayList<>();
         return_icon.setOnClickListener(V->{
+            for(int i=0; i<linear.getChildCount(); i++){
+                if(linear.getChildAt(i) instanceof ImageView imageView){
+                    imageView.setImageBitmap(null);
+                }
+            }
+            linear.removeAllViews();
+            post_dataList.clear();
             dialog.dismiss();
         });
         add_img.setOnClickListener(V->{
@@ -149,18 +153,6 @@ public class 发表文章窗口 {
                 }
             }
         });
-
-
-        dialog.setOnDismissListener(_ -> {
-            for(int i=0; i<linear.getChildCount(); i++){
-                if(linear.getChildAt(i) instanceof ImageView imageView){
-                    imageView.setImageBitmap(null);
-                }
-            }
-            linear.removeAllViews();
-        });
-
-
         dialog.setView(view);
         dialog.setCancelable(false);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

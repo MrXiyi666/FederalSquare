@@ -79,14 +79,6 @@ public class 查看图片窗口 {
             return true;
         });
         dialog.setView(view);
-        dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                dialog.dismiss();
-                return true;
-            }
-            return false;
-        });
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);

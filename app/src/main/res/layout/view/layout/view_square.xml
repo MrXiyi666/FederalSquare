@@ -21,6 +21,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"/>
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@id/title"
             android:id="@+id/new_icon"
             android:src="@drawable/square_new_icon"
