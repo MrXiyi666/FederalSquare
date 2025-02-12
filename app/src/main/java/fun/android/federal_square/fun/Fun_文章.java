@@ -58,7 +58,7 @@ public class Fun_文章 {
                         break;
                     }
                     if(!sb.toString().isEmpty()){
-                        sb.append("\n");
+                        sb.append(" ");
                     }
                     for(String s : str){
                         if(sb.length() >= 100){

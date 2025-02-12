@@ -14,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -30,6 +28,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
+import fun.android.federal_square.fun.TimeUtils;
 import fun.android.federal_square.network.NetWork_查看文章_评论发布;
 import fun.android.federal_square.view.Video_ImageView;
 import fun.android.federal_square.window.打开方式窗口;
@@ -41,7 +40,9 @@ import fun.android.federal_square.window.查看评论窗口;
 public class View_Post_Activity extends AppCompatActivity {
     private String url_txt, PassWord_txt="";
     private LinearLayout linear;
-
+    private boolean 时间切换 = false;
+    private String time = "";
+    private String forward="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +68,7 @@ public class View_Post_Activity extends AppCompatActivity {
         if(able.传递数据.isEmpty()){
             finish();
         }
-        String time = "";
-        String forward="";
+
         for(Post_Data post_data : able.传递数据){
             switch(post_data.getName()){
                 case "name":
@@ -163,17 +163,6 @@ public class View_Post_Activity extends AppCompatActivity {
                     break;
                 case "time":
                     time = post_data.getText();
-                    String[] time_shuzu = post_data.getText().split("_");
-                    StringBuffer time_data = new StringBuffer();
-                    for(int i=0;i<time_shuzu.length; i++){
-                        if(i < 6){
-                            if(!time_data.toString().isEmpty()){
-                                time_data.append(":");
-                            }
-                            time_data.append(time_shuzu[i]);
-                        }
-                    }
-                    text_time.setText(time_data);
                     break;
                 case "url":
                     url_txt = post_data.getText();
@@ -198,8 +187,26 @@ public class View_Post_Activity extends AppCompatActivity {
             netWork_讨论_读取.start();
         }
 
+        text_time.setText(TimeUtils.calculateRelativeTime(time));
+        text_time.setOnClickListener(V->{
+            时间切换 = !时间切换;
+            if(时间切换){
+                String[] time_shuzu = time.split("_");
+                StringBuffer time_data = new StringBuffer();
+                for(int i=0;i<time_shuzu.length; i++){
+                    if(i < 6){
+                        if(!time_data.toString().isEmpty()){
+                            time_data.append(":");
+                        }
+                        time_data.append(time_shuzu[i]);
+                    }
+                }
+                text_time.setText(time_data);
+            }else{
+                text_time.setText(TimeUtils.calculateRelativeTime(time));
+            }
+        });
         if(!Fun_账号.GetID().isEmpty()){
-            String finalTime = time;
             button_ok.setOnClickListener(V->{
                 String text = edit_text.getText().toString();
                 if(text.isEmpty()){
@@ -219,7 +226,7 @@ public class View_Post_Activity extends AppCompatActivity {
                 post_dataList.add(post_data_sign);
                 post_dataList.add(post_data_text);
                 NetWork_查看文章_评论发布 netWork_查看文章_评论发布 = new NetWork_查看文章_评论发布(this);
-                netWork_查看文章_评论发布.传递参数(url_txt, PassWord_txt, finalTime, Fun.获取时间(), able.gson.toJson(post_dataList), 查看评论窗口.添加评论布局(this, post_dataList), linear_check);
+                netWork_查看文章_评论发布.传递参数(url_txt, PassWord_txt, time, Fun.获取时间(), able.gson.toJson(post_dataList), 查看评论窗口.添加评论布局(this, post_dataList), linear_check);
                 netWork_查看文章_评论发布.start();
                 edit_text.setText("");
             });
