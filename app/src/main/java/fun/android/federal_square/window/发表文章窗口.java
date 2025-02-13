@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_广场上传;
+import fun.android.federal_square.view.Video_ImageView;
 
 public class 发表文章窗口 {
     private LinearLayout linear;
@@ -181,7 +183,7 @@ public class 发表文章窗口 {
             var post_data = new Post_Data();
             post_data.setName("img");
             post_data.setText(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position));
-            var imageView = new ImageView(activity);
+            var imageView = new Video_ImageView(activity);
             Glide.with(activity)
                     .load(able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position))
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -189,6 +191,7 @@ public class 发表文章窗口 {
                     .into(imageView);
             var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
             params.setMargins(0, 0, 0, 10);
+            imageView.后缀 = Fun_文件.获取后缀(post_data.getText());
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V->{
                 var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
@@ -199,14 +202,12 @@ public class 发表文章窗口 {
                 return true;
             });
             imageView.setOnClickListener(V->{
-                var 后缀 = Fun_文件.获取后缀(list.get(position));
-                var url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + list.get(position);
-                if(Fun.图片格式判断(后缀)){
-                    查看图片窗口.启动_Dialog(activity, url);
-                }else if(Fun.视频格式判断(后缀)){
-                    查看视频窗口.启动_Dialog(activity, url);
+                if(Fun.图片格式判断(imageView.后缀)){
+                    查看图片窗口.启动_Dialog(activity, post_data.getText());
+                }else if(Fun.视频格式判断(imageView.后缀)){
+                    查看视频窗口.启动_Dialog(activity, post_data.getText());
                 }else{
-                    打开方式窗口.启动(activity, url);
+                    打开方式窗口.启动(activity, post_data.getText());
                 }
             });
             post_dataList.add(post_data);
@@ -291,7 +292,7 @@ public class 发表文章窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
