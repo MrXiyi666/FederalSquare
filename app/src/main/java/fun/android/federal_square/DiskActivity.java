@@ -63,7 +63,6 @@ public class DiskActivity extends AppCompatActivity {
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         加载图片初始化(Fun_账号.GetID());
         初始化数据();
-
     }
 
     public void 事件(){
@@ -81,7 +80,6 @@ public class DiskActivity extends AppCompatActivity {
         button_menu.setOnClickListener(_ ->{
             网盘设置窗口.启动(this);
         });
-
         return_icon.setOnClickListener(_ ->{
             finish();
         });
