@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,6 +67,8 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 事件(){
+        // 屏幕不息屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         swiperefre.setOnRefreshListener(()->{
             NetWork_网盘_刷新 netWork_网盘_刷新 = new NetWork_网盘_刷新(this);
             netWork_网盘_刷新.start();
