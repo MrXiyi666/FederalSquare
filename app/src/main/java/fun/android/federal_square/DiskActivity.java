@@ -47,6 +47,8 @@ public class DiskActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
+        // 屏幕不息屏
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_disk);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         初始化();
@@ -66,8 +68,6 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 事件(){
-        // 屏幕不息屏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         swiperefre.setOnRefreshListener(()->{
             NetWork_网盘_刷新 netWork_网盘_刷新 = new NetWork_网盘_刷新(this);
             netWork_网盘_刷新.start();

@@ -13,13 +13,13 @@ import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.view.Post_View;
 import okhttp3.FormBody;
 
-public class NetWork_广场上传 extends NetWork_Main {
+public class NetWork_发表文章 extends NetWork_Main {
 
     private String time;
     private List<Post_Data> post_dataList;
     private AlertDialog dialog;
 
-    public NetWork_广场上传(Activity activity) {
+    public NetWork_发表文章(Activity activity) {
         super(activity);
     }
 

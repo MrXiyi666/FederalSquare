@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
-import fun.android.federal_square.network.NetWork_广场上传;
+import fun.android.federal_square.network.NetWork_发表文章;
 import fun.android.federal_square.view.Video_ImageView;
 
 public class 发表文章窗口 {
@@ -126,9 +125,9 @@ public class 发表文章窗口 {
                 post_dataList.add(time);
                 post_dataList.add(url);
                 post_dataList.add(password);
-                var netWork_广场上传 = new NetWork_广场上传(activity);
-                netWork_广场上传.传递数据(post_dataList, time.getText(), dialog);
-                netWork_广场上传.start();
+                var netWork_发表文章 = new NetWork_发表文章(activity);
+                netWork_发表文章.传递数据(post_dataList, time.getText(), dialog);
+                netWork_发表文章.start();
             }else{
                 Fun.mess(activity, "内容为空");
             }

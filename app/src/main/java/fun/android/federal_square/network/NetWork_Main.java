@@ -2,7 +2,6 @@ package fun.android.federal_square.network;
 
 import android.app.Activity;
 import android.util.Log;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
