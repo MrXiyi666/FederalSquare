@@ -18,6 +18,7 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
+import fun.android.federal_square.network.后台判断新内容;
 import fun.android.federal_square.window.发表文章窗口;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
@@ -40,7 +41,7 @@ public class View_Square extends View_Main{
     public boolean scrollView_Down = false;
     private Thread time_thread=null;
     public int Post_Index = 0;
-
+    private List<后台判断新内容> 后台判断集合 = new ArrayList<>();
 
 
     public View_Square(MainActivity activity) {
@@ -118,31 +119,19 @@ public class View_Square extends View_Main{
     }
 
     public void 启动刷新(){
-        if(time_thread != null){
-            time_thread.interrupt();
-            time_thread = null;
+        if(后台判断集合.isEmpty()){
+            后台判断集合.add(new 后台判断新内容(activity_main));
         }
-        time_thread = new Thread(()->{
-            var fun_多少秒获取广场数据 = new NetWork_多少秒获取广场数据(activity_main);
-            while (true){
-                fun_多少秒获取广场数据.start();
-                try {
-                    Thread.sleep(Fun.获取广场计时数量());
-                }catch (Exception ignored){
-                }
-            }
-        });
-        time_thread.start();
     }
 
 
     @Override
     public void onStop() {
         super.onStop();
-        if(time_thread!=null){
-            time_thread.interrupt();
-            time_thread = null;
+        for(后台判断新内容 s : 后台判断集合){
+            s.close();
         }
+        后台判断集合.clear();
     }
 
     @Override
