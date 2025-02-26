@@ -67,7 +67,7 @@ public class 查看视频窗口 {
                 }else if(state == Player.STATE_ENDED){
                     new Thread(()->{
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
