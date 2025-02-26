@@ -23,7 +23,6 @@ import fun.android.federal_square.window.发表文章窗口;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.fun.Fun_文章;
-import fun.android.federal_square.network.NetWork_多少秒获取广场数据;
 import fun.android.federal_square.network.NetWork_广场刷新;
 import fun.android.federal_square.window.引用列表窗口;
 import fun.android.federal_square.window.重新设置域名窗口;
@@ -39,7 +38,6 @@ public class View_Square extends View_Main{
     public LinearLayout linear;
     public TextView di_title;
     public boolean scrollView_Down = false;
-    private Thread time_thread=null;
     public int Post_Index = 0;
     private List<后台判断新内容> 后台判断集合 = new ArrayList<>();
 
@@ -61,7 +59,6 @@ public class View_Square extends View_Main{
         scrollView = view.findViewById(R.id.scrollView);
         di_title = view.findViewById(R.id.di_title);
         new_icon.setVisibility(View.GONE);
-        初始化本地数据();
     }
 
     @Override
@@ -108,6 +105,7 @@ public class View_Square extends View_Main{
         button_url_setting.setOnClickListener(V->{
             new 重新设置域名窗口().启动(activity_main, button_url_setting);
         });
+        初始化本地数据();
     }
     @Override
     public void onStart() {
@@ -140,6 +138,9 @@ public class View_Square extends View_Main{
         Fun_文章.释放所有文章内存(linear,activity_main);
     }
     public void 初始化本地数据(){
+        if(linear.getChildCount() > 0){
+            return;
+        }
         new Thread(()->{
             Fun_文章.释放所有文章内存(linear, activity_main);
             Post_Index=0;

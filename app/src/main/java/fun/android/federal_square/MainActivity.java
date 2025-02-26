@@ -1,5 +1,6 @@
 package fun.android.federal_square;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -202,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
         if(able.view_square!=null){
             able.view_square.onStart();
         }
-
     }
 
     @Override
@@ -211,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
         if(able.view_square != null){
             able.view_square.onStop();
         }
-
     }
 
     @Override
@@ -233,9 +232,13 @@ public class MainActivity extends AppCompatActivity {
         if(keyCode == KeyEvent.KEYCODE_BACK){
             if(pager.getCurrentItem() > 0){
                 pager.setCurrentItem(0);
-                return false;
+            }else{
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(homeIntent);
             }
         }
-        return super.onKeyUp(keyCode, event);
+        return true;
     }
 }

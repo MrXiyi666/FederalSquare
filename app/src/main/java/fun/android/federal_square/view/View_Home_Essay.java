@@ -44,7 +44,6 @@ public class View_Home_Essay extends View_Main{
         swiperefee = view.findViewById(R.id.swiperefee);
         scrollView = view.findViewById(R.id.scrollView);
         button_loading = view.findViewById(R.id.button_loading);
-        初始化数据();
     }
 
     @Override
@@ -60,12 +59,10 @@ public class View_Home_Essay extends View_Main{
             var intent = new Intent(activity_main, View_Essay.class);
             activity_main.startActivity(intent);
         });
-
-
-
         scrollView.setOnScrollChangeListener((_, _, _, _, _) -> {
             Fun.刷新当前文章(activity_main, linear, scrollView);
         });
+        初始化数据();
     }
 
     @Override

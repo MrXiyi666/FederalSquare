@@ -43,7 +43,6 @@ public class View_Home_Collection extends View_Main{
         scrollView = view.findViewById(R.id.scrollView);
         linear = view.findViewById(R.id.linear);
         button_loading = view.findViewById(R.id.button_loading);
-        初始化收藏();
     }
     @Override
     public void 事件() {
@@ -63,6 +62,7 @@ public class View_Home_Collection extends View_Main{
         scrollView.setOnScrollChangeListener((_, _, _, _, _) -> {
             Fun.刷新当前文章(activity_main, linear, scrollView);
         });
+        初始化收藏();
     }
 
     public void 初始化收藏(){

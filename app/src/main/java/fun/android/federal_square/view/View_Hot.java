@@ -31,7 +31,6 @@ public class View_Hot extends View_Main{
 
     public View_Hot(MainActivity activity) {
         super(activity);
-
     }
 
     @Override
@@ -43,7 +42,6 @@ public class View_Hot extends View_Main{
         swipe_layout = view.findViewById(R.id.swiperefee);
         scrollView = view.findViewById(R.id.scrollView);
         linear = view.findViewById(R.id.linear);
-        初始化数据();
     }
 
     @Override
@@ -72,6 +70,7 @@ public class View_Hot extends View_Main{
             }
             Fun.刷新当前文章(activity_main, linear, scrollView);
         });
+        初始化数据();
     }
     @Override
     public void onStart() {
