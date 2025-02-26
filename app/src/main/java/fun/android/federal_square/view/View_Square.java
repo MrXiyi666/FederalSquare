@@ -138,9 +138,6 @@ public class View_Square extends View_Main{
         Fun_文章.释放所有文章内存(linear,activity_main);
     }
     public void 初始化本地数据(){
-        if(linear.getChildCount() > 0){
-            return;
-        }
         new Thread(()->{
             Fun_文章.释放所有文章内存(linear, activity_main);
             Post_Index=0;
