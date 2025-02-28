@@ -13,7 +13,7 @@
         android:textSize="15sp"
         android:textColor="@color/black"
         android:gravity="start"
-        android:text="您必须有一个广场实例 才可以进入联邦广场\nhttp://xxxxxx.com/\n我们称它为实例地址\n如果你输入错误 必须进清除数据重新进入软件\n注意：结尾请加上 / 符号。"
+        android:text="您必须有一个广场实例 才可以进入联邦广场\nhttp://xxxxxx.com/\n我们称它为实例地址\n如果你输入错误 必须清除数据重新进入软件\n注意：结尾请加上 / 符号。  请使用http而不是https"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
