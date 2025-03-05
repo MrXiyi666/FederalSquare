@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -92,13 +93,13 @@ public class DiskActivity extends AppCompatActivity {
                 button_network_disk.setEnabled(true);
                 return;
             }
+
             if(Fun.获取Uri文件大小(DiskActivity.this, uri) > 52428800){
                 Fun.mess(DiskActivity.this, "文件大于 50 MB 请压缩后上传");
                 button_network_disk.setEnabled(true);
                 return;
             }
             String 后缀 = Fun.获取文件扩展名(Fun.获取Uri文件名(this, uri));
-
             if(Fun.图片格式判断(后缀)){
                 Fun_文件.copy_Uri_File(this, uri, able.app_path + "/cache/cache." + 后缀);
                 netWork_网盘_上传图片 = new NetWork_网盘_上传图片(this);

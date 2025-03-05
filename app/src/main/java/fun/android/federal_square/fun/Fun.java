@@ -121,40 +121,25 @@ public class Fun {
         }
         return str;
     }
-    /*
-     * Java文件操作 获取文件扩展名
-     * */
-    public static String 获取文件扩展名(String filename) {
-        if ((filename != null) && (!filename.isEmpty())) {
-            int dot = filename.lastIndexOf('.');
-            if ((dot >-1) && (dot < (filename.length() - 1))) {
-                return filename.substring(dot + 1);
-            }
+    public static String 获取文件扩展名(String filename){
+        if (filename == null || filename.isEmpty()) {
+            return "";
         }
-        return filename;
+        int dotIndex = filename.lastIndexOf('.');
+        if (dotIndex == -1 || dotIndex == filename.length() - 1) {
+            return "";
+        }
+
+        return filename.substring(dotIndex + 1);
     }
 
     //获取uri文件名称
     public static String 获取Uri文件名(Activity context, Uri fileUri) {
-        if (context == null || fileUri == null) return null;
-        DocumentFile documentFile = DocumentFile.fromSingleUri(context, fileUri);
-        if (documentFile == null) return null;
-        return documentFile.getName();
+        return FileUri.getFileName(context, fileUri);
     }
 
     public static int 获取Uri文件大小(Activity context, Uri fileUri){
-        try {
-            ContentResolver contentResolver = context.getContentResolver();
-            InputStream inputStream = contentResolver.openInputStream(fileUri);
-            if(inputStream ==null){
-                return 0;
-            }
-            int fileSize = inputStream.available();
-            inputStream.close();
-            return fileSize;
-        }catch (Exception e){
-            return 0;
-        }
+        return FileUri.getUriFileSize(context,fileUri);
     }
 
 
@@ -168,22 +153,31 @@ public class Fun {
         return result;
     }
 
-    public static int PXToDP(Activity activity, int px){
+    public static int PXToDP(Activity activity, int px) {
+        if (activity == null) {
+            throw new IllegalArgumentException("Activity cannot be null");
+        }
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float density = metrics.density;
-        return (int)(px / density);
+        return Math.round(px / density);
     }
 
-    public static int DPToPX(Activity activity, int dp){
+    public static int DPToPX(Activity activity, int dp) {
+        if (activity == null) {
+            throw new IllegalArgumentException("Activity cannot be null");
+        }
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        float density = metrics.density;
-        return (int)(dp * density);
+        float density = metrics.scaledDensity; // 使用 scaledDensity 以考虑字体缩放
+        return Math.round(dp * density); // 使用 Math.round() 进行四舍五入
     }
-    public static int DPToPX(Context context, int dp){
-        float density = context.getResources().getDisplayMetrics().density;
-        return (int) (dp*density + 0.5f);
+    public static int DPToPX(Context context, int dp) {
+        if (context == null) {
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+        float density = context.getResources().getDisplayMetrics().scaledDensity; // 使用 scaledDensity 以考虑字体缩放
+        return Math.round(dp * density); // 使用 Math.round() 进行四舍五入
     }
 
     public static boolean StrBoolJSON(String str){
