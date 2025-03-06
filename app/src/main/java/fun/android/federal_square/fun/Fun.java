@@ -2,7 +2,6 @@ package fun.android.federal_square.fun;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,10 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-import androidx.documentfile.provider.DocumentFile;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -154,9 +151,6 @@ public class Fun {
     }
 
     public static int PXToDP(Activity activity, int px) {
-        if (activity == null) {
-            throw new IllegalArgumentException("Activity cannot be null");
-        }
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float density = metrics.density;
@@ -164,9 +158,6 @@ public class Fun {
     }
 
     public static int DPToPX(Activity activity, int dp) {
-        if (activity == null) {
-            throw new IllegalArgumentException("Activity cannot be null");
-        }
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float density = metrics.scaledDensity; // 使用 scaledDensity 以考虑字体缩放
@@ -220,33 +211,50 @@ public class Fun {
         return name.equals("jpg") || name.equals("jpeg") || name.equals("png") || name.equals("webp") || name.equals("gif");
     }
 
-    public static String 网址获取文件名(String txt){
+    public static String 网址获取文件名(String txt) {
         try {
+            // 使用 URL 类解析输入字符串
             URL url = new URL(txt);
-            String[] url_shuzu = url.getFile().split("/");
-            if(url_shuzu.length > 0){
-                return url_shuzu[url_shuzu.length-1];
+            String file = url.getFile();
+
+            // 如果文件路径为空，直接返回空字符串
+            if (file == null || file.isEmpty()) {
+                return "";
             }
-            return "";
-        }catch (Exception e){
+
+            // 使用 lastIndexOf 方法避免分割数组
+            int lastSlashIndex = file.lastIndexOf('/');
+            if (lastSlashIndex != -1) {
+                // 提取最后一个 '/' 后的部分作为文件名
+                String fileName = file.substring(lastSlashIndex + 1);
+                // 如果文件名为空（例如，路径以 '/' 结尾），返回空字符串
+                return fileName.isEmpty() ? "" : fileName;
+            }
+
+            // 如果没有 '/'，直接返回文件名
+            return file;
+        } catch (Exception e) {
+            // 捕获所有异常并返回空字符串
             return "";
         }
     }
 
     public static String 获取域名(){
-        String url="";
-        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0];
+        try {
+            String shuzu[] = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",");
+            return shuzu[0];
+        }catch (Exception e){
+            return "";
         }
-        return url;
     }
 
     public static String 获取密码(){
-        String url="";
-        if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            url = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1];
+        try {
+            String[] shuzu = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",");
+            return shuzu[1];
+        }catch (Exception e){
+            return "";
         }
-        return url;
     }
 
     public static int 获取广场文章数量(){

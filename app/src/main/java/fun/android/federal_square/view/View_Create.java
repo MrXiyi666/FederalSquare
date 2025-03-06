@@ -9,6 +9,7 @@ import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
 
 public class View_Create extends View_Main{
@@ -27,8 +28,8 @@ public class View_Create extends View_Main{
         this.pager = pager;
         this.pager_view = pager_view;
         if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
-            able.URL = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[0]+"";
-            able.PassWord = Fun_文件.读取文件(able.app_path + "System_Data/URL_Name.txt").split(",")[1] + "";
+            able.URL = Fun.获取域名();
+            able.PassWord = Fun.获取密码();
             跳转到广场();
         }
     }
