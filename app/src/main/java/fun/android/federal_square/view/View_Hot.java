@@ -139,6 +139,7 @@ public class View_Hot extends View_Main{
                 });
             }
             Fun.回到顶部(scrollView, linear, activity_main);
+            scrollView_Down = false;
         }).start();
     }
 
@@ -178,6 +179,7 @@ public class View_Hot extends View_Main{
                 遍历数量++;
             }
             Fun.回到顶部(scrollView, linear, activity_main);
+            scrollView_Down = false;
         }).start();
     }
 
@@ -218,6 +220,7 @@ public class View_Hot extends View_Main{
                 遍历数量++;
             }
             Fun.回到顶部(scrollView, linear, activity_main);
+            scrollView_Down = false;
         }).start();
     }
 
@@ -225,14 +228,15 @@ public class View_Hot extends View_Main{
         Fun.刷新当前文章(activity_main, linear, scrollView);
     }
     public void 修改底部空间(){
-        if(scrollView_Down){
-            activity_main.runOnUiThread(()->{
-                scrollView.post(()->{
-                    int childHeight = scrollView.getChildAt(0).getHeight();
-                    int scrollViewHeight = scrollView.getHeight();
-                    scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
-                });
-            });
+        if(!scrollView_Down){
+            return;
         }
+        activity_main.runOnUiThread(()->{
+            scrollView.post(()->{
+                int childHeight = scrollView.getChildAt(0).getHeight();
+                int scrollViewHeight = scrollView.getHeight();
+                scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+            });
+        });
     }
 }
