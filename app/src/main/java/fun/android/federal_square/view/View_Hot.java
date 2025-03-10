@@ -139,7 +139,9 @@ public class View_Hot extends View_Main{
                 });
             }
             Fun.回到顶部(scrollView, linear, activity_main);
-            scrollView_Down = false;
+            scrollView.post(()->{
+                scrollView_Down = false;
+            });
         }).start();
     }
 
@@ -179,7 +181,9 @@ public class View_Hot extends View_Main{
                 遍历数量++;
             }
             Fun.回到顶部(scrollView, linear, activity_main);
-            scrollView_Down = false;
+            scrollView.post(()->{
+                scrollView_Down = false;
+            });
         }).start();
     }
 
@@ -220,7 +224,9 @@ public class View_Hot extends View_Main{
                 遍历数量++;
             }
             Fun.回到顶部(scrollView, linear, activity_main);
-            scrollView_Down = false;
+            scrollView.post(()->{
+                scrollView_Down = false;
+            });
         }).start();
     }
 
