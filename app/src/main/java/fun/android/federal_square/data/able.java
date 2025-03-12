@@ -2,6 +2,8 @@ package fun.android.federal_square.data;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
+import android.widget.TextView;
+
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
@@ -9,10 +11,13 @@ import java.util.List;
 import fun.android.federal_square.R;
 import fun.android.federal_square.view.View_Home;
 import fun.android.federal_square.view.View_Hot;
+import fun.android.federal_square.view.View_Main;
 import fun.android.federal_square.view.View_Square;
 import okhttp3.OkHttpClient;
 
 public class able {
+    public static View_Main view_main;
+    public static TextView 广场空, 头条空;
     public static int pager_id=0;
     public static Handler handler = new Handler();
     public static int 宽度, 高度, 状态栏高度;

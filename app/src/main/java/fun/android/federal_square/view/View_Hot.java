@@ -42,6 +42,13 @@ public class View_Hot extends View_Main{
         swipe_layout = view.findViewById(R.id.swiperefee);
         scrollView = view.findViewById(R.id.scrollView);
         linear = view.findViewById(R.id.linear);
+        able.头条空 = new TextView(activity_main);
+        able.头条空.setTextColor(Color.rgb(128, 128, 128));
+        able.头条空.setTextSize(15);
+        able.头条空.setText("头条为空");
+        able.头条空.setTextIsSelectable(true);
+        able.头条空.setGravity(Gravity.CENTER);
+        able.头条空.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
     }
 
     @Override
@@ -94,29 +101,15 @@ public class View_Hot extends View_Main{
             var index = Fun.获取热门数量();
             if(list.isEmpty()){
                 activity_main.runOnUiThread(()->{
-                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    var textView = new TextView(activity_main);
-                    textView.setTextColor(Color.rgb(128, 128, 128));
-                    textView.setTextSize(15);
-                    textView.setText("头条为空");
-                    textView.setTextIsSelectable(true);
-                    textView.setGravity(Gravity.CENTER);
-                    textView.setLayoutParams(params);
-                    linear.addView(textView);
+                    able.头条空.setText("头条为空");
+                    linear.addView(able.头条空);
                 });
                 return;
             }
             if(Fun_账号.GetID().isEmpty()){
                 activity_main.runOnUiThread(()->{
-                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    var textView = new TextView(activity_main);
-                    textView.setTextColor(Color.rgb(128, 128, 128));
-                    textView.setTextSize(15);
-                    textView.setText("没有登录 无法查看");
-                    textView.setTextIsSelectable(true);
-                    textView.setGravity(Gravity.CENTER);
-                    textView.setLayoutParams(params);
-                    linear.addView(textView);
+                    able.头条空.setText("没有登陆 无法查看");
+                    linear.addView(able.头条空);
                 });
                 return;
             }

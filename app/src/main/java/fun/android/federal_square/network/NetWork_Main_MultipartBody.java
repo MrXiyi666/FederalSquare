@@ -56,35 +56,35 @@ public class NetWork_Main_MultipartBody {
             return;
         }
         Thread 线程 = new Thread(()->{
+            Response response = null;
             try {
                 request = new Request.Builder()
                         .url(url)
                         .post(requestBody)
                         .build();
-                Response response = able.okHttpClient.newCall(request).execute();
+                response = able.okHttpClient.newCall(request).execute();
                 if(!response.isSuccessful()){
                     Log.w(class_name, url + "isSuccessfulnull");
                     Fun.mess(activity, url + "\nisSuccessfulnull");
-                    throw new Exception("跳出");
+                    return;
                 }
                 if(response.body() == null){
                     Log.w(class_name, "null");
                     Fun.mess(activity, url + "\nisSuccessfulnull");
-                    throw new Exception("跳出");
+                    return;
                 }
                 String string=response.body().string();
-                response.close();
                 if(string.isEmpty()){
                     Fun.mess(activity, url + "\nstring null");
-                    throw new Exception("跳出");
+                    return;
                 }
                 if(string.equals("Null_PassWord")){
                     Fun.mess(activity, url + "\n没有密码");
-                    throw new Exception("跳出");
+                    return;
                 }
                 if(string.equals("Error_PassWord")){
                     Fun.mess(activity, url + "\n密码错误");
-                    throw new Exception("跳出");
+                    return;
                 }
                 事件(string);
                 if(b_update){
@@ -98,6 +98,9 @@ public class NetWork_Main_MultipartBody {
                     失败();
                 });
             }finally {
+                if (response != null) {
+                    response.close();
+                }
                 _上传进度窗口.关闭();
             }
         });

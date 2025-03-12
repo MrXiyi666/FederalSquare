@@ -60,6 +60,14 @@ public class View_Square extends View_Main{
         scrollView = view.findViewById(R.id.scrollView);
         di_title = view.findViewById(R.id.di_title);
         new_icon.setVisibility(View.GONE);
+
+        able.广场空 = new TextView(activity_main);
+        able.广场空.setTextColor(Color.rgb(128, 128, 128));
+        able.广场空.setTextSize(15);
+        able.广场空.setText("广场为空");
+        able.广场空.setTextIsSelectable(true);
+        able.广场空.setGravity(Gravity.CENTER);
+        able.广场空.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
     }
 
     @Override
@@ -150,15 +158,7 @@ public class View_Square extends View_Main{
             }
             if(所有文章.isEmpty()){
                 activity_main.runOnUiThread(()->{
-                    var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    var textView = new TextView(activity_main);
-                    textView.setTextColor(Color.rgb(128, 128, 128));
-                    textView.setTextSize(15);
-                    textView.setText("广场为空");
-                    textView.setTextIsSelectable(true);
-                    textView.setGravity(Gravity.CENTER);
-                    textView.setLayoutParams(params);
-                    linear.addView(textView);
+                    linear.addView(able.广场空);
                 });
                 return;
             }

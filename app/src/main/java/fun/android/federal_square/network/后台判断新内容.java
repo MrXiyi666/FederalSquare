@@ -1,6 +1,8 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
+import android.util.Log;
+
 import fun.android.federal_square.fun.Fun;
 
 public class 后台判断新内容 {
@@ -13,6 +15,7 @@ public class 后台判断新内容 {
                 try {
                     Thread.sleep(Fun.获取广场计时数量());
                 }catch (Exception ignored){
+
                 }
             }
         }).start();

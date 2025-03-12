@@ -63,11 +63,18 @@ public class NetWork_发表文章 extends NetWork_Main {
             if(able.view_square.linear.getChildCount() >= Integer.parseInt(Fun_文件.读取文件(able.app_path + "System_Data/Essay_index.txt"))){
                 able.view_square.linear.removeViewAt(able.view_square.linear.getChildCount()-1);
             }
+            for (int i = 0; i < able.view_square.linear.getChildCount(); i++) {
+                if (able.view_square.linear.getChildAt(i).equals(able.广场空)) {
+                    able.view_square.linear.removeView(able.广场空);
+                    break;
+                }
+            }
         }
         if(able.view_square.scrollView != null){
             able.view_square.scrollView.post(()->{
                 able.view_square.scrollView.smoothScrollTo(0,0);
             });
         }
+
     }
 }
