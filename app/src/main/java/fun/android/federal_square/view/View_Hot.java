@@ -99,16 +99,16 @@ public class View_Hot extends View_Main{
             Post_Index=0;
             var list = Fun_文章.获取热门集合();
             var index = Fun.获取热门数量();
-            if(list.isEmpty()){
+            if(Fun_账号.GetID().isEmpty()){
                 activity_main.runOnUiThread(()->{
-                    able.头条空.setText("头条为空");
+                    able.头条空.setText("没有登陆 无法查看");
                     linear.addView(able.头条空);
                 });
                 return;
             }
-            if(Fun_账号.GetID().isEmpty()){
+            if(list.isEmpty()){
                 activity_main.runOnUiThread(()->{
-                    able.头条空.setText("没有登陆 无法查看");
+                    able.头条空.setText("头条为空");
                     linear.addView(able.头条空);
                 });
                 return;

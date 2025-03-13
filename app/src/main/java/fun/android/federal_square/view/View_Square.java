@@ -253,10 +253,6 @@ public class View_Square extends View_Main{
 
     public void 下一页(){
         new Thread(()->{
-            if(linear.getChildCount() == 0){
-                Fun.mess(activity_main, "到底了");
-                return;
-            }
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity_main, "没有登陆 无法使用");
                 return;
@@ -265,6 +261,10 @@ public class View_Square extends View_Main{
             var url = Fun.获取域名();
             var 所有文章 = Fun_文章.获取广场所有集合();
             var index = Fun.获取广场文章数量();
+            if(linear.getChildCount() == 0){
+                Fun.mess(activity_main, "到底了");
+                return;
+            }
             if(url.isEmpty()){
                 return;
             }
