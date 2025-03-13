@@ -2,7 +2,6 @@ package fun.android.federal_square.view;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -195,7 +194,6 @@ public class View_Main_Pager extends View_Main{
         able.view_square.onStart();
         able.view_hot.onStart();
         able.view_home.onStart();
-        Log.w("测试", "onStart");
     }
 
     @Override
@@ -204,7 +202,6 @@ public class View_Main_Pager extends View_Main{
         able.view_square.onStop();
         able.view_hot.onStop();
         able.view_home.onStop();
-
     }
 
     @Override

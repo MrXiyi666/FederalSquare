@@ -1,8 +1,6 @@
 package fun.android.federal_square.network;
 
 import android.app.Activity;
-import android.util.Log;
-
 import fun.android.federal_square.fun.Fun;
 
 public class 后台判断新内容 {

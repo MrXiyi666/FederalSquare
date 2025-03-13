@@ -10,7 +10,6 @@ public class View_Main {
     public View_Main(MainActivity activity){
         activity_main = activity;
         this.class_name = this.getClass().getSimpleName();
-
         初始化();
         事件();
     }

@@ -4,7 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-
 import androidx.appcompat.widget.AppCompatButton;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
