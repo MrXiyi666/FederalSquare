@@ -40,12 +40,11 @@ public class 查看视频窗口 {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_video_view, null);
-        final ExoPlayer player = new ExoPlayer.Builder(activity).build();
         PlayerView playerView = view.findViewById(R.id.video_view);
+        final ExoPlayer player = new ExoPlayer.Builder(activity).build();
         MediaItem mediaItem = MediaItem.fromUri(url);
         DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true);
         DefaultDataSource.Factory defaultDataSourceFactory = new DefaultDataSource.Factory(activity, httpDataSourceFactory);
-
         CacheDataSource.Factory cacheDataSourceFactory = new CacheDataSource.Factory()
                 .setCache(App.getVideoCache())
                 .setUpstreamDataSourceFactory(defaultDataSourceFactory)

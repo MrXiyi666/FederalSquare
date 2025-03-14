@@ -127,18 +127,17 @@ public class Fun_文章 {
                 Fun.mess(activity, "没有登陆 无法转发");
                 return;
             }
-            if(finalForward.isEmpty() && !able.URL.equals(finalUrl_txt)){
-                Post_Data postData = new Post_Data();
-                postData.setName("forward");
-                postData.setText("true");
-                post_data.add(postData);
-                NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
-                netWork_转发功能.传递参数(post_data, finalTime_txt, button_forward);
-                netWork_转发功能.start();
-            }else{
+            if(finalForward.isEmpty() && able.URL.equals(finalUrl_txt)){
                 Fun.mess(activity, "已存在");
-
+                return;
             }
+            Post_Data postData = new Post_Data();
+            postData.setName("forward");
+            postData.setText("true");
+            post_data.add(postData);
+            NetWork_转发功能 netWork_转发功能 = new NetWork_转发功能(activity);
+            netWork_转发功能.传递参数(post_data, finalTime_txt, button_forward);
+            netWork_转发功能.start();
 
         });
 
@@ -283,17 +282,6 @@ public class Fun_文章 {
         }catch (Exception e){
             return new ArrayList<>();
         }
-    }
-
-    public static void 释放所有文章内存(LinearLayout linear){
-        able.handler.post(()->{
-            for(int i=0; i< linear.getChildCount(); i++){
-                if(linear.getChildAt(i) instanceof Post_View post_view){
-                    post_view.清除图片();
-                }
-            }
-            linear.removeAllViews();
-        });
     }
 
     public static void 释放所有文章内存(LinearLayout linear, Activity activity){

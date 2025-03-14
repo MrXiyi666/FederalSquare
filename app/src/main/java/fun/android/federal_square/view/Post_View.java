@@ -53,10 +53,7 @@ public class Post_View extends LinearLayout {
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
         if(visibility == View.VISIBLE){
-            fun_文章子布局.加载图片();
-            加载头像();
-        }else if(visibility == View.INVISIBLE){
-            fun_文章子布局.清除图片();
+            加载图片();
         }
     }
     private void 加载头像(){
@@ -76,6 +73,11 @@ public class Post_View extends LinearLayout {
     public void 清除图片(){
         fun_文章子布局.清除图片();
         Glide.with(activity).clear(avatar_img);
+    }
+
+    public void 加载图片(){
+        fun_文章子布局.加载图片();
+        加载头像();
     }
     private View di_xian;
     public void 传递底线(View di_xian){

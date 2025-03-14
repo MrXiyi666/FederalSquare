@@ -1,6 +1,5 @@
 package fun.android.federal_square.adatper;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,12 +52,10 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         return position;
     }
 
-    @SuppressLint({"ViewHolder", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyGui gui;
         Context context = contextRef.get();
-        String 后缀 = Fun_文件.获取后缀(url.get(position));
         if(context== null){
             return convertView;
         }
@@ -71,13 +68,13 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         }else{
             gui = (MyGui) convertView.getTag();
         }
-        Glide.with(context).clear(gui.img);
-        gui.img.后缀 = 后缀;
+        gui.img.后缀 = Fun_文件.获取后缀(url.get(position));
         String url_txt = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + url.get(position);
         Glide.with(context).load(url_txt)
                 .override(height)
                 .apply(able.requestOptions)
                 .into(gui.img);
+
         return convertView;
     }
     static class MyGui{

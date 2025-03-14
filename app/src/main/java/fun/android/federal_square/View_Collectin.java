@@ -143,7 +143,7 @@ public class View_Collectin extends AppCompatActivity {
             for(var i=0;i<index;i++){
                 Post_Index++;
             }
-            Fun_文章.释放所有文章内存(linear);
+            Fun_文章.释放所有文章内存(linear,this);
             var 遍历数量 = 0;
             for(var i=Post_Index; i<list.size(); i++){
                 if(遍历数量 >= index){
