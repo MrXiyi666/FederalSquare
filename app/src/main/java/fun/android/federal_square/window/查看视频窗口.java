@@ -45,6 +45,7 @@ public class 查看视频窗口 {
         MediaItem mediaItem = MediaItem.fromUri(url);
         DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true);
         DefaultDataSource.Factory defaultDataSourceFactory = new DefaultDataSource.Factory(activity, httpDataSourceFactory);
+
         CacheDataSource.Factory cacheDataSourceFactory = new CacheDataSource.Factory()
                 .setCache(App.getVideoCache())
                 .setUpstreamDataSourceFactory(defaultDataSourceFactory)
