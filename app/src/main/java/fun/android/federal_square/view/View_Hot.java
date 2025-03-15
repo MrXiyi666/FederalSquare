@@ -182,12 +182,12 @@ public class View_Hot extends View_Main{
 
     public void 下一页(){
         new Thread(()->{
-            if(linear.getChildCount() == 0){
-                Fun.mess(activity_main, "到底了");
-                return;
-            }
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity_main, "没有登陆 无法查看");
+                return;
+            }
+            if(linear.getChildCount() == 0){
+                Fun.mess(activity_main, "到底了");
                 return;
             }
             Fun_文章.释放所有文章内存(linear, activity_main);

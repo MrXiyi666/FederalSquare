@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="#f2f3f7"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -38,4 +39,4 @@
 
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</LinearLayout>
+</RelativeLayout>
