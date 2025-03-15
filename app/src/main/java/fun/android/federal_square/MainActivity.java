@@ -43,13 +43,11 @@ public class MainActivity extends AppCompatActivity {
             able.URL = Fun.获取域名();
             able.PassWord = Fun.获取密码();
             able.view_main = new View_Main_Pager(this);
-            able.view_main.getView().setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            main.addView(able.view_main.getView());
         }else{
             able.view_main = new View_Create(this);
-            able.view_main.getView().setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            main.addView(able.view_main.getView());
         }
+        able.view_main.getView().setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        main.addView(able.view_main.getView());
     }
 
     @Override

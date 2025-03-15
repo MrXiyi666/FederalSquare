@@ -174,10 +174,12 @@ public class View_Main_Pager extends View_Main{
                 menu_list_view.setVisibility(View.GONE);
                 xian_view.setVisibility(View.GONE);
                 menu_open.setImageResource(R.drawable.menu_up);
+                menu_open.setAlpha(0.2f);
                 return;
             }
             menu_list_view.setVisibility(View.VISIBLE);
             menu_open.setImageResource(R.drawable.menu_down);
+            menu_open.setAlpha(1.0f);
             xian_view.setVisibility(View.VISIBLE);
         });
     }
