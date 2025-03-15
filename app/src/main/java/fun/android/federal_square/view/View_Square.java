@@ -315,6 +315,7 @@ public class View_Square extends View_Main{
                 int childHeight = scrollView.getChildAt(0).getHeight();
                 int scrollViewHeight = scrollView.getHeight();
                 scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
+
             });
         });
     }

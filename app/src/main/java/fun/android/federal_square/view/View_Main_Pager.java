@@ -16,11 +16,12 @@ import fun.android.federal_square.adatper.Main_Pager_Adapter;
 import fun.android.federal_square.data.able;
 
 public class View_Main_Pager extends View_Main{
-    private ViewPager pager;
+    public ViewPager pager;
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
     public LinearLayout linear_menu, menu_list_view, linear_menu_view;
     public TextView menu_text;
+    public View xian_view;
     public AppCompatButton button_top, button_up, button_down, button_update;
 
     public View_Main_Pager(MainActivity activity) {
@@ -40,6 +41,7 @@ public class View_Main_Pager extends View_Main{
         menu_hot = view.findViewById(R.id.menu_hot);
         menu_home = view.findViewById(R.id.menu_home);
         menu_text = view.findViewById(R.id.menu_text);
+        xian_view = view.findViewById(R.id.xian_view);
         menu_list_view = view.findViewById(R.id.menu_list_view);
         button_top = view.findViewById(R.id.button_top);
         button_up = view.findViewById(R.id.button_up);
@@ -172,8 +174,8 @@ public class View_Main_Pager extends View_Main{
         menu_text.setOnClickListener(V->{
             if(menu_list_view.getVisibility() == View.VISIBLE){
                 menu_list_view.setVisibility(View.GONE);
+                xian_view.setVisibility(View.GONE);
                 menu_text.setText(" ▲ ");
-                menu_text.setBackgroundColor(Color.TRANSPARENT);
                 menu_text.setTextColor(Color.rgb(242,243,247));
                 able.view_square.修改底部空间();
                 able.view_hot.修改底部空间();
@@ -181,7 +183,7 @@ public class View_Main_Pager extends View_Main{
             }
             menu_list_view.setVisibility(View.VISIBLE);
             menu_text.setText(" ▼ ");
-            menu_text.setBackgroundColor(Color.WHITE);
+            xian_view.setVisibility(View.VISIBLE);
             menu_text.setTextColor(Color.rgb(128,128,128));
             able.view_square.修改底部空间();
             able.view_hot.修改底部空间();

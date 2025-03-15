@@ -54,6 +54,8 @@ public class Post_View extends LinearLayout {
         super.setVisibility(visibility);
         if(visibility == View.VISIBLE){
             加载图片();
+        }else{
+            清除图片();
         }
     }
     private void 加载头像(){

@@ -140,7 +140,16 @@ public class Fun_文章 {
             netWork_转发功能.start();
 
         });
-
+        avatar_img.setOnClickListener(V->{
+            if(Fun_账号.GetID().isEmpty()){
+                Fun.mess(activity, "没有登陆 无法查看");
+                return;
+            }
+            able.传递数据 = post_data;
+            Intent intent = new Intent();
+            intent.setClass(activity, View_Post_Activity.class);
+            activity.startActivity(intent);
+        });
         button_message.setOnClickListener(_ ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法查看");
