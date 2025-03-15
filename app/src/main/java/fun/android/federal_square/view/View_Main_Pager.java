@@ -20,7 +20,7 @@ public class View_Main_Pager extends View_Main{
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
     public LinearLayout linear_menu, menu_list_view, linear_menu_view;
-    public TextView menu_text;
+    public ImageView menu_open;
     public View xian_view;
     public AppCompatButton button_top, button_up, button_down, button_update;
 
@@ -40,7 +40,7 @@ public class View_Main_Pager extends View_Main{
         menu_square = view.findViewById(R.id.menu_square);
         menu_hot = view.findViewById(R.id.menu_hot);
         menu_home = view.findViewById(R.id.menu_home);
-        menu_text = view.findViewById(R.id.menu_text);
+        menu_open = view.findViewById(R.id.menu_open);
         xian_view = view.findViewById(R.id.xian_view);
         menu_list_view = view.findViewById(R.id.menu_list_view);
         button_top = view.findViewById(R.id.button_top);
@@ -83,7 +83,6 @@ public class View_Main_Pager extends View_Main{
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_square.恢复界面();
-                        able.view_square.修改底部空间();
                         break;
                     case 1:
                         linear_menu_view.setVisibility(View.VISIBLE);
@@ -91,7 +90,6 @@ public class View_Main_Pager extends View_Main{
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_hot.恢复界面();
-                        able.view_square.修改底部空间();
                         break;
                     case 2:
                         linear_menu_view.setVisibility(View.GONE);
@@ -171,22 +169,16 @@ public class View_Main_Pager extends View_Main{
                 able.view_hot.初始化数据();
             }
         });
-        menu_text.setOnClickListener(V->{
+        menu_open.setOnClickListener(V->{
             if(menu_list_view.getVisibility() == View.VISIBLE){
                 menu_list_view.setVisibility(View.GONE);
                 xian_view.setVisibility(View.GONE);
-                menu_text.setText(" ▲ ");
-                menu_text.setTextColor(Color.rgb(242,243,247));
-                able.view_square.修改底部空间();
-                able.view_hot.修改底部空间();
+                menu_open.setImageResource(R.drawable.menu_up);
                 return;
             }
             menu_list_view.setVisibility(View.VISIBLE);
-            menu_text.setText(" ▼ ");
+            menu_open.setImageResource(R.drawable.menu_down);
             xian_view.setVisibility(View.VISIBLE);
-            menu_text.setTextColor(Color.rgb(128,128,128));
-            able.view_square.修改底部空间();
-            able.view_hot.修改底部空间();
         });
     }
 

@@ -305,18 +305,4 @@ public class View_Square extends View_Main{
     public void 恢复界面(){
         Fun.刷新当前文章(activity_main, linear, scrollView);
     }
-
-    public void 修改底部空间(){
-        if(!scrollView_Down){
-            return;
-        }
-        activity_main.runOnUiThread(()->{
-            scrollView.post(()->{
-                int childHeight = scrollView.getChildAt(0).getHeight();
-                int scrollViewHeight = scrollView.getHeight();
-                scrollView.smoothScrollTo(0, childHeight-scrollViewHeight);
-
-            });
-        });
-    }
 }
