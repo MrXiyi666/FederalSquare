@@ -337,7 +337,9 @@ public class Fun {
             int scrollY = scrollView.getScrollY();
             int scrollViewHeight = scrollView.getHeight();
             int linearCount = linear.getChildCount();
-
+            if(linearCount == 0){
+                return;
+            }
             for (int i = 0; i < linearCount; i++) {
                 View childView = linear.getChildAt(i);
                 if (childView instanceof Post_View postView) {

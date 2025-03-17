@@ -63,7 +63,7 @@ public class View_Square extends View_Main{
         able.广场空 = new TextView(activity_main);
         able.广场空.setTextColor(Color.rgb(128, 128, 128));
         able.广场空.setTextSize(15);
-        able.广场空.setText("广场为空");
+        able.广场空.setText("");
         able.广场空.setTextIsSelectable(true);
         able.广场空.setGravity(Gravity.CENTER);
         able.广场空.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -148,6 +148,9 @@ public class View_Square extends View_Main{
     public void 初始化本地数据(){
         new Thread(()->{
             Fun_文章.释放所有文章内存(linear, activity_main);
+            activity_main.runOnUiThread(()->{
+                able.广场空.setText("");
+            });
             Post_Index=0;
             var url = Fun.获取域名();
             var 所有文章 = Fun_文章.获取广场所有集合();
@@ -156,7 +159,7 @@ public class View_Square extends View_Main{
                 return;
             }
             if(所有文章.isEmpty()){
-                activity_main.runOnUiThread(()->{
+                linear.post(()->{
                     linear.addView(able.广场空);
                 });
                 return;
@@ -248,6 +251,14 @@ public class View_Square extends View_Main{
             scrollView.post(()->{
                 scrollView_Down = false;
             });
+            linear.post(()->{
+                if(linear.getChildCount() == 0){
+                    able.广场空.setText("广场为空");
+                    linear.addView(able.广场空);
+                }else{
+                    able.广场空.setText("");
+                }
+            });
         }).start();
     }
 
@@ -257,7 +268,7 @@ public class View_Square extends View_Main{
                 Fun.mess(activity_main, "没有登陆 无法使用");
                 return;
             }
-            if(linear.getChildCount() == 0){
+            if(able.广场空.getText().toString().equals("广场为空")){
                 Fun.mess(activity_main, "到底了");
                 return;
             }
@@ -299,6 +310,14 @@ public class View_Square extends View_Main{
             Fun.回到顶部(scrollView, linear, activity_main);
             scrollView.post(()->{
                 scrollView_Down = false;
+            });
+            linear.post(()->{
+                if(linear.getChildCount() == 0){
+                    able.广场空.setText("广场为空");
+                    linear.addView(able.广场空);
+                }else{
+                    able.广场空.setText("");
+                }
             });
         }).start();
     }
