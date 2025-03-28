@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
@@ -56,7 +55,7 @@ public class 重新设置域名窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
+        dialog.setOnKeyListener((V1, keyCode, V3) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 dialog.dismiss();
                 return true;

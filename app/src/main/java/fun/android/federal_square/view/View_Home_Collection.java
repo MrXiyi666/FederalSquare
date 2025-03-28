@@ -3,10 +3,8 @@ package fun.android.federal_square.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -59,7 +57,7 @@ public class View_Home_Collection extends View_Main{
             activity_main.startActivity(intent);
         });
 
-        scrollView.setOnScrollChangeListener((_, _, _, _, _) -> {
+        scrollView.setOnScrollChangeListener((V1, V2, V3, V4, V5) -> {
             Fun.刷新当前文章(activity_main, linear, scrollView);
         });
         初始化收藏();

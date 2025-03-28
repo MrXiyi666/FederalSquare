@@ -49,7 +49,6 @@ public class View_Post_Activity extends AppCompatActivity {
         Window window = this.getWindow();
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
-        //window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_view_post);
         linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
@@ -231,7 +230,7 @@ public class View_Post_Activity extends AppCompatActivity {
                 edit_text.setText("");
             });
         }
-        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+        scrollView.setOnScrollChangeListener((V1, V2, scrollY, V4, V5) -> {
             int scrollViewHeight = scrollView.getHeight();
             int linearCount = linear.getChildCount();
 

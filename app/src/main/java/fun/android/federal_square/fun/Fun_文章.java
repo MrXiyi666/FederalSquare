@@ -122,7 +122,7 @@ public class Fun_文章 {
         String finalUrl_txt = url_txt;
         String finalPassWord_txt = PassWord_txt;
         String finalForward = forward;
-        button_forward.setOnClickListener(_ ->{
+        button_forward.setOnClickListener(V ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法转发");
                 return;
@@ -150,14 +150,14 @@ public class Fun_文章 {
             intent.setClass(activity, View_Post_Activity.class);
             activity.startActivity(intent);
         });
-        button_message.setOnClickListener(_ ->{
+        button_message.setOnClickListener(V ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法查看");
                 return;
             }
             查看评论窗口.查看评论窗口(activity, finalTime_txt, finalUrl_txt, finalPassWord_txt);
         });
-        button_collection.setOnClickListener(_ ->{
+        button_collection.setOnClickListener(V ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法收藏");
                 return;
@@ -166,7 +166,7 @@ public class Fun_文章 {
             netWork_添加_收藏.传递参数(finalTime_txt, post_data);
             netWork_添加_收藏.start();
         });
-        view.setOnClickListener(_ ->{
+        view.setOnClickListener(V ->{
             if(Fun_账号.GetID().isEmpty()){
                 Fun.mess(activity, "没有登陆 无法查看");
                 return;
@@ -176,7 +176,7 @@ public class Fun_文章 {
             intent.setClass(activity, View_Post_Activity.class);
             activity.startActivity(intent);
         });
-        view.setOnLongClickListener(_ ->{
+        view.setOnLongClickListener(V ->{
             switch (index){
                 case 0:
                     删除窗口.删除本地文章窗户(activity, finalTime_txt, view);

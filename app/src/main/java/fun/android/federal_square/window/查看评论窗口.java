@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,7 +71,7 @@ public class 查看评论窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
+        dialog.setOnKeyListener((V1, keyCode, V3) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 dialog.dismiss();
                 return true;

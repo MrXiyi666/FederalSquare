@@ -22,10 +22,6 @@ public class View_Main {
 
     }
 
-    public void 返回键(){
-
-    }
-
     public void 事件(){
 
     }
@@ -38,7 +34,12 @@ public class View_Main {
 
     }
 
+    public void 返回键(){
+
+    }
+
     public void 释放(){
 
     }
+
 }

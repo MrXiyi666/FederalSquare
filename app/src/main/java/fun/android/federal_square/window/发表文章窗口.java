@@ -214,7 +214,7 @@ public class 发表文章窗口 {
             选择图片窗口句柄.dismiss();
             Fun.回到底部(activity, scrollView);
         });
-        选择图片窗口句柄.setOnDismissListener(_ -> {
+        选择图片窗口句柄.setOnDismissListener(V -> {
             // 释放GridView资源
             if(gridview != null){
                 // 先清除Adapter引用

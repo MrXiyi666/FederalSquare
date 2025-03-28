@@ -1,11 +1,9 @@
 package fun.android.federal_square.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
@@ -23,7 +21,6 @@ public class View_Main_Pager extends View_Main{
     public ImageView menu_open;
     public View xian_view;
     public AppCompatButton button_top, button_up, button_down, button_update;
-
     public View_Main_Pager(MainActivity activity) {
         super(activity);
     }
@@ -112,8 +109,8 @@ public class View_Main_Pager extends View_Main{
             }
             pager.setCurrentItem(0);
         });
-        menu_hot.setOnClickListener(_ -> pager.setCurrentItem(1));
-        menu_home.setOnClickListener(_ -> pager.setCurrentItem(2));
+        menu_hot.setOnClickListener(V -> pager.setCurrentItem(1));
+        menu_home.setOnClickListener(V -> pager.setCurrentItem(2));
         menu_square.setOnLongClickListener(v -> {
             if(pager.getCurrentItem() == 0){
                 able.view_square.scrollView.smoothScrollTo(0, 0);

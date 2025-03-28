@@ -1,7 +1,6 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class View_Hot extends View_Main{
             netWork_读取_热门.start();
         });
 
-        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+        scrollView.setOnScrollChangeListener((V1, V2, scrollY, V4, V5) -> {
             var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){

@@ -53,7 +53,7 @@ public class View_Collectin extends AppCompatActivity {
             finish();
         });
 
-        scrollView.setOnScrollChangeListener((_, _, _, _, _) -> {
+        scrollView.setOnScrollChangeListener((V1, V2, V3, V4, V5) -> {
             Fun.刷新当前文章(View_Collectin.this, linear, scrollView);
         });
         button_top.setOnClickListener(V->{

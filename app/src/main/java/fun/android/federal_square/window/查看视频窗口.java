@@ -90,7 +90,7 @@ public class 查看视频窗口 {
             }
         });
 
-        dialog.setOnCancelListener(_ -> {
+        dialog.setOnCancelListener(V -> {
             player.release();
             dialog.dismiss();
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

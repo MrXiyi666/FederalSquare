@@ -7,12 +7,10 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
-
 import java.util.Objects;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
@@ -74,7 +72,7 @@ public class 文章设置窗口 {
         });
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
+        dialog.setOnKeyListener((V1, keyCode, V3) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 dialog.dismiss();
                 return true;

@@ -56,7 +56,7 @@ public class 选择头像窗口 {
                 netWork_头像_上传.start();
             }
         });
-        dialog.setOnDismissListener(_ -> {
+        dialog.setOnDismissListener(V -> {
             // 释放GridView资源
             if(gridview != null){
                 // 先清除Adapter引用
@@ -74,7 +74,7 @@ public class 选择头像窗口 {
         });
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
+        dialog.setOnKeyListener((V1, keyCode, V3) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 dialog.dismiss();
                 return true;

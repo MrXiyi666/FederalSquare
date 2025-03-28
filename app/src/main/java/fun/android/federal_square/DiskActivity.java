@@ -50,7 +50,7 @@ public class DiskActivity extends AppCompatActivity {
         // 屏幕不息屏
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_disk);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         初始化();
         事件();
     }
@@ -77,10 +77,10 @@ public class DiskActivity extends AppCompatActivity {
             button_network_disk.setEnabled(false);
             上传图片.launch( new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE).build());
         });
-        button_menu.setOnClickListener(_ ->{
+        button_menu.setOnClickListener(V ->{
             网盘设置窗口.启动(this);
         });
-        return_icon.setOnClickListener(_ ->{
+        return_icon.setOnClickListener(V ->{
             finish();
         });
     }
@@ -130,7 +130,7 @@ public class DiskActivity extends AppCompatActivity {
         title_index.setText("统计数量： " + file_list.size());
         disk_grid_adapter = new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index);
         gridView.setAdapter(disk_grid_adapter);
-        gridView.setOnItemClickListener((_, _, position, _) -> {
+        gridView.setOnItemClickListener((V1, V2, position, V4) -> {
             String 后缀 = Fun_文件.获取后缀(file_list.get(position));
             String url = able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position);
             if(Fun.图片格式判断(后缀)){
@@ -141,7 +141,7 @@ public class DiskActivity extends AppCompatActivity {
                 打开方式窗口.启动(this, url);
             }
         });
-        gridView.setOnItemLongClickListener((_, _, position, _) -> {
+        gridView.setOnItemLongClickListener((V1, V2, position, V4) -> {
             删除窗口.删除网盘图片窗口(DiskActivity.this, file_list.get(position));
             return true;
         });

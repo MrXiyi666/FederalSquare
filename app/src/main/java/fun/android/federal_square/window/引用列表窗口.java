@@ -7,12 +7,10 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import com.google.gson.reflect.TypeToken;
@@ -60,7 +58,7 @@ public class 引用列表窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
+        dialog.setOnKeyListener((V1, keyCode, V3) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 dialog.dismiss();
                 return true;

@@ -88,7 +88,7 @@ public class View_Square extends View_Main{
             }
             swipe_layout.setRefreshing(false);
         });
-        scrollView.setOnScrollChangeListener((_, _, scrollY, _, _) -> {
+        scrollView.setOnScrollChangeListener((V1, V2, scrollY, V4, V5) -> {
             int screenHeight = scrollView.getHeight(); // 获取 ScrollView 的高度
             var childHeight = scrollView.getChildAt(0).getHeight();
             if(scrollY + screenHeight >= childHeight){

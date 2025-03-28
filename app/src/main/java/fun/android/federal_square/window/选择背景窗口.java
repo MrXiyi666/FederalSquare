@@ -50,7 +50,7 @@ public class 选择背景窗口 {
         gridview.setNumColumns(Disk_Index);
         disk_grid_adapter = new Disk_Grid_Adapter(activity, file_list,Disk_Index);
         gridview.setAdapter(disk_grid_adapter);
-        gridview.setOnItemClickListener((_, _, position, l) -> {
+        gridview.setOnItemClickListener((V1, V2, position, l) -> {
             List<Post_Data> post_dataList = Fun_账号.重新生成(Fun_账号.GetID(), Fun_账号.GetPassWord(), Fun_账号.GetName(), Fun_账号.GetSign(), Fun_账号.GetAvatar_Url(), able.URL + "federal-square/Account/" + Fun_账号.GetID() + "/Image_Resources/" + file_list.get(position), Fun_账号.Get发贴开关(), Fun_账号.Get评论开关());
             if(!post_dataList.isEmpty()){
                 NetWork_背景_上传 netWork_背景_上传 = new NetWork_背景_上传(activity);
@@ -60,7 +60,7 @@ public class 选择背景窗口 {
         });
 
 
-        dialog.setOnDismissListener(_ -> {
+        dialog.setOnDismissListener(V -> {
             // 释放GridView资源
             if(gridview != null){
                 // 先清除Adapter引用
@@ -79,7 +79,7 @@ public class 选择背景窗口 {
 
         dialog.setView(view);
         dialog.setCancelable(false);
-        dialog.setOnKeyListener((_, keyCode, _) -> {
+        dialog.setOnKeyListener((V1, keyCode, V3) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 dialog.dismiss();
                 return true;
