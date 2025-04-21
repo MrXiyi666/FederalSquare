@@ -46,7 +46,7 @@ public class View_Hot extends View_Main{
         able.头条空.setTextColor(Color.rgb(128, 128, 128));
         able.头条空.setTextSize(15);
         able.头条空.setPadding(0,10,0,10);
-        able.头条空.setText("");
+        able.头条空.setText(" 头条为空 ");
         able.头条空.setTextIsSelectable(true);
         able.头条空.setGravity(Gravity.CENTER);
         able.头条空.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -112,7 +112,7 @@ public class View_Hot extends View_Main{
             }
             if(list.isEmpty()){
                 activity_main.runOnUiThread(()->{
-                    able.头条空.setText("头条为空");
+                    able.头条空.setText(" 头条为空 ");
                     linear.addView(able.头条空);
                 });
                 return;
@@ -138,6 +138,11 @@ public class View_Hot extends View_Main{
             Fun.回到顶部(scrollView, linear, activity_main);
             scrollView.post(()->{
                 scrollView_Down = false;
+            });
+            linear.post(()->{
+                if(linear.getChildCount() == 0) {
+                    linear.addView(able.头条空);
+                }
             });
         }).start();
     }
@@ -182,11 +187,8 @@ public class View_Hot extends View_Main{
                 scrollView_Down = false;
             });
             linear.post(()->{
-                if(linear.getChildCount() == 0){
-                    able.头条空.setText("头条为空");
+                if(linear.getChildCount() == 0) {
                     linear.addView(able.头条空);
-                }else{
-                    able.头条空.setText("");
                 }
             });
         }).start();
@@ -198,13 +200,15 @@ public class View_Hot extends View_Main{
                 Fun.mess(activity_main, "没有登陆 无法查看");
                 return;
             }
-            if(able.头条空.getText().toString().equals("头条为空")){
-                Fun.mess(activity_main, "到底了");
-                return;
-            }
             Fun_文章.释放所有文章内存(linear, activity_main);
             var list = Fun_文章.获取热门集合();
             var index = Fun.获取热门数量();
+            if(Post_Index >= list.size()){
+                linear.post(()->{
+                    linear.addView(able.头条空);
+                });
+                Fun.mess(activity_main, "到底了");
+            }
             for(var i=0;i<index;i++){
                 Post_Index++;
             }
@@ -233,11 +237,8 @@ public class View_Hot extends View_Main{
                 scrollView_Down = false;
             });
             linear.post(()->{
-                if(linear.getChildCount() == 0){
-                    able.头条空.setText("头条为空");
+                if(linear.getChildCount() == 0) {
                     linear.addView(able.头条空);
-                }else{
-                    able.头条空.setText("");
                 }
             });
         }).start();

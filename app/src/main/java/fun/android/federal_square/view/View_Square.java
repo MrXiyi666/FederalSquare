@@ -199,6 +199,11 @@ public class View_Square extends View_Main{
             scrollView.post(()->{
                 scrollView_Down = false;
             });
+            linear.post(()->{
+                if(linear.getChildCount() == 0) {
+                    linear.addView(able.广场空);
+                }
+            });
         }).start();
     }
 
@@ -250,11 +255,8 @@ public class View_Square extends View_Main{
                 scrollView_Down = false;
             });
             linear.post(()->{
-                if(linear.getChildCount() == 0){
-                    able.广场空.setText("广场为空");
+                if(linear.getChildCount() == 0) {
                     linear.addView(able.广场空);
-                }else{
-                    able.广场空.setText("");
                 }
             });
         }).start();
@@ -266,16 +268,15 @@ public class View_Square extends View_Main{
                 Fun.mess(activity_main, "没有登陆 无法使用");
                 return;
             }
-            if(able.广场空.getText().toString().equals("广场为空")){
-                Fun.mess(activity_main, "到底了");
-                return;
-            }
             Fun_文章.释放所有文章内存(linear, activity_main);
             var url = Fun.获取域名();
             var 所有文章 = Fun_文章.获取广场所有集合();
             var index = Fun.获取广场文章数量();
             if(url.isEmpty()){
                 return;
+            }
+            if(Post_Index >= 所有文章.size()){
+                Fun.mess(activity_main, "到底了");
             }
             for(int i=0;i<index;i++){
                 Post_Index++;
@@ -310,11 +311,8 @@ public class View_Square extends View_Main{
                 scrollView_Down = false;
             });
             linear.post(()->{
-                if(linear.getChildCount() == 0){
-                    able.广场空.setText("广场为空");
+                if(linear.getChildCount() == 0) {
                     linear.addView(able.广场空);
-                }else{
-                    able.广场空.setText("");
                 }
             });
         }).start();
