@@ -75,6 +75,7 @@ public class View_Home_Collection extends View_Main{
                     textView.setTextColor(Color.rgb(128, 128, 128));
                     textView.setTextSize(15);
                     textView.setText("收藏为空");
+                    textView.setPadding(0,10,0,10);
                     textView.setTextIsSelectable(true);
                     textView.setGravity(Gravity.CENTER);
                     textView.setLayoutParams(params);

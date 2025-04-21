@@ -45,6 +45,7 @@ public class View_Hot extends View_Main{
         able.头条空 = new TextView(activity_main);
         able.头条空.setTextColor(Color.rgb(128, 128, 128));
         able.头条空.setTextSize(15);
+        able.头条空.setPadding(0,10,0,10);
         able.头条空.setText("");
         able.头条空.setTextIsSelectable(true);
         able.头条空.setGravity(Gravity.CENTER);
