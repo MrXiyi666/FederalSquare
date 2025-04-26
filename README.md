@@ -145,12 +145,6 @@ v5.8.4.4
 #
 修复了bug
 #
-引用实例 http://federal-square.top/
-#
-实例密码 federal-square
-#
-查看最新动态
-#
 #
 #
 # 如何搭建广场社区
