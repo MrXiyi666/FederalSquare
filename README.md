@@ -193,27 +193,3 @@ v5.8.4.4
 此项目目前还在开发阶段 遇到问题 很正常
 #
 如果遇到问题 可以清除数据从新开始
-#
-#
-#
-# 感谢赞助
-如果您喜欢这个项目 那么你可以少许赞助 我会更有动力 谢谢 我喜欢人民币
-#
-
-<img src="http://federal-square.top/Image/zhifubao.jpg" alt="支付宝收款码" width="300" height="400">
-
-#
-
-<img src="http://federal-square.top/Image/weixin.png" alt="微信收款码" width="300" height="400">
-
-#
-#
-#
-
-# 我们使用XMPP来进行交流 你可以扫码加入官方群 进行交流
-# XMPP是开源的社交APP 和微信QQ比较相似 但是注重隐私安全 
-
-<img src="http://federal-square.top/Image/qunliao.png" alt="群聊二维码" width="300" height="400">
-#
-https://conversations.im/j/联邦广场官方群@conference.conversations.im
-#
