@@ -75,6 +75,9 @@ public class View_Main_Pager extends View_Main{
                 able.pager_id = position;
                 switch (position){
                     case 0:
+                        if(menu_list_view.getVisibility() == View.VISIBLE){
+                            menu_open.setAlpha(1.0f);
+                        }
                         linear_menu_view.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_true_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
@@ -82,6 +85,9 @@ public class View_Main_Pager extends View_Main{
                         able.view_square.恢复界面();
                         break;
                     case 1:
+                        if(menu_list_view.getVisibility() == View.VISIBLE){
+                            menu_open.setAlpha(1.0f);
+                        }
                         linear_menu_view.setVisibility(View.VISIBLE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);

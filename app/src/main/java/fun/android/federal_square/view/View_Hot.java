@@ -1,6 +1,8 @@
 package fun.android.federal_square.view;
 
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +28,12 @@ public class View_Hot extends View_Main{
     private SwipeRefreshLayout swipe_layout;
     public LinearLayout linear;
     public ScrollView scrollView;
-    private boolean scrollView_Down = false;
     public int Post_Index = 0;
-
+    private Handler 滑动监听_handler = new Handler(Looper.getMainLooper());
+    private Runnable 滑动监听_scrollEndRunnable = () -> {
+        View_Main_Pager v = (View_Main_Pager)able.view_main;
+        v.menu_open.setAlpha(0.2f);
+    };
     public View_Hot(MainActivity activity) {
         super(activity);
     }
@@ -71,12 +76,13 @@ public class View_Hot extends View_Main{
         scrollView.setOnScrollChangeListener((V1, V2, scrollY, V4, V5) -> {
             var screenHeight = scrollView.getHeight();
             var childHeight = scrollView.getChildAt(0).getHeight();
-            if(scrollY + screenHeight >= childHeight){
-                scrollView_Down = true;
-            }else{
-                scrollView_Down = false;
-            }
             Fun.刷新当前文章(activity_main, linear, scrollView);
+            View_Main_Pager v = (View_Main_Pager)able.view_main;
+            if(v.menu_list_view.getVisibility() == View.VISIBLE){
+                v.menu_open.setAlpha(1.0f);
+            }
+            滑动监听_handler.removeCallbacks(滑动监听_scrollEndRunnable);
+            滑动监听_handler.postDelayed(滑动监听_scrollEndRunnable, 200);
         });
         初始化数据();
     }
@@ -136,9 +142,6 @@ public class View_Hot extends View_Main{
                 });
             }
             Fun.回到顶部(scrollView, linear, activity_main);
-            scrollView.post(()->{
-                scrollView_Down = false;
-            });
             linear.post(()->{
                 if(linear.getChildCount() == 0) {
                     linear.addView(able.头条空);
@@ -183,9 +186,6 @@ public class View_Hot extends View_Main{
                 遍历数量++;
             }
             Fun.回到顶部(scrollView, linear, activity_main);
-            scrollView.post(()->{
-                scrollView_Down = false;
-            });
             linear.post(()->{
                 if(linear.getChildCount() == 0) {
                     linear.addView(able.头条空);
@@ -233,9 +233,6 @@ public class View_Hot extends View_Main{
                 遍历数量++;
             }
             Fun.回到顶部(scrollView, linear, activity_main);
-            scrollView.post(()->{
-                scrollView_Down = false;
-            });
             linear.post(()->{
                 if(linear.getChildCount() == 0) {
                     linear.addView(able.头条空);
