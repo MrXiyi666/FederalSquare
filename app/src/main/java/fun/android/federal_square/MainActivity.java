@@ -1,13 +1,19 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.window.OnBackInvokedCallback;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.appcompat.app.AppCompatActivity;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
@@ -17,7 +23,7 @@ import fun.android.federal_square.view.View_Main_Pager;
 
 public class MainActivity extends AppCompatActivity {
     public RelativeLayout main;
-
+    OnBackPressedCallback onBackPressedCallback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         able.宽度 = displayMetrics.widthPixels;
         able.高度 = displayMetrics.heightPixels;
+        onBackPressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                able.view_main.返回键();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
         main = findViewById(R.id.main);
     }
 
@@ -64,14 +77,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        onBackPressedCallback.remove();
         able.view_main.释放();
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            able.view_main.返回键();
-        }
-        return true;
-    }
 }

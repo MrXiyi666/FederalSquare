@@ -40,4 +40,13 @@
         android:text="引用列表"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="10dp"
+        android:stateListAnimator="@null"
+        android:id="@+id/button_system_features"
+        android:textColor="@color/black"
+        android:background="@drawable/button_event_back"
+        android:text="系统功能"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

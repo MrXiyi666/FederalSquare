@@ -1,9 +1,12 @@
 package fun.android.federal_square.view;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.adatper.Main_Pager_Adapter;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 
 public class View_Main_Pager extends View_Main{
     public ViewPager pager;

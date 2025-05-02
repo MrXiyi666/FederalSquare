@@ -34,6 +34,10 @@ public class View_Main {
 
     }
 
+    public void 预见返回(){
+
+    }
+
     public void 返回键(){
 
     }

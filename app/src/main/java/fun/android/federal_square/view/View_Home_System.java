@@ -11,9 +11,10 @@ import fun.android.federal_square.window.个人信息窗口;
 import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.window.引用列表窗口;
 import fun.android.federal_square.window.文章设置窗口;
+import fun.android.federal_square.window.系统功能窗口;
 
 public class View_Home_System extends View_Main{
-    private AppCompatButton 网盘按钮, 个人信息, 引用列表, 文章设置;
+    private AppCompatButton 网盘按钮, 个人信息, 引用列表, 文章设置, 系统功能;
     public View_Home_System(MainActivity activity) {
         super(activity);
     }
@@ -26,6 +27,8 @@ public class View_Home_System extends View_Main{
         个人信息 = view.findViewById(R.id.button_personal_information);
         引用列表 = view.findViewById(R.id.button_yinyong_list);
         文章设置 = view.findViewById(R.id.button_essay_system);
+        系统功能 = view.findViewById(R.id.button_system_features);
+        系统功能.setVisibility(View.GONE);
     }
 
     @Override
@@ -46,6 +49,9 @@ public class View_Home_System extends View_Main{
         });
         文章设置.setOnClickListener(V->{
             文章设置窗口.显示(activity_main);
+        });
+        系统功能.setOnClickListener(V->{
+            new 系统功能窗口().启动(activity_main);
         });
     }
 
