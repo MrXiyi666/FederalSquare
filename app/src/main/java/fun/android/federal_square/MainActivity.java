@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
 import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.OnBackPressedDispatcherOwner;
@@ -23,7 +24,6 @@ import fun.android.federal_square.view.View_Main_Pager;
 
 public class MainActivity extends AppCompatActivity {
     public RelativeLayout main;
-    OnBackPressedCallback onBackPressedCallback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +40,6 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         able.宽度 = displayMetrics.widthPixels;
         able.高度 = displayMetrics.heightPixels;
-        onBackPressedCallback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                able.view_main.返回键();
-            }
-        };
-        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
         main = findViewById(R.id.main);
     }
 
@@ -77,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        onBackPressedCallback.remove();
+        if(Fun.onBackPressedCallback!=null){
+            Fun.onBackPressedCallback.remove();
+        }
         able.view_main.释放();
     }
 

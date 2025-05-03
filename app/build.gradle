@@ -20,10 +20,10 @@ android {
     }
     defaultConfig {
         applicationId "fun.android.federal_square"
-        minSdk 29
+        minSdk 26
         targetSdk 36
         versionCode 6
-        versionName "6.0.1"
+        versionName "6.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +31,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+
+import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.URL_PassWord_Data;
@@ -32,6 +40,8 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.view.Post_View;
 
 public class Fun {
+    private static OnBackInvokedCallback onBackInvokedCallback;
+    public static OnBackPressedCallback onBackPressedCallback;
 
     public static void mess(Activity activity, String name){
         activity.runOnUiThread(()->{
@@ -370,5 +380,31 @@ public class Fun {
                 }
             }
         }));
+    }
+
+    public static void 预测性返回关(MainActivity activity_main){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedCallback = () -> {
+                able.view_main.返回键();
+            };
+            activity_main.getOnBackInvokedDispatcher().registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT, onBackInvokedCallback);
+        }else{
+            if(onBackPressedCallback==null){
+                onBackPressedCallback = new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        able.view_main.返回键();
+                    }
+                };
+                activity_main.getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
+            }
+        }
+    }
+
+    public static void 预测性返回开(MainActivity activity_main){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            activity_main.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(onBackInvokedCallback);
+        }
     }
 }

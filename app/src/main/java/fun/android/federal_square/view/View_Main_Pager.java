@@ -1,10 +1,13 @@
 package fun.android.federal_square.view;
 
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatButton;
@@ -25,6 +28,7 @@ public class View_Main_Pager extends View_Main{
     public ImageView menu_open;
     public View xian_view;
     public AppCompatButton button_top, button_up, button_down, button_update;
+    public OnBackInvokedCallback onBackPressedCallback;
     public View_Main_Pager(MainActivity activity) {
         super(activity);
     }
@@ -79,6 +83,7 @@ public class View_Main_Pager extends View_Main{
                 able.pager_id = position;
                 switch (position){
                     case 0:
+                        Fun.预测性返回开(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
                         }
@@ -89,6 +94,7 @@ public class View_Main_Pager extends View_Main{
                         able.view_square.恢复界面();
                         break;
                     case 1:
+                        Fun.预测性返回关(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
                         }
@@ -99,6 +105,7 @@ public class View_Main_Pager extends View_Main{
                         able.view_hot.恢复界面();
                         break;
                     case 2:
+                        Fun.预测性返回关(activity_main);
                         linear_menu_view.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
@@ -215,7 +222,7 @@ public class View_Main_Pager extends View_Main{
         }else{
             Intent homeIntent = new Intent(Intent.ACTION_MAIN);
             homeIntent.addCategory(Intent.CATEGORY_HOME);
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             activity_main.startActivity(homeIntent);
         }
     }
@@ -227,6 +234,5 @@ public class View_Main_Pager extends View_Main{
         able.view_hot.释放();
         able.view_home.释放();
     }
-
 
 }
