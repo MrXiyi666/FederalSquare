@@ -83,7 +83,7 @@ public class View_Main_Pager extends View_Main{
                 able.pager_id = position;
                 switch (position){
                     case 0:
-                        Fun.预测性返回开(activity_main);
+                        Fun.释放预测返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
                         }
@@ -94,7 +94,7 @@ public class View_Main_Pager extends View_Main{
                         able.view_square.恢复界面();
                         break;
                     case 1:
-                        Fun.预测性返回关(activity_main);
+                        Fun.拦截返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
                         }
@@ -105,7 +105,7 @@ public class View_Main_Pager extends View_Main{
                         able.view_hot.恢复界面();
                         break;
                     case 2:
-                        Fun.预测性返回关(activity_main);
+                        Fun.拦截返回(activity_main);
                         linear_menu_view.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
@@ -204,6 +204,11 @@ public class View_Main_Pager extends View_Main{
         able.view_square.onStart();
         able.view_hot.onStart();
         able.view_home.onStart();
+        if(pager.getCurrentItem() > 0){
+            Fun.拦截返回(activity_main);
+        }else{
+            Fun.释放预测返回(activity_main);
+        }
     }
 
     @Override
@@ -212,6 +217,8 @@ public class View_Main_Pager extends View_Main{
         able.view_square.onStop();
         able.view_hot.onStop();
         able.view_home.onStop();
+        Fun.释放预测返回(activity_main);
+
     }
 
     @Override
@@ -233,6 +240,8 @@ public class View_Main_Pager extends View_Main{
         able.view_square.释放();
         able.view_hot.释放();
         able.view_home.释放();
+        Fun.释放预测返回(activity_main);
+        Fun.释放正常返回();
     }
 
 }

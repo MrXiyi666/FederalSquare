@@ -382,29 +382,40 @@ public class Fun {
         }));
     }
 
-    public static void 预测性返回关(MainActivity activity_main){
-
+    public static void 拦截返回(MainActivity activity_main){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(onBackInvokedCallback!=null){
+                activity_main.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(onBackInvokedCallback);
+            }
             onBackInvokedCallback = () -> {
                 able.view_main.返回键();
             };
             activity_main.getOnBackInvokedDispatcher().registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT, onBackInvokedCallback);
         }else{
-            if(onBackPressedCallback==null){
-                onBackPressedCallback = new OnBackPressedCallback(true) {
-                    @Override
-                    public void handleOnBackPressed() {
-                        able.view_main.返回键();
-                    }
-                };
-                activity_main.getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
+            if(onBackPressedCallback!=null){
+                onBackPressedCallback.remove();
             }
+            onBackPressedCallback = new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    able.view_main.返回键();
+                }
+            };
+            activity_main.getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
         }
     }
 
-    public static void 预测性返回开(MainActivity activity_main){
+    public static void 释放预测返回(MainActivity activity_main){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            activity_main.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(onBackInvokedCallback);
+            if(onBackInvokedCallback!=null){
+                activity_main.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(onBackInvokedCallback);
+            }
+
+        }
+    }
+    public static void 释放正常返回(){
+        if(onBackPressedCallback!=null){
+            onBackPressedCallback.remove();
         }
     }
 }

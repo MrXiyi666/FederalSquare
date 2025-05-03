@@ -3,6 +3,7 @@ package fun.android.federal_square;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +16,7 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.List;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
@@ -49,8 +51,13 @@ public class DiskActivity extends AppCompatActivity {
         window.setNavigationBarColor(Color.WHITE);
         // 屏幕不息屏
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_disk);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        setContentView(R.layout.activity_disk);
+        GradientDrawable gradientDrawable= new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setCornerRadius(60f); // 设置圆角半径
+        gradientDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
+        getWindow().getDecorView().setBackground(gradientDrawable);
         初始化();
         事件();
     }

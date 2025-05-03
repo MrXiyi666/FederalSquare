@@ -2,6 +2,7 @@ package fun.android.federal_square;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -53,6 +56,11 @@ public class View_Post_Activity extends AppCompatActivity {
         window.setStatusBarColor(Color.WHITE);
         window.setNavigationBarColor(Color.WHITE);
         setContentView(R.layout.activity_view_post);
+        GradientDrawable gradientDrawable= new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setCornerRadius(60f); // 设置圆角半径
+        gradientDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
+        getWindow().getDecorView().setBackground(gradientDrawable);
         linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);

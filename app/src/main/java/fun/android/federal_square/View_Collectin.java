@@ -1,6 +1,7 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -10,6 +11,8 @@ import android.widget.ScrollView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,11 @@ public class View_Collectin extends AppCompatActivity {
         window.setNavigationBarColor(Color.WHITE);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_view_collection);
+        GradientDrawable gradientDrawable= new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setCornerRadius(60f); // 设置圆角半径
+        gradientDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
+        getWindow().getDecorView().setBackground(gradientDrawable);
         初始化();
         事件();
     }
