@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         GradientDrawable gradientDrawable= new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setCornerRadius(60f); // 设置圆角半径
+        gradientDrawable.setCornerRadius(Fun.DPToPX(this, 20));
         gradientDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
         getWindow().getDecorView().setBackground(gradientDrawable);
         初始化();
