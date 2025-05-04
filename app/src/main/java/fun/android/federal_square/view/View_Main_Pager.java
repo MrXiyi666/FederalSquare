@@ -1,15 +1,10 @@
 package fun.android.federal_square.view;
 
 import android.content.Intent;
-import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.window.OnBackInvokedCallback;
-import android.window.OnBackInvokedDispatcher;
-
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;

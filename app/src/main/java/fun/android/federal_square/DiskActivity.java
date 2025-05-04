@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,12 +19,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.ArrayList;
 import java.util.List;
 import fun.android.federal_square.adatper.Disk_Grid_Adapter;
+import fun.android.federal_square.data.Post_Data;
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_图片;
 import fun.android.federal_square.fun.Fun_文件;
+import fun.android.federal_square.fun.Fun_文章;
 import fun.android.federal_square.network.NetWork_网盘_上传视频;
 import fun.android.federal_square.window.打开方式窗口;
 import fun.android.federal_square.window.查看图片窗口;
@@ -72,6 +77,11 @@ public class DiskActivity extends AppCompatActivity {
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         加载图片初始化(Fun_账号.GetID());
         初始化数据();
+        this.runOnUiThread(() -> {
+            if(!ActivityResultContracts.PickVisualMedia.isPhotoPickerAvailable(this)){
+                Fun.mess(this, "照片选择器 不可用", 5000);
+            }
+        });
     }
 
     public void 事件(){
@@ -93,7 +103,6 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 加载图片初始化(String account_id){
-
         上传图片 = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if(uri == null){
                 button_network_disk.setEnabled(true);
@@ -121,7 +130,6 @@ public class DiskActivity extends AppCompatActivity {
             }
             Fun.mess(this, "不支持的格式 " + 后缀);
         });
-
     }
 
     @SuppressLint("SetTextI18n")
