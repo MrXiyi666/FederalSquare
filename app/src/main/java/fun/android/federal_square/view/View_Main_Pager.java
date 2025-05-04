@@ -218,7 +218,7 @@ public class View_Main_Pager extends View_Main{
         able.view_hot.onStop();
         able.view_home.onStop();
         Fun.释放预测返回(activity_main);
-
+        Fun.释放正常返回();
     }
 
     @Override

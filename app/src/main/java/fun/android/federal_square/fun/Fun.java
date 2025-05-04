@@ -386,6 +386,7 @@ public class Fun {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if(onBackInvokedCallback!=null){
                 activity_main.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(onBackInvokedCallback);
+                onBackInvokedCallback=null;
             }
             onBackInvokedCallback = () -> {
                 able.view_main.返回键();
@@ -394,6 +395,7 @@ public class Fun {
         }else{
             if(onBackPressedCallback!=null){
                 onBackPressedCallback.remove();
+                onBackPressedCallback=null;
             }
             onBackPressedCallback = new OnBackPressedCallback(true) {
                 @Override
@@ -409,6 +411,7 @@ public class Fun {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if(onBackInvokedCallback!=null){
                 activity_main.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(onBackInvokedCallback);
+                onBackInvokedCallback=null;
             }
 
         }
@@ -416,6 +419,7 @@ public class Fun {
     public static void 释放正常返回(){
         if(onBackPressedCallback!=null){
             onBackPressedCallback.remove();
+            onBackPressedCallback=null;
         }
     }
 }
