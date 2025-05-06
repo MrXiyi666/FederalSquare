@@ -20,7 +20,7 @@
             android:id="@+id/img_0"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
@@ -32,7 +32,7 @@
             android:id="@+id/img_1"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
@@ -43,7 +43,7 @@
             android:id="@+id/img_2"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
@@ -59,7 +59,7 @@
             android:id="@+id/img_3"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
@@ -70,7 +70,7 @@
             android:id="@+id/img_4"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
@@ -80,7 +80,7 @@
             android:id="@+id/img_5"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>

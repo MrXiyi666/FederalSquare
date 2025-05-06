@@ -24,6 +24,10 @@ public class Video_ImageView extends net.csdn.roundview.RoundImageView {
     public Video_ImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec); // 宽高相同
+    }
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
