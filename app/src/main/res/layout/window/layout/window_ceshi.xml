@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="1dp"
+    android:padding="10dp"
     android:background="#00000000"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ScrollView
-        android:id="@+id/scrollView"
+        android:layout_above="@id/button_ok"
         android:layout_below="@id/ding_view"
         android:background="@drawable/round_white_stroke_black"
         android:layout_width="match_parent"
@@ -106,20 +106,15 @@
                 android:layout_height="wrap_content">
 
             </LinearLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                android:stateListAnimator="@null"
-                android:id="@+id/button_ok"
-                android:background="@drawable/button_event_back_tran"
-                android:text="发表文章"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
-            <View
-                android:id="@+id/di"
-                android:background="#00000000"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
         </LinearLayout>
     </ScrollView>
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:stateListAnimator="@null"
+        android:id="@+id/button_ok"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_event_back_tran"
+        android:text="发表文章"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
 </RelativeLayout>

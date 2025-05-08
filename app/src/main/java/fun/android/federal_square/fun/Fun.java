@@ -2,6 +2,7 @@ package fun.android.federal_square.fun;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -15,6 +16,10 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -23,6 +28,7 @@ import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -422,4 +428,5 @@ public class Fun {
             onBackPressedCallback=null;
         }
     }
+
 }

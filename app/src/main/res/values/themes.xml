@@ -1,8 +1,5 @@
 <resources>
 
-    <style name="Base.Theme.FederalSquare" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
-    </style>
     <style name="Theme.FederalSquare" parent="Base.Theme.FederalSquare" />
 
     <style name="AlertDialog_Null" parent="android:Theme.Dialog">
@@ -11,6 +8,10 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowFrame">@null</item>
+        <!-- 主要内容颜色，可用于设置菜单栏文字颜色等 -->
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- 主色调，可用于设置菜单栏背景色等 -->
+        <item name="colorPrimary">@color/black</item>
     </style>
 
     <style name="AlertDialog_Loading" parent="android:Theme.Dialog">

@@ -29,6 +29,7 @@ public class 查看评论窗口 {
     public static void 查看评论窗口(Activity activity, String time_name, String 网址, String PassWord){
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_check_reviews, null);
+        var ding_view = view.findViewById(R.id.ding_view);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         LinearLayout linear = view.findViewById(R.id.linear);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
@@ -37,7 +38,11 @@ public class 查看评论窗口 {
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-
+        ding_view.post(()->{
+            ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
+            layoutParams.height = able.状态栏高度;
+            ding_view.setLayoutParams(layoutParams);
+        });
         if(!Fun_账号.GetID().isEmpty()){
             button_ok.setOnClickListener(V->{
                 String text = edit_text.getText().toString();
