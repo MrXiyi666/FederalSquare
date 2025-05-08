@@ -3,11 +3,9 @@ package fun.android.federal_square.view;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -64,23 +62,9 @@ public class View_Hot extends View_Main{
         super.事件();
         ViewGroup.LayoutParams layoutParams = top_title.getLayoutParams();
         layoutParams.height = able.状态栏高度;
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(() -> {
-            // 获取视图的大小
-            int width = view.getWidth();
-            int height = view.getHeight();
-
-            // 获取屏幕的大小
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            activity_main.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            int screenWidth = displayMetrics.widthPixels;
-            int screenHeight = displayMetrics.heightPixels;
-
-            // 如果视图的宽度或高度明显小于屏幕的宽度或高度，可能处于小窗模式
-            if (width < screenWidth * 0.9 || height < screenHeight * 0.9) {
-                top_title.setBackgroundColor(Color.rgb(128,128,128));
-            }
-        });
+        if(!Fun.是否全屏(activity_main)){
+            top_title.setBackgroundColor(Color.rgb(128,128,128));
+        }
         top_title.setLayoutParams(layoutParams);
         swipe_layout.setOnRefreshListener(()->{
             swipe_layout.setRefreshing(false);

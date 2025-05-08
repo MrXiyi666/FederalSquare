@@ -2,23 +2,16 @@ package fun.android.federal_square;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowMetrics;
 import android.widget.RelativeLayout;
-import android.window.OnBackInvokedCallback;
-import android.window.OnBackInvokedDispatcher;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-
 import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.fun.Fun_文件;
@@ -48,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         able.宽度 = displayMetrics.widthPixels;
         able.高度 = displayMetrics.heightPixels;
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/System_Width.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/System_Width.txt", String.valueOf(able.宽度));
+        }
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/System_Height.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/System_Height.txt", String.valueOf(able.高度));
+        }
         main = findViewById(R.id.main);
     }
 
     public void 事件(){
+
         if(Fun_文件.是否存在(able.app_path + "System_Data/URL_Name.txt")){
             able.URL = Fun.获取域名();
             able.PassWord = Fun.获取密码();
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
         able.view_main.getView().setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         main.addView(able.view_main.getView());
+
     }
 
     @Override

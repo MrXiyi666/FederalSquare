@@ -62,6 +62,7 @@ public class App extends Application {
         if(!Fun_文件.是否存在(able.app_path + "System_Data/System_Features.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/System_Features.txt", "true");
         }
+
         LeastRecentlyUsedCacheEvictor leastRecentlyUsedCacheEvictor = new LeastRecentlyUsedCacheEvictor(10000L * 1024 * 1024);
         simpleCache = new SimpleCache(new File(able.app_path + "video_cache"), leastRecentlyUsedCacheEvictor, new ExoDatabaseProvider(this));
     }

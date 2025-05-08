@@ -2,11 +2,9 @@ package fun.android.federal_square.fun;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
@@ -16,10 +14,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.WindowMetrics;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -28,7 +25,6 @@ import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -319,6 +315,16 @@ public class Fun {
         return index;
     }
 
+    public static int 屏幕宽度(){
+        String data = Fun_文件.读取文件(able.app_path + "System_Data/System_Width.txt");
+        return Integer.parseInt(data);
+    }
+
+    public static int 屏幕高度(){
+        String data = Fun_文件.读取文件(able.app_path + "System_Data/System_Height.txt");
+        return Integer.parseInt(data);
+    }
+
     public static int 获取广场计时数量(){
         var index = 5000;
         String sindex = Fun_文件.读取文件(able.app_path + "System_Data/Time_index.txt");
@@ -427,6 +433,13 @@ public class Fun {
             onBackPressedCallback.remove();
             onBackPressedCallback=null;
         }
+    }
+
+    public static boolean 是否全屏(Activity activity) {
+        if(able.宽度 < 屏幕宽度()){
+            return false;
+        }
+        return true;
     }
 
 }
