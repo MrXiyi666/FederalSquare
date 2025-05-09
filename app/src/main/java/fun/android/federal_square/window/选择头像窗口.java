@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -32,9 +31,17 @@ public class 选择头像窗口 {
         View view = View.inflate(activity, R.layout.window_select_image_view, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         gridview = view.findViewById(R.id.gridview);
+        var ding_view = view.findViewById(R.id.ding_view);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
+
+        ding_view.post(()->{
+            ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
+            layoutParams.height = able.状态栏高度;
+            ding_view.setLayoutParams(layoutParams);
+        });
+
         List<String> file_list = Fun_图片.遍历所有图片();
         if(file_list.isEmpty()){
             Fun.mess(activity, "网盘数据为空");

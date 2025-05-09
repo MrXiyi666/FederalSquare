@@ -1,42 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/round_white_stroke_black"
+    android:background="#00000000"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <TextView
-            android:text="图片选择"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"/>
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/return_icon"
-            android:id="@+id/return_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
-    </RelativeLayout>
     <View
-        android:background="#80808080"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <GridView
-        android:scrollbars="none"
-        android:fadeScrollbars="true"
-        android:id="@+id/gridview"
-        android:stretchMode="columnWidth"
-        android:numColumns="auto_fit"
-        android:horizontalSpacing="5dp"
-        android:verticalSpacing="5dp"
-        android:padding="10dp"
+        android:id="@+id/ding_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:background="@drawable/round_white_stroke_black"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:text="图片选择"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/return_icon"
+                android:id="@+id/return_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+        </RelativeLayout>
+        <View
+            android:background="#80808080"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <GridView
+            android:scrollbars="none"
+            android:fadeScrollbars="true"
+            android:id="@+id/gridview"
+            android:stretchMode="columnWidth"
+            android:numColumns="auto_fit"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 </LinearLayout>

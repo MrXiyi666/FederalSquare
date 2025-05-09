@@ -9,8 +9,7 @@
         android:id="@+id/ding_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ScrollView
-        android:id="@+id/scrollView"
+    <RelativeLayout
         android:layout_below="@id/ding_view"
         android:background="@drawable/round_white_stroke_black"
         android:layout_width="match_parent"
@@ -99,27 +98,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:ignore="HardcodedText" />
-            <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/linear"
+            <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            </LinearLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                android:stateListAnimator="@null"
-                android:id="@+id/button_ok"
-                android:background="@drawable/button_event_back_tran"
-                android:text="发表文章"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
-            <View
-                android:id="@+id/di"
-                android:background="#00000000"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
         </LinearLayout>
-    </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:layout_above="@id/di"
+            android:id="@+id/button_ok"
+            android:background="@drawable/button_event_back_tran"
+            android:text="发表文章"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <View
+            android:layout_alignParentBottom="true"
+            android:id="@+id/di"
+            android:background="#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </RelativeLayout>
+
 
 </RelativeLayout>

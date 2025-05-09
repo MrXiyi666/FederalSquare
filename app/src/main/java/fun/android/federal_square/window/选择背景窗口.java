@@ -32,9 +32,16 @@ public class 选择背景窗口 {
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_select_image_view, null);
         ImageView return_icon = view.findViewById(R.id.return_icon);
+        var ding_view = view.findViewById(R.id.ding_view);
         gridview = view.findViewById(R.id.gridview);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
+        });
+
+        ding_view.post(()->{
+            ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
+            layoutParams.height = able.状态栏高度;
+            ding_view.setLayoutParams(layoutParams);
         });
 
         List<String> file_list = Fun_图片.遍历所有图片();
