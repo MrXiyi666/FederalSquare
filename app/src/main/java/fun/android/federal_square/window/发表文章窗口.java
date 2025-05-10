@@ -86,10 +86,7 @@ public class 发表文章窗口 {
                 params.setMargins(0, 0, 0, 10);
                 textView.setLayoutParams(params);
                 textView.setOnLongClickListener(tV->{
-                    var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(10);
-                    linear.removeView(textView);
-                    post_dataList.remove(post_data);
+                    删除窗口.发表文章删除元素窗口(activity, linear, textView, post_dataList, post_data);
                     return true;
                 });
                 post_dataList.add(post_data);
@@ -208,11 +205,7 @@ public class 发表文章窗口 {
             imageView.后缀 = Fun_文件.获取后缀(post_data.getText());
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V->{
-                var vibrator = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.vibrate(10);
-                imageView.setImageBitmap(null);
-                linear.removeView(imageView);
-                post_dataList.remove(post_data);
+                删除窗口.发表文章删除元素窗口(activity,linear,imageView,post_dataList,post_data);
                 return true;
             });
             imageView.setOnClickListener(V->{
