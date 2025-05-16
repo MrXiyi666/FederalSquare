@@ -187,7 +187,7 @@ public class 发表文章窗口 {
         }
         var Disk_Index = Fun.获取网盘数量();
         gridview.setNumColumns(Disk_Index);
-        disk_grid_adapter = new Disk_Grid_Adapter(activity, list, Disk_Index);
+        disk_grid_adapter = new Disk_Grid_Adapter(activity, list);
         gridview.setAdapter(disk_grid_adapter);
         gridview.setOnItemClickListener((adapterView, view1, position, l) -> {
             var post_data = new Post_Data();

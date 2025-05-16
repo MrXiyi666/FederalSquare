@@ -32,15 +32,18 @@ public class able {
     public static View_Home view_home;
     public static List<Post_Data> 传递数据;
     public static RequestOptions requestOptions = new RequestOptions()
+            .frame(0)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
     public static RequestOptions 占位_request = new RequestOptions()
+            .frame(0)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .placeholder(R.drawable.glide_zhanwei)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
     public static RequestOptions 原图_request = new RequestOptions()
+            .frame(0)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .skipMemoryCache(true)
             .error(R.drawable.glide_shibai)

@@ -24,13 +24,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
     private final WeakReference<Context> contextRef;
     private final List<String> url;
 
-    private RequestOptions requestOptions = new RequestOptions()
-            .frame(0)
-            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            .error(R.drawable.glide_shibai)
-            .fallback(R.drawable.glide_duqushibai);
-
-    public Disk_Grid_Adapter(Context context, List<String> url, int Disk_Index){
+    public Disk_Grid_Adapter(Context context, List<String> url){
         this.contextRef = new WeakReference<>(context);
         this.url = url;
     }
@@ -71,7 +65,7 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         Glide.with(context)
                 .asBitmap()
                 .load(url_txt)
-                .apply(requestOptions)
+                .apply(able.requestOptions)
                 .into(gui.img);
         return convertView;
     }

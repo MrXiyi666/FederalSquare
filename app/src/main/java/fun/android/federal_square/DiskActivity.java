@@ -142,7 +142,7 @@ public class DiskActivity extends AppCompatActivity {
         this.button_network_disk.setEnabled(true);
         List<String> file_list = Fun_图片.遍历所有图片();
         title_index.setText("统计数量： " + file_list.size());
-        disk_grid_adapter = new Disk_Grid_Adapter(DiskActivity.this, file_list, Disk_Index);
+        disk_grid_adapter = new Disk_Grid_Adapter(DiskActivity.this, file_list);
         gridView.setAdapter(disk_grid_adapter);
         gridView.setOnItemClickListener((V1, V2, position, V4) -> {
             String 后缀 = Fun_文件.获取后缀(file_list.get(position));
