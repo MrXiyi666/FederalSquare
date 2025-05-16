@@ -36,12 +36,6 @@ public class able {
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
-    public static RequestOptions 占位_request = new RequestOptions()
-            .frame(0)
-            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            .placeholder(R.drawable.glide_zhanwei)
-            .error(R.drawable.glide_shibai)
-            .fallback(R.drawable.glide_duqushibai);
     public static RequestOptions 原图_request = new RequestOptions()
             .frame(0)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
