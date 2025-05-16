@@ -2,12 +2,14 @@ package fun.android.federal_square;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.WindowMetrics;
 import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,16 +39,6 @@ public class MainActivity extends AppCompatActivity {
         事件();
     }
     public void 初始化(){
-        able.状态栏高度 = Fun.获取状态栏高度(this);
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        able.宽度 = displayMetrics.widthPixels;
-        able.高度 = displayMetrics.heightPixels;
-        if(!Fun_文件.是否存在(able.app_path + "System_Data/System_Width.txt")){
-            Fun_文件.写入文件(able.app_path + "System_Data/System_Width.txt", String.valueOf(able.宽度));
-        }
-        if(!Fun_文件.是否存在(able.app_path + "System_Data/System_Height.txt")){
-            Fun_文件.写入文件(able.app_path + "System_Data/System_Height.txt", String.valueOf(able.高度));
-        }
         main = findViewById(R.id.main);
     }
 

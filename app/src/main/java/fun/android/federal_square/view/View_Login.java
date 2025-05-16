@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import fun.android.federal_square.MainActivity;
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 import fun.android.federal_square.network.NetWork_登录;
 
 public class View_Login extends View_Main{
@@ -31,7 +32,7 @@ public class View_Login extends View_Main{
     @Override
     public void 事件() {
         super.事件();
-        top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+        top_title.setPadding(0, Fun.获取状态栏高度(activity_main) / 2, 0, 0);
         button_enroll.setOnClickListener(V->{
             able.view_home.linear_main.removeAllViews();
             able.view_home.linear_main.addView(new View_Enroll(activity_main).getView());

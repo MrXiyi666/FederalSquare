@@ -23,28 +23,16 @@ public class Disk_Grid_Adapter extends BaseAdapter {
 
     private final WeakReference<Context> contextRef;
     private final List<String> url;
-    private final int height;
+
     private RequestOptions requestOptions = new RequestOptions()
             .frame(0)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .error(R.drawable.glide_shibai)
             .fallback(R.drawable.glide_duqushibai);
-    private static final int[] HEIGHT_PRESETS = {
-            350,
-            150,
-            100,
-            75,
-            60,
-            50,
-            45,
-            40,
-            30
-    };
+
     public Disk_Grid_Adapter(Context context, List<String> url, int Disk_Index){
         this.contextRef = new WeakReference<>(context);
         this.url = url;
-        int heightDp = HEIGHT_PRESETS[Disk_Index-1];
-        height = Fun.DPToPX(context, heightDp);
     }
 
     @Override
@@ -73,7 +61,6 @@ public class Disk_Grid_Adapter extends BaseAdapter {
             gui = new MyGui();
             convertView = LayoutInflater.from(context).inflate(R.layout.disk_item, null);
             gui.img = convertView.findViewById(R.id.img);
-            gui.img.getLayoutParams().height = height;
             convertView.setTag(gui);
         }else{
             gui = (MyGui) convertView.getTag();
@@ -84,7 +71,6 @@ public class Disk_Grid_Adapter extends BaseAdapter {
         Glide.with(context)
                 .asBitmap()
                 .load(url_txt)
-                .override(height)
                 .apply(requestOptions)
                 .into(gui.img);
         return convertView;

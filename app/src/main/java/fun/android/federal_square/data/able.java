@@ -19,7 +19,6 @@ public class able {
     public static TextView 广场空, 头条空;
     public static int pager_id=0;
     public static Handler handler = new Handler();
-    public static int 宽度, 高度, 状态栏高度;
     public static String app_path;
     public static String URL ="";
     public static String PassWord ="";

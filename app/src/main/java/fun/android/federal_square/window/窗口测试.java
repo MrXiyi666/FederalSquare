@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import fun.android.federal_square.R;
 import fun.android.federal_square.data.able;
+import fun.android.federal_square.fun.Fun;
 
 public class 窗口测试 {
     public 窗口测试(Activity activity){
@@ -20,7 +21,7 @@ public class 窗口测试 {
         var view = View.inflate(activity, R.layout.window_ceshi, null);
         var ding_view = view.findViewById(R.id.ding_view);
         ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
-        layoutParams.height = able.状态栏高度;
+        layoutParams.height = Fun.获取状态栏高度(activity);
         ding_view.setLayoutParams(layoutParams);
         dialog.setView(view);
         dialog.setCancelable(false);

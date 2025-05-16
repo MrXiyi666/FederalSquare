@@ -81,12 +81,9 @@ public class View_Square extends View_Main{
     public void 事件() {
         super.事件();
         ViewGroup.LayoutParams layoutParams = top_title.getLayoutParams();
-        layoutParams.height = able.状态栏高度;
-        if(!Fun.是否全屏(activity_main)){
-            top_title.setBackgroundColor(Color.rgb(128,128,128));
-        }
-
+        layoutParams.height = Fun.获取状态栏高度(activity_main);
         top_title.setLayoutParams(layoutParams);
+        //top_title.setBackgroundColor(Color.rgb(242,243,247));
         swipe_layout.setOnRefreshListener(()->{
             if(new_icon.getVisibility() == View.VISIBLE){
                 new_icon.setVisibility(View.GONE);

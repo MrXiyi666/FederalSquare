@@ -54,8 +54,8 @@ public class Fun {
             ScrollView scrollView = view.findViewById(R.id.scrollView);
             return_icon.setVisibility(View.GONE);
             view.post(()->{
-                if(text_id.getHeight() > able.高度){
-                    scrollView.getLayoutParams().height = able.高度 / 2;
+                if(text_id.getHeight() > Fun.屏幕高度(activity)){
+                    scrollView.getLayoutParams().height =  Fun.屏幕高度(activity) / 2;
                     scrollView.requestLayout();
                 }
             });
@@ -87,8 +87,8 @@ public class Fun {
             ScrollView scrollView = view.findViewById(R.id.scrollView);
             return_icon.setVisibility(View.GONE);
             view.post(()->{
-                if(text_id.getHeight() > able.高度){
-                    scrollView.getLayoutParams().height = able.高度 / 2;
+                if(text_id.getHeight() >  Fun.屏幕高度(activity)){
+                    scrollView.getLayoutParams().height =  Fun.屏幕高度(activity) / 2;
                     scrollView.requestLayout();
                 }
             });
@@ -315,14 +315,19 @@ public class Fun {
         return index;
     }
 
-    public static int 屏幕宽度(){
-        String data = Fun_文件.读取文件(able.app_path + "System_Data/System_Width.txt");
-        return Integer.parseInt(data);
+    public static int 屏幕宽度(Activity activity){
+        WindowManager windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+
+        return displayMetrics.widthPixels;
     }
 
-    public static int 屏幕高度(){
-        String data = Fun_文件.读取文件(able.app_path + "System_Data/System_Height.txt");
-        return Integer.parseInt(data);
+    public static int 屏幕高度(Activity activity){
+        WindowManager windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
     }
 
     public static int 获取广场计时数量(){
@@ -433,13 +438,6 @@ public class Fun {
             onBackPressedCallback.remove();
             onBackPressedCallback=null;
         }
-    }
-
-    public static boolean 是否全屏(Activity activity) {
-        if(able.宽度 < 屏幕宽度()){
-            return false;
-        }
-        return true;
     }
 
 }

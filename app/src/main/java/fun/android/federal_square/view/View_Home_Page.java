@@ -54,7 +54,7 @@ public class View_Home_Page extends View_Main{
     public void 事件() {
         super.事件();
         top_title.post(()->{
-            top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+            top_title.setPadding(0, Fun.获取状态栏高度(activity_main) / 2, 0, 0);
         });
         name_view.setText(Fun_账号.GetName() + "");
         sign_view.setText(Fun_账号.GetSign() + "");
@@ -78,7 +78,7 @@ public class View_Home_Page extends View_Main{
         }
         back_img.setBackgroundResource(R.drawable.gradient_white_to_transparent);
         top_relati.post(()->{
-            top_relati.getLayoutParams().height = top_relati.getHeight() + able.状态栏高度;
+            top_relati.getLayoutParams().height = top_relati.getHeight() + Fun.获取状态栏高度(activity_main);
             top_relati.requestLayout();
         });
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,10 +53,9 @@ public class 发表文章窗口 {
         AppCompatButton add_img_or_video_url = view.findViewById(R.id.add_img_or_video_url);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         linear = view.findViewById(R.id.linear);
-
         ding_view.post(()->{
             ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
-            layoutParams.height = able.状态栏高度;
+            layoutParams.height = Fun.获取状态栏高度(activity);
             ding_view.setLayoutParams(layoutParams);
         });
         post_dataList = new ArrayList<>();
@@ -170,10 +170,9 @@ public class 发表文章窗口 {
         var view = View.inflate(activity, R.layout.window_select_image_view, null);
         var ding_view = view.findViewById(R.id.ding_view);
         ImageView return_icon = view.findViewById(R.id.return_icon);
-
         ding_view.post(()->{
             ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
-            layoutParams.height = able.状态栏高度;
+            layoutParams.height = Fun.获取状态栏高度(activity);
             ding_view.setLayoutParams(layoutParams);
         });
 
@@ -200,7 +199,7 @@ public class 发表文章窗口 {
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .apply(able.占位_request)
                     .into(imageView);
-            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Fun.屏幕宽度(activity) / 2);
             params.setMargins(0, 0, 0, 10);
             imageView.后缀 = Fun_文件.获取后缀(post_data.getText());
             imageView.setLayoutParams(params);
@@ -270,7 +269,7 @@ public class 发表文章窗口 {
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .apply(able.占位_request)
                     .into(imageView);
-            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, able.宽度 / 2);
+            var params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Fun.屏幕宽度(activity) / 2);
             params.setMargins(0, 0, 0, 10);
             imageView.setLayoutParams(params);
             imageView.setOnLongClickListener(V1->{

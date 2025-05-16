@@ -36,8 +36,8 @@ public class 查看图片窗口 {
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_view_img, null);
         com.github.chrisbanes.photoview.PhotoView photoView = view.findViewById(R.id.photoView);
-        photoView.getLayoutParams().width = able.宽度;
-        photoView.getLayoutParams().height = able.高度;
+        photoView.getLayoutParams().width = Fun.屏幕宽度(activity);
+        photoView.getLayoutParams().height = Fun.屏幕高度(activity);
         photoView.setVisibility(View.VISIBLE);
         photoView.setOnClickListener(V->{
             dialog.dismiss();

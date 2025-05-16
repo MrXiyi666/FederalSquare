@@ -36,7 +36,7 @@ public class View_Enroll extends View_Main{
     @Override
     public void 事件() {
         super.事件();
-        top_title.setPadding(0, able.状态栏高度 / 2, 0, 0);
+        top_title.setPadding(0, Fun.获取状态栏高度(activity_main) / 2, 0, 0);
         button_login.setOnClickListener(V->{
             able.view_home.linear_main.removeAllViews();
             able.view_home.linear_main.addView(new View_Login(activity_main).getView());
