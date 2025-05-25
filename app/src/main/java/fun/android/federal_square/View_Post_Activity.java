@@ -52,13 +52,11 @@ public class View_Post_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_post);
-        GradientDrawable gradientDrawable= new GradientDrawable();
-        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setCornerRadius(Fun.DPToPX(this, 20));
-        gradientDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
-        getWindow().getDecorView().setBackground(gradientDrawable);
         this.getSupportActionBar().hide();
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setNavigationBarColor(Color.rgb(255,255,255));
+        getWindow().setStatusBarColor(Color.rgb(255,255,255));
+        setContentView(R.layout.activity_view_post);
         linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);

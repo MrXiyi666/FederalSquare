@@ -1,6 +1,7 @@
 package fun.android.federal_square.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -80,6 +81,7 @@ public class View_Main_Pager extends View_Main{
                 able.pager_id = position;
                 switch (position){
                     case 0:
+                        activity_main.getWindow().setStatusBarColor(Color.rgb(255,255,255));
                         Fun.释放预测返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
@@ -91,6 +93,7 @@ public class View_Main_Pager extends View_Main{
                         able.view_square.恢复界面();
                         break;
                     case 1:
+                        activity_main.getWindow().setStatusBarColor(Color.rgb(255,255,255));
                         Fun.拦截返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
@@ -102,6 +105,7 @@ public class View_Main_Pager extends View_Main{
                         able.view_hot.恢复界面();
                         break;
                     case 2:
+                        activity_main.getWindow().setStatusBarColor(Color.argb(0,0,0,0));
                         Fun.拦截返回(activity_main);
                         linear_menu_view.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);

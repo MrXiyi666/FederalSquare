@@ -18,7 +18,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"/>
         <ImageView
-            android:layout_centerInParent="true"
+            android:layout_toEndOf="@id/button_url_setting"
+            android:layout_centerVertical="true"
             android:id="@+id/new_icon"
             android:src="@drawable/square_new_icon"
             android:layout_width="40dp"

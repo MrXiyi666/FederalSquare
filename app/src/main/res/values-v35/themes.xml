@@ -3,6 +3,5 @@
 
     <style name="Base.Theme.FederalSquare" parent="Theme.Material3.DayNight" tools:ignore="DuplicateDefinition">
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
-        <item name="actionBarSize">50dp</item>
     </style>
 </resources>

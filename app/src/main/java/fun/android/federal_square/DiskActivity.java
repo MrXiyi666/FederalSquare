@@ -52,12 +52,10 @@ public class DiskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getSupportActionBar().hide();
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setNavigationBarColor(Color.rgb(255,255,255));
+        getWindow().setStatusBarColor(Color.rgb(255,255,255));
         setContentView(R.layout.activity_disk);
-        GradientDrawable gradientDrawable= new GradientDrawable();
-        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setCornerRadius(Fun.DPToPX(this, 20));
-        gradientDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
-        getWindow().getDecorView().setBackground(gradientDrawable);
         初始化();
         事件();
     }
