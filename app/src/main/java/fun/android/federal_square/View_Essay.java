@@ -31,10 +31,7 @@ public class View_Essay extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = this.getWindow();
-        window.setStatusBarColor(Color.WHITE);
-        window.setNavigationBarColor(Color.WHITE);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_view_essay);
         GradientDrawable gradientDrawable= new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);

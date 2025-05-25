@@ -1,6 +1,7 @@
 package fun.android.federal_square.data;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Handler;
 import android.widget.TextView;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -15,6 +16,8 @@ import fun.android.federal_square.view.View_Square;
 import okhttp3.OkHttpClient;
 
 public class able {
+    //=====================================颜色数据======================================
+    public static int 描边颜色 = Color.argb(128,128,128,128);
     public static View_Main view_main;
     public static TextView 广场空, 头条空;
     public static int pager_id=0;

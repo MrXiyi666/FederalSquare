@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.Theme.FederalSquare" parent="Theme.Material3.DayNight.NoActionBar" tools:ignore="DuplicateDefinition">
+    <style name="Base.Theme.FederalSquare" parent="Theme.Material3.DayNight" tools:ignore="DuplicateDefinition">
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="actionBarSize">50dp</item>
     </style>
 </resources>

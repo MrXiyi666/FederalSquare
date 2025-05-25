@@ -12,6 +12,7 @@ public class View_Main {
         this.class_name = this.getClass().getSimpleName();
         初始化();
         事件();
+        主题设置();
     }
 
     public View getView(){
@@ -43,6 +44,10 @@ public class View_Main {
     }
 
     public void 释放(){
+
+    }
+
+    public void 主题设置(){
 
     }
 

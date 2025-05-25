@@ -59,6 +59,7 @@ public class View_Main_Pager extends View_Main{
         var adapter = new Main_Pager_Adapter(pager_view);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
+        activity_main.getSupportActionBar().setTitle("时间线");
         img_square.setImageResource(R.drawable.square_checked_true_icon);
         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
         img_home.setImageResource(R.drawable.hot_checked_false_icon);

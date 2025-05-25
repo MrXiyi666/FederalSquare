@@ -6,12 +6,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import fun.android.federal_square.data.able;
@@ -25,11 +28,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = this.getWindow();
-        window.setStatusBarColor(Color.TRANSPARENT);
-        window.setNavigationBarColor(Color.WHITE);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_main);
+        this.getSupportActionBar().hide();
         GradientDrawable gradientDrawable= new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
         gradientDrawable.setCornerRadius(Fun.DPToPX(this, 20));

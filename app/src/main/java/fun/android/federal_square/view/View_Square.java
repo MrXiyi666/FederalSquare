@@ -3,10 +3,8 @@ package fun.android.federal_square.view;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -32,14 +30,13 @@ import fun.android.federal_square.window.重新设置域名窗口;
 
 public class View_Square extends View_Main{
 
-    private TextView top_title;
+    private View xian;
     public ImageView new_icon;
     private SwipeRefreshLayout swipe_layout;
     public ScrollView scrollView;
     private RelativeLayout button_add;
     private ImageView button_url_setting;
     public LinearLayout linear;
-    public TextView di_title;
 
     public int Post_Index = 0;
     private List<后台判断新内容> 后台判断集合 = new ArrayList<>();
@@ -57,14 +54,13 @@ public class View_Square extends View_Main{
     public void 初始化() {
         super.初始化();
         view = View.inflate(activity_main, R.layout.view_square, null);
-        top_title = view.findViewById(R.id.top_title);
+        xian = view.findViewById(R.id.xian);
         new_icon = view.findViewById(R.id.new_icon);
         swipe_layout = view.findViewById(R.id.swiperefee);
         button_add = view.findViewById(R.id.button_add);
         button_url_setting = view.findViewById(R.id.button_url_setting);
         linear = view.findViewById(R.id.linear);
         scrollView = view.findViewById(R.id.scrollView);
-        di_title = view.findViewById(R.id.di_title);
         new_icon.setVisibility(View.GONE);
 
         able.广场空 = new TextView(activity_main);
@@ -80,10 +76,6 @@ public class View_Square extends View_Main{
     @Override
     public void 事件() {
         super.事件();
-        ViewGroup.LayoutParams layoutParams = top_title.getLayoutParams();
-        layoutParams.height = Fun.获取状态栏高度(activity_main);
-        top_title.setLayoutParams(layoutParams);
-        //top_title.setBackgroundColor(Color.rgb(242,243,247));
         swipe_layout.setOnRefreshListener(()->{
             if(new_icon.getVisibility() == View.VISIBLE){
                 new_icon.setVisibility(View.GONE);
@@ -126,6 +118,13 @@ public class View_Square extends View_Main{
         });
         初始化本地数据();
     }
+
+    @Override
+    public void 主题设置() {
+        super.主题设置();
+        xian.setBackgroundColor(able.描边颜色);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -322,4 +321,5 @@ public class View_Square extends View_Main{
     public void 恢复界面(){
         Fun.刷新当前文章(activity_main, linear, scrollView);
     }
+
 }

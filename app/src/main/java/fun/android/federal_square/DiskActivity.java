@@ -51,11 +51,7 @@ public class DiskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = this.getWindow();
-        window.setStatusBarColor(Color.WHITE);
-        window.setNavigationBarColor(Color.WHITE);
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_disk);
         GradientDrawable gradientDrawable= new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);

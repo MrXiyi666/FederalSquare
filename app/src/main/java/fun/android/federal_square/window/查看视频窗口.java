@@ -36,8 +36,6 @@ public class 查看视频窗口 {
             Fun.mess(activity, "没有登陆 无法查看");
             return;
         }
-        Window window = activity.getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         View view = View.inflate(activity, R.layout.window_video_view, null);
         PlayerView playerView = view.findViewById(R.id.video_view);
@@ -60,8 +58,6 @@ public class 查看视频窗口 {
             @Override
             public void onPlaybackStateChanged(@Player.State int state) {
                 if (state == Player.STATE_READY) {
-                    window.setNavigationBarColor(Color.BLACK);
-                    window.setStatusBarColor(Color.BLACK);
                     playerView.hideController();
                 }else if(state == Player.STATE_ENDED){
                     new Thread(()->{
@@ -84,18 +80,12 @@ public class 查看视频窗口 {
                 Fun.mess(activity, "播放错误", 2000);
                 player.release();
                 dialog.dismiss();
-                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                window.setNavigationBarColor(Color.WHITE);
-                window.setStatusBarColor(Color.TRANSPARENT);
             }
         });
 
         dialog.setOnCancelListener(V -> {
             player.release();
             dialog.dismiss();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            window.setNavigationBarColor(Color.WHITE);
-            window.setStatusBarColor(Color.TRANSPARENT);
         });
         dialog.setView(view);
         Objects.requireNonNull(dialog.getWindow()).getDecorView().setPadding(0, 0, 0, 0);
