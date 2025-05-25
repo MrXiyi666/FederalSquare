@@ -57,6 +57,7 @@ public class View_Hot extends View_Main{
     @Override
     public void 事件() {
         super.事件();
+
         swipe_layout.setOnRefreshListener(()->{
             swipe_layout.setRefreshing(false);
             if(Fun_账号.GetID().isEmpty()){

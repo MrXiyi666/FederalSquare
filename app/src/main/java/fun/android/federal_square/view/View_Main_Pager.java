@@ -2,7 +2,6 @@ package fun.android.federal_square.view;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +17,7 @@ import fun.android.federal_square.data.able;
 import fun.android.federal_square.fun.Fun;
 
 public class View_Main_Pager extends View_Main{
-    public ViewPager pager;
+    public View_Pager pager;
     private LinearLayout menu_square, menu_hot, menu_home;
     private ImageView img_square, img_hot, img_home;
     public LinearLayout linear_menu, menu_list_view, linear_menu_view;
@@ -60,6 +59,10 @@ public class View_Main_Pager extends View_Main{
         var adapter = new Main_Pager_Adapter(pager_view);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
+        pager.是否滑动(false);
+        able.view_square.view.setVisibility(View.VISIBLE);
+        able.view_hot.view.setVisibility(View.INVISIBLE);
+        able.view_home.view.setVisibility(View.INVISIBLE);
         activity_main.getSupportActionBar().setTitle("时间线");
         img_square.setImageResource(R.drawable.square_checked_true_icon);
         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
@@ -81,7 +84,9 @@ public class View_Main_Pager extends View_Main{
                 able.pager_id = position;
                 switch (position){
                     case 0:
-                        activity_main.getWindow().setStatusBarColor(Color.rgb(255,255,255));
+                        activity_main.getWindow().setStatusBarColor(Color.argb(255,255,255,255));
+                        activity_main.getWindow().getDecorView().setSystemUiVisibility(
+                                activity_main.getWindow().getDecorView().getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                         Fun.释放预测返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
@@ -91,9 +96,14 @@ public class View_Main_Pager extends View_Main{
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_square.恢复界面();
+                        able.view_square.view.setVisibility(View.VISIBLE);
+                        able.view_hot.view.setVisibility(View.INVISIBLE);
+                        able.view_home.view.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
-                        activity_main.getWindow().setStatusBarColor(Color.rgb(255,255,255));
+                        activity_main.getWindow().setStatusBarColor(Color.argb(255,255,255,255));
+                        activity_main.getWindow().getDecorView().setSystemUiVisibility(
+                                activity_main.getWindow().getDecorView().getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                         Fun.拦截返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
@@ -103,15 +113,23 @@ public class View_Main_Pager extends View_Main{
                         img_hot.setImageResource(R.drawable.hot_checked_true_icon);
                         img_home.setImageResource(R.drawable.hot_checked_false_icon);
                         able.view_hot.恢复界面();
+                        able.view_square.view.setVisibility(View.INVISIBLE);
+                        able.view_hot.view.setVisibility(View.VISIBLE);
+                        able.view_home.view.setVisibility(View.INVISIBLE);
                         break;
                     case 2:
                         activity_main.getWindow().setStatusBarColor(Color.argb(0,0,0,0));
+                        activity_main.getWindow().getDecorView().setSystemUiVisibility(
+                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                         Fun.拦截返回(activity_main);
                         linear_menu_view.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
                         img_hot.setImageResource(R.drawable.hot_checked_false_icon);
                         img_home.setImageResource(R.drawable.home_checked_true_icon);
                         able.view_home.恢复界面();
+                        able.view_square.view.setVisibility(View.INVISIBLE);
+                        able.view_hot.view.setVisibility(View.INVISIBLE);
+                        able.view_home.view.setVisibility(View.VISIBLE);
                         break;
                 }
             }
