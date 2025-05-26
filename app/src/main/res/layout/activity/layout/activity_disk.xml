@@ -6,7 +6,14 @@
     android:background="#ffffff"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DiskActivity">
+    <View
+        android:background="#ffffff"
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <RelativeLayout
+        android:background="#ffffff"
+        android:layout_below="@id/top_view"
         android:id="@+id/relati"
         android:layout_width="match_parent"
         android:layout_height="40dp">

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +24,7 @@ import fun.android.federal_square.fun.Fun_文件;
 import fun.android.federal_square.fun.Fun_文章;
 
 public class View_Collectin extends AppCompatActivity {
+    private View top_view;
     private ImageView return_icon;
     private LinearLayout linear;
     private ScrollView scrollView;
@@ -31,16 +33,16 @@ public class View_Collectin extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.argb(0,0,0,0));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setNavigationBarColor(Color.rgb(255,255,255));
-        getWindow().setStatusBarColor(Color.rgb(255,255,255));
         setContentView(R.layout.activity_view_collection);
         初始化();
         事件();
     }
 
     public void 初始化(){
+        top_view = findViewById(R.id.top_view);
         return_icon = findViewById(R.id.return_icon);
         linear = findViewById(R.id.linear);
         scrollView = findViewById(R.id.scrollView);
@@ -52,6 +54,9 @@ public class View_Collectin extends AppCompatActivity {
     }
 
     public void 事件(){
+        ViewGroup.LayoutParams layoutParams = top_view.getLayoutParams();
+        layoutParams.height = Fun.获取状态栏高度(this);
+        top_view.setLayoutParams(layoutParams);
         return_icon.setOnClickListener(V->{
             finish();
         });

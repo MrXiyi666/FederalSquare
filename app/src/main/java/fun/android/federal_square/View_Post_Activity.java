@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,6 +45,7 @@ import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.查看评论窗口;
 
 public class View_Post_Activity extends AppCompatActivity {
+    private View top_view;
     private String url_txt, PassWord_txt="";
     private LinearLayout linear;
     private boolean 时间切换 = false;
@@ -52,11 +54,11 @@ public class View_Post_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.argb(0,0,0,0));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setNavigationBarColor(Color.rgb(255,255,255));
-        getWindow().setStatusBarColor(Color.rgb(255,255,255));
         setContentView(R.layout.activity_view_post);
+        top_view = findViewById(R.id.top_view);
         linear = findViewById(R.id.linear);
         LinearLayout linear_check = findViewById(R.id.linear_check);
         TextView name_view = findViewById(R.id.name);
@@ -74,6 +76,10 @@ public class View_Post_Activity extends AppCompatActivity {
         if(able.传递数据.isEmpty()){
             finish();
         }
+
+        ViewGroup.LayoutParams layoutParams = top_view.getLayoutParams();
+        layoutParams.height = Fun.获取状态栏高度(this);
+        top_view.setLayoutParams(layoutParams);
 
         for(Post_Data post_data : able.传递数据){
             switch(post_data.getName()){

@@ -4,7 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:layout_height="match_parent">
+    <View
+        android:background="#ffffff"
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <ScrollView
+        android:layout_below="@id/top_view"
         android:id="@+id/scrollView"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

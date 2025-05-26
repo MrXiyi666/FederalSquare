@@ -3,8 +3,10 @@ package fun.android.federal_square.view;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,11 +32,11 @@ import fun.android.federal_square.window.重新设置域名窗口;
 
 public class View_Square extends View_Main{
 
-    private View xian;
+    private View top_view, xian;
     public ImageView new_icon;
     private SwipeRefreshLayout swipe_layout;
     public ScrollView scrollView;
-    private RelativeLayout button_add;
+    private RelativeLayout relati, button_add;
     private ImageView button_url_setting;
     public LinearLayout linear;
 
@@ -55,8 +57,10 @@ public class View_Square extends View_Main{
         super.初始化();
         view = View.inflate(activity_main, R.layout.view_square, null);
         xian = view.findViewById(R.id.xian);
+        top_view = view.findViewById(R.id.top_view);
         new_icon = view.findViewById(R.id.new_icon);
         swipe_layout = view.findViewById(R.id.swiperefee);
+        relati = view.findViewById(R.id.relati);
         button_add = view.findViewById(R.id.button_add);
         button_url_setting = view.findViewById(R.id.button_url_setting);
         linear = view.findViewById(R.id.linear);
@@ -76,6 +80,9 @@ public class View_Square extends View_Main{
     @Override
     public void 事件() {
         super.事件();
+        ViewGroup.LayoutParams layoutParams = top_view.getLayoutParams();
+        layoutParams.height = Fun.获取状态栏高度(activity_main);
+        top_view.setLayoutParams(layoutParams);
         swipe_layout.setOnRefreshListener(()->{
             if(new_icon.getVisibility() == View.VISIBLE){
                 new_icon.setVisibility(View.GONE);

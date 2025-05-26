@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:background="#00000000"
     android:layout_height="match_parent">
+    <View
+        android:background="#ffffff"
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:background="#00000000"
         android:id="@+id/swiperefee"

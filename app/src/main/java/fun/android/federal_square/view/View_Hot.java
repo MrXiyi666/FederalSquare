@@ -24,6 +24,7 @@ import fun.android.federal_square.fun.Fun_账号;
 import fun.android.federal_square.network.NetWork_读取热门;
 
 public class View_Hot extends View_Main{
+    private View top_view;
     private SwipeRefreshLayout swipe_layout;
     public LinearLayout linear;
     public ScrollView scrollView;
@@ -42,6 +43,7 @@ public class View_Hot extends View_Main{
         super.初始化();
         view = View.inflate(activity_main, R.layout.view_hot, null);
         swipe_layout = view.findViewById(R.id.swiperefee);
+        top_view = view.findViewById(R.id.top_view);
         scrollView = view.findViewById(R.id.scrollView);
         linear = view.findViewById(R.id.linear);
         able.头条空 = new TextView(activity_main);
@@ -57,7 +59,9 @@ public class View_Hot extends View_Main{
     @Override
     public void 事件() {
         super.事件();
-
+        ViewGroup.LayoutParams layoutParams = top_view.getLayoutParams();
+        layoutParams.height = Fun.获取状态栏高度(activity_main);
+        top_view.setLayoutParams(layoutParams);
         swipe_layout.setOnRefreshListener(()->{
             swipe_layout.setRefreshing(false);
             if(Fun_账号.GetID().isEmpty()){

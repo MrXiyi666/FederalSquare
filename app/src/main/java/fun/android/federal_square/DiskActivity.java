@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridView;
@@ -40,6 +41,7 @@ import fun.android.federal_square.window.查看视频窗口;
 import fun.android.federal_square.window.网盘设置窗口;
 
 public class DiskActivity extends AppCompatActivity {
+    private View top_view;
     ActivityResultLauncher<PickVisualMediaRequest> 上传图片;
     public SwipeRefreshLayout swiperefre;
     public GridView gridView;
@@ -51,16 +53,16 @@ public class DiskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.argb(0,0,0,0));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setNavigationBarColor(Color.rgb(255,255,255));
-        getWindow().setStatusBarColor(Color.rgb(255,255,255));
         setContentView(R.layout.activity_disk);
         初始化();
         事件();
     }
 
     public void 初始化(){
+        top_view = findViewById(R.id.top_view);
         button_network_disk = findViewById(R.id.button_network_disk);
         button_menu = findViewById(R.id.button_menu);
         gridView = findViewById(R.id.gridview);
@@ -78,6 +80,9 @@ public class DiskActivity extends AppCompatActivity {
     }
 
     public void 事件(){
+        ViewGroup.LayoutParams layoutParams = top_view.getLayoutParams();
+        layoutParams.height = Fun.获取状态栏高度(this);
+        top_view.setLayoutParams(layoutParams);
         swiperefre.setOnRefreshListener(()->{
             NetWork_网盘_刷新 netWork_网盘_刷新 = new NetWork_网盘_刷新(this);
             netWork_网盘_刷新.start();
