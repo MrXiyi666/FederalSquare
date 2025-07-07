@@ -38,18 +38,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:autoSizeTextType="uniform"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
                         android:id="@+id/name"
-                        android:textSize="15sp"
                         android:textColor="@color/black"
                         android:text=""
                         android:layout_width="match_parent"
                         android:layout_height="20dp"/>
                     <TextView
+                        android:autoSizeTextType="uniform"
                         android:id="@+id/url_txt_id"
                         android:visibility="gone"
-                        android:textSize="15sp"
                         android:textColor="#f2f3f7"
                         android:gravity="center_vertical"
                         android:text=""
@@ -62,9 +62,9 @@
                     android:text=""
                     android:gravity="end"
                     android:layout_weight="1"
-                    android:textSize="11sp"
+                    android:autoSizeTextType="uniform"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"/>
+                    android:layout_height="20dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="6dp"
@@ -96,11 +96,11 @@
             <TextView
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="9sp"
+                android:autoSizeTextType="uniform"
                 android:textColor="#808080"
                 android:text="转发"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="20dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/button_message"
@@ -115,11 +115,11 @@
             <TextView
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="9sp"
+                android:autoSizeTextType="uniform"
                 android:textColor="#808080"
                 android:text="评论"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="20dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginStart="50dp"
@@ -135,11 +135,11 @@
             <TextView
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="9sp"
+                android:autoSizeTextType="uniform"
                 android:textColor="#808080"
                 android:text="收藏"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="20dp"/>
         </LinearLayout>
     </LinearLayout>
     <View
