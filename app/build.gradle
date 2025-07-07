@@ -23,7 +23,7 @@ android {
         minSdk 28
         targetSdk 36
         versionCode 6
-        versionName "6.0.9"
+        versionName "6.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:okhttp3-integration:5.0.0-rc01'
     annotationProcessor 'com.github.bumptech.glide:compiler:5.0.0-rc01'
     implementation 'com.google.code.gson:gson:2.13.1'
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.14'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
