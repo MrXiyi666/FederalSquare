@@ -45,7 +45,6 @@ public class 发表文章窗口 {
         var dialog = new AlertDialog.Builder(activity).create();
         var view = View.inflate(activity, R.layout.window_post_view, null);
         scrollView = view.findViewById(R.id.scrollView);
-        var ding_view = view.findViewById(R.id.ding_view);
         ImageView return_icon = view.findViewById(R.id.return_icon);
         EditText edit_text = view.findViewById(R.id.edit_text);
         AppCompatButton add_img = view.findViewById(R.id.add_img);
@@ -53,11 +52,6 @@ public class 发表文章窗口 {
         AppCompatButton add_img_or_video_url = view.findViewById(R.id.add_img_or_video_url);
         AppCompatButton button_ok = view.findViewById(R.id.button_ok);
         linear = view.findViewById(R.id.linear);
-        ding_view.post(()->{
-            ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
-            layoutParams.height = Fun.获取状态栏高度(activity);
-            ding_view.setLayoutParams(layoutParams);
-        });
         post_dataList = new ArrayList<>();
         return_icon.setOnClickListener(V->{
             for(int i=0; i<linear.getChildCount(); i++){

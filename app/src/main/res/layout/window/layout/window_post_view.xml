@@ -5,12 +5,7 @@
     android:background="#00000000"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <View
-        android:id="@+id/ding_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <RelativeLayout
-        android:layout_below="@id/ding_view"
         android:background="@drawable/round_white_stroke_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

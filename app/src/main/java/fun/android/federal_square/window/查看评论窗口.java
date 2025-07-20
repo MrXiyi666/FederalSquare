@@ -38,11 +38,6 @@ public class 查看评论窗口 {
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
-        ding_view.post(()->{
-            ViewGroup.LayoutParams layoutParams = ding_view.getLayoutParams();
-            layoutParams.height = Fun.获取状态栏高度(activity);
-            ding_view.setLayoutParams(layoutParams);
-        });
         if(!Fun_账号.GetID().isEmpty()){
             button_ok.setOnClickListener(V->{
                 String text = edit_text.getText().toString();
