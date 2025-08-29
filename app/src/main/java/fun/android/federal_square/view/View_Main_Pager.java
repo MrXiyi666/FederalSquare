@@ -81,7 +81,6 @@ public class View_Main_Pager extends View_Main{
                 switch (position){
                     case 0:
                         activity_main.getWindow().setStatusBarColor(Color.argb(255,255,255,255));
-                        //activity_main.getWindow().getDecorView().setSystemUiVisibility(activity_main.getWindow().getDecorView().getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                         Fun.释放预测返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
@@ -94,7 +93,6 @@ public class View_Main_Pager extends View_Main{
                         break;
                     case 1:
                         activity_main.getWindow().setStatusBarColor(Color.argb(255,255,255,255));
-                        //activity_main.getWindow().getDecorView().setSystemUiVisibility(activity_main.getWindow().getDecorView().getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                         Fun.拦截返回(activity_main);
                         if(menu_list_view.getVisibility() == View.VISIBLE){
                             menu_open.setAlpha(1.0f);
@@ -107,7 +105,6 @@ public class View_Main_Pager extends View_Main{
                         break;
                     case 2:
                         activity_main.getWindow().setStatusBarColor(Color.argb(0,0,0,0));
-                        //activity_main.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                         Fun.拦截返回(activity_main);
                         linear_menu_view.setVisibility(View.GONE);
                         img_square.setImageResource(R.drawable.square_checked_false_icon);
