@@ -57,7 +57,9 @@ public class App extends Application {
         }
         if(!Fun_文件.是否存在(able.app_path + "System_Data/Disk_index.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/Disk_index.txt", "3");
-
+        }
+        if(!Fun_文件.是否存在(able.app_path + "System_Data/Disk_Select.txt")){
+            Fun_文件.写入文件(able.app_path + "System_Data/Disk_Select.txt", "0");
         }
         if(!Fun_文件.是否存在(able.app_path + "System_Data/System_Features.txt")){
             Fun_文件.写入文件(able.app_path + "System_Data/System_Features.txt", "true");

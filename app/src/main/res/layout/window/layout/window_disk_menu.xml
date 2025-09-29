@@ -55,4 +55,36 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     </LinearLayout>
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:layout_weight="1"
+            android:id="@+id/button_image_select"
+            android:layout_marginEnd="5dp"
+            android:text="筛选图片"
+            android:background="@drawable/button_event_back"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:layout_weight="1"
+            android:id="@+id/button_video_select"
+            android:layout_marginStart="5dp"
+            android:text="筛选视频"
+            android:background="@drawable/button_event_back"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:stateListAnimator="@null"
+            android:layout_weight="1"
+            android:id="@+id/button_video_default"
+            android:layout_marginStart="5dp"
+            android:text="默认"
+            android:background="@drawable/button_event_back"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+    </LinearLayout>
 </LinearLayout>

@@ -10,6 +10,7 @@
     android:layout_height="wrap_content">
     <fun.android.federal_square.view.Video_ImageView
         android:id="@+id/img"
+        android:background="#f2f3f7"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

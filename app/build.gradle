@@ -22,8 +22,8 @@ android {
         applicationId "fun.android.federal_square"
         minSdk 28
         targetSdk 36
-        versionCode 7
-        versionName "6.2.1"
+        versionCode 8
+        versionName "6.2.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

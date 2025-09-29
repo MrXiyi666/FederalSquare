@@ -23,6 +23,9 @@ public class 网盘设置窗口 {
         ImageView return_icon = view.findViewById(R.id.return_icon);
         EditText edit_text_1 = view.findViewById(R.id.edit_text_1);
         AppCompatButton button_edit_1 = view.findViewById(R.id.button_edit_1);
+        AppCompatButton button_image_select = view.findViewById(R.id.button_image_select);
+        AppCompatButton button_video_select = view.findViewById(R.id.button_video_select);
+        AppCompatButton button_video_default = view.findViewById(R.id.button_video_default);
         return_icon.setOnClickListener(V->{
             dialog.dismiss();
         });
@@ -34,8 +37,23 @@ public class 网盘设置窗口 {
             int index = Integer.parseInt(str);
             Fun_文件.写入文件(able.app_path + "System_Data/Disk_index.txt", str);
             activity.gridView.setNumColumns(index);
-            activity.初始化数据();
             dialog.dismiss();
+            activity.初始化数据();
+        });
+        button_image_select.setOnClickListener(V->{
+            Fun_文件.写入文件(able.app_path + "System_Data/Disk_Select.txt", "1");
+            dialog.dismiss();
+            activity.初始化数据();
+        });
+        button_video_select.setOnClickListener(V->{
+            Fun_文件.写入文件(able.app_path + "System_Data/Disk_Select.txt", "2");
+            dialog.dismiss();
+            activity.初始化数据();
+        });
+        button_video_default.setOnClickListener(V->{
+            Fun_文件.写入文件(able.app_path + "System_Data/Disk_Select.txt", "0");
+            dialog.dismiss();
+            activity.初始化数据();
         });
 
         dialog.setView(view);
