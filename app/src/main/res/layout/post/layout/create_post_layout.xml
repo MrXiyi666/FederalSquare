@@ -47,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"/>
                     <TextView
-                        android:autoSizeTextType="uniform"
+                        android:textSize="9sp"
                         android:id="@+id/url_txt_id"
                         android:visibility="gone"
                         android:textColor="#f2f3f7"
