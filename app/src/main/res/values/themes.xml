@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.FederalSquare" parent="Base.Theme.FederalSquare" />
+
+    <style name="AlertDialog_Null" parent="Theme.AppCompat.Dialog">
+        <!-- 移除对话框背景和窗口背景 -->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 去掉标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 禁用周围变暗效果 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 去掉窗口边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 移除窗口阴影（关键补充，部分机型需要） -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>
