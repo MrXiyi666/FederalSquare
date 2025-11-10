@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <net.csdn.roundview.RoundImageView
+            android:src="@mipmap/ic_launcher_round"
+            android:id="@+id/avatar_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            app:rStrokeWidth="1dp"
+            app:rStrokeColor="#f2f3f7"
+            app:rRadius="10dp"/>
+    </LinearLayout>
+</LinearLayout>

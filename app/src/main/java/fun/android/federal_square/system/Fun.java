@@ -1,5 +1,6 @@
 package fun.android.federal_square.system;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -26,7 +27,7 @@ public class Fun {
         return null;
     }
 
-    public static int 屏幕宽度(Activity activity){
+    public static int 屏幕宽度(Context activity){
         WindowManager windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -34,11 +35,21 @@ public class Fun {
         return displayMetrics.widthPixels;
     }
 
-    public static int 屏幕高度(Activity activity){
+    public static int 屏幕高度(Context activity){
         WindowManager windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
+    }
+
+    public static int 获取状态栏高度(Context activity){
+        int result=0;
+        @SuppressLint({"InternalInsetResource", "DiscouragedApi"})
+        int resourceld = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if(resourceld > 0){
+            result = activity.getResources().getDimensionPixelSize(resourceld);
+        }
+        return result;
     }
 
 }

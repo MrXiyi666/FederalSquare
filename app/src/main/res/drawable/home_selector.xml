@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 选中状态时显示的图片 -->
+    <item android:drawable="@drawable/home_checked_true_icon" android:state_checked="true"/>
+    <!-- 未选中状态时显示的图片 -->
+    <item android:drawable="@drawable/home_checked_false_icon" android:state_checked="false"/>
+    <!-- 默认状态（可选，未匹配上述状态时使用） -->
+    <item android:drawable="@drawable/home_checked_true_icon"/>
+</selector>
