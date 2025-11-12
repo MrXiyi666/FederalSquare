@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 public class Fun {
     /**
@@ -50,6 +53,32 @@ public class Fun {
             result = activity.getResources().getDimensionPixelSize(resourceld);
         }
         return result;
+    }
+
+    /**
+     * 将 px 值转换为 dp 值
+     * @param context 上下文（用于获取屏幕密度）
+     * @param pxValue 需要转换的 px 值
+     * @return 转换后的 dp 值（float 类型，保留精度）
+     */
+    public static float PXToDP(Context context, float pxValue) {
+        // 获取设备的屏幕密度（density = dpi / 160）
+        float density = context.getResources().getDisplayMetrics().density;
+        // 计算 dp 值（px / density）
+        return pxValue / density;
+    }
+
+    /**
+     * 将 dp 值转换为 px（像素）
+     * @param context 上下文（用于获取屏幕密度）
+     * @param dpValue 需要转换的 dp 值
+     * @return 转换后的 px 值（int 类型，通常用于设置 View 尺寸）
+     */
+    public static int DPToPX(Context context, float dpValue) {
+        // 获取设备的屏幕密度信息
+        float density = context.getResources().getDisplayMetrics().density;
+        // 计算 px 值（四舍五入取整）
+        return (int) (dpValue * density + 0.5f);
     }
 
 }

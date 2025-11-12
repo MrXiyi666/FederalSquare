@@ -9,9 +9,10 @@ import fun.android.federal_square.R;
 import fun.android.federal_square.system.Fun;
 
 public class View_Main {
-    private Context context;
+    public Context context;
     public String class_name;
     public View view;
+    public LinearLayout linear;
     public View_Main(Context context){
         this.context = context;
         this.class_name = this.getClass().getSimpleName();
