@@ -1,6 +1,9 @@
 package fun.android.federal_square.system;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.widget.ScrollView;
 import fun.android.federal_square.view.Popular_View;
 import fun.android.federal_square.view.TimeLine_View;
@@ -65,8 +68,75 @@ public class Static {
             "#A78BFA",  // 按钮弹起 - 亮紫
             "#F3F4F6"   // 输入框背景 - 浅灰
     };
-    public static String 当前主题 = "";
+    public static String 当前主题 = "青春薄荷绿";
+    public static GradientDrawable up_normalDrawable = new GradientDrawable();
+    public static GradientDrawable down_pressedDrawable = new GradientDrawable();
+    public static String drawable_color, menu_color, child_color, button_down_color, button_up_color, button_stroke_color;
     public static void create(Context context){
-
+        switch (Static.当前主题){
+            case "青春薄荷绿":
+                drawable_color = Static.青春薄荷绿[0];
+                menu_color = Static.青春薄荷绿[1];
+                button_down_color = Static.青春薄荷绿[4];
+                button_up_color = Static.青春薄荷绿[5];
+                button_stroke_color = Static.青春薄荷绿[3];
+                break;
+            case "活力天空蓝":
+                drawable_color = Static.活力天空蓝[0];
+                menu_color = Static.活力天空蓝[1];
+                button_down_color = Static.活力天空蓝[4];
+                button_up_color = Static.活力天空蓝[5];
+                button_stroke_color = Static.活力天空蓝[3];
+                break;
+            case "甜美樱花粉":
+                drawable_color = Static.甜美樱花粉[0];
+                menu_color = Static.甜美樱花粉[1];
+                button_down_color = Static.甜美樱花粉[4];
+                button_up_color = Static.甜美樱花粉[5];
+                button_stroke_color = Static.甜美樱花粉[3];
+                break;
+            case "阳光柑橘橙":
+                drawable_color = Static.阳光柑橘橙[0];
+                menu_color = Static.阳光柑橘橙[1];
+                button_down_color = Static.阳光柑橘橙[4];
+                button_up_color = Static.阳光柑橘橙[5];
+                button_stroke_color = Static.阳光柑橘橙[3];
+            case "梦幻薰衣草紫":
+                drawable_color = Static.梦幻薰衣草紫[0];
+                menu_color = Static.梦幻薰衣草紫[1];
+                button_down_color = Static.梦幻薰衣草紫[4];
+                button_up_color = Static.梦幻薰衣草紫[5];
+                button_stroke_color = Static.梦幻薰衣草紫[3];
+                break;
+            default:
+                drawable_color="#ffffff";
+                menu_color = "#ffffff";
+                button_down_color = "#808080";
+                button_up_color = "#f2f3f7";
+                button_stroke_color="#ffffff";
+        }
+        float radius = Fun.DPToPX(context, 8);
+        up_normalDrawable.setCornerRadii(new float[]{
+                radius, radius,
+                radius, radius,
+                radius, radius,
+                radius, radius
+        });
+        up_normalDrawable.setColor(Color.parseColor(button_up_color));
+        up_normalDrawable.setStroke(
+                Fun.DPToPX(context, 2),
+                Color.parseColor(button_stroke_color)
+        );
+        down_pressedDrawable.setCornerRadii(new float[]{
+                radius, radius,
+                radius, radius,
+                radius, radius,
+                radius, radius
+        });
+        down_pressedDrawable.setColor(Color.parseColor(button_down_color)); // 按下状态颜色（橙色）
+        down_pressedDrawable.setStroke(
+                Fun.DPToPX(context, 2),
+                Color.parseColor(button_stroke_color) // 按下时边框颜色（深橙色）
+        );
     }
 }

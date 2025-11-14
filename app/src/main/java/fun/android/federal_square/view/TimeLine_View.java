@@ -21,7 +21,7 @@ public class TimeLine_View extends View_Main {
         @Override
         public void run() {
             if(min_index>= index){
-                linear.addView(new View(context), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Fun.获取状态栏高度(context)));
+                linear.addView(new View(context), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Fun.获取状态栏高度(context) * 2));
                 return;
             }
             if(是否加载文章){
