@@ -16,38 +16,52 @@
         <net.csdn.roundview.RoundImageView
             android:src="@mipmap/ic_launcher_round"
             android:id="@+id/avatar_img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             app:rStrokeWidth="1dp"
             app:rStrokeColor="#f2f3f7"
             app:rRadius="10dp"/>
         <LinearLayout
+            android:id="@+id/linear_info"
             android:layout_marginStart="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_weight="1"
                     android:text="社区管理员"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:ellipsize="middle"
                     android:id="@+id/name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/black"
                     android:text="小尾巴"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:ellipsize="middle"
+                    android:id="@+id/sign"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <TextView
+                android:layout_marginTop="5dp"
                 android:text="实例地址"
-                android:gravity="center"
+                android:textColor="#f2f3f7"
+                android:id="@+id/url"
+                android:maxLines="1"
+                android:ellipsize="middle"
+                android:gravity="start|bottom"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
     <!-- 上面是文章的个人信息 -->
@@ -61,13 +75,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="还是规范和手感不佳多生两个合适的话根深蒂固了考虑是否v是公司v是快乐的速度更快速度刚开始\n数据的附加赛\n决定v感觉扣税的VS的v技术的扣税\n的v难道v那就\n决定v感觉扣税的VS的v技术的扣税\n决定v感觉扣税的VS的v技术的扣税\n决定v感觉扣税的VS的v技术的扣税"
+            android:id="@+id/text"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="3"
             android:ellipsize="end"/>
+        <RelativeLayout
+            android:id="@+id/relati_img_1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
     </LinearLayout>
     <View
+        android:id="@+id/di_xian"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="#80f2f3f7"

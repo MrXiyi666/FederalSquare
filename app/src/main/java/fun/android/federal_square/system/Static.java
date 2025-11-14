@@ -1,11 +1,7 @@
 package fun.android.federal_square.system;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-
 import fun.android.federal_square.view.Popular_View;
 import fun.android.federal_square.view.TimeLine_View;
 import fun.android.federal_square.view.View_Main;
@@ -24,16 +20,52 @@ public class Static {
     public static TimeLine_View timeLine_view ;
     public static Popular_View popular_view;
     public static int timeLine_view_y=0, popular_view_y=0;
-
-
-    //主题颜色 文字颜色: 背景颜色: 前景颜色: 按钮按下颜色: 默认颜色: 控件描边颜色:
-
-    public static String[] 极简灰色 = {"#111111", "#FAFAFA", "#F0F0F0", "#CCCCCC", "#7F8C8D", "#E0E0E0"};
-    public static String[] 活力橙色 = {"#2E2E2E", "#FFF8F0", "#FFFFFF", "#F8C471", "#E67E22", "#FDEDEC"};
-    public static String[] 柔和蓝色 = {"#1B4F72", "#EBF5FB", "#FFFFFF", "#85C1E9", "#2980B9", "#D6EAF8"};
-    public static String[] 现代深色 = {"#ECF0F1", "#1A1A1A", "#2C2C2C", "#34495E", "#1ABC9C", "#3A3A3A"};
-    public static String[] 经典浅色 = {"#2C3E50", "#F5F7FA", "#FFFFFF", "#BDC3C7", "#3498DB", "#E0E6ED"};
-
+    public static String[] 青春薄荷绿 = {
+            "#E6FEF2",  // 整个软件背景 - 清新薄荷绿
+            "#10B981",  // 底部菜单栏背景 - 活力薄荷绿
+            "#F0FFFA",  // 文章背景 - 微薄荷白
+            "#A7F3D0",  // 描边颜色 - 中薄荷绿
+            "#065F46",  // 按钮按下 - 深薄荷绿
+            "#34D399",  // 按钮弹起 - 亮薄荷绿
+            "#F3F4F6"   // 输入框背景 - 浅灰
+    };
+    public static String[] 活力天空蓝 = {
+            "#E0F2FE",  // 整个软件背景 - 明亮天蓝
+            "#0EA5E9",  // 底部菜单栏背景 - 天空蓝
+            "#F8FBFF",  // 文章背景 - 微天蓝白
+            "#7DD3FC",  // 描边颜色 - 中蓝
+            "#0369A1",  // 按钮按下 - 深海蓝
+            "#38BDF8",  // 按钮弹起 - 亮天蓝
+            "#F3F4F6"   // 输入框背景 - 浅灰
+    };
+    public static String[] 甜美樱花粉 = {
+            "#FFF1F7",  // 整个软件背景 - 柔美樱花粉
+            "#EC4899",  // 底部菜单栏背景 - 樱花粉
+            "#FFF9FB",  // 文章背景 - 微樱花白
+            "#FBCFE8",  // 描边颜色 - 中粉
+            "#9D174D",  // 按钮按下 - 深粉
+            "#F472B6",  // 按钮弹起 - 亮粉
+            "#F3F4F6"   // 输入框背景 - 浅灰
+    };
+    public static String[] 阳光柑橘橙 = {
+            "#FFF7ED",  // 整个软件背景 - 温暖柑橘橙
+            "#F97316",  // 底部菜单栏背景 - 活力橙
+            "#FFFBF8",  // 文章背景 - 微橙白
+            "#FED7AA",  // 描边颜色 - 中橙
+            "#C2410C",  // 按钮按下 - 深橙
+            "#FB923C",  // 按钮弹起 - 亮橙
+            "#F3F4F6"   // 输入框背景 - 浅灰
+    };
+    public static String[] 梦幻薰衣草紫 = {
+            "#FAF5FF",  // 整个软件背景 - 梦幻薰衣草紫
+            "#8B5CF6",  // 底部菜单栏背景 - 薰衣草紫
+            "#FCFAFF",  // 文章背景 - 微薰衣草白
+            "#E9D5FF",  // 描边颜色 - 中紫
+            "#7C3AED",  // 按钮按下 - 深紫
+            "#A78BFA",  // 按钮弹起 - 亮紫
+            "#F3F4F6"   // 输入框背景 - 浅灰
+    };
+    public static String 当前主题 = "";
     public static void create(Context context){
 
     }
