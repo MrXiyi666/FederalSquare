@@ -48,36 +48,9 @@ public class Article_View {
                     }
                 }
         );
-
-        switch (Static.当前主题){
-            case "青春薄荷绿":
-                view.setBackgroundColor(Color.parseColor(Static.青春薄荷绿[2]));
-                avatar_img.setStrokeColor(Color.parseColor(Static.青春薄荷绿[3]));
-                di_xian.setBackgroundColor((Color.parseColor(Static.青春薄荷绿[3]) & 0x00FFFFFF) | (51 << 24));
-                break;
-            case "活力天空蓝":
-                view.setBackgroundColor(Color.parseColor(Static.活力天空蓝[2]));
-                avatar_img.setStrokeColor(Color.parseColor(Static.活力天空蓝[3]));
-                di_xian.setBackgroundColor((Color.parseColor(Static.活力天空蓝[3]) & 0x00FFFFFF) | (51 << 24));
-                break;
-            case "甜美樱花粉":
-                view.setBackgroundColor(Color.parseColor(Static.甜美樱花粉[2]));
-                avatar_img.setStrokeColor(Color.parseColor(Static.甜美樱花粉[3]));
-                di_xian.setBackgroundColor((Color.parseColor(Static.甜美樱花粉[3]) & 0x00FFFFFF) | (51 << 24));
-                break;
-            case "阳光柑橘橙":
-                view.setBackgroundColor(Color.parseColor(Static.阳光柑橘橙[2]));
-                avatar_img.setStrokeColor(Color.parseColor(Static.阳光柑橘橙[3]));
-                di_xian.setBackgroundColor((Color.parseColor(Static.阳光柑橘橙[3]) & 0x00FFFFFF) | (51 << 24));
-                break;
-            case "梦幻薰衣草紫":
-                view.setBackgroundColor(Color.parseColor(Static.梦幻薰衣草紫[2]));
-                avatar_img.setStrokeColor(Color.parseColor(Static.梦幻薰衣草紫[3]));
-                di_xian.setBackgroundColor((Color.parseColor(Static.梦幻薰衣草紫[3]) & 0x00FFFFFF) | (51 << 24));
-                break;
-            default:
-
-        }
+        avatar_img.setStrokeColor(Color.parseColor(Static.button_stroke_color));
+        di_xian.setBackgroundColor((Color.parseColor(Static.button_stroke_color) & 0x00FFFFFF) | (51 << 24));
+        view.setBackgroundColor(Color.parseColor(Static.article_color));
 
     }
 

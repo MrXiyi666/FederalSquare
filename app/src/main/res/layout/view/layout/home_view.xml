@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#f2f3f7"
-    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/relati_view"
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+        <ImageView
+            android:alpha="0.2"
+            android:id="@+id/back_img"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <RelativeLayout
+            android:id="@+id/personal_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <net.csdn.roundview.RoundImageView
+                android:layout_margin="10dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:id="@+id/avatar_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:rStrokeWidth="1dp"
+                app:rRadius="10dp"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/name_view"
+                android:text="社区管理员"
+                android:textColor="@color/black"
+                android:maxLines="1"
+                android:layout_toEndOf="@id/avatar_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/sige_view"
+                android:text="幼女小穴"
+                android:textColor="@color/black"
+                android:maxLines="1"
+                android:layout_toEndOf="@id/avatar_img"
+                android:layout_below="@id/name_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/button_article"
+                    android:text="文章"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/button_favorites"
+                    android:text="收藏"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/button_system"
+                    android:text="系统"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+        </RelativeLayout>
 
+    </RelativeLayout>
 </LinearLayout>

@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.widget.ScrollView;
+
+import fun.android.federal_square.view.Home_View;
 import fun.android.federal_square.view.Popular_View;
 import fun.android.federal_square.view.TimeLine_View;
 import fun.android.federal_square.view.View_Main;
@@ -22,6 +24,7 @@ public class Static {
     public static View_Main view_main;
     public static TimeLine_View timeLine_view ;
     public static Popular_View popular_view;
+    public static Home_View home_view;
     public static int timeLine_view_y=0, popular_view_y=0;
     public static String[] 青春薄荷绿 = {
             "#E6FEF2",  // 整个软件背景 - 清新薄荷绿
@@ -71,12 +74,13 @@ public class Static {
     public static String 当前主题 = "青春薄荷绿";
     public static GradientDrawable up_normalDrawable = new GradientDrawable();
     public static GradientDrawable down_pressedDrawable = new GradientDrawable();
-    public static String drawable_color, menu_color, child_color, button_down_color, button_up_color, button_stroke_color;
+    public static String drawable_color, menu_color, article_color, child_color, button_down_color, button_up_color, button_stroke_color;
     public static void create(Context context){
         switch (Static.当前主题){
             case "青春薄荷绿":
                 drawable_color = Static.青春薄荷绿[0];
                 menu_color = Static.青春薄荷绿[1];
+                article_color = Static.青春薄荷绿[2];
                 button_down_color = Static.青春薄荷绿[4];
                 button_up_color = Static.青春薄荷绿[5];
                 button_stroke_color = Static.青春薄荷绿[3];
@@ -84,6 +88,7 @@ public class Static {
             case "活力天空蓝":
                 drawable_color = Static.活力天空蓝[0];
                 menu_color = Static.活力天空蓝[1];
+                article_color = Static.活力天空蓝[2];
                 button_down_color = Static.活力天空蓝[4];
                 button_up_color = Static.活力天空蓝[5];
                 button_stroke_color = Static.活力天空蓝[3];
@@ -91,6 +96,7 @@ public class Static {
             case "甜美樱花粉":
                 drawable_color = Static.甜美樱花粉[0];
                 menu_color = Static.甜美樱花粉[1];
+                article_color = Static.甜美樱花粉[2];
                 button_down_color = Static.甜美樱花粉[4];
                 button_up_color = Static.甜美樱花粉[5];
                 button_stroke_color = Static.甜美樱花粉[3];
@@ -98,19 +104,23 @@ public class Static {
             case "阳光柑橘橙":
                 drawable_color = Static.阳光柑橘橙[0];
                 menu_color = Static.阳光柑橘橙[1];
+                article_color = Static.阳光柑橘橙[2];
                 button_down_color = Static.阳光柑橘橙[4];
                 button_up_color = Static.阳光柑橘橙[5];
                 button_stroke_color = Static.阳光柑橘橙[3];
             case "梦幻薰衣草紫":
                 drawable_color = Static.梦幻薰衣草紫[0];
                 menu_color = Static.梦幻薰衣草紫[1];
+                article_color = Static.梦幻薰衣草紫[2];
+                button_stroke_color = Static.梦幻薰衣草紫[3];
                 button_down_color = Static.梦幻薰衣草紫[4];
                 button_up_color = Static.梦幻薰衣草紫[5];
-                button_stroke_color = Static.梦幻薰衣草紫[3];
+
                 break;
             default:
                 drawable_color="#ffffff";
                 menu_color = "#ffffff";
+                article_color="#f2f3f7";
                 button_down_color = "#808080";
                 button_up_color = "#f2f3f7";
                 button_stroke_color="#ffffff";

@@ -2,9 +2,7 @@ package fun.android.federal_square.view;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.LinearLayout;
 import fun.android.federal_square.R;
-import fun.android.federal_square.system.Static;
 
 public class Popular_View extends View_Main{
     public Popular_View(Context context) {

@@ -26,6 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import fun.android.federal_square.system.Fun;
 import fun.android.federal_square.system.Static;
+import fun.android.federal_square.view.Home_View;
 import fun.android.federal_square.view.Popular_View;
 import fun.android.federal_square.view.TimeLine_View;
 
@@ -129,7 +130,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             if(item.getItemId() == R.id.home){
+                if(Static.home_view==null){
+                    Static.home_view = new Home_View(this);
+                }
+                Static.view_main = Static.home_view;
                 Static.main.removeAllViews();
+                Static.main.addView(Static.view_main.getView(), new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 return true;
             }
             return false;
