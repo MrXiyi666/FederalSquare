@@ -143,10 +143,10 @@ public class Static {
                 radius, radius,
                 radius, radius
         });
-        down_pressedDrawable.setColor(Color.parseColor(button_down_color)); // 按下状态颜色（橙色）
+        down_pressedDrawable.setColor(Color.parseColor(button_down_color));
         down_pressedDrawable.setStroke(
                 Fun.DPToPX(context, 2),
-                Color.parseColor(button_stroke_color) // 按下时边框颜色（深橙色）
+                Color.parseColor(button_stroke_color)
         );
     }
 }

@@ -3,9 +3,12 @@ package fun.android.federal_square.system;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -83,6 +86,45 @@ public class Fun {
         float density = context.getResources().getDisplayMetrics().density;
         // 计算 px 值（四舍五入取整）
         return (int) (dpValue * density + 0.5f);
+    }
+
+    public static void setButtonBack(Context context, AppCompatButton button){
+        GradientDrawable up_normalDrawable = new GradientDrawable();
+        GradientDrawable down_pressedDrawable = new GradientDrawable();
+        float radius = Fun.DPToPX(context, 8);
+        up_normalDrawable.setCornerRadii(new float[]{
+                radius, radius,
+                radius, radius,
+                radius, radius,
+                radius, radius
+        });
+        up_normalDrawable.setColor(Color.parseColor(Static.button_up_color));
+        up_normalDrawable.setStroke(
+                Fun.DPToPX(context, 2),
+                Color.parseColor(Static.button_stroke_color)
+        );
+        down_pressedDrawable.setCornerRadii(new float[]{
+                radius, radius,
+                radius, radius,
+                radius, radius,
+                radius, radius
+        });
+        down_pressedDrawable.setColor(Color.parseColor(Static.button_down_color));
+        down_pressedDrawable.setStroke(
+                Fun.DPToPX(context, 2),
+                Color.parseColor(Static.button_stroke_color)
+        );
+        StateListDrawable drawable = new StateListDrawable();
+        drawable.addState(new int[]{android.R.attr.state_pressed}, down_pressedDrawable);
+        drawable.addState(new int[]{}, up_normalDrawable);
+
+        button.setBackground(drawable);
+        int[][] states = new int[][]{new int[]{android.R.attr.state_pressed}, new int[]{}};
+        int[] colors = new int[]{Color.WHITE, Color.BLACK};
+        ColorStateList textColorStateList = new ColorStateList(states, colors);
+        button.setTextColor(textColorStateList);
+
+
     }
 
 }

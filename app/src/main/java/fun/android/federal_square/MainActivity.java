@@ -62,34 +62,10 @@ public class MainActivity extends AppCompatActivity {
         AppCompatButton button_up = button_sheet_view.findViewById(R.id.button_up);
         AppCompatButton button_down = button_sheet_view.findViewById(R.id.button_down);
 
-        StateListDrawable button_update_drawable = new StateListDrawable();
-        button_update_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_update_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_update.setStateListAnimator(null);
-        button_update.setElevation(0f);
-        button_update.setBackground(button_update_drawable);
-
-        StateListDrawable button_top_drawable = new StateListDrawable();
-        button_top_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_top_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_top.setStateListAnimator(null);
-        button_top.setElevation(0f);
-        button_top.setBackground(button_top_drawable);
-
-        StateListDrawable button_up_drawable = new StateListDrawable();
-        button_up_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_up_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_up.setStateListAnimator(null);
-        button_up.setElevation(0f);
-        button_up.setBackground(button_up_drawable);
-
-        StateListDrawable button_down_drawable = new StateListDrawable();
-        button_down_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_down_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_down.setStateListAnimator(null);
-        button_down.setElevation(0f);
-        button_down.setBackground(button_down_drawable);
-
+        Fun.setButtonBack(this, button_update);
+        Fun.setButtonBack(this, button_top);
+        Fun.setButtonBack(this, button_up);
+        Fun.setButtonBack(this, button_down);
         return button_sheet_view;
     }
 
@@ -109,33 +85,26 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.time_line);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.time_line){
-
-                if(Static.timeLine_view==null){
-                    Static.timeLine_view = new TimeLine_View(this);
-                }
-                Static.view_main = Static.timeLine_view;
+                Static.view_main = new TimeLine_View(this);
                 Static.main.removeAllViews();
                 Static.main.addView(Static.view_main.getView(), new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 Static.main.scrollTo(0, Static.timeLine_view_y);
+                button_sheet.setVisibility(View.VISIBLE);
                 return true;
             }
             if(item.getItemId() == R.id.popular){
-                if(Static.popular_view==null){
-                    Static.popular_view = new Popular_View(this);
-                }
-                Static.view_main = Static.popular_view;
+                Static.view_main = new Popular_View(this);
                 Static.main.removeAllViews();
                 Static.main.addView(Static.view_main.getView(), new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 Static.main.scrollTo(0, Static.popular_view_y);
+                button_sheet.setVisibility(View.VISIBLE);
                 return true;
             }
             if(item.getItemId() == R.id.home){
-                if(Static.home_view==null){
-                    Static.home_view = new Home_View(this);
-                }
-                Static.view_main = Static.home_view;
+                Static.view_main = new Home_View(this);
                 Static.main.removeAllViews();
                 Static.main.addView(Static.view_main.getView(), new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                button_sheet.setVisibility(View.GONE);
                 return true;
             }
             return false;
@@ -190,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         // 2. Android 6.0（API 23）至 Android 10（API 29）：使用 SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        else {
             window.getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR // 状态栏文字深色（黑色）
                     // 可叠加其他标志，如全屏：| View.SYSTEM_UI_FLAG_FULLSCREEN

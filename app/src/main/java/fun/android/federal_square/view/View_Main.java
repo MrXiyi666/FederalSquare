@@ -16,6 +16,7 @@ public class View_Main {
     public View_Main(Context context){
         this.context = context;
         this.class_name = this.getClass().getSimpleName();
+
     }
 
     public View getView(){

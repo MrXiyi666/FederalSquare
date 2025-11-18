@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -37,25 +38,34 @@ public class Home_View extends View_Main{
         relati_view.setBackgroundColor(Color.parseColor(Static.menu_color));
         personal_view.setPadding(0, Fun.获取状态栏高度(context), 0, 0);
 
-        StateListDrawable button_article_drawable = new StateListDrawable();
-        button_article_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_article_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_article.setStateListAnimator(null);
-        button_article.setElevation(0f);
-        button_article.setBackground(button_article_drawable);
+        Fun.setButtonBack(context, button_article);
+        Fun.setButtonBack(context, button_favorites);
+        Fun.setButtonBack(context, button_system);
 
-        StateListDrawable button_favorites_drawable = new StateListDrawable();
-        button_favorites_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_favorites_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_favorites.setStateListAnimator(null);
-        button_favorites.setElevation(0f);
-        button_favorites.setBackground(button_favorites_drawable);
+        linear.setBackgroundColor(Color.parseColor(Static.drawable_color));
+        linear.addView(Create_Child_View(), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    }
 
-        StateListDrawable button_system_drawable = new StateListDrawable();
-        button_system_drawable.addState(new int[]{android.R.attr.state_pressed}, Static.down_pressedDrawable);
-        button_system_drawable.addState(new int[]{}, Static.up_normalDrawable);
-        button_system.setStateListAnimator(null);
-        button_system.setElevation(0f);
-        button_system.setBackground(button_system_drawable);
+    @Override
+    public void 初始化() {
+        super.初始化();
+
+    }
+
+    private View Create_Child_View(){
+        View child_view = View.inflate(context, R.layout.home_child_view, null);
+        AppCompatButton wangpan_button = child_view.findViewById(R.id.wangpan_button);
+        AppCompatButton geren_button = child_view.findViewById(R.id.geren_button);
+        AppCompatButton zhuti_button = child_view.findViewById(R.id.zhuti_button);
+        AppCompatButton dizhi_button = child_view.findViewById(R.id.dizhi_button);
+        AppCompatButton system_button = child_view.findViewById(R.id.system_button);
+
+        Fun.setButtonBack(context, wangpan_button);
+        Fun.setButtonBack(context, geren_button);
+        Fun.setButtonBack(context, zhuti_button);
+        Fun.setButtonBack(context, dizhi_button);
+        Fun.setButtonBack(context, system_button);
+
+        return child_view;
     }
 }
