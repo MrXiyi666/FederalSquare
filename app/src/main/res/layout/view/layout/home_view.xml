@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="230dp">
         <ImageView
-            android:alpha="0.2"
             android:id="@+id/back_img"
             android:scaleType="centerCrop"
             android:src="@drawable/home_back"

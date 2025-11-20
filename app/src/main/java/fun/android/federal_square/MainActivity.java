@@ -1,31 +1,24 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import fun.android.federal_square.system.Fun;
 import fun.android.federal_square.system.Static;
+import fun.android.federal_square.view.Create_View;
 import fun.android.federal_square.view.Home_View;
 import fun.android.federal_square.view.Popular_View;
 import fun.android.federal_square.view.TimeLine_View;
@@ -38,21 +31,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_main);
         初始化();
-        事件();
     }
 
     private void 初始化(){
         Static.create(this);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        button_sheet = findViewById(R.id.button_sheet);
         Static.main = findViewById(R.id.scrollView);
-        Static.timeLine_view = new TimeLine_View(this);
-        Static.view_main = Static.timeLine_view;
+        Static.view_main = new Create_View(this);
         Static.main.addView(Static.view_main.getView(), new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         Static.main.setBackgroundColor(Color.parseColor(Static.drawable_color));
+        初始化菜单();
+    }
+    public void 初始化菜单(){
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        button_sheet = findViewById(R.id.button_sheet);
         bottomNavigationView.setBackgroundColor(Color.parseColor(Static.menu_color));
+        菜单事件();
+        bottomNavigationView.setVisibility(View.GONE);
     }
     private View 初始化功能菜单(){
         View button_sheet_view = getLayoutInflater().inflate(R.layout.button_sheet_layout, null);
@@ -62,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
         AppCompatButton button_up = button_sheet_view.findViewById(R.id.button_up);
         AppCompatButton button_down = button_sheet_view.findViewById(R.id.button_down);
 
-        Fun.setButtonBack(this, button_update);
-        Fun.setButtonBack(this, button_top);
-        Fun.setButtonBack(this, button_up);
-        Fun.setButtonBack(this, button_down);
+        Fun.setButtonTheme(this, button_update);
+        Fun.setButtonTheme(this, button_top);
+        Fun.setButtonTheme(this, button_up);
+        Fun.setButtonTheme(this, button_down);
         return button_sheet_view;
     }
 
-    private void 事件(){
+    private void 菜单事件(){
         button_sheet.setOnClickListener(V->{
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
             bottomSheetDialog.setContentView(初始化功能菜单());
@@ -114,21 +111,25 @@ public class MainActivity extends AppCompatActivity {
             button_sheet.setAlpha(1.0f);
             滑动监听_handler.removeCallbacks(滑动监听_scrollEndRunnable);
             滑动监听_handler.postDelayed(滑动监听_scrollEndRunnable, 200);
-            if(Static.view_main instanceof TimeLine_View){ //用于切换菜单 定位
+            if(Static.view_main instanceof TimeLine_View ){
                 Static.timeLine_view_y = scrollY;
-            }else {
+            }
+            if(Static.view_main instanceof Popular_View){
                 Static.popular_view_y = scrollY;
             }
-            for (int i = 0; i < Static.view_main.linear.getChildCount(); i++) {
-                View child = Static.view_main.linear.getChildAt(i);
-                if ("article_view".equals(child.getTag())) {
-                    if(child.getHeight() + child.getTop() < scrollY || child.getTop() > scrollY + Static.main.getHeight()){
-                        child.setVisibility(View.INVISIBLE);
-                    }else{
-                        child.setVisibility(View.VISIBLE);
+            if(Static.view_main instanceof TimeLine_View || Static.view_main instanceof Popular_View){
+                for (int i = 0; i < Static.view_main.linear.getChildCount(); i++) {
+                    View child = Static.view_main.linear.getChildAt(i);
+                    if ("article_view".equals(child.getTag())) {
+                        if(child.getHeight() + child.getTop() < scrollY || child.getTop() > scrollY + Static.main.getHeight()){
+                            child.setVisibility(View.INVISIBLE);
+                        }else{
+                            child.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
+
         });
 
     }
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) { // 窗口获得焦点时，DecorView 已就绪
-            setStatusBarTextColorBlack(getWindow());
+           // setStatusBarTextColorBlack(getWindow());
         }
     }
     /**

@@ -2,11 +2,7 @@ package fun.android.federal_square.view;
 
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import fun.android.federal_square.R;
-import fun.android.federal_square.system.Fun;
 
 public class View_Main {
     public Context context;

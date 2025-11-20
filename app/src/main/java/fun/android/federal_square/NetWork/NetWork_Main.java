@@ -19,8 +19,8 @@ import okhttp3.ResponseBody;
 
 public class NetWork_Main {
     private final Activity activity;
-    private final String class_name; //类的名字用于调试
-    private String file_name;  //下载的文件名字
+    private final String class_name;
+    private String file_name;
     private Window_Progress_Bar window_progress_bar;
     public NetWork_Main(Activity activity){
         this.activity = activity;
@@ -121,7 +121,6 @@ public class NetWork_Main {
         body.close();
         this.activity.runOnUiThread(()->{
             window_progress_bar.close();
-            new Window_View_Image(activity, Static.app_path + Static.Example_Name + "/" + file_name);
         });
     }
 

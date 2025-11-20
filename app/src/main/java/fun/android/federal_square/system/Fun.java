@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -88,7 +89,7 @@ public class Fun {
         return (int) (dpValue * density + 0.5f);
     }
 
-    public static void setButtonBack(Context context, AppCompatButton button){
+    public static void setButtonTheme(Context context, AppCompatButton button){
         GradientDrawable up_normalDrawable = new GradientDrawable();
         GradientDrawable down_pressedDrawable = new GradientDrawable();
         float radius = Fun.DPToPX(context, 8);
@@ -125,6 +126,16 @@ public class Fun {
         button.setTextColor(textColorStateList);
 
 
+    }
+
+    public static void setEditTextTheme(Context context, EditText editText){
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        int radius = Fun.DPToPX(context, 8);
+        gradientDrawable.setCornerRadius(radius);
+        gradientDrawable.setColor(Color.parseColor(Static.edit_color));
+        gradientDrawable.setStroke(Fun.DPToPX(context, 2), Color.parseColor(Static.button_stroke_color));
+        editText.setBackground(gradientDrawable);
     }
 
 }

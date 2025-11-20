@@ -38,9 +38,9 @@ public class Home_View extends View_Main{
         relati_view.setBackgroundColor(Color.parseColor(Static.menu_color));
         personal_view.setPadding(0, Fun.获取状态栏高度(context), 0, 0);
 
-        Fun.setButtonBack(context, button_article);
-        Fun.setButtonBack(context, button_favorites);
-        Fun.setButtonBack(context, button_system);
+        Fun.setButtonTheme(context, button_article);
+        Fun.setButtonTheme(context, button_favorites);
+        Fun.setButtonTheme(context, button_system);
 
         linear.setBackgroundColor(Color.parseColor(Static.drawable_color));
         linear.addView(Create_Child_View(), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -60,11 +60,11 @@ public class Home_View extends View_Main{
         AppCompatButton dizhi_button = child_view.findViewById(R.id.dizhi_button);
         AppCompatButton system_button = child_view.findViewById(R.id.system_button);
 
-        Fun.setButtonBack(context, wangpan_button);
-        Fun.setButtonBack(context, geren_button);
-        Fun.setButtonBack(context, zhuti_button);
-        Fun.setButtonBack(context, dizhi_button);
-        Fun.setButtonBack(context, system_button);
+        Fun.setButtonTheme(context, wangpan_button);
+        Fun.setButtonTheme(context, geren_button);
+        Fun.setButtonTheme(context, zhuti_button);
+        Fun.setButtonTheme(context, dizhi_button);
+        Fun.setButtonTheme(context, system_button);
 
         return child_view;
     }
