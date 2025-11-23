@@ -7,15 +7,17 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-
 import androidx.appcompat.widget.AppCompatButton;
+
+import java.util.Locale;
 
 public class Fun {
     /**
@@ -36,6 +38,10 @@ public class Fun {
         }
         // 如果没有找到有效文件名，返回默认值
         return null;
+    }
+    //获取文件名字符串后缀
+    public static String getStringSuffix(String fileName){
+        return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase(Locale.ROOT);
     }
 
     public static int 屏幕宽度(Context activity){
@@ -137,5 +143,51 @@ public class Fun {
         gradientDrawable.setStroke(Fun.DPToPX(context, 2), Color.parseColor(Static.button_stroke_color));
         editText.setBackground(gradientDrawable);
     }
+
+    public static void setWindowTheme(Context context, Window window){
+        GradientDrawable roundedBackground = new GradientDrawable();
+        roundedBackground.setShape(GradientDrawable.RECTANGLE);
+        roundedBackground.setColor(Color.parseColor(Static.menu_color));
+        float cornerRadius = DPToPX(context, 20);
+        roundedBackground.setCornerRadius(cornerRadius);
+
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.dimAmount = 0.0f;
+        layoutParams.gravity = Gravity.CENTER;
+        layoutParams.width = 屏幕宽度(context) / 2;
+        layoutParams.height = 屏幕宽度(context) / 2;
+        window.setAttributes(layoutParams);
+        window.setBackgroundDrawable(roundedBackground);
+    }
+
+    public static String 获取Uri文件名(Activity context, Uri fileUri) {
+        return FileUri.getFileName(context, fileUri);
+    }
+
+    public static int 获取Uri文件大小(Activity context, Uri fileUri){
+        return Math.toIntExact(FileUri.getUriFileSize(context, fileUri));
+    }
+
+    public static String 获取文件扩展名(String filename){
+        if (filename == null || filename.isEmpty()) {
+            return "";
+        }
+        int dotIndex = filename.lastIndexOf('.');
+        if (dotIndex == -1 || dotIndex == filename.length() - 1) {
+            return "";
+        }
+
+        return filename.substring(dotIndex + 1);
+    }
+
+    public static boolean 视频格式判断(String name){
+        return name.equals("mp4") || name.equals("3gp") || name.equals("mov") || name.equals("avi") || name.equals("mkv") || name.equals("flv") || name.equals("webm");
+    }
+
+    public static boolean 图片格式判断(String name){
+        return name.equals("jpg") || name.equals("jpeg") || name.equals("png") || name.equals("webp") || name.equals("gif");
+    }
+
+
 
 }
