@@ -1,35 +1,66 @@
 package fun.android.federal_square.window;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Dialog;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
-import android.view.ViewGroup;
-import androidx.appcompat.app.AlertDialog;
+import android.view.Window;
 import java.util.Objects;
-import fun.android.federal_square.R;
-import fun.android.federal_square.child_view.CircularProgressView;
+import fun.android.federal_square.system.Fun;
+import fun.android.federal_square.view.Progress_View;
 
 public class Window_Progress_Bar {
-    private Activity activity;
-    private AlertDialog dialog;
-    private CircularProgressView progress_view;
+    private Dialog dialog;
+    protected Activity activity;
+
+    private Progress_View progress_view;
     public Window_Progress_Bar(Activity activity){
         this.activity = activity;
-        dialog = new AlertDialog.Builder(activity, R.style.AlertDialog_Null).create();
-        View view = View.inflate(activity, R.layout.window_progress_bar_view, null);
-        progress_view = view.findViewById(R.id.circularProgress);
-        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setView(view);
-        dialog.setCancelable(false);
-        dialog.show();
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                dialog = new Dialog(activity);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                progress_view = new Progress_View(activity);
+                dialog.setContentView(progress_view.getView());
+                dialog.setCancelable(false);
+                Fun.setWindowTheme(activity, Objects.requireNonNull(dialog.getWindow()));
+                dialog.show();
+            }
+        });
     }
 
     public void setProgress(int progress){
-        progress_view.setProgress(progress);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progress_view.setProgress(progress);
+            }
+        });
+
     }
 
+    public void setText(String text){
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progress_view.setText(text);
+            }
+        });
+    }
     public void close(){
-        dialog.dismiss();
+        progress_view.circularProgressView.post(()->{
+            progress_view.circularProgressView.setVisibility(View.GONE);
+        });
+        progress_view.text_view.post(()->{
+            progress_view.text_view.setVisibility(View.VISIBLE);
+        });
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 1000);
     }
 }
