@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import com.google.common.io.Files;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -155,12 +156,12 @@ public class Fun_文件 {
      */
     public static boolean copy_Uri_File(File fromUri, File toFilePath) {
         try {
-            //Files.copy(fromUri, toFilePath);
-            //return true;
+            Files.copy(fromUri, toFilePath);
+            return true;
         }catch (Exception e){
-           // return false;
+            return false;
         }
-        return false;
+
     }
 
     public static String 获取后缀(String fileName){
