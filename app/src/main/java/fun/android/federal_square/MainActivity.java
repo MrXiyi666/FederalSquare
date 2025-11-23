@@ -1,22 +1,23 @@
 package fun.android.federal_square;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import java.io.File;
+import fun.android.federal_square.NetWork.NetWork_UpLoad;
 import fun.android.federal_square.system.Fun;
+import fun.android.federal_square.system.Fun_文件;
 import fun.android.federal_square.system.Static;
 import fun.android.federal_square.view.Create_View;
 import fun.android.federal_square.view.Home_View;
@@ -28,12 +29,15 @@ public class MainActivity extends AppCompatActivity {
     private Handler 滑动监听_handler = new Handler();
     ImageView button_sheet;
     private Runnable 滑动监听_scrollEndRunnable = () -> button_sheet.setAlpha(0.2f);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_main);
         初始化();
+        加载图片初始化();
+
     }
 
     private void 初始化(){
@@ -133,40 +137,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    // 方法2：在窗口获取焦点时执行（更可靠）
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) { // 窗口获得焦点时，DecorView 已就绪
-           // setStatusBarTextColorBlack(getWindow());
-        }
-    }
-    /**
-     * 将状态栏文字和图标设置为黑色
-     * @param window 当前 Activity 的 Window 对象
-     */
-    private void setStatusBarTextColorBlack(Window window) {
-        if (window == null) return;
 
-        // 1. Android 11（API 30）及以上：使用 WindowInsetsController
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            WindowInsetsController insetsController = window.getInsetsController();
-            if (insetsController != null) {
-                // 设置状态栏文字为深色（黑色）
-                insetsController.setSystemBarsAppearance(
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-                );
+
+    public void 加载图片初始化(){
+        Static.上传图片 = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+            if(uri == null){
+                Log.w("upload", "文件为 null ");
+                return;
             }
-        }
-        // 2. Android 6.0（API 23）至 Android 10（API 29）：使用 SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        else {
-            window.getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR // 状态栏文字深色（黑色）
-                    // 可叠加其他标志，如全屏：| View.SYSTEM_UI_FLAG_FULLSCREEN
-            );
-        }
-        // 3. Android 6.0（API 23）以下：不支持设置状态栏文字颜色（默认白色，无法修改）
+            if(Fun.获取Uri文件大小(MainActivity.this, uri) > 52428800){
+                //文件大于 50 MB 请压缩后上传
+                Log.w("upload", "文件大于 50 MB 请压缩后上传 ");
+                return;
+            }
+            String 后缀 = Fun.获取文件扩展名(Fun.获取Uri文件名(this, uri));
+            if(Fun.图片格式判断(后缀)){
+                Log.w("upload", "图片格式 " + 后缀);
+                Fun_文件.copy_Uri_File(this, uri, Static.app_path + Fun.获取Uri文件名(this, uri));
+                new NetWork_UpLoad(this).Start("http://mrxiyi.top/Record/upload.php", new File(Static.app_path + Fun.获取Uri文件名(this, uri)));
+                return;
+            }else if(Fun.视频格式判断(后缀)){
+                Log.w("upload", "视频格式 " + 后缀);
+                return;
+            }
+            Log.w("upload", "不支持的格式 " + 后缀);
+        });
     }
 
 }

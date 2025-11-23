@@ -6,6 +6,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.widget.ScrollView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+
 import fun.android.federal_square.view.Home_View;
 import fun.android.federal_square.view.Popular_View;
 import fun.android.federal_square.view.TimeLine_View;
@@ -65,10 +68,12 @@ public class Static {
             "#A78BFA",  // 按钮弹起 - 亮紫
             "#F3F4F6"   // 输入框背景 - 浅灰
     };
-    public static String 当前主题 = "青春薄荷绿";
+    public static String 当前主题 = "活力天空蓝";
     public static GradientDrawable up_normalDrawable = new GradientDrawable();
     public static GradientDrawable down_pressedDrawable = new GradientDrawable();
     public static String drawable_color, menu_color, article_color, child_color, button_down_color, button_up_color, button_stroke_color, edit_color;
+
+    public static ActivityResultLauncher<PickVisualMediaRequest> 上传图片;
     public static void create(Context context){
         switch (Static.当前主题){
             case "青春薄荷绿":
