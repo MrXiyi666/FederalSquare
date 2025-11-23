@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import fun.android.federal_square.system.Fun;
+
 public class CircularProgressView extends View {
     private Paint backgroundPaint; // 背景圆环画笔
     private Paint progressPaint;   // 进度圆环画笔
@@ -16,15 +18,15 @@ public class CircularProgressView extends View {
 
     public CircularProgressView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public CircularProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
         // 初始化背景圆环画笔
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.rgb(242, 243, 247)); // 背景色
@@ -42,8 +44,8 @@ public class CircularProgressView extends View {
 
         // 初始化文字画笔（显示进度值）
         textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(40);
+        textPaint.setColor(Color.WHITE);
+        textPaint.setTextSize(Fun.DPToPX(context, 20));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setAntiAlias(true);
     }
